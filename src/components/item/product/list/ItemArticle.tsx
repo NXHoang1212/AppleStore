@@ -23,7 +23,7 @@ const ItemArticle = ({ item, navigation }: PropsProduct) => {
     };
     return (
         <View style={styles.container}>
-            <TouchableOpacity style={styles.viewItem} onPress={() => navigation.navigate('DetailArticle', { item: item._id })}>
+            <TouchableOpacity style={styles.viewItem} onPress={() => navigation.navigate('StackMisc', { screen: 'DetailArticle', params: { _id: item._id } })}>
                 <Text style={styles.textdiscount}>Giảm {item.discount.percentage}%</Text>
                 <View style={{ paddingHorizontal: Responsive.wp(2), gap: Responsive.hp(1) }}>
                     <Animated.Image

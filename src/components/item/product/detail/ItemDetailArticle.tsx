@@ -1,29 +1,29 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Animated, ScrollView, Image } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { View, Text, TouchableOpacity, Animated, ScrollView, Image, Easing } from 'react-native';
 
 import { COLOR } from '../../../../constant/Colors';
 import { Icon } from '../../../../constant/Icon';
 import { Responsive } from '../../../../constant/Responsive';
 import { IndexStyles } from '../../../../import/IndexStyles';
 
+import { FlashList } from '@shopify/flash-list';
+import Shuffle from '../../../../utils/Shuffle';
+
 import { DetailProductParams } from '../../../../model/entity/IndexProduct.entity';
 import { FormatPrice, calculateDiscountedPrice } from '../../../../utils/FormatPrice';
-import { CustomBackdrop, ItemListDetailArticle, ItemModelInfor } from '../../../../import/IndexComponent';
+import { CustomBackdrop, ItemArticle, ItemModelInfor } from '../../../../import/IndexComponent';
 
 import Carousel from 'react-native-reanimated-carousel';
 import LinearGradient from 'react-native-linear-gradient';
 
-import { ShareItemDetail, UseBottomSheetModel } from '../../../../import/IndexFeatures';
+import { ShareItemDetail, UseBottomSheetModel, useAppSelector } from '../../../../import/IndexFeatures';
 import { BottomSheetModal, BottomSheetModalProvider, BottomSheetScrollView, BottomSheetView } from '@gorhom/bottom-sheet';
-import { useAppSelector } from '../../../../import/IndexFeatures';
-
-import { FlashList } from '@shopify/flash-list';
-import Shuffle from '../../../../utils/Shuffle';
 
 type PropsProduct = {
     item: DetailProductParams,
     navigation?: any
 }
+
 
 const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation }) => {
     const { onImageLoad, shareProduct, showDescription, ToggleDescription } = ShareItemDetail();
@@ -34,7 +34,21 @@ const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation }) => {
         color: item.priceColor[0].color,
     });
 
-    const product = useAppSelector(state => state.Product.data).slice(0, 20);
+    const product = Shuffle(useAppSelector((state) => state.Product.data).filter((product) => product._id !== item._id)).slice(0, 15);
+
+    const animatedValue = useRef(new Animated.Value(0)).current;
+
+    const handleAddToCart = () => {
+        Animated.timing(animatedValue, {
+            toValue: 1,
+            duration: 1000,
+            easing: Easing.linear,
+            useNativeDriver: true,
+        }).start(() => {
+            animatedValue.setValue(0);
+        });
+    };
+
 
     return (
         <BottomSheetModalProvider>
@@ -139,7 +153,7 @@ const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation }) => {
                             <Text style={IndexStyles.StyleItemDetailArticle.textProduct}>Sản phẩm liên quan</Text>
                             <FlashList
                                 data={product}
-                                renderItem={({ item }) => <ItemListDetailArticle item={item} navigation={navigation} />}
+                                renderItem={({ item }) => <ItemArticle item={item} navigation={navigation} />}
                                 keyExtractor={(item) => item._id}
                                 horizontal={false}
                                 numColumns={2}
@@ -156,8 +170,17 @@ const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation }) => {
                             <Text style={IndexStyles.StyleItemDetailArticle.textChat}>Chat ngay</Text>
                         </TouchableOpacity>
                         <View style={IndexStyles.StyleItemDetailArticle.lineheight} />
-                        <TouchableOpacity style={IndexStyles.StyleItemDetailArticle.viewChat}>
-                            <Icon.ShoppingCartSVG width={Responsive.wp(7)} height={Responsive.hp(4)} fill={COLOR.REDTWO} />
+                        <TouchableOpacity style={IndexStyles.StyleItemDetailArticle.viewChat} onPress={handleAddToCart}>
+                            <Animated.View style={[IndexStyles.StyleItemDetailArticle.viewCart, {
+                                transform:
+                                    [{
+                                        translateX: animatedValue.interpolate({ inputRange: [0, 1], outputRange: [0, Responsive.wp(58)] }),
+                                    }, {
+                                        translateY: animatedValue.interpolate({ inputRange: [0, 1], outputRange: [0, Responsive.hp(-92)] }),
+                                    }]
+                            }]}>
+                                <Icon.ShoppingCartSVG width={Responsive.wp(7)} height={Responsive.hp(4)} fill={COLOR.REDTWO} />
+                            </Animated.View>
                             <Text style={IndexStyles.StyleItemDetailArticle.textCart}>Giỏ hàng</Text>
                         </TouchableOpacity>
                     </View>

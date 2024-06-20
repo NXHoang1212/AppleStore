@@ -174,6 +174,10 @@ const StyleItemDetailArticle = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    viewCart: {
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     lineheight: {
         width: Responsive.wp(0.2),
         height: Responsive.hp(7),

@@ -28,7 +28,6 @@ import ItemArticle from "../components/item/product/list/ItemArticle";
 import ItemProductHomePage from "../components/item/homepage/ItemProductHomePage";
 import ItemDetailArticle from "../components/item/product/detail/ItemDetailArticle";
 import ItemModelInfor from "../components/item/product/detail/ItemModelInfor";
-import ItemListDetailArticle from "../components/item/product/list/ItemListDetailArticle";
 
 
 /*MEDIA */
@@ -57,7 +56,6 @@ export {
     ItemArticle,
     ItemProductHomePage,
     ItemModelInfor,
-    ItemListDetailArticle,
     ItemDetailArticle,
     ImagePicker,
     Loading,

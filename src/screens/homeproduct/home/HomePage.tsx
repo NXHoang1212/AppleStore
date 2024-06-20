@@ -35,6 +35,7 @@ const HomePage: React.FC = () => {
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false} ref={scrollRef}>
             <View style={IndexStyles.StylesHomePage.container}>
+                <Loading loading={product.loading} />
                 <LinearGradient colors={['#E33545', '#F9405C', '#E9515E']} style={IndexStyles.StylesHomePage.containerCrossbar}>
                     <View style={IndexStyles.StylesHomePage.viewcrossbar}>
                         <View style={IndexStyles.StylesHomePage.viewcrossbar1}>
@@ -70,7 +71,6 @@ const HomePage: React.FC = () => {
                         </TouchableOpacity>
                     </View>
                     <View style={IndexStyles.StylesHomePage.ViewProduct}>
-                        <Loading loading={product.loading} />
                         <FlatList
                             data={product.data.filter((item) => item.category.name === 'Iphone').slice(0, 10)}
                             renderItem={({ item }) => <ItemProductHomePage item={item} navigation={navigation} />}
@@ -87,7 +87,6 @@ const HomePage: React.FC = () => {
                         </TouchableOpacity>
                     </View>
                     <View style={IndexStyles.StylesHomePage.ViewProduct}>
-                        <Loading loading={product.loading} />
                         <FlatList
                             data={product.data.filter((item) => item.category.name === 'Mac').slice(0, 10)}
                             renderItem={({ item }) => <ItemProductHomePage item={item} navigation={navigation} />}
@@ -104,7 +103,6 @@ const HomePage: React.FC = () => {
                         </TouchableOpacity>
                     </View>
                     <View style={IndexStyles.StylesHomePage.ViewProduct}>
-                        <Loading loading={product.loading} />
                         <FlatList
                             data={product.data.filter((item) => item.category.name === 'Airpods').slice(0, 10)}
                             renderItem={({ item }) => <ItemProductHomePage item={item} navigation={navigation} />}
@@ -121,7 +119,6 @@ const HomePage: React.FC = () => {
                         </TouchableOpacity>
                     </View>
                     <View style={IndexStyles.StylesHomePage.ViewProduct}>
-                        <Loading loading={product.loading} />
                         <FlatList
                             data={product.data.filter((item) => item.category.name === 'Ipad').slice(0, 10)}
                             renderItem={({ item }) => <ItemProductHomePage item={item} navigation={navigation} />}
@@ -138,7 +135,6 @@ const HomePage: React.FC = () => {
                         </TouchableOpacity>
                     </View>
                     <View style={IndexStyles.StylesHomePage.ViewProduct}>
-                        <Loading loading={product.loading} />
                         <FlatList
                             data={product.data.filter((item) => item.category.name === 'Phụ kiện').slice(0, 10)}
                             renderItem={({ item }) => <ItemProductHomePage item={item} navigation={navigation} />}
