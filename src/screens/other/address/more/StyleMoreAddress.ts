@@ -10,7 +10,7 @@ const StyleMoreAddress = StyleSheet.create({
         backgroundColor: COLOR.GRAYONE
     },
     viewheader: {
-        height: Responsive.hp(10),
+        height: Responsive.hp(12),
         backgroundColor: COLOR.WHITE,
         borderBottomWidth: 1.5,
         borderBottomColor: COLOR.GRAY,
@@ -21,11 +21,11 @@ const StyleMoreAddress = StyleSheet.create({
     headerTitle: {
         flexDirection: 'row',
         alignItems: 'center',
-        top: Responsive.hp(5),
+        marginTop: Responsive.hp(6),
         paddingHorizontal: Responsive.wp(5),
     },
     textHeader: {
-        fontSize: 18,
+        fontSize: Responsive.RFPercentage(2.5),
         fontFamily: FontsROBOTO.ROBOTO_REGULAR,
         color: COLOR.REDONE,
         fontWeight: 'bold',
@@ -43,7 +43,7 @@ const StyleMoreAddress = StyleSheet.create({
         marginTop: Responsive.hp(1.5),
     },
     textinput: {
-        fontSize: 17,
+        fontSize: Responsive.RFPercentage(2),
         fontFamily: FontsOSANS.OSANS_REGULAR,
         color: COLOR.BLACKONE,
         letterSpacing: 0.25,
@@ -53,7 +53,6 @@ const StyleMoreAddress = StyleSheet.create({
     input1: {
         width: Responsive.wp(100),
         height: Responsive.hp(7),
-        paddingHorizontal: Responsive.wp(2),
         fontFamily: FontsROBOTO.ROBOTO_REGULAR,
         backgroundColor: COLOR.WHITE,
         borderBottomWidth: 1,
@@ -62,7 +61,6 @@ const StyleMoreAddress = StyleSheet.create({
     input2: {
         width: Responsive.wp(100),
         height: Responsive.hp(7),
-        paddingHorizontal: Responsive.wp(2),
         fontFamily: FontsROBOTO.ROBOTO_REGULAR,
         backgroundColor: COLOR.WHITE,
     },
@@ -91,17 +89,16 @@ const StyleMoreAddress = StyleSheet.create({
         height: Responsive.hp(10),
     },
     textchooseAddress: {
-        fontSize: 17,
+        fontSize: Responsive.RFPercentage(2.2),
         fontFamily: FontsROBOTO.ROBOTO_REGULAR,
         color: COLOR.BLACK,
         letterSpacing: 0.25,
     },
     textaddress: {
-        fontSize: 17,
+        fontSize: Responsive.RFPercentage(2.2),
         color: COLOR.GREY,
         letterSpacing: 0.01,
         paddingHorizontal: Responsive.wp(2.6),
-
     },
     containerSetting: {
         flexDirection: 'column',
@@ -151,7 +148,7 @@ const StyleMoreAddress = StyleSheet.create({
         left: Responsive.wp(2),
     },
     textoptions: {
-        fontSize: 14,
+        fontSize: Responsive.RFPercentage(1.9),
         fontWeight: '700',
         fontFamily: FontsOSANS.OSANS_REGULAR,
         color: COLOR.BLACK,
@@ -167,8 +164,8 @@ const StyleMoreAddress = StyleSheet.create({
         marginTop: Responsive.hp(5),
     },
     textbutton: {
-        fontSize: 18,
-        fontFamily: FontsROBOTO.ROBOTO_REGULAR,
+        fontSize: Responsive.RFPercentage(2.5),
+        fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
         color: COLOR.WHITE,
         letterSpacing: 0.25,
     },

@@ -12,23 +12,18 @@ import { useAppSelector, useAppDispatch } from '../../../import/IndexFeatures'
 import { FlashList } from '@shopify/flash-list'
 
 import ItemArticle from '../../../components/item/product/list/ItemArticle'
-import { fetProductsPagination } from '../../../service/Api/IndexProduct'
 import { TypeNameProductParams } from '../../../model/entity/IndexProduct.entity'
 
 
-const Article: React.FC = () => {
+const CategoryArticle: React.FC = () => {
     useStatusBarConfig('dark-content', 'transparent', true)
     const navigation = useNavigation()
     const dispatch = useAppDispatch()
     const route = useRoute<TypeNameProductParams['route']>();
     const { name } = route.params
-    const data = useAppSelector(state => state.ProductPagination)
+    const data = useAppSelector(state => state.Product)
     
-    const handleOnReached = () => {
-        if (!data.loading) {
-            dispatch(fetProductsPagination({ page: data.nextPage, limit: 10 }));
-        }
-    };
+ 
 
     const renderFooter = () => {
         if (!data.loading) return null;
@@ -56,9 +51,8 @@ const Article: React.FC = () => {
                     keyExtractor={(item) => item._id}
                     horizontal={false}
                     numColumns={2}
-                    estimatedItemSize={500}
+                    estimatedItemSize={200}
                     showsVerticalScrollIndicator={false}
-                    onEndReached={handleOnReached}
                     ListFooterComponent={renderFooter}
                     onEndReachedThreshold={0.1}
                 />
@@ -67,4 +61,4 @@ const Article: React.FC = () => {
     )
 }
 
-export default Article
+export default CategoryArticle

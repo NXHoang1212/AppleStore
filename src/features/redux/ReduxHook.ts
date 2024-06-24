@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { StoreRedux } from '../../redux/Store'
+import StoreRedux from '../../redux/Store'
 
 export type RootState = ReturnType<typeof StoreRedux.getState>
 export type AppDispatch = typeof StoreRedux.dispatch

@@ -1,5 +1,5 @@
-import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
-import React, { useState } from 'react'
+import { View, Text, Image, TouchableOpacity, ScrollView, TextInput } from 'react-native';
+import React, { useState, useRef } from 'react'
 
 import { IndexStyles } from '../../../import/IndexStyles';
 import { Icon } from '../../../constant/Icon'
@@ -20,7 +20,7 @@ const AuthLoginUser: React.FC = () => {
     const navigation = useNavigation<NativeStackNavigationProp<StackHomeTypeParam, 'AuthUser'>>()
     const { handleLogin, email, setEmail, password, setPassword, phone, setPhone } = AccountManagement()
     const [showPassword, setShowPassword] = useState<boolean>(false)
-
+   
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
             <View style={IndexStyles.StyleAuthLoginUser.container}>

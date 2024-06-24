@@ -31,6 +31,7 @@ import { StyleNotFound } from "../screens/notfound/StyleNotFound";
 /*COMPONENT */
 import { StyleItemDetailArticle } from "../components/item/product/detail/StyleItemDetailAricle";
 import StyleBottomSheetModelDetail from "../components/item/product/detail/StyleBottomSheetModelDetail";
+import { StyleItemListAddress } from "../components/item/address/StyleItemListAddress";
 
 export const IndexStyles = {
     StyleAuthLoginUser,
@@ -63,5 +64,6 @@ export const IndexStyles = {
 
     /*COMPONENT */
     StyleItemDetailArticle,
-    StyleBottomSheetModelDetail
+    StyleBottomSheetModelDetail,
+    StyleItemListAddress
 }

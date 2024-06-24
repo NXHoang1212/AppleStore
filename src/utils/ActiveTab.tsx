@@ -10,7 +10,6 @@ export const UseActiveTab = (initialTab: string) => {
     return { activeTab, handleActiveTab };
 }
 
-//focus màu khi chọn 
 export const UseFocus = (initialFocus: boolean) => {
     const [focus, setFocus] = useState<boolean>(initialFocus);
 

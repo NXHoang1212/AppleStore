@@ -32,7 +32,7 @@ const CategoryProduct: React.FC = () => {
           {isLoading && <Loading loading={isLoading} />}
           <FlashList
             data={DataCategory}
-            renderItem={({ item }) => <ItemCategoryProduct item={item} />}
+            renderItem={({ item }) => <ItemCategoryProduct item={item} navigation={navigation} />}
             keyExtractor={(item) => item._id}
             horizontal={false}
             numColumns={2}

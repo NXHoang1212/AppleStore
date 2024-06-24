@@ -14,9 +14,10 @@ interface WardListProps {
     navigation: any;
     district: any;
     province: any;
+    previousScreen: string,
 }
 
-const WardList = ({ item, groupedWards, setSelectedWard, district, province, navigation }: WardListProps) => {
+const WardList = ({ item, groupedWards, setSelectedWard, district, province, navigation, previousScreen }: WardListProps) => {
     return (
         <View style={styles.viewward}>
             <Text style={styles.alphabetHeader}>{item}</Text>
@@ -25,7 +26,7 @@ const WardList = ({ item, groupedWards, setSelectedWard, district, province, nav
                     <WardItem
                         key={wardItem.ward_id}
                         wardItem={wardItem}
-                        onPress={() => HandleLocationAddress.handleSelectWard(wardItem, setSelectedWard, district, province, navigation)}
+                        onPress={() => HandleLocationAddress.handleSelectWard(wardItem, setSelectedWard, district, province, navigation, previousScreen)}
                         isLastItem={itemIndex === groupedWards[item].length}
                     />
                 ))}

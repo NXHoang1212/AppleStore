@@ -10,12 +10,13 @@ export class HandleLocationAddress {
         setSelectedDistrict(district);
         setSelectedWard(null);
     };
-    static handleSelectWard = (ward: WardMapEntity, setSelectedWard: any, district: any, province: any, navigation: any) => {
+    static handleSelectWard = (ward: WardMapEntity, setSelectedWard: any, district: any, province: any, navigation: any, previousScreen: any) => {
         setSelectedWard(ward);
-        navigation.navigate('MoreAddress', {
+        navigation.navigate(previousScreen, {
             ward: ward.name,
             district: district.name,
-            province: province.name
-        });
+            province: province.name,
+        })
     };
+    
 }

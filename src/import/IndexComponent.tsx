@@ -13,13 +13,16 @@ import Paginations from "../components/banner/Paginations";
 import DistrictItem from "../components/address-list/disctrict/DistrictItem";
 import DistrictList from "../components/address-list/disctrict/DistrictList";
 
+
 /*WARD */
 import WardItem from "../components/address-list/ward/WardItem";
 import WardList from "../components/address-list/ward/WardList";
 
+
 /*PROVINCE */
 import ProvinceItem from "../components/address-list/province/ProvinceItem";
 import ProvinceList from "../components/address-list/province/ProvinceList";
+
 
 /*RENDER ITEM */
 import { renderInformationItem, renderOrderStatus } from "../components/other/ItemIndividual";
@@ -28,6 +31,7 @@ import ItemArticle from "../components/item/product/list/ItemArticle";
 import ItemProductHomePage from "../components/item/homepage/ItemProductHomePage";
 import ItemDetailArticle from "../components/item/product/detail/ItemDetailArticle";
 import ItemModelInfor from "../components/item/product/detail/ItemModelInfor";
+import ItemListAddress from "../components/item/address/ItemListAddress";
 
 
 /*MEDIA */
@@ -56,6 +60,7 @@ export {
     ItemArticle,
     ItemProductHomePage,
     ItemModelInfor,
+    ItemListAddress,
     ItemDetailArticle,
     ImagePicker,
     Loading,

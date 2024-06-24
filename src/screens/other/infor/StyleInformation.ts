@@ -21,15 +21,21 @@ const StyleInformation = StyleSheet.create({
         marginLeft: Responsive.wp(3.5),
         top: Responsive.hp(2),
     },
+    image: {
+        width: Responsive.wp(19),
+        height: Responsive.hp(9),
+        borderRadius: 50,
+        marginTop: Responsive.hp(0.5),
+    },
     textheader1: {
         color: COLOR.WHITE,
-        fontSize: 18,
+        fontSize: Responsive.RFPercentage(2.2),
         fontFamily: FontsROBOTO.ROBOTO_BOLD,
         letterSpacing: 0.5,
     },
     textheader2: {
         color: COLOR.WHITE,
-        fontSize: 14,
+        fontSize: Responsive.RFPercentage(1.9),
         fontFamily: FontsROBOTO.ROBOTO_BOLD,
         bottom: Responsive.hp(0.2),
         letterSpacing: 0.3,
@@ -54,14 +60,14 @@ const StyleInformation = StyleSheet.create({
         left: Responsive.wp(2),
     },
     textOrder1: {
-        fontSize: 16,
+        fontSize: Responsive.RFPercentage(2.2),
         fontFamily: FontsROBOTO.ROBOTO_BOLD,
         letterSpacing: 0.5,
         textAlignVertical: 'center',
         color: COLOR.BLACK,
     },
     textOrder2: {
-        fontSize: 14,
+        fontSize: Responsive.RFPercentage(2.1),
         fontFamily: FontsROBOTO.ROBOTO_ITALIC,
         letterSpacing: 0.5,
         textAlignVertical: 'center',
@@ -94,13 +100,6 @@ const StyleInformation = StyleSheet.create({
         justifyContent: 'space-between',
         marginHorizontal: Responsive.wp(4),
         marginVertical: Responsive.hp(1),
-    },
-    textinfor1: {
-        fontSize: 16,
-        fontFamily: FontsROBOTO.ROBOTO_BOLD,
-        letterSpacing: 0.5,
-        textAlignVertical: 'center',
-        color: COLOR.BLACK,
     },
 });
 

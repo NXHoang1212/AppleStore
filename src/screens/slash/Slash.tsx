@@ -16,6 +16,7 @@ import { useAppDispatch } from '../../import/IndexFeatures'
 import { fetchCategoryProduct } from '../../service/Api/IndexCategory'
 import { fetchBannerProduct } from '../../service/Api/IndexBanner'
 import { fetchProducts, fetProductsPagination } from '../../service/Api/IndexProduct'
+import useStatusBarConfig from '../../utils/UseStatusBarConfig'
 
 const Slash: React.FC = () => {
     const dispatch = useAppDispatch()

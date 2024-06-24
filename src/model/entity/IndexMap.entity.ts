@@ -40,5 +40,12 @@ export type LocationParams = {
     ward: WardMapEntity;
 }
 
+type ChooseAddressParams = {
+    previousScreen: {
+        previousScreen: string
+    }
+}
 
 export type SubdivisionsParams = NativeStackScreenProps<Subdivisions, 'location'>
+
+export type TypeEditAddressParmas = NativeStackScreenProps<ChooseAddressParams, 'previousScreen'>;

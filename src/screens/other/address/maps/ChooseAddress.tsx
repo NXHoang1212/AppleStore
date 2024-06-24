@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { ParamListBase, RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Icon } from '../../../../constant/Icon';
 
 import { InputCustom, ProvinceList, WardList, DistrictList } from '../../../../import/IndexComponent';
@@ -12,7 +12,7 @@ import Ward from '../../../../data/Wards.json';
 
 import { FlashList } from '@shopify/flash-list';
 
-import { DistrictMapEntity, ProvinceMapEntity, WardMapEntity } from '../../../../model/entity/IndexMap.entity';
+import { DistrictMapEntity, ProvinceMapEntity, WardMapEntity, TypeEditAddressParmas } from '../../../../model/entity/IndexMap.entity';
 import { Responsive } from '../../../../constant/Responsive';
 
 import { groupByAlphabet } from '../../../../utils/GroupByAlphabet';
@@ -21,6 +21,8 @@ import { IndexStyles } from '../../../../import/IndexStyles';
 
 const ChooseAddress: React.FC = () => {
     const navigation = useNavigation<NativeStackNavigationProp<any>>();
+    const route = useRoute<TypeEditAddressParmas['route']>();
+    const { previousScreen } = route.params ?? {};
 
     const [province, setProvince] = useState<ProvinceMapEntity[]>(Province || []);
     const [district, setDistrict] = useState<DistrictMapEntity[]>(District || []);
@@ -129,6 +131,7 @@ const ChooseAddress: React.FC = () => {
                             (<WardList item={item} groupedWards={filteredWards}
                                 setSelectedWard={setSelectedWard}
                                 navigation={navigation} district={selectedDistrict} province={selectedProvince}
+                                previousScreen={previousScreen}
                             />)}
                             estimatedItemSize={70}
                             showsVerticalScrollIndicator={false}

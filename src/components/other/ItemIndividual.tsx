@@ -14,10 +14,10 @@ type Props = {
 const renderInformationItem = ({ text, image, navigate }: Props) => (
     <TouchableOpacity style={StyleItemIndividual.viewinfor1} key={text} onPress={navigate}>
         <View style={StyleItemIndividual.viewText}>
-            <Image source={image} style={{ width: 30, height: 30, resizeMode: 'contain' }} />
+            <Image source={image} style={{ width: Responsive.wp(8), height: Responsive.hp(4), resizeMode: 'contain' }} />
             <Text style={StyleItemIndividual.textinfor1}>{text}</Text>
         </View>
-        <Image source={Icon.RIGHT} style={{ width: 25, height: 25, marginLeft: 'auto', }} />
+        <Image source={Icon.RIGHT} style={{ width: Responsive.wp(6), height: Responsive.hp(2), marginLeft: 'auto' }} />
     </TouchableOpacity>
 );
 
@@ -40,6 +40,8 @@ const StyleItemIndividual = StyleSheet.create({
         flexDirection: 'row',
         marginHorizontal: Responsive.wp(4),
         marginVertical: Responsive.hp(1),
+        justifyContent: 'space-between',
+        alignItems: 'center',
     },
     viewText: {
         flexDirection: 'row',
@@ -47,7 +49,7 @@ const StyleItemIndividual = StyleSheet.create({
         alignItems: 'center',
     },
     textinfor1: {
-        fontSize: 17,
+        fontSize: Responsive.RFPercentage(2.2),
         fontFamily: FontsROBOTO.ROBOTO_BOLD,
         letterSpacing: 0.5,
         textAlignVertical: 'center',
@@ -59,8 +61,8 @@ const StyleItemIndividual = StyleSheet.create({
         alignItems: 'center',
     },
     textconfirm: {
-        fontSize: 14,
-        fontFamily: FontsROBOTO.ROBOTO_ITALIC,
+        fontSize: Responsive.RFPercentage(1.9),
+        fontFamily: FontsROBOTO.ROBOTO_MEDIUM_ITALIC,
         letterSpacing: 0.5,
         textAlignVertical: 'center',
         color: COLOR.BLACK,

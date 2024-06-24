@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, ImageProps, ImageSourcePropType, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { CategoryState } from '../../../model/entity/IndexCategory.entity'
 import { Responsive } from '../../../constant/Responsive'
@@ -7,12 +7,13 @@ import { COLOR } from '../../../constant/Colors'
 
 
 type PropsCategory = {
-    item: CategoryState
+    item: CategoryState,
+    navigation?: any,
 }
 
-const ItemCategoryProduct = ({ item }: PropsCategory) => {
+const ItemCategoryProduct = ({ item, navigation }: PropsCategory) => {
     return (
-        <TouchableOpacity style={styles.product1}>
+        <TouchableOpacity style={styles.product1} onPress={() => navigation.navigate('StackMisc', { screen: 'CategoryArticle', params: { name: item.name } })}>
             <Image source={{ uri: item.images as string }} style={styles.imgproduct} />
             <Text style={styles.textproduct}>{item.name}</Text>
         </TouchableOpacity>

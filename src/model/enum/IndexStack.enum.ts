@@ -33,5 +33,6 @@ export enum StackAuthUserEnum {
 export enum StackMiscEnum {
     SearchHome = 'SearchHome',
     Article = 'Article',
+    CategoryArticle = 'CategoryArticle',
     DetailArticle = 'DetailArticle',
 }

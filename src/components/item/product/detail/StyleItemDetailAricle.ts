@@ -59,6 +59,7 @@ const StyleItemDetailArticle = StyleSheet.create({
     },
     viewModel: {
         flexDirection: 'row',
+        justifyContent: 'center',
         alignItems: 'center',
         gap: Responsive.wp(0.5),
     },
@@ -140,7 +141,8 @@ const StyleItemDetailArticle = StyleSheet.create({
         width: Responsive.wp(6),
         height: Responsive.hp(6),
         resizeMode: 'contain',
-        tintColor: COLOR.REDONE
+        tintColor: COLOR.REDONE,
+        bottom: Responsive.hp(0.35),
     },
     containerDescribe: {
         width: Responsive.wp(94),

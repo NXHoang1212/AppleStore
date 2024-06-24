@@ -5,6 +5,7 @@ import { StackMiscParams } from '../model/param/IndexStack.Param';
 
 import SearchHome from '../screens/homeproduct/search/SearchHome';
 import Article from '../screens/homeproduct/product/Article';
+import CategoryArticle from '../screens/homeproduct/product/CategoryArticle';
 import DetailArticle from '../screens/homeproduct/detail/DetailArticle';
 
 
@@ -15,6 +16,7 @@ const StackMisc = (): React.JSX.Element => {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name={StackMiscEnum.SearchHome} component={SearchHome} />
             <Stack.Screen name={StackMiscEnum.Article} component={Article} />
+            <Stack.Screen name={StackMiscEnum.CategoryArticle} component={CategoryArticle} />
             <Stack.Screen name={StackMiscEnum.DetailArticle} component={DetailArticle} />
         </Stack.Navigator>
     );

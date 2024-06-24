@@ -12,5 +12,6 @@ export const enum COLOR {
     GRAY = '#e0dede',
     GREY = '#808080',
     GRAYONE = '#d6d6d6',
+    LIGHT_RED = '#ff9ea6',
 }
 

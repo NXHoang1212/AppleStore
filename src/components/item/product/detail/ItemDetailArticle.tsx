@@ -41,7 +41,7 @@ const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation }) => {
     const handleAddToCart = () => {
         Animated.timing(animatedValue, {
             toValue: 1,
-            duration: 1000,
+            duration: 1200,
             easing: Easing.linear,
             useNativeDriver: true,
         }).start(() => {
@@ -53,7 +53,7 @@ const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation }) => {
     return (
         <BottomSheetModalProvider>
             <View style={IndexStyles.StyleItemDetailArticle.container}>
-                <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsHorizontalScrollIndicator={false}>
+                <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
                     <View style={IndexStyles.StyleItemDetailArticle.containerHeader}>
                         <LinearGradient colors={['#ffffff', '#e8e8e8']} style={IndexStyles.StyleItemDetailArticle.viewimage}>
                             <View style={IndexStyles.StyleItemDetailArticle.viewIcon}>
@@ -136,7 +136,7 @@ const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation }) => {
                             <View style={IndexStyles.StyleItemDetailArticle.viewDetail}>
                                 <Text style={IndexStyles.StyleItemDetailArticle.textTilte}>Chi tiết sản phẩm</Text>
                                 <TouchableOpacity style={IndexStyles.StyleItemDetailArticle.viewModel} onPress={handlePresentModalPress}>
-                                    <Text style={IndexStyles.StyleItemDetailArticle.textTilte}>Model máy sx</Text>
+                                    <Text style={IndexStyles.StyleItemDetailArticle.textTilte}>Thông tin sản phẩm</Text>
                                     <Image source={Icon.RIGHT} style={IndexStyles.StyleItemDetailArticle.iconRight} />
                                 </TouchableOpacity>
                             </View>
@@ -165,7 +165,7 @@ const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation }) => {
                 </ScrollView>
                 <View style={IndexStyles.StyleItemDetailArticle.containerFooter}>
                     <View style={IndexStyles.StyleItemDetailArticle.viewChatCart}>
-                        <TouchableOpacity style={IndexStyles.StyleItemDetailArticle.viewChat}>
+                        <TouchableOpacity style={IndexStyles.StyleItemDetailArticle.viewChat} onPress={() => navigation.navigate('StackIndividual', { screen: 'ChatWithAdmin' })}>
                             <Icon.ChatSVG width={Responsive.wp(7)} height={Responsive.hp(4)} fill={COLOR.REDTWO} />
                             <Text style={IndexStyles.StyleItemDetailArticle.textChat}>Chat ngay</Text>
                         </TouchableOpacity>
@@ -177,6 +177,8 @@ const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation }) => {
                                         translateX: animatedValue.interpolate({ inputRange: [0, 1], outputRange: [0, Responsive.wp(58)] }),
                                     }, {
                                         translateY: animatedValue.interpolate({ inputRange: [0, 1], outputRange: [0, Responsive.hp(-92)] }),
+                                    }, {
+                                        rotate: animatedValue.interpolate({ inputRange: [0, 1], outputRange: ['1deg', '480deg'] }),
                                     }]
                             }]}>
                                 <Icon.ShoppingCartSVG width={Responsive.wp(7)} height={Responsive.hp(4)} fill={COLOR.REDTWO} />

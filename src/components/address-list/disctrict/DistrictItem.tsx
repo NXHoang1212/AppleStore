@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, Text, View, StyleSheet } from 'react-native';
-import { Responsive } from '../../../constant/Responsive';
 import { COLOR } from '../../../constant/Colors';
+import { Responsive } from '../../../constant/Responsive';
 import { FontsROBOTO } from '../../../constant/Fonts';
 
 interface DisctrictItemProps {

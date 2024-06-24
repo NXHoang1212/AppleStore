@@ -30,6 +30,7 @@ export type StackIndividualParams = {
 export type StackMiscParams = {
     SearchHome: undefined;
     Article: undefined;
+    CategoryArticle: undefined;
     DetailArticle: undefined;
 }
 

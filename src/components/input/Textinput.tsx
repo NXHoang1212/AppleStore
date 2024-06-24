@@ -1,4 +1,4 @@
-import { View, Text, TextInput, StyleSheet, StyleProp, ImageStyle } from 'react-native'
+import { View, Text, TextInput, StyleSheet, StyleProp, ImageStyle, TextInputProps } from 'react-native'
 import React from 'react'
 import { Responsive } from '../../constant/Responsive'
 

@@ -5,12 +5,18 @@ import { Responsive } from "../../../../constant/Responsive";
 
 
 const StyleViewAddRess = StyleSheet.create({
+    loadingContainer:{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: COLOR.GRAYONE
+    },
     container: {
         flex: 1,
-        backgroundColor: COLOR.GRAY
+        backgroundColor: COLOR.GRAYONE,
     },
     viewheader: {
-        height: Responsive.hp(10),
+        height: Responsive.hp(12),
         backgroundColor: COLOR.WHITE,
         borderBottomWidth: 1.5,
         borderBottomColor: COLOR.GRAY,
@@ -21,11 +27,11 @@ const StyleViewAddRess = StyleSheet.create({
     headerTitle: {
         flexDirection: 'row',
         alignItems: 'center',
-        top: Responsive.hp(5),
+        marginTop: Responsive.hp(6.2),
         paddingHorizontal: Responsive.wp(5),
     },
     textHeader: {
-        fontSize: 18,
+        fontSize: Responsive.RFPercentage(2.5),
         fontFamily: FontsROBOTO.ROBOTO_REGULAR,
         color: COLOR.REDONE,
         fontWeight: 'bold',
@@ -33,8 +39,25 @@ const StyleViewAddRess = StyleSheet.create({
         width: Responsive.wp(80),
         letterSpacing: 0.25
     },
+    containerItem: {
+    },
     containerBody: {
-
+        flex: 1,
+        backgroundColor: COLOR.GRAYONE,
+    },
+    textAddressTitle: {
+        fontSize: Responsive.RFPercentage(2.5),
+        fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
+        color: COLOR.REDONE,
+        letterSpacing: 0.25,
+        paddingHorizontal: Responsive.wp(2),
+        marginTop: Responsive.hp(1),
+        paddingBottom: Responsive.hp(1.5),
+    },
+    separator: {
+        height: 1,
+        backgroundColor: COLOR.GRAYONE,
+        width: Responsive.wp(100),
     },
     moreAddress: {
         flexDirection: 'row',
@@ -48,7 +71,7 @@ const StyleViewAddRess = StyleSheet.create({
         marginTop: Responsive.hp(2),
     },
     textMoreAddress: {
-        fontSize: 16,
+        fontSize: Responsive.RFPercentage(2.3),
         fontFamily: FontsROBOTO.ROBOTO_REGULAR,
         color: COLOR.REDONE,
         letterSpacing: 0.25
