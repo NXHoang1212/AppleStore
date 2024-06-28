@@ -10,7 +10,7 @@ const StyleChangePassword = StyleSheet.create({
         backgroundColor: COLOR.WHITE
     },
     viewheader: {
-        height: Responsive.hp(10),
+        height: Responsive.hp(11),
         backgroundColor: COLOR.WHITE,
         borderBottomWidth: 2,
         borderBottomColor: COLOR.GRAY,
@@ -21,7 +21,7 @@ const StyleChangePassword = StyleSheet.create({
     headerTitle: {
         flexDirection: 'row',
         alignItems: 'center',
-        top: Responsive.hp(5.3),
+        top: Responsive.hp(6),
         paddingHorizontal: Responsive.wp(5),
     },
     textHeader: {

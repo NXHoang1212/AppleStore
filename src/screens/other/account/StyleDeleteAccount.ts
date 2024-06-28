@@ -10,7 +10,7 @@ const StyleDeleteAccount = StyleSheet.create({
         backgroundColor: COLOR.GRAY
     },
     viewheader: {
-        height: Responsive.hp(10),
+        height: Responsive.hp(12),
         backgroundColor: COLOR.WHITE,
         borderBottomWidth: 1.5,
         borderBottomColor: COLOR.GREY,
@@ -21,11 +21,11 @@ const StyleDeleteAccount = StyleSheet.create({
     headerTitle: {
         flexDirection: 'row',
         alignItems: 'center',
-        top: Responsive.hp(5),
+        top: Responsive.hp(6.2),
         paddingHorizontal: Responsive.wp(5),
     },
     textHeader: {
-        fontSize: 18,
+        fontSize: Responsive.RFPercentage(2.5),
         fontFamily: FontsROBOTO.ROBOTO_REGULAR,
         color: COLOR.REDONE,
         fontWeight: 'bold',
@@ -47,7 +47,7 @@ const StyleDeleteAccount = StyleSheet.create({
         resizeMode: 'cover',
     },
     textdelete: {
-        fontSize: 16,
+        fontSize: Responsive.RFPercentage(2.2),
         fontFamily: FontsOSANS.OSANS_SEMIBOLD,
         color: COLOR.BLACK,
         top: Responsive.hp(1),
@@ -69,7 +69,7 @@ const StyleDeleteAccount = StyleSheet.create({
         top: Responsive.hp(21),
     },
     textbutton: {
-        fontSize: 18,
+        fontSize: Responsive.RFPercentage(2.3),
         fontFamily: FontsROBOTO.ROBOTO_REGULAR,
         color: COLOR.WHITE,
         fontWeight: '700',

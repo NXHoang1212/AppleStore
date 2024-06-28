@@ -20,7 +20,7 @@ const AuthLoginUser: React.FC = () => {
     const navigation = useNavigation<NativeStackNavigationProp<StackHomeTypeParam, 'AuthUser'>>()
     const { handleLogin, email, setEmail, password, setPassword, phone, setPhone } = AccountManagement()
     const [showPassword, setShowPassword] = useState<boolean>(false)
-   
+
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
             <View style={IndexStyles.StyleAuthLoginUser.container}>
@@ -65,7 +65,9 @@ const AuthLoginUser: React.FC = () => {
                                 {!showPassword ? <Icon.HidePasswordSVG width={25} height={25} fill='black' /> : <Icon.ShowPasswordSVG width={25} height={25} fill='black' />}
                             </TouchableOpacity>
                         </View>
-                        <Text style={IndexStyles.StyleAuthLoginUser.textForgot}>Quên mật khẩu?</Text>
+                        <TouchableOpacity onPress={() => navigation.navigate('AuthUser', { screen: 'ForgotPassword' } as any)}>
+                            <Text style={IndexStyles.StyleAuthLoginUser.textForgot}>Quên mật khẩu?</Text>
+                        </TouchableOpacity>
                     </View>
                     <TouchableOpacity onPress={handleLogin}>
                         <LinearGradient colors={['#FFCDB2', '#FF5A5F']} style={IndexStyles.StyleAuthLoginUser.buttonLogin}

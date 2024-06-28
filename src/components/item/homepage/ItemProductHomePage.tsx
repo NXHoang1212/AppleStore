@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, ImageProps, ImageSourcePropType, TouchableOpacity, Animated } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Animated } from 'react-native'
 import React from 'react'
 import { FontsROBOTO } from '../../../constant/Fonts'
 import { COLOR } from '../../../constant/Colors'
@@ -8,7 +8,6 @@ import { Responsive } from '../../../constant/Responsive'
 import { FormatPrice, calculateDiscountedPrice } from '../../../utils/FormatPrice'
 import { useAppSelector } from '../../../import/IndexFeatures'
 import { Icon } from '../../../constant/Icon'
-import { ShareItemDetail } from '../../../import/IndexFeatures'
 import IndexHandleFavourites from '../../../service/Api/indexFavourites'
 
 type PropsProduct = {
@@ -23,7 +22,14 @@ const imageAnimated = new Animated.Value(0)
 const ItemProductHomePage = ({ item, navigation, userId, dispatch }: PropsProduct) => {
     const favourites = useAppSelector((state) => state.Favourites.items);
     const isFavourite = favourites.some(favItem => favItem.productId._id === item._id);
-    const { onFastImageLoad } = ShareItemDetail()
+
+    const onFastImageLoad = () => {
+        Animated.timing(imageAnimated, {
+            toValue: 1,
+            duration: 500,
+            useNativeDriver: true,
+        }).start()
+    }
 
 
     return (
@@ -32,7 +38,7 @@ const ItemProductHomePage = ({ item, navigation, userId, dispatch }: PropsProduc
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                     <Text style={styles.textdiscount}>Giảm {item.discount.percentage}%</Text>
                     {isFavourite ? (
-                        <TouchableOpacity style={styles.viewHeart}>
+                        <TouchableOpacity style={styles.viewHeart} onPress={() => IndexHandleFavourites.handleRemoveFavourite(favourites.find(favItem => favItem.productId._id === item._id)?._id as string, dispatch, userId)}>
                             <Icon.HeartCheckedSVG width={Responsive.wp(5)} height={Responsive.hp(3)} fill={COLOR.REDONE} />
                         </TouchableOpacity>
                     ) : (

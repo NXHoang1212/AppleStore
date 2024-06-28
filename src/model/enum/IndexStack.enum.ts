@@ -28,6 +28,8 @@ export enum StackIndividualEnum {
 export enum StackAuthUserEnum {
     AuthLogin = 'AuthLogin',
     AuthRegister = 'AuthRegister',
+    ForgotPassword = 'ForgotPassword',
+    OtpPassword = 'OtpPassword',
 }
 
 export enum StackMiscEnum {

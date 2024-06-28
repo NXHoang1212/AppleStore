@@ -14,7 +14,7 @@ import { ItemListAddress } from '../../../../import/IndexComponent';
 
 const ViewAddress: React.FC = () => {
     const navigation = useNavigation<NativeStackNavigationProp<StackIndividualParams, 'ViewAddRess'>>();
-    const user_id = useAppSelector(state => state.Auth.user._id)
+    const user_id = useAppSelector(state => state.root.Auth.user._id)
     const dispatch = useAppDispatch()
 
     const { data, isLoading, isFetching } = useGetAddressIdUserQuery(user_id)

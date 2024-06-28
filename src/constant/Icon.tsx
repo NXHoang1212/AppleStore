@@ -26,6 +26,8 @@ import IconShoppingCart from '../assets/svg/shoppingcart.svg';
 import IconShare from '../assets/svg/share.svg';
 import IconHeart from '../assets/svg/heart.svg';
 import IconHeartChecked from '../assets/svg/heartChecked.svg';
+import IconAccount from '../assets/svg/account.svg';
+import IconQuestion from '../assets/svg/question.svg';
 
 export class Icon {
     static BackSVG = IconBack;
@@ -56,6 +58,8 @@ export class Icon {
     static ShareSVG = IconShare;
     static HeartSVG = IconHeart;
     static HeartCheckedSVG = IconHeartChecked;
+    static AccountSVG = IconAccount;
+    static QuestionSVG = IconQuestion;
     static HOME = require('../assets/images/house.png');
     static CART = require('../assets/images/cart.png');
     static CATEGORY = require('../assets/images/category.png');

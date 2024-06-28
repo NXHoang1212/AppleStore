@@ -5,6 +5,8 @@ import { StackAuthUserParams } from '../model/param/IndexStack.Param';
 
 import AuthLoginUser from '../screens/auth/login/AuthLoginUser';
 import AuthRegisterUser from '../screens/auth/register/AuthRegisterUser';
+import ForgotPassword from '../screens/auth/password/reset/ForgotPassword';
+import OtpPassword from '../screens/auth/password/otp/OtpPassword';
 
 const Stack = createNativeStackNavigator<StackAuthUserParams>();
 
@@ -13,6 +15,8 @@ const StackAuthUser = (): React.JSX.Element => {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name={StackAuthUserEnum.AuthLogin} component={AuthLoginUser} />
             <Stack.Screen name={StackAuthUserEnum.AuthRegister} component={AuthRegisterUser} />
+            <Stack.Screen name={StackAuthUserEnum.ForgotPassword} component={ForgotPassword} />
+            <Stack.Screen name={StackAuthUserEnum.OtpPassword} component={OtpPassword} />
         </Stack.Navigator>
     );
 };

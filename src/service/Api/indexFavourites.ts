@@ -1,6 +1,6 @@
 import { Animated, Easing } from 'react-native';
 import ToastMessage from '../../utils/ToastMessage';
-import { addFavourite, fetchFavourites } from '../../redux/slices/Favourties.Slice';
+import { addFavourite, fetchFavourites, removeFavourite } from '../../redux/slices/Favourties.Slice';
 
 
 class IndexHandleFavourites {
@@ -26,6 +26,16 @@ class IndexHandleFavourites {
             dispatch(fetchFavourites(userId));
         } catch (error) {
             console.log('handleAddFavourite error:', error);
+        }
+    }
+
+    static async handleRemoveFavourite(favouriteId: string, dispatch: any, userId: string) {
+        try {
+            await dispatch(removeFavourite(favouriteId));
+            ToastMessage('success', 'Đã xóa khỏi yêu thích');
+            dispatch(fetchFavourites(userId));
+        } catch (error) {
+            console.log('handleRemoveFavourite error:', error);
         }
     }
 }

@@ -1,5 +1,5 @@
-import React, { useState, useRef, useCallback } from 'react';
-import { View, Text, TouchableOpacity, Animated, ScrollView, Image, Easing, ActivityIndicator, FlatList } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { View, Text, TouchableOpacity, Animated, ScrollView, Image } from 'react-native';
 
 import { COLOR } from '../../../../constant/Colors';
 import { Icon } from '../../../../constant/Icon';
@@ -16,10 +16,8 @@ import { CustomBackdrop, ItemArticle, ItemModelInfor } from '../../../../import/
 import Carousel from 'react-native-reanimated-carousel';
 import LinearGradient from 'react-native-linear-gradient';
 
-import { ShareItemDetail, UseBottomSheetModel, useAppSelector, useAppDispatch } from '../../../../import/IndexFeatures';
+import { ShareItemDetail, UseBottomSheetModel, useAppSelector } from '../../../../import/IndexFeatures';
 import { BottomSheetModal, BottomSheetModalProvider, BottomSheetScrollView, BottomSheetView } from '@gorhom/bottom-sheet';
-import ToastMessage from '../../../../utils/ToastMessage';
-import { addFavourite, fetchFavourites } from '../../../../redux/slices/Favourties.Slice';
 import IndexHandleFavourites from '../../../../service/Api/indexFavourites';
 
 type PropsProduct = {
@@ -42,7 +40,6 @@ const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation, userId = 
 
     const favourites = useAppSelector((state) => state.Favourites.items);
     const isFavourite = favourites.some(favItem => favItem.productId._id === item._id);
-
 
     return (
         <BottomSheetModalProvider>
@@ -102,7 +99,7 @@ const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation, userId = 
                             <View style={IndexStyles.StyleItemDetailArticle.viewName}>
                                 <Text style={IndexStyles.StyleItemDetailArticle.textname}>{item.name} {item.storage} {item.model}</Text>
                                 {isFavourite ? (
-                                    <TouchableOpacity style={IndexStyles.StyleItemDetailArticle.viewHeart}>
+                                    <TouchableOpacity style={IndexStyles.StyleItemDetailArticle.viewHeart} onPress={() => IndexHandleFavourites.handleRemoveFavourite(favourites.find(favItem => favItem.productId._id === item._id)?._id as string, dispatch, userId)} >
                                         <Icon.HeartCheckedSVG width={Responsive.wp(5)} height={Responsive.hp(3)} fill={COLOR.REDONE} />
                                     </TouchableOpacity>
                                 ) : (

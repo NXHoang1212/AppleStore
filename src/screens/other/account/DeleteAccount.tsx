@@ -1,15 +1,35 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StackHomeTypeParam } from '../../../model/param/IndexStack.Param';
+import { useAppSelector, useAppDispatch } from '../../../import/IndexFeatures';
+import { Logout } from '../../../redux/slices/Auth.Slice';
 
 import { Icon } from '../../../constant/Icon'
-
 import { CustomCheckBox } from '../../../import/IndexComponent'
 import { IndexStyles } from '../../../import/IndexStyles';
+import { HandleDeleteUser } from '../../../service/Api/IndexUser'
+import ToastMessage from '../../../utils/ToastMessage';
+
 
 const DeleteAccount: React.FC = () => {
-    const navigation = useNavigation();
+    const navigation = useNavigation<NativeStackNavigationProp<StackHomeTypeParam, 'AuthUser'>>()
     const [checked, setChecked] = useState<boolean>(false);
+    const id = useAppSelector(state => state.root.Auth.user._id)
+    const dispatch = useAppDispatch()
+
+    const HandleDeleteAccount = async () => {
+        try {
+            const response = await HandleDeleteUser(id)
+            ToastMessage('success', 'Xóa tài khoản thành công')
+            navigation.navigate('AuthUser')
+            dispatch(Logout())
+            console.log("🚀 ~ HandleDeleteAccount ~ response", response)
+        } catch (error) {
+            console.log("🚀 ~ HandleDeleteAccount ~ error", error)
+        }
+    }
 
     return (
         <View style={IndexStyles.StyleDeleteAccount.container}>
@@ -43,7 +63,7 @@ const DeleteAccount: React.FC = () => {
                 </View>
                 <TouchableOpacity
                     style={[IndexStyles.StyleDeleteAccount.buttonConfirm, { opacity: checked ? 1 : 0.5 }]}
-                    disabled={!checked}>
+                    disabled={!checked} onPress={HandleDeleteAccount}>
                     <Text style={IndexStyles.StyleDeleteAccount.textbutton}>Xóa tài khoản</Text>
                 </TouchableOpacity>
             </View>

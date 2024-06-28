@@ -10,7 +10,7 @@ const StyleContactFeedback = StyleSheet.create({
         backgroundColor: COLOR.GRAY
     },
     viewheader: {
-        height: Responsive.hp(10),
+        height: Responsive.hp(11),
         backgroundColor: COLOR.WHITE,
         borderBottomWidth: 1.5,
         borderBottomColor: COLOR.GREY,
@@ -21,11 +21,11 @@ const StyleContactFeedback = StyleSheet.create({
     headerTitle: {
         flexDirection: 'row',
         alignItems: 'center',
-        top: Responsive.hp(5),
+        top: Responsive.hp(6),
         paddingHorizontal: Responsive.wp(5),
     },
     textHeader: {
-        fontSize: 18,
+        fontSize: Responsive.RFPercentage(2.3),
         fontFamily: FontsROBOTO.ROBOTO_REGULAR,
         color: COLOR.REDONE,
         fontWeight: 'bold',
@@ -65,17 +65,16 @@ const StyleContactFeedback = StyleSheet.create({
         marginLeft: 'auto'
     },
     textTitle: {
-        fontSize: 17,
+        fontSize: Responsive.RFPercentage(2.2),
         fontFamily: FontsOSANS.OSANS_MEDIUM,
         color: COLOR.BLACK,
         letterSpacing: 0.1
     },
     textname: {
-        fontSize: 16,
+        fontSize: Responsive.RFPercentage(2.1),
         fontFamily: FontsROBOTO.ROBOTO_REGULAR,
         color: COLOR.GREY,
         letterSpacing: 0.25,
-        textAlign: 'justify'
     }
 });
 

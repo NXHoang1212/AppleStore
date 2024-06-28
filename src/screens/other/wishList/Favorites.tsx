@@ -4,15 +4,23 @@ import React, { useState, useRef } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { Icon } from '../../../constant/Icon';
 
-import { InputCustom } from '../../../import/IndexComponent';
+import { InputCustom, ItemArticle, ItemFavourites } from '../../../import/IndexComponent';
 import { Responsive } from '../../../constant/Responsive';
 import { IndexStyles } from '../../../import/IndexStyles';
+
+import { useAppSelector } from '../../../import/IndexFeatures';
+import { FlashList } from '@shopify/flash-list';
 
 const Favorites: React.FC = () => {
     const navigation = useNavigation();
     const [search, setSearch] = useState<string>('');
     const [isSearchVisible, setIsSearchVisible] = useState<boolean>(false);
     const animatedValue = useRef(new Animated.Value(0)).current;
+    const favourites = useAppSelector((state) => state.Favourites.items);
+
+    const searchProduct = favourites.filter((item) => {
+        return item.productId.name.toLowerCase().includes(search.toLowerCase());
+    });
 
     const toggleSearch = () => {
         if (isSearchVisible) {
@@ -33,7 +41,7 @@ const Favorites: React.FC = () => {
 
     const headerHeight = animatedValue.interpolate({
         inputRange: [0, 1],
-        outputRange: [Responsive.hp(11), Responsive.hp(2.5)],
+        outputRange: [Responsive.hp(12), Responsive.hp(2.5)],
     });
 
     const inputOpacity = animatedValue.interpolate({
@@ -49,9 +57,11 @@ const Favorites: React.FC = () => {
                     <Text style={IndexStyles.StyleFavorites.textHeader}>Lượt thích</Text>
                     <View style={IndexStyles.StyleFavorites.headerIcon}>
                         <TouchableOpacity onPress={toggleSearch}>
-                            <Icon.SearchSVG width={25} height={25} fill='red' />
+                            <Icon.SearchSVG width={23} height={25} fill='red' />
                         </TouchableOpacity>
-                        <Image source={Icon.CART} style={{ width: 25, height: 25, tintColor: 'red' }} />
+                        <TouchableOpacity>
+                            <Image source={Icon.CART} style={{ width: 25, height: 25, tintColor: 'red' }} />
+                        </TouchableOpacity>
                     </View>
                 </View>
             </Animated.View>
@@ -72,6 +82,30 @@ const Favorites: React.FC = () => {
                 </Animated.View>
             )}
             <View style={IndexStyles.StyleFavorites.containerBody}>
+                {search.length === 0 ? (
+                    <FlashList
+                        data={favourites}
+                        renderItem={({ item }) => <ItemFavourites item={item.productId} navigation={navigation} />}
+                        keyExtractor={(item) => item._id}
+                        numColumns={2}
+                        estimatedItemSize={Responsive.hp(50)}
+                        showsVerticalScrollIndicator={false}
+                    />
+                ) : searchProduct.length > 0 ? (
+                    <FlashList
+                        data={searchProduct}
+                        renderItem={({ item }) => <ItemFavourites item={item.productId} navigation={navigation} />}
+                        keyExtractor={(item) => item._id}
+                        numColumns={2}
+                        estimatedItemSize={Responsive.hp(50)}
+                        showsVerticalScrollIndicator={false}
+                    />
+                ) : (
+                    <View style={IndexStyles.StyleFavorites.viewNoProduct}>
+                        <Image source={Icon.NotFoundProduct} style={IndexStyles.StyleFavorites.iconNoProduct} />
+                        <Text style={IndexStyles.StyleFavorites.textNoProduct}>Không tìm thấy sản phẩm</Text>
+                    </View>
+                )}
             </View>
         </View>
     );

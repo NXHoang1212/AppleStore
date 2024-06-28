@@ -21,7 +21,7 @@ const StyleFavorites = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        top: Responsive.hp(6.3),
+        top: Responsive.hp(7),
         paddingHorizontal: Responsive.wp(5),
     },
     textHeader: {
@@ -41,9 +41,10 @@ const StyleFavorites = StyleSheet.create({
     containerBody: {
         flex: 1,
         backgroundColor: COLOR.WHITE,
+        marginTop: Responsive.hp(2),
     },
     textInput: {
-        width: Responsive.wp(83),
+        width: Responsive.wp(78),
         borderRadius: 5,
         height: Responsive.hp(5),
         backgroundColor: COLOR.GRAY,
@@ -55,7 +56,7 @@ const StyleFavorites = StyleSheet.create({
         height: Responsive.hp(10),
         justifyContent: 'center',
         alignItems: 'center',
-        top: Responsive.hp(1.5),
+        top: Responsive.hp(2),
     },
     textRemove: {
         fontSize: 18,
@@ -63,6 +64,22 @@ const StyleFavorites = StyleSheet.create({
         color: COLOR.REDONE,
         fontWeight: 'bold',
         letterSpacing: 0.25,
+    },
+    viewNoProduct: {
+        flex: 1,
+        alignItems: 'center',
+        marginTop: Responsive.hp(20),
+    },
+    iconNoProduct: {
+        width: Responsive.wp(50),
+        height: Responsive.hp(35),
+        resizeMode: 'contain',
+    },
+    textNoProduct: {
+        fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
+        fontSize: Responsive.RFPercentage(2.5),
+        color: COLOR.BLACK,
+
     },
 });
 

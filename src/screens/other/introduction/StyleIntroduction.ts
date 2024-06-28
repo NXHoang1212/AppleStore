@@ -10,7 +10,7 @@ const StyleIntroduction = StyleSheet.create({
         backgroundColor: COLOR.GRAY
     },
     viewheader: {
-        height: Responsive.hp(10),
+        height: Responsive.hp(12),
         backgroundColor: COLOR.WHITE,
         borderBottomWidth: 1.5,
         borderBottomColor: COLOR.GREY,
@@ -21,12 +21,12 @@ const StyleIntroduction = StyleSheet.create({
     headerTitle: {
         flexDirection: 'row',
         alignItems: 'center',
-        top: Responsive.hp(5),
+        top: Responsive.hp(6.2),
         justifyContent: 'space-between',
         paddingHorizontal: Responsive.wp(4),
     },
     textHeader: {
-        fontSize: 18,
+        fontSize: Responsive.RFPercentage(2.5),
         fontFamily: FontsROBOTO.ROBOTO_REGULAR,
         color: COLOR.REDONE,
         fontWeight: 'bold',
@@ -39,7 +39,7 @@ const StyleIntroduction = StyleSheet.create({
         backgroundColor: COLOR.GRAY,
     },
     text: {
-        fontSize: 16,
+        fontSize: Responsive.RFPercentage(2.3),
         fontFamily: FontsOSANS.OSANS_REGULAR,
         color: COLOR.REDONE,
         fontWeight: 'bold',

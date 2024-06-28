@@ -7,10 +7,10 @@ import { Responsive } from "../../../constant/Responsive";
 const StyleChatWithAdmin = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: COLOR.GRAY
+        backgroundColor: COLOR.WHITE
     },
     viewheader: {
-        height: Responsive.hp(10),
+        height: Responsive.hp(12),
         backgroundColor: COLOR.WHITE,
         borderBottomWidth: 1.5,
         borderBottomColor: COLOR.GRAY,
@@ -21,11 +21,11 @@ const StyleChatWithAdmin = StyleSheet.create({
     headerTitle: {
         flexDirection: 'row',
         alignItems: 'center',
-        top: Responsive.hp(5),
+        top: Responsive.hp(6),
         paddingHorizontal: Responsive.wp(5),
     },
     textHeader: {
-        fontSize: 18,
+        fontSize: Responsive.RFPercentage(2.3),
         fontFamily: FontsROBOTO.ROBOTO_REGULAR,
         color: COLOR.REDONE,
         fontWeight: 'bold',

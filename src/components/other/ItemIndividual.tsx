@@ -8,11 +8,11 @@ import { Icon } from '../../constant/Icon';
 type Props = {
     text: string;
     image: ImageSourcePropType;
-    navigate?: () => void;
+    onPress?: () => void;
 }
 
-const renderInformationItem = ({ text, image, navigate }: Props) => (
-    <TouchableOpacity style={StyleItemIndividual.viewinfor1} key={text} onPress={navigate}>
+const renderInformationItem = ({ text, image, onPress }: Props) => (
+    <TouchableOpacity style={StyleItemIndividual.viewinfor1} key={text} onPress={onPress}>
         <View style={StyleItemIndividual.viewText}>
             <Image source={image} style={{ width: Responsive.wp(8), height: Responsive.hp(4), resizeMode: 'contain' }} />
             <Text style={StyleItemIndividual.textinfor1}>{text}</Text>

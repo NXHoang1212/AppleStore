@@ -33,6 +33,7 @@ import ItemProductHomePage from "../components/item/homepage/ItemProductHomePage
 import ItemDetailArticle from "../components/item/product/detail/ItemDetailArticle";
 import ItemModelInfor from "../components/item/product/detail/ItemModelInfor";
 import ItemListAddress from "../components/item/address/ItemListAddress";
+import ItemFavourites from "../components/item/product/list/ItemFavourites";
 
 
 /*MEDIA */
@@ -63,6 +64,7 @@ export {
     ItemProductHomePage,
     ItemModelInfor,
     ItemListAddress,
+    ItemFavourites,
     ItemDetailArticle,
     ImagePicker,
     Loading,

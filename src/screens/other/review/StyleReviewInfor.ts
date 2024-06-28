@@ -10,7 +10,7 @@ const StyleReviewInfor = StyleSheet.create({
         backgroundColor: COLOR.GRAY,
     },
     viewheader: {
-        height: Responsive.hp(10),
+        height: Responsive.hp(11),
         backgroundColor: COLOR.WHITE,
         borderBottomWidth: 2,
         borderBottomColor: COLOR.GRAY,
@@ -21,11 +21,11 @@ const StyleReviewInfor = StyleSheet.create({
     headerTitle: {
         flexDirection: 'row',
         alignItems: 'center',
-        top: Responsive.hp(4.5),
+        top: Responsive.hp(6),
         paddingHorizontal: Responsive.wp(3),
     },
     textHeader: {
-        fontSize: 18,
+        fontSize: Responsive.RFPercentage(2.3),
         fontFamily: FontsROBOTO.ROBOTO_REGULAR,
         color: COLOR.BLACK,
         fontWeight: 'bold',
@@ -45,19 +45,19 @@ const StyleReviewInfor = StyleSheet.create({
         marginBottom: Responsive.hp(2),
     },
     textTab: {
-        fontSize: 15,
+        fontSize: Responsive.RFPercentage(2.1),
         fontFamily: FontsROBOTO.ROBOTO_REGULAR,
         color: COLOR.GREY,
         letterSpacing: 0.25,
     },  
     textActive: {
-        fontSize: 15,
+        fontSize: Responsive.RFPercentage(2.1),
         fontFamily: FontsROBOTO.ROBOTO_BLACK_ITALIC,
         color: COLOR.RED,
         letterSpacing: 0.25,
         borderBottomWidth: 2,
         borderBottomColor: COLOR.RED,
-        width: Responsive.wp(30),
+        width: Responsive.wp(25.8),
         textAlign: 'center',
     },
 });

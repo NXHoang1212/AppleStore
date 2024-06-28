@@ -23,12 +23,12 @@ const ReviewInfor: React.FC = () => {
             </View>
             <View style={IndexStyles.StyleReviewInfor.containerBody}>
                 <View style={IndexStyles.StyleReviewInfor.viewTab}>
-                    <Pressable onPress={() => { handleActiveTab('review') }}>
+                    <TouchableOpacity onPress={() => { handleActiveTab('review') }}>
                         <Text style={activeTab === 'review' ? IndexStyles.StyleReviewInfor.textActive : IndexStyles.StyleReviewInfor.textTab}>Chưa đánh giá</Text>
-                    </Pressable>
-                    <Pressable onPress={() => { handleActiveTab('comment') }}>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => { handleActiveTab('comment') }}>
                         <Text style={activeTab === 'comment' ? IndexStyles.StyleReviewInfor.textActive : IndexStyles.StyleReviewInfor.textTab}>Đã đánh giá</Text>
-                    </Pressable>
+                    </TouchableOpacity>
                 </View>
             </View>
             

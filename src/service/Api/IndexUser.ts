@@ -44,4 +44,31 @@ const HandleUploadAvatar = async (id: String, photoUrl: String) => {
     }
 }
 
-export { HandleRegisterUser, HandleLoginUser, HandleUpdateUser, HandleUploadAvatar }
+const HandleAuthenticatePassword = async (id: String, password: String) => {
+    try {
+        const response = await AxiosInstance().put(`/api/auth/authenticatePassword/${id}`, { password })
+        return response
+    } catch (error: any) {
+        throw new Error(error)
+    }
+}
+
+const HandleResetPassword = async (id: String, oldPassword: String, newPassword: String, confirmPassword: String) => {
+    try {
+        const response = await AxiosInstance().put(`/api/auth/resetPassword/${id}`, { oldPassword, newPassword, confirmPassword })
+        return response
+    } catch (error: any) {
+        throw new Error(error)
+    }
+}
+
+const HandleDeleteUser = async (id: String) => {
+    try {
+        const response = await AxiosInstance().delete(`/api/auth/deleteUser/${id}`)
+        return response
+    } catch (error: any) {
+        throw new Error(error)
+    }
+}
+
+export { HandleRegisterUser, HandleLoginUser, HandleUpdateUser, HandleUploadAvatar, HandleAuthenticatePassword, HandleResetPassword, HandleDeleteUser }

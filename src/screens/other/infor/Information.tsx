@@ -1,22 +1,25 @@
 import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 
 import useStatusBarConfig from '../../../utils/UseStatusBarConfig'
 import LinearGradient from 'react-native-linear-gradient'
 import { Icon } from '../../../constant/Icon'
+import { IndexStyles } from '../../../import/IndexStyles';
 
 import { renderInformationItem, renderOrderStatus } from '../../../import/IndexComponent'
-
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackHomeTypeParam } from '../../../model/param/IndexStack.Param'
 
-import { useAppSelector } from '../../../features/redux/ReduxHook'
-import { IndexStyles } from '../../../import/IndexStyles';
+import { useAppSelector, useAppDispatch } from '../../../features/redux/ReduxHook'
+import { Logout } from '../../../redux/slices/Auth.Slice'
+import { CustomModalConfirm } from '../../../import/IndexComponent'
 
 const Information: React.FC = () => {
   useStatusBarConfig('dark-content', 'transparent', true)
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeTypeParam>>()
+  const dispatch = useAppDispatch()
+  const [isVisible, setIsVisible] = useState<boolean>(false)
   const isLoggedIn = useAppSelector(state => state.root.Auth)
 
   return (
@@ -55,17 +58,24 @@ const Information: React.FC = () => {
           <View style={IndexStyles.StyleInformation.decor}></View>
           <View>
             {renderInformationItem({ text: 'Khách hàng thân thiết', image: Icon.LOYALCUSTOMER })}
-            {renderInformationItem({ text: 'Thông tin cá nhân', image: Icon.INFOR, navigate: () => navigation.navigate(isLoggedIn.isLogged ? 'StackIndividual' : 'AuthUser', { screen: 'EditProfile' } as any) })}
-            {renderInformationItem({ text: 'Địa chỉ', image: Icon.ADDRESS, navigate: () => navigation.navigate(isLoggedIn.isLogged ? 'StackIndividual' : 'AuthUser', { screen: 'ViewAddRess' } as any) })}
-            {renderInformationItem({ text: 'Yêu thích', image: Icon.FAVOURITE, navigate: () => navigation.navigate(isLoggedIn.isLogged ? 'StackIndividual' : 'AuthUser', { screen: 'Favorites' } as any) })}
-            {renderInformationItem({ text: 'Đổi mật khẩu', image: Icon.CHANGEPASSWORD, navigate: () => navigation.navigate(isLoggedIn.isLogged ? 'StackIndividual' : 'AuthUser', { screen: 'ChangePassword' } as any) })}
-            {renderInformationItem({ text: 'Đánh giá của tôi', image: Icon.FEEDBACK, navigate: () => navigation.navigate(isLoggedIn.isLogged ? 'StackIndividual' : 'AuthUser', { screen: 'ReviewInfor' } as any) })}
-            {renderInformationItem({ text: 'Trò chuyện với shop', image: Icon.CHATWITHSHOP, navigate: () => navigation.navigate(isLoggedIn.isLogged ? 'StackIndividual' : 'AuthUser', { screen: 'ChatWithAdmin' } as any) })}
-            {renderInformationItem({ text: 'Xóa tài khoản', image: Icon.DELETEUSER, navigate: () => navigation.navigate(isLoggedIn.isLogged ? 'StackIndividual' : 'AuthUser', { screen: 'DeleteAccount' } as any) })}
-            {renderInformationItem({ text: 'Liên hệ và góp ý', image: Icon.CONTACT, navigate: () => navigation.navigate(isLoggedIn.isLogged ? 'StackIndividual' : 'AuthUser', { screen: 'ContactFeedback' } as any) })}
-            {renderInformationItem({ text: 'Giới thiệu', image: Icon.INTRODUCE, navigate: () => navigation.navigate(isLoggedIn.isLogged ? 'StackIndividual' : 'AuthUser', { screen: 'Introduction' } as any) })}
-            {renderInformationItem({ text: 'Đăng xuất', image: Icon.LOGOUT })}
+            {renderInformationItem({ text: 'Thông tin cá nhân', image: Icon.INFOR, onPress: () => navigation.navigate(isLoggedIn.isLogged ? 'StackIndividual' : 'AuthUser', { screen: 'EditProfile' } as any) })}
+            {renderInformationItem({ text: 'Địa chỉ', image: Icon.ADDRESS, onPress: () => navigation.navigate(isLoggedIn.isLogged ? 'StackIndividual' : 'AuthUser', { screen: 'ViewAddRess' } as any) })}
+            {renderInformationItem({ text: 'Yêu thích', image: Icon.FAVOURITE, onPress: () => navigation.navigate(isLoggedIn.isLogged ? 'StackIndividual' : 'AuthUser', { screen: 'Favorites' } as any) })}
+            {renderInformationItem({ text: 'Đổi mật khẩu', image: Icon.CHANGEPASSWORD, onPress: () => navigation.navigate(isLoggedIn.isLogged ? 'StackIndividual' : 'AuthUser', { screen: 'ChangePassword' } as any) })}
+            {renderInformationItem({ text: 'Đánh giá của tôi', image: Icon.FEEDBACK, onPress: () => navigation.navigate(isLoggedIn.isLogged ? 'StackIndividual' : 'AuthUser', { screen: 'ReviewInfor' } as any) })}
+            {renderInformationItem({ text: 'Trò chuyện với shop', image: Icon.CHATWITHSHOP, onPress: () => navigation.navigate(isLoggedIn.isLogged ? 'StackIndividual' : 'AuthUser', { screen: 'ChatWithAdmin' } as any) })}
+            {renderInformationItem({ text: 'Xóa tài khoản', image: Icon.DELETEUSER, onPress: () => navigation.navigate(isLoggedIn.isLogged ? 'StackIndividual' : 'AuthUser', { screen: 'DeleteAccount' } as any) })}
+            {renderInformationItem({ text: 'Liên hệ và góp ý', image: Icon.CONTACT, onPress: () => navigation.navigate(isLoggedIn.isLogged ? 'StackIndividual' : 'AuthUser', { screen: 'ContactFeedback' } as any) })}
+            {renderInformationItem({ text: 'Giới thiệu', image: Icon.INTRODUCE, onPress: () => navigation.navigate(isLoggedIn.isLogged ? 'StackIndividual' : 'AuthUser', { screen: 'Introduction' } as any) })}
+            {renderInformationItem({ text: 'Đăng xuất', image: Icon.LOGOUT, onPress: () => setIsVisible(true) })}
           </View>
+          <CustomModalConfirm
+            isVisible={isVisible}
+            title='Xác nhận'
+            message='Bạn có chắc chắn muốn đăng xuất không?'
+            onPressConfirm={() => dispatch(Logout(), setIsVisible(false))}
+            onPressCancel={() => setIsVisible(false)}
+          />
         </View>
       </View>
     </ScrollView>

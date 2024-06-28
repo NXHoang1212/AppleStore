@@ -16,13 +16,6 @@ const ShareItemDetail = () => {
         }).start()
     }
 
-    const onFastImageLoad = () => {
-        Animated.timing(imageAnimated, {
-            toValue: 1,
-            useNativeDriver: true,
-        }).start()
-    }
-
     const shareProduct = async (item: DetailProductParams) => {
         try {
             const shareResponse = await Share.share({
@@ -48,7 +41,7 @@ const ShareItemDetail = () => {
     };
 
     return {
-        onImageLoad, onFastImageLoad, shareProduct, showDescription, setShowDescription, ToggleDescription,
+        onImageLoad, shareProduct, showDescription, setShowDescription, ToggleDescription,
     }
 }
 

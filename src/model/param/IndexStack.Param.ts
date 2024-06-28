@@ -37,4 +37,6 @@ export type StackMiscParams = {
 export type StackAuthUserParams = {
     AuthLogin: undefined;
     AuthRegister: undefined;
+    ForgotPassword: undefined;
+    OtpPassword: undefined;
 };

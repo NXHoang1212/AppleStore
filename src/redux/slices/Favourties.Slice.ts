@@ -27,7 +27,7 @@ export const addFavourite = createAsyncThunk<FavouritesEntity, CreateFavouritesE
     }
 );
 
-export const removeFavourite = createAsyncThunk<void, string>(
+export const removeFavourite = createAsyncThunk<string, string>(
     'favourites/removeFavourite',
     async (favouriteId) => {
         try {
@@ -71,6 +71,15 @@ const favouritesSlice = createSlice({
             })
             .addCase(addFavourite.fulfilled, (state, action) => {
                 state.items.push(action.payload);
+            })
+            .addCase(addFavourite.rejected, (state, action) => {
+                state.error = action.error.message || 'Lỗi Rồi cứu bé đi ạ!';
+            })
+            .addCase(removeFavourite.fulfilled, (state, action) => {
+                state.items = state.items.filter((item) => item._id !== action.payload);
+            })
+            .addCase(removeFavourite.rejected, (state, action) => {
+                state.error = action.error.message || 'Lỗi Rồi cứu bé đi ạ!';
             });
     },
 });
