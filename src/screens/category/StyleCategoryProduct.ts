@@ -11,7 +11,7 @@ const StyleCategoryProduct = StyleSheet.create({
     },
     viewheader: {
         width: Responsive.wp(100),
-        height: Responsive.hp(12),
+        height: Responsive.hp(13),
         backgroundColor: COLOR.REDONE,
     },
     headerSmall: {
@@ -20,7 +20,7 @@ const StyleCategoryProduct = StyleSheet.create({
         justifyContent: 'space-between',
         padding: Responsive.wp(3),
         gap: Responsive.wp(3),
-        top: Responsive.hp(4.7),
+        top: Responsive.hp(5),
     },
     textheader: {
         fontFamily: FontsOSANS.OSANS_BOLD,

@@ -23,7 +23,7 @@ const EditProfile: React.FC = () => {
   const navigation = useNavigation()
   const dispatch = useAppDispatch()
   const { photoUrl, handleSelectPhoto, handleUploadPhoto } = useImagePicker();
-  const users = useAppSelector(state => state.Auth.user)
+  const users = useAppSelector(state => state.root.Auth.user)
   const [open, setOpen] = useState<boolean>(false)
   const [infor, setInfor] = useState<UpdateUser>({
     fullname: users.fullname,

@@ -43,7 +43,9 @@ export const AddressQuery = createApi({
                     body: body
                 }
             },
+            transformErrorResponse: (response, meta, arg) => response.status,
             invalidatesTags: [{ type: 'TypeAddress', id: 'ADDRESS' }],
+            
         }),
         deleteAddress: build.mutation<{ message: string }, string>({
             query: (id) => {

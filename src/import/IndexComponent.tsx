@@ -1,10 +1,11 @@
 
-/*BUTTON,TEXTINPUT,SWITCH,PICKER*/
+/*BUTTON,TEXTINPUT,SWITCH,PICKER,MODAL*/
 import CustomCheckBox from "../components/checkbox/CustomCheckbox";
 import InputCustom from "../components/input/Textinput";
 import CustomSwtich from "../components/toggle/CustomSwtich";
 import PickerCustom from "../components/other/PickerCustom";
 import CustomBackdrop from "../components/other/CustomBarckdrop";
+import CustomModalConfirm from "../components/other/CustomModalConfirm";
 
 /*BANNER */
 import Paginations from "../components/banner/Paginations";
@@ -48,6 +49,7 @@ export {
     Paginations,
     PickerCustom,
     CustomBackdrop,
+    CustomModalConfirm,
     DistrictItem,
     DistrictList,
     WardItem,

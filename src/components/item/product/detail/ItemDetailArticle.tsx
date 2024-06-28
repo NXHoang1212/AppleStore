@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { View, Text, TouchableOpacity, Animated, ScrollView, Image, Easing } from 'react-native';
+import React, { useState, useRef, useCallback } from 'react';
+import { View, Text, TouchableOpacity, Animated, ScrollView, Image, Easing, ActivityIndicator, FlatList } from 'react-native';
 
 import { COLOR } from '../../../../constant/Colors';
 import { Icon } from '../../../../constant/Icon';
@@ -16,38 +16,32 @@ import { CustomBackdrop, ItemArticle, ItemModelInfor } from '../../../../import/
 import Carousel from 'react-native-reanimated-carousel';
 import LinearGradient from 'react-native-linear-gradient';
 
-import { ShareItemDetail, UseBottomSheetModel, useAppSelector } from '../../../../import/IndexFeatures';
+import { ShareItemDetail, UseBottomSheetModel, useAppSelector, useAppDispatch } from '../../../../import/IndexFeatures';
 import { BottomSheetModal, BottomSheetModalProvider, BottomSheetScrollView, BottomSheetView } from '@gorhom/bottom-sheet';
+import ToastMessage from '../../../../utils/ToastMessage';
+import { addFavourite, fetchFavourites } from '../../../../redux/slices/Favourties.Slice';
+import IndexHandleFavourites from '../../../../service/Api/indexFavourites';
 
 type PropsProduct = {
     item: DetailProductParams,
-    navigation?: any
+    navigation?: any,
+    userId?: string,
+    dispatch?: any
 }
 
-
-const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation }) => {
+const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation, userId = '', dispatch }) => {
     const { onImageLoad, shareProduct, showDescription, ToggleDescription } = ShareItemDetail();
     const { selectedItem, bottomSheetModalRef, snapPoints, handlePresentModalPress, handleDismissModal } = UseBottomSheetModel({ item });
-
     const [selectedPrice, setSelectedPrice] = useState<{ price: number, color: string }>({
         price: item.priceColor[0].price,
         color: item.priceColor[0].color,
     });
-
     const product = Shuffle(useAppSelector((state) => state.Product.data).filter((product) => product._id !== item._id)).slice(0, 15);
 
     const animatedValue = useRef(new Animated.Value(0)).current;
 
-    const handleAddToCart = () => {
-        Animated.timing(animatedValue, {
-            toValue: 1,
-            duration: 1200,
-            easing: Easing.linear,
-            useNativeDriver: true,
-        }).start(() => {
-            animatedValue.setValue(0);
-        });
-    };
+    const favourites = useAppSelector((state) => state.Favourites.items);
+    const isFavourite = favourites.some(favItem => favItem.productId._id === item._id);
 
 
     return (
@@ -105,7 +99,18 @@ const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation }) => {
                     </View>
                     <View style={IndexStyles.StyleItemDetailArticle.containerBody}>
                         <View style={IndexStyles.StyleItemDetailArticle.containerText}>
-                            <Text style={IndexStyles.StyleItemDetailArticle.textname}>{item.name} {item.storage} {item.model}</Text>
+                            <View style={IndexStyles.StyleItemDetailArticle.viewName}>
+                                <Text style={IndexStyles.StyleItemDetailArticle.textname}>{item.name} {item.storage} {item.model}</Text>
+                                {isFavourite ? (
+                                    <TouchableOpacity style={IndexStyles.StyleItemDetailArticle.viewHeart}>
+                                        <Icon.HeartCheckedSVG width={Responsive.wp(5)} height={Responsive.hp(3)} fill={COLOR.REDONE} />
+                                    </TouchableOpacity>
+                                ) : (
+                                    <TouchableOpacity style={IndexStyles.StyleItemDetailArticle.viewHeart} onPress={() => IndexHandleFavourites.handleAddFavourite(item, userId, navigation, dispatch)}>
+                                        <Icon.HeartSVG width={Responsive.wp(5)} height={Responsive.hp(3)} fill={COLOR.BLACKONE} />
+                                    </TouchableOpacity>
+                                )}
+                            </View>
                             <View style={{ flexDirection: 'row', alignItems: 'center', gap: Responsive.wp(2), paddingBottom: Responsive.hp(2) }}>
                                 <Text style={IndexStyles.StyleItemDetailArticle.textPriceDiscount}>{FormatPrice(calculateDiscountedPrice(item.priceColor[0].price, item.discount.percentage))}</Text>
                                 <Text style={IndexStyles.StyleItemDetailArticle.textPrice}>{FormatPrice(item.priceColor[0].price)}</Text>
@@ -157,8 +162,8 @@ const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation }) => {
                                 keyExtractor={(item) => item._id}
                                 horizontal={false}
                                 numColumns={2}
-                                estimatedItemSize={500}
                                 showsVerticalScrollIndicator={false}
+                                estimatedItemSize={200}
                             />
                         </View>
                     </View>
@@ -170,7 +175,7 @@ const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation }) => {
                             <Text style={IndexStyles.StyleItemDetailArticle.textChat}>Chat ngay</Text>
                         </TouchableOpacity>
                         <View style={IndexStyles.StyleItemDetailArticle.lineheight} />
-                        <TouchableOpacity style={IndexStyles.StyleItemDetailArticle.viewChat} onPress={handleAddToCart}>
+                        <TouchableOpacity style={IndexStyles.StyleItemDetailArticle.viewChat} onPress={() => IndexHandleFavourites.handleAddToCart(animatedValue)}>
                             <Animated.View style={[IndexStyles.StyleItemDetailArticle.viewCart, {
                                 transform:
                                     [{

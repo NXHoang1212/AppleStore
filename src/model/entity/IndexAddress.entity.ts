@@ -26,6 +26,7 @@ export interface CreateAddressEntity {
 }
 
 export interface UpdateAddressEntity {
+    _id: string;
     houseNumber: string;
     ward: string;
     district: string;

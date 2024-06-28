@@ -24,6 +24,8 @@ import IconProduct from '../assets/svg/product.svg';
 import IconChange from '../assets/svg/change.svg';
 import IconShoppingCart from '../assets/svg/shoppingcart.svg';
 import IconShare from '../assets/svg/share.svg';
+import IconHeart from '../assets/svg/heart.svg';
+import IconHeartChecked from '../assets/svg/heartChecked.svg';
 
 export class Icon {
     static BackSVG = IconBack;
@@ -52,6 +54,8 @@ export class Icon {
     static ChangeSVG = IconChange;
     static ShoppingCartSVG = IconShoppingCart;
     static ShareSVG = IconShare;
+    static HeartSVG = IconHeart;
+    static HeartCheckedSVG = IconHeartChecked;
     static HOME = require('../assets/images/house.png');
     static CART = require('../assets/images/cart.png');
     static CATEGORY = require('../assets/images/category.png');
@@ -77,6 +81,8 @@ export class Icon {
     static GOOGLE = require('../assets/images/google.png');
     static ZALO = require('../assets/images/zalo.png');
     static FACEBOOK = require('../assets/images/facebook.png');
+    static CANCELSEARCH = require('../assets/images/canecelSearch.png');
+    static NotFoundProduct = require('../assets/images/NotfoundProduct.png');
 }
 
 

@@ -8,30 +8,84 @@ import { IndexStyles } from '../../../../import/IndexStyles'
 import { useRoute } from '@react-navigation/native'
 import { AddressType, TypeEditAddressParmas } from '../../../../model/entity/IndexAddress.entity'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { CustomSwtich, InputCustom } from '../../../../import/IndexComponent'
+import { CustomSwtich, InputCustom, CustomModalConfirm } from '../../../../import/IndexComponent'
 
 import { useAppSelector, useAppDispatch } from '../../../../import/IndexFeatures'
 import { setAddressFromParams, setUpdate } from '../../../../redux/slices/Address.Slice'
 import { useUpdateAddressMutation, useDeleteAddressMutation } from '../../../../service/Api/IndexAddress'
+import ToastMessage from '../../../../utils/ToastMessage'
 
 
 const EditAddress: React.FC = () => {
     const navigation = useNavigation<NativeStackNavigationProp<any>>()
+    const dispatch = useAppDispatch()
     const route = useRoute<TypeEditAddressParmas['route']>()
     const { _id, province, ward, district } = route?.params || {}
     const update = useAppSelector(state => state.Address)
-    const dispatch = useAppDispatch()
+    const isPhonelength = update.update.phone.length === 10
+    const [isVisible, setIsVisible] = useState<boolean>(false)
     const [updateAddress] = useUpdateAddressMutation()
     const [deleteAddress] = useDeleteAddressMutation()
+
+    const handleUpdateAddress = () => {
+        try {
+            if (!isPhonelength) {
+                ToastMessage('error', 'Số điện thoại phải có 10 số')
+            } else {
+                updateAddress({
+                    id: update.update._id, body: {
+                        _id: update.update._id,
+                        name: update.update.name,
+                        phone: update.update.phone,
+                        ward: update.update.ward,
+                        district: update.update.district,
+                        province: update.update.province,
+                        houseNumber: update.update.houseNumber,
+                        addressType: update.update.addressType,
+                        isDefault: update.update.isDefault
+                    }
+                })
+                    .unwrap()
+                    .then((response) => {
+                        if (response !== undefined) {
+                            ToastMessage('success', 'Cập nhật địa chỉ thành công')
+                            navigation.goBack()
+                        }
+                    })
+            }
+        } catch (error) {
+            console.log("🚀 ~ handleUpdateAddress ~ error:", error)
+        }
+    }
+
+    const handleDeleteAddress = () => {
+        try {
+            deleteAddress(update.update._id)
+                .unwrap()
+                .then((response) => {
+                    if (response !== undefined) {
+                        ToastMessage('success', 'Xóa địa chỉ thành công')
+                        navigation.goBack()
+                    }
+                })
+        } catch (error) {
+            console.log("🚀 ~ handleDeleteAddress ~ error:", error)
+        }
+
+    }
 
 
     useEffect(() => {
         if (province && district && ward) {
             dispatch(setAddressFromParams({ province, district, ward }));
         }
+        if (_id) {
+            dispatch(setUpdate({ ...update.update, _id }))
+        }
+
     }, [province, district, ward])
 
-    if (update.isLoading) { 
+    if (update.isLoading) {
         return (
             <View style={IndexStyles.StyleEditAddress.loadingContainer}>
                 <ActivityIndicator size='large' color='red' />
@@ -53,6 +107,7 @@ const EditAddress: React.FC = () => {
                     placeholder='Họ và tên'
                     placeholderTextColor='gray'
                     value={update.update.name}
+                    onChangeText={(text) => dispatch(setUpdate({ name: text }))}
                     style={IndexStyles.StyleEditAddress.input1}
                     keyboardType='default'
                 />
@@ -60,6 +115,7 @@ const EditAddress: React.FC = () => {
                     placeholder='Số điện thoại'
                     placeholderTextColor='gray'
                     value={update.update.phone}
+                    onChangeText={(text) => dispatch(setUpdate({ phone: text }))}
                     style={IndexStyles.StyleEditAddress.input2}
                     keyboardType='numeric'
                 />
@@ -85,6 +141,7 @@ const EditAddress: React.FC = () => {
                     placeholder='Tên đường, số nhà'
                     placeholderTextColor='gray'
                     value={update.update.houseNumber}
+                    onChangeText={(text) => dispatch(setUpdate({ houseNumber: text }))}
                     style={IndexStyles.StyleEditAddress.input2}
                     keyboardType='default'
                 />
@@ -94,13 +151,13 @@ const EditAddress: React.FC = () => {
                 <View style={IndexStyles.StyleEditAddress.containerViewtext}>
                     <Text style={IndexStyles.StyleEditAddress.textsetting}>Loại địa chỉ:</Text>
                     <TouchableOpacity style={[IndexStyles.StyleEditAddress.viewhome, update.update.addressType === AddressType.HOME ? IndexStyles.StyleEditAddress.selected : null]}
-                    >
+                        onPress={() => dispatch(setUpdate({ addressType: AddressType.HOME }))}>
                         <Text style={[IndexStyles.StyleEditAddress.textoptions, update.update.addressType === AddressType.HOME ? IndexStyles.StyleEditAddress.selectedText : null]}>
                             Nhà Riêng
                         </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={[IndexStyles.StyleEditAddress.viewoffice, update.update.addressType === AddressType.OFFICE ? IndexStyles.StyleEditAddress.selected : null]}
-                    >
+                        onPress={() => dispatch(setUpdate({ addressType: AddressType.OFFICE }))}>
                         <Text style={[IndexStyles.StyleEditAddress.textoptions, update.update.addressType === AddressType.OFFICE ? IndexStyles.StyleEditAddress.selectedText : null]}>
                             Văn Phòng
                         </Text>
@@ -108,17 +165,24 @@ const EditAddress: React.FC = () => {
                 </View>
                 <View style={IndexStyles.StyleEditAddress.containerViewdefault}>
                     <Text style={IndexStyles.StyleEditAddress.textsetting}>Đặt làm địa chỉ mặc định</Text>
-                    <CustomSwtich value={update.update.isDefault} onChange={() => { }} />
+                    <CustomSwtich value={update.update.isDefault} onChange={(value) => dispatch(setUpdate({ isDefault: value }))} />
                 </View>
             </View>
             <View style={IndexStyles.StyleEditAddress.containerButton}>
-                <TouchableOpacity style={IndexStyles.StyleEditAddress.viewDelete}>
+                <TouchableOpacity style={IndexStyles.StyleEditAddress.viewDelete} onPress={() => setIsVisible(true)}>
                     <Text style={IndexStyles.StyleEditAddress.textDelete}>Xóa địa chỉ</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={IndexStyles.StyleEditAddress.viewbutton}>
+                <TouchableOpacity style={IndexStyles.StyleEditAddress.viewbutton} onPress={handleUpdateAddress}>
                     <Text style={IndexStyles.StyleEditAddress.textbutton}>Hoàn thành</Text>
                 </TouchableOpacity>
             </View>
+            <CustomModalConfirm
+                title='Xác nhận xóa địa chỉ'
+                message='Bạn có chắc chắn muốn xóa địa chỉ này không?'
+                onPressConfirm={handleDeleteAddress}
+                isVisible={isVisible}
+                onPressCancel={() => setIsVisible(false)}
+            />
         </View>
     )
 }

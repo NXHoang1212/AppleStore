@@ -11,7 +11,7 @@ const StyleCart = StyleSheet.create({
     },
     viewheader: {
         flexDirection: 'row',
-        height: Responsive.hp(11),
+        height: Responsive.hp(13),
         backgroundColor: COLOR.REDONE,
     },
     headerSmall: {

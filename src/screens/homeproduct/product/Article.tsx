@@ -15,7 +15,6 @@ import ItemArticle from '../../../components/item/product/list/ItemArticle'
 import { fetProductsPagination } from '../../../service/Api/IndexProduct'
 import { TypeNameProductParams } from '../../../model/entity/IndexProduct.entity'
 
-
 const Article: React.FC = () => {
     useStatusBarConfig('dark-content', 'transparent', true)
     const navigation = useNavigation()

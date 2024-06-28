@@ -11,6 +11,7 @@ interface AddressState {
 
 const initialState: AddressState = {
     update: {
+        _id: '',
         houseNumber: '',
         name: '',
         province: '',

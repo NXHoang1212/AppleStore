@@ -10,7 +10,6 @@ const StyleFavorites = StyleSheet.create({
         backgroundColor: COLOR.WHITE
     },
     viewheader: {
-        height: Responsive.hp(10),
         backgroundColor: COLOR.WHITE,
         borderBottomWidth: 1.5,
         borderBottomColor: COLOR.GRAY,
@@ -22,7 +21,7 @@ const StyleFavorites = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        top: Responsive.hp(5.3),
+        top: Responsive.hp(6.3),
         paddingHorizontal: Responsive.wp(5),
     },
     textHeader: {
@@ -45,7 +44,7 @@ const StyleFavorites = StyleSheet.create({
     },
     textInput: {
         width: Responsive.wp(83),
-        borderRadius: 10,
+        borderRadius: 5,
         height: Responsive.hp(5),
         backgroundColor: COLOR.GRAY,
     },
@@ -56,6 +55,7 @@ const StyleFavorites = StyleSheet.create({
         height: Responsive.hp(10),
         justifyContent: 'center',
         alignItems: 'center',
+        top: Responsive.hp(1.5),
     },
     textRemove: {
         fontSize: 18,

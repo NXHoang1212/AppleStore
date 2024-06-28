@@ -32,6 +32,11 @@ const StyleItemDetailArticle = StyleSheet.create({
         paddingHorizontal: Responsive.wp(3),
         paddingBottom: Responsive.hp(1),
     },
+    viewName: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
     containerShipper: {
         flexDirection: 'column',
         alignItems: 'center',
@@ -74,6 +79,9 @@ const StyleItemDetailArticle = StyleSheet.create({
         fontSize: Responsive.RFPercentage(2.5),
         color: COLOR.ORANGEONE,
         marginTop: Responsive.hp(1),
+    },
+    viewHeart: {
+        top: Responsive.hp(0.5),
     },
     textPriceDiscount: {
         fontFamily: FontsROBOTO.ROBOTO_BOLD_ITALIC,
@@ -232,6 +240,7 @@ const StyleItemDetailArticle = StyleSheet.create({
         color: COLOR.WHITE,
     },
     listProduct: {
+        height: 'auto'
     },
     textProduct: {
         fontFamily: FontsOSANS.OSANS_BOLD,

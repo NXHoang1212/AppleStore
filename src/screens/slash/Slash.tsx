@@ -16,7 +16,6 @@ import { useAppDispatch } from '../../import/IndexFeatures'
 import { fetchCategoryProduct } from '../../service/Api/IndexCategory'
 import { fetchBannerProduct } from '../../service/Api/IndexBanner'
 import { fetchProducts, fetProductsPagination } from '../../service/Api/IndexProduct'
-import useStatusBarConfig from '../../utils/UseStatusBarConfig'
 
 const Slash: React.FC = () => {
     const dispatch = useAppDispatch()
@@ -32,6 +31,8 @@ const Slash: React.FC = () => {
             setLoading(false)
             navigation.replace('TabHome')
         }, 1500)
+
+        
     }, [])
 
     return (

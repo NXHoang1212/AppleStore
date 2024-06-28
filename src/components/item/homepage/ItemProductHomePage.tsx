@@ -6,27 +6,41 @@ import { ProductState } from '../../../model/entity/IndexProduct.entity'
 import FastImage from 'react-native-fast-image'
 import { Responsive } from '../../../constant/Responsive'
 import { FormatPrice, calculateDiscountedPrice } from '../../../utils/FormatPrice'
+import { useAppSelector } from '../../../import/IndexFeatures'
+import { Icon } from '../../../constant/Icon'
+import { ShareItemDetail } from '../../../import/IndexFeatures'
+import IndexHandleFavourites from '../../../service/Api/indexFavourites'
 
 type PropsProduct = {
     item: ProductState,
     navigation: any,
+    userId?: any,
+    dispatch?: any,
 }
 const AnimatedFastImage = Animated.createAnimatedComponent(FastImage)
 const imageAnimated = new Animated.Value(0)
 
-const ItemProductHomePage = ({ item, navigation }: PropsProduct) => {
-    
-    const onImageLoad = () => {
-        Animated.timing(imageAnimated, {
-          toValue: 1,
-          useNativeDriver: true,
-        }).start();
-    };
+const ItemProductHomePage = ({ item, navigation, userId, dispatch }: PropsProduct) => {
+    const favourites = useAppSelector((state) => state.Favourites.items);
+    const isFavourite = favourites.some(favItem => favItem.productId._id === item._id);
+    const { onFastImageLoad } = ShareItemDetail()
+
 
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.viewItem} onPress={() => navigation.navigate('StackMisc', { screen: 'DetailArticle', params: { _id: item._id } })}>
-                <Text style={styles.textdiscount}>Giảm {item.discount.percentage}%</Text>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <Text style={styles.textdiscount}>Giảm {item.discount.percentage}%</Text>
+                    {isFavourite ? (
+                        <TouchableOpacity style={styles.viewHeart}>
+                            <Icon.HeartCheckedSVG width={Responsive.wp(5)} height={Responsive.hp(3)} fill={COLOR.REDONE} />
+                        </TouchableOpacity>
+                    ) : (
+                        <TouchableOpacity style={styles.viewHeart} onPress={() => IndexHandleFavourites.handleAddFavourite(item, userId, navigation, dispatch)}>
+                            <Icon.HeartSVG width={Responsive.wp(5)} height={Responsive.hp(3)} fill={COLOR.BLACKONE} />
+                        </TouchableOpacity>
+                    )}
+                </View>
                 <View style={{ paddingHorizontal: Responsive.wp(2), gap: Responsive.hp(1) }}>
                     <AnimatedFastImage
                         source=
@@ -37,7 +51,7 @@ const ItemProductHomePage = ({ item, navigation }: PropsProduct) => {
                         }}
                         style={[styles.image, { opacity: imageAnimated }]}
                         resizeMode={FastImage.resizeMode.contain}
-                        onLoad={onImageLoad}
+                        onLoad={onFastImageLoad}
                     />
                     <Text style={styles.textName}>{item.name} {item.storage} {item.model}</Text>
                     <View style={{ flexDirection: 'row', alignItems: 'center', gap: Responsive.wp(2) }}>
@@ -75,19 +89,19 @@ const styles = StyleSheet.create({
     },
     textName: {
         fontFamily: FontsROBOTO.ROBOTO_REGULAR,
-        fontSize: 16,
+        fontSize: Responsive.RFPercentage(2.2),
         color: COLOR.BLACK,
         fontWeight: '700',
     },
     textPrice: {
         fontFamily: FontsROBOTO.ROBOTO_REGULAR,
-        fontSize: 14,
+        fontSize: Responsive.RFPercentage(2.1),
         color: COLOR.BLACK,
         textDecorationLine: 'line-through',
     },
     textPriceDiscount: {
         fontFamily: FontsROBOTO.ROBOTO_BOLD,
-        fontSize: 17,
+        fontSize: Responsive.RFPercentage(2.2),
         color: COLOR.REDONE,
     },
     textdiscount: {
@@ -98,8 +112,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         color: COLOR.WHITE,
         textAlign: 'center',
-        fontSize: 15,
+        fontSize: Responsive.RFPercentage(1.9),
         borderBottomRightRadius: 10,
         borderTopRightRadius: 10,
+    },
+    viewHeart: {
+        right: Responsive.wp(2),
     },
 })

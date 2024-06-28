@@ -1,11 +1,11 @@
 import { View, Text, StatusBar, TouchableOpacity, ScrollView, Image, Linking, FlatList } from 'react-native'
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Icon } from '../../../constant/Icon';
 
 import LinearGradient from 'react-native-linear-gradient';
 import useStatusBarConfig from '../../../utils/UseStatusBarConfig'
 
-import { useFocusEffect, useNavigation, useScrollToTop } from '@react-navigation/native'
+import { useNavigation, useScrollToTop } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackHomeTypeParam } from '../../../model/param/IndexStack.Param'
 
@@ -14,10 +14,9 @@ import { IndexStyles } from '../../../import/IndexStyles';
 
 import BannerSlider from '../../../components/banner/Advertisement';
 
-import { FlashList } from '@shopify/flash-list';
 import { ItemProductHomePage } from '../../../import/IndexComponent';
-
 import { Loading } from '../../../import/IndexComponent';
+import { fetchFavourites } from '../../../redux/slices/Favourties.Slice';
 
 
 const HomePage: React.FC = () => {
@@ -25,8 +24,15 @@ const HomePage: React.FC = () => {
     const navigation = useNavigation<NativeStackNavigationProp<StackHomeTypeParam, 'AuthUser'>>()
     const scrollRef = useRef<ScrollView>(null)
     useScrollToTop(scrollRef)
-    const user = useAppSelector(state => state.Auth)
+    const dispatch = useAppDispatch()
+    const user = useAppSelector(state => state.root.Auth)
     const product = useAppSelector(state => state.Product)
+
+    useEffect(() => {
+        if (user.user._id) {
+            dispatch(fetchFavourites(user.user._id))
+        }
+    }, [user.user._id, dispatch])
 
     if (product.error) {
         return <Loading loading={product.loading} />
@@ -73,7 +79,7 @@ const HomePage: React.FC = () => {
                     <View style={IndexStyles.StylesHomePage.ViewProduct}>
                         <FlatList
                             data={product.data.filter((item) => item.category.name === 'Iphone').slice(0, 10)}
-                            renderItem={({ item }) => <ItemProductHomePage item={item} navigation={navigation} />}
+                            renderItem={({ item }) => <ItemProductHomePage item={item} navigation={navigation} userId={user.user._id} dispatch={dispatch} />}
                             keyExtractor={item => item._id}
                             horizontal
                             showsHorizontalScrollIndicator={false}
@@ -89,7 +95,7 @@ const HomePage: React.FC = () => {
                     <View style={IndexStyles.StylesHomePage.ViewProduct}>
                         <FlatList
                             data={product.data.filter((item) => item.category.name === 'Mac').slice(0, 10)}
-                            renderItem={({ item }) => <ItemProductHomePage item={item} navigation={navigation} />}
+                            renderItem={({ item }) => <ItemProductHomePage item={item} navigation={navigation} userId={user.user._id} dispatch={dispatch} />}
                             keyExtractor={item => item._id}
                             horizontal
                             showsHorizontalScrollIndicator={false}
@@ -105,7 +111,7 @@ const HomePage: React.FC = () => {
                     <View style={IndexStyles.StylesHomePage.ViewProduct}>
                         <FlatList
                             data={product.data.filter((item) => item.category.name === 'Airpods').slice(0, 10)}
-                            renderItem={({ item }) => <ItemProductHomePage item={item} navigation={navigation} />}
+                            renderItem={({ item }) => <ItemProductHomePage item={item} navigation={navigation} userId={user.user._id} dispatch={dispatch} />}
                             keyExtractor={item => item._id}
                             horizontal
                             showsHorizontalScrollIndicator={false}
@@ -121,7 +127,7 @@ const HomePage: React.FC = () => {
                     <View style={IndexStyles.StylesHomePage.ViewProduct}>
                         <FlatList
                             data={product.data.filter((item) => item.category.name === 'Ipad').slice(0, 10)}
-                            renderItem={({ item }) => <ItemProductHomePage item={item} navigation={navigation} />}
+                            renderItem={({ item }) => <ItemProductHomePage item={item} navigation={navigation} userId={user.user._id} dispatch={dispatch}/>}
                             keyExtractor={item => item._id}
                             horizontal
                             showsHorizontalScrollIndicator={false}
@@ -137,7 +143,7 @@ const HomePage: React.FC = () => {
                     <View style={IndexStyles.StylesHomePage.ViewProduct}>
                         <FlatList
                             data={product.data.filter((item) => item.category.name === 'Phụ kiện').slice(0, 10)}
-                            renderItem={({ item }) => <ItemProductHomePage item={item} navigation={navigation} />}
+                            renderItem={({ item }) => <ItemProductHomePage item={item} navigation={navigation} userId={user.user._id} dispatch={dispatch}/>}
                             keyExtractor={item => item._id}
                             horizontal
                             showsHorizontalScrollIndicator={false}

@@ -17,7 +17,7 @@ import { IndexStyles } from '../../../import/IndexStyles';
 const Information: React.FC = () => {
   useStatusBarConfig('dark-content', 'transparent', true)
   const navigation = useNavigation<NativeStackNavigationProp<StackHomeTypeParam>>()
-  const isLoggedIn = useAppSelector(state => state.Auth)
+  const isLoggedIn = useAppSelector(state => state.root.Auth)
 
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>

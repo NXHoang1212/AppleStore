@@ -33,7 +33,7 @@ const Favorites: React.FC = () => {
 
     const headerHeight = animatedValue.interpolate({
         inputRange: [0, 1],
-        outputRange: [Responsive.hp(10), Responsive.hp(2.5)],
+        outputRange: [Responsive.hp(11), Responsive.hp(2.5)],
     });
 
     const inputOpacity = animatedValue.interpolate({
