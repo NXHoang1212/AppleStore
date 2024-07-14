@@ -1,5 +1,5 @@
 import { useLayoutEffect } from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, Platform } from 'react-native';
 
 const useStatusBarConfig = (
     barStyle: 'default' | 'light-content' | 'dark-content',
@@ -8,13 +8,19 @@ const useStatusBarConfig = (
 ) => {
     useLayoutEffect(() => {
         StatusBar.setBarStyle(barStyle);
-        StatusBar.setBackgroundColor(backgroundColor);
-        StatusBar.setTranslucent(translucent);
+
+        if (Platform.OS === 'android') {
+            StatusBar.setBackgroundColor(backgroundColor);
+            StatusBar.setTranslucent(translucent);
+        }
 
         return () => {
             StatusBar.setBarStyle('dark-content');
-            StatusBar.setBackgroundColor('transparent');
-            StatusBar.setTranslucent(true);
+
+            if (Platform.OS === 'android') {
+                StatusBar.setBackgroundColor('transparent');
+                StatusBar.setTranslucent(true);
+            }
         };
     }, [barStyle, backgroundColor, translucent]);
 };
