@@ -14,6 +14,7 @@ import { StackHomeTypeParam } from '../../../model/param/IndexStack.Param'
 import { useAppSelector, useAppDispatch } from '../../../features/redux/ReduxHook'
 import { Logout } from '../../../redux/slices/Auth.Slice'
 import { CustomModalConfirm } from '../../../import/IndexComponent'
+import { setItemCount } from '../../../redux/slices/CountCartSlice'
 
 const Information: React.FC = () => {
   useStatusBarConfig('dark-content', 'transparent', true)
@@ -67,13 +68,17 @@ const Information: React.FC = () => {
             {renderInformationItem({ text: 'Xóa tài khoản', image: Icon.DELETEUSER, onPress: () => navigation.navigate(isLoggedIn.isLogged ? 'StackIndividual' : 'AuthUser', { screen: 'DeleteAccount' } as any) })}
             {renderInformationItem({ text: 'Liên hệ và góp ý', image: Icon.CONTACT, onPress: () => navigation.navigate(isLoggedIn.isLogged ? 'StackIndividual' : 'AuthUser', { screen: 'ContactFeedback' } as any) })}
             {renderInformationItem({ text: 'Giới thiệu', image: Icon.INTRODUCE, onPress: () => navigation.navigate(isLoggedIn.isLogged ? 'StackIndividual' : 'AuthUser', { screen: 'Introduction' } as any) })}
-            {renderInformationItem({ text: 'Đăng xuất', image: Icon.LOGOUT, onPress: () => setIsVisible(true) })}
+            {isLoggedIn.isLogged ? (
+              renderInformationItem({ text: 'Đăng xuất', image: Icon.LOGOUT, onPress: () => setIsVisible(true) })
+            ) : (
+              renderInformationItem({ text: 'Đăng nhập', image: Icon.LOGIN, onPress: () => navigation.navigate('AuthUser', { screen: 'Login' } as any) })
+            )}
           </View>
           <CustomModalConfirm
             isVisible={isVisible}
             title='Xác nhận'
             message='Bạn có chắc chắn muốn đăng xuất không?'
-            onPressConfirm={() => dispatch(Logout(), setIsVisible(false))}
+            onPressConfirm={() => { dispatch(Logout()); dispatch(setItemCount(0)); setIsVisible(false) }}
             onPressCancel={() => setIsVisible(false)}
           />
         </View>

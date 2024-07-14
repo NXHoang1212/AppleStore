@@ -1,15 +1,21 @@
 import { DetailProductParams } from "../model/entity/IndexProduct.entity";
 
 export const colorMapping: { [key: string]: string[] } = {
-    "Đen": ["Black"],
-    "Trắng": ["white"],
-    "Hồng": ["pinky", "purple"],
-    "Xanh dương": ["blue"],
-    "Xanh lá cây": ["green", "ProGreen"],
-    "Đỏ": ["red"],
-    "Vàng": ["gold", "Yellow", "ProGold"],
-    "Xám": ["progrey"],
-    "Bạc": ["prosilver"],
+    /*Iphone*/
+    "Đen": ["Black", "MiniBlack"],
+    "Trắng": ["white", "MiniWhite"],
+    "Hồng": ["pinky", "purple", "ProPurple", "MiniPurple"],
+    "Xanh dương": ["blue", "MiniBlue"],
+    "Xanh lá cây": ["green", "ProGreen", "MiniGreen"],
+    "Xanh đen": ["MacbookAirM3GreenBlack"],
+    "Đỏ": ["red", "MiniRed"],
+    "Vàng": ["gold", "Yellow", "ProGold", "ProYellow", "MacbookAirM3SYellow"],
+    "Xám": ["progrey", "ProGrey", "MacbookAirM38512GB", "MacbookAirM3Grey"],
+    "Bạc": ["prosilver", "ProSilver", "MacbookAirM3Silever"],
+    "Titan Xanh": ["ProTitanBlue"],
+    "Titan Đen": ["protitanblack"],
+    "Titan Trắng": ["ProTitanWhite"],
+    "Titan Tự nhiên": ["ProTitanNatural"],
 };
 
 

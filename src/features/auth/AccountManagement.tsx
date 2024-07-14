@@ -3,12 +3,14 @@ import React, { useState } from 'react'
 import { HandleLoginUser, HandleRegisterUser } from '../../service/Api/IndexUser'
 import ToastMessage from '../../utils/ToastMessage'
 import { Validation } from '../../utils/Validation'
-import { useAppDispatch } from '../redux/ReduxHook'
+import { useAppDispatch, useAppSelector } from '../redux/ReduxHook'
 import { Users } from '../../model/entity/IndexUsers.entity'
 import { Login } from '../../redux/slices/Auth.Slice'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { StackHomeTypeParam } from '../../model/param/IndexStack.Param'
 import { useNavigation } from '@react-navigation/native'
+import { setItemCount } from '../../redux/slices/CountCartSlice'
+import { useLazyGetCartByUserQuery } from '../../service/Api/IndexCart'
 
 const AccountManagement = () => {
     const dispatch = useAppDispatch()

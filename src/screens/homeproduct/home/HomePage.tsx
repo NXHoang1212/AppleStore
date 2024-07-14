@@ -17,6 +17,7 @@ import BannerSlider from '../../../components/banner/Advertisement';
 import { ItemProductHomePage } from '../../../import/IndexComponent';
 import { Loading } from '../../../import/IndexComponent';
 import { fetchFavourites } from '../../../redux/slices/Favourties.Slice';
+import { fetchGetCountCart } from '../../../redux/slices/CountCartSlice';
 
 
 const HomePage: React.FC = () => {
@@ -30,6 +31,7 @@ const HomePage: React.FC = () => {
 
     useEffect(() => {
         if (user.user._id) {
+            dispatch(fetchGetCountCart(user.user._id))
             dispatch(fetchFavourites(user.user._id))
         }
     }, [user.user._id, dispatch])

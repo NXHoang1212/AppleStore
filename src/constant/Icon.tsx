@@ -86,6 +86,7 @@ export class Icon {
     static CONTACT = require('../assets/images/contact.png');
     static INTRODUCE = require('../assets/images/introduce.png');
     static LOGOUT = require('../assets/images/logout.png');
+    static LOGIN = require('../assets/images/login.png');
     static DELETEACCOUNT = require('../assets/images/deleteacount.jpg');
     static CALL = require('../assets/images/call.png');
     static WEBSITE = require('../assets/images/website.png');

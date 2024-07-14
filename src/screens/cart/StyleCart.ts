@@ -56,12 +56,12 @@ const StyleCart = StyleSheet.create({
         justifyContent: 'flex-end',
         borderWidth: 1,
         borderColor: COLOR.GREY,
-        paddingHorizontal: Responsive.wp(2),
-        gap: Responsive.wp(4),
+        paddingHorizontal: Responsive.wp(1),
+        gap: Responsive.wp(1.5),
     },
     textButton: {
         fontFamily: FontsOSANS.OSANS_BOLD,
-        fontSize: Responsive.RFPercentage(2.3),
+        fontSize: Responsive.RFPercentage(2),
         color: COLOR.WHITE,
     },
     textPayment: {
@@ -93,7 +93,7 @@ const StyleCart = StyleSheet.create({
     },
     viewPayment: {
         backgroundColor: COLOR.REDONE,
-        width: Responsive.wp(38),
+        width: Responsive.wp(30),
         height: Responsive.hp(6),
         alignItems: 'center',
         justifyContent: 'center',

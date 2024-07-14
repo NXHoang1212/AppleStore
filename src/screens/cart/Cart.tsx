@@ -90,6 +90,18 @@ const Cart: React.FC = () => {
       </View>
       <View style={{ flex: 1, justifyContent: 'flex-end' }}>
         <View style={IndexStyles.StyleCart.viewButton} >
+          <CustomCheckBox
+            checked={selectAll}
+            onPress={() => {
+              setSelectAll(!selectAll);
+              if (!selectAll) {
+                setSelectedItems(data?.data.map(item => item._id) || []);
+              } else {
+                setSelectedItems([]);
+              }
+            }}
+            title='Tất cả'
+          />
           <View>
             <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
               <Text style={IndexStyles.StyleCart.textPayment}>Tổng cộng</Text>
@@ -107,7 +119,6 @@ const Cart: React.FC = () => {
             </LinearGradient>
           </TouchableOpacity>
         </View>
-
       </View>
     </View>
   )
