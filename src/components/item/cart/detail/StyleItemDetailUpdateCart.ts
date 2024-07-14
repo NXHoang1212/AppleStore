@@ -17,6 +17,7 @@ const StylesItemDetailUpdateCart = StyleSheet.create({
         backgroundColor: COLOR.WHITE,
         height: Responsive.hp(50),
         elevation: 8,
+        flex: 1,
     },
     containerBody: {},
     lineHeight: {
@@ -95,7 +96,6 @@ const StylesItemDetailUpdateCart = StyleSheet.create({
         alignSelf: 'center',
         justifyContent: 'center',
         alignItems: 'center',
-        top: Responsive.hp(3.7),
     },
     textTotal: {
         fontFamily: FontsROBOTO.ROBOTO_REGULAR,

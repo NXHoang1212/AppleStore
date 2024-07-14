@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { View, Text, TouchableOpacity, Animated, ScrollView, Image, Easing } from 'react-native';
+import { View, Text, TouchableOpacity, Animated, ScrollView, Image, Easing, ImageSourcePropType } from 'react-native';
 
 import { COLOR } from '../../../../constant/Colors';
 import { Icon } from '../../../../constant/Icon';
@@ -21,15 +21,18 @@ import { BottomSheetModal, BottomSheetModalProvider, BottomSheetScrollView, Bott
 import IndexHandleDetails from '../../../../service/Api/IndexHandleDetails';
 
 import { useCreateCartMutation } from '../../../../service/Api/IndexCart';
+import { incrementItemCount } from '../../../../redux/slices/CountCartSlice';
+
 
 type PropsProduct = {
     item: DetailProductParams,
     navigation?: any,
     userId?: string,
-    dispatch?: any
+    dispatch?: any,
+    countCart?: number
 }
 
-const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation, userId = '', dispatch }) => {
+const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation, userId = '', dispatch, countCart }) => {
     const { onImageLoad, shareProduct, showDescription, ToggleDescription } = ShareItemDetail();
     const { selectedItem, bottomSheetModalRef, snapPoints, handlePresentModalPress, handleDismissModal } = UseBottomSheetModel({ item });
     const [selectedPrice, setSelectedPrice] = useState<{ price: number, color: string }>({
@@ -46,6 +49,7 @@ const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation, userId = 
     const isFavourite = favourites.some(favItem => favItem.productId._id === item._id);
 
     const [createCart] = useCreateCartMutation();
+
 
 
     return (
@@ -72,13 +76,17 @@ const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation, userId = 
                                             style={IndexStyles.StyleItemDetailArticle.iconShare}
                                         />
                                     </TouchableOpacity>
-                                    <TouchableOpacity>
+                                    <TouchableOpacity style={IndexStyles.StyleItemDetailArticle.viewCartIcon}
+                                        onPress={() => navigation.navigate('TabHome', { screen: 'Giỏ hàng' })}>
                                         <Icon.ShoppingCartSVG
                                             width={Responsive.wp(7)}
                                             height={Responsive.hp(7)}
                                             fill={COLOR.REDONE}
                                             style={IndexStyles.StyleItemDetailArticle.iconCart}
                                         />
+                                        <View style={IndexStyles.StyleItemDetailArticle.viewCountCart}>
+                                            <Text style={IndexStyles.StyleItemDetailArticle.textCountCart}>{countCart}</Text>
+                                        </View>
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -179,7 +187,7 @@ const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation, userId = 
                             <Text style={IndexStyles.StyleItemDetailArticle.textChat}>Chat ngay</Text>
                         </TouchableOpacity>
                         <View style={IndexStyles.StyleItemDetailArticle.lineheight} />
-                        <TouchableOpacity style={IndexStyles.StyleItemDetailArticle.viewChat} onPress={() => IndexHandleDetails.handleAddToCart(animatedValue, userId, selectedPrice, item, createCart, discountedPrice)}>
+                        <TouchableOpacity style={IndexStyles.StyleItemDetailArticle.viewChat} onPress={() => IndexHandleDetails.handleAddToCart(animatedValue, userId, selectedPrice, item, createCart, discountedPrice, dispatch, incrementItemCount)}>
                             <Animated.View style={[IndexStyles.StyleItemDetailArticle.viewCart, {
                                 transform:
                                     [{

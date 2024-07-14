@@ -23,6 +23,7 @@ const DetailArticle: React.FC = () => {
     const { data, isLoading } = useGetProductsByIdQuery(_id)
     const dispatch = useAppDispatch()
     const userId = useAppSelector(state => state.root.Auth.user._id)
+    const cartData = useAppSelector(state => state.root.CountCart.itemCount);
 
 
     if (isLoading) {
@@ -44,6 +45,7 @@ const DetailArticle: React.FC = () => {
                     key={item._id}
                     userId={userId}
                     dispatch={dispatch}
+                    countCart={cartData}
                 />
             ))}
         </View>

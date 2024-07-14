@@ -37,7 +37,7 @@ import ItemListAddress from "../components/item/address/ItemListAddress";
 import ItemFavourites from "../components/item/product/list/ItemFavourites";
 import ItemListCart from "../components/item/cart/list/ItemListCart";
 import ItemDetailUpdateCart from "../components/item/cart/detail/ItemDetailUpdateCart";
-
+import ItemDetailUpdateArticle from "../components/item/cart/detail/ItemDetailUpdateCart";
 
 /*MEDIA */
 import ImagePicker from "../components/media/CamraPicker";
@@ -72,6 +72,7 @@ export {
     ItemListCart,
     ItemDetailUpdateCart,
     ItemDetailArticle,
+    ItemDetailUpdateArticle,
     ImagePicker,
     Loading,
 }

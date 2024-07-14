@@ -9,33 +9,39 @@ import { FormatPrice } from '../../../../utils/FormatPrice'
 import { Icon } from '../../../../constant/Icon'
 
 import { IndexStyles } from '../../../../import/IndexStyles'
+import IndexHandleCart from '../../../../service/Api/IndexHandleCart'
 import { useLazyGetProductsByIdQuery } from '../../../../service/Api/IndexProduct'
 
-import ItemDetailUpdateArticle from '../detail/ItemDetailUpdateCart'
+import { ItemDetailUpdateArticle, CustomModalConfirm, CustomCheckBox } from '../../../../import/IndexComponent'
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 
-import { useDeleteCartMutation } from '../../../../service/Api/IndexCart'
-import ToastMessage from '../../../../utils/ToastMessage'
-
+import { useDeleteCartMutation, useUpdateCartMutation } from '../../../../service/Api/IndexCart'
 
 type PropsCart = {
     item: CartEntity,
     navigation: any,
-    currentlyOpenSwipeable: any
+    currentlyOpenSwipeable: any,
+    decrementItemCount?: any,
+    dispatch?: any,
+    isSelected: boolean,
+    onItemSelect: (itemId: string) => void
 }
 const imageAnimated = new Animated.Value(0)
 
-const ItemListCart = ({ item, navigation, currentlyOpenSwipeable }: PropsCart) => {
+const ItemListCart = ({ item, navigation, currentlyOpenSwipeable, decrementItemCount, dispatch, isSelected, onItemSelect }: PropsCart) => {
     const [show, setShow] = useState<boolean>(false);
 
     const [trigger, { data }] = useLazyGetProductsByIdQuery();
 
     const [itemCartDetail, setItemCartDetail] = useState<any>(null);
 
+    const [modalVisible, setModalVisible] = useState<boolean>(false);
+
     const [deleteCart] = useDeleteCartMutation();
 
-    const swipeableRef = useRef<Swipeable | null>(null);
+    const [updateCart] = useUpdateCartMutation();
 
+    const swipeableRef = useRef<Swipeable | null>(null);
 
     useEffect(() => {
         if (data) {
@@ -58,42 +64,27 @@ const ItemListCart = ({ item, navigation, currentlyOpenSwipeable }: PropsCart) =
         }).start();
     };
 
-    const handleDeleteCart = async () => {
-        try {
-            const res = await deleteCart(item._id);
-            if (res.data) {
-                ToastMessage('success', 'Xóa sản phẩm thành công');
-            } else {
-                ToastMessage('error', 'Xóa sản phẩm thất bại');
-            }
-        } catch (error) {
-            console.log('handleDeleteCart error:', error);
-        }
-    }
-
-
     const renderRightActions = () => {
         return (
-            <TouchableOpacity style={IndexStyles.StylesItemListCart.viewDelete} onPress={handleDeleteCart}>
+            <TouchableOpacity style={IndexStyles.StylesItemListCart.viewDelete} onPress={() => IndexHandleCart.handleDeleteCart(deleteCart, item._id, dispatch, decrementItemCount)}>
                 <Text style={IndexStyles.StylesItemListCart.textDelete}>Xóa</Text>
             </TouchableOpacity>
         );
     }
 
-    const handleSwipeableOpen = () => {
-        if (currentlyOpenSwipeable.current && currentlyOpenSwipeable.current !== swipeableRef.current) {
-            currentlyOpenSwipeable.current.close();
-        }
-        currentlyOpenSwipeable.current = swipeableRef.current;
-    };
-
     return (
         <Swipeable
             ref={swipeableRef}
             renderRightActions={renderRightActions}
-            onSwipeableWillOpen={handleSwipeableOpen}
+            onSwipeableWillOpen={() => IndexHandleCart.handleSwipeableOpen(swipeableRef, currentlyOpenSwipeable)}
         >
             <TouchableOpacity style={IndexStyles.StylesItemListCart.container} onPress={() => navigation.navigate('StackMisc', { screen: 'DetailArticle', params: { _id: item.products._id } })}>
+                <View style={IndexStyles.StylesItemListCart.viewCheckbox}>
+                    <CustomCheckBox
+                        checked={isSelected}
+                        onPress={() => onItemSelect(item._id)}
+                    />
+                </View>
                 <View style={IndexStyles.StylesItemListCart.viewImage}>
                     <Animated.Image
                         source={{ uri: item.products.priceColor.image as string }}
@@ -111,11 +102,18 @@ const ItemListCart = ({ item, navigation, currentlyOpenSwipeable }: PropsCart) =
                     <View style={IndexStyles.StylesItemListCart.viewRows}>
                         <Text style={IndexStyles.StylesItemListCart.textPriceProducts}>{FormatPrice(item.products.priceColor.price)}</Text>
                         <View style={IndexStyles.StylesItemListCart.viewQuantity}>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={() => IndexHandleCart.handleUpdateCart(updateCart, { _id: item._id, quantity: item.quantity + 1 })}>
                                 <Icon.PlusSVG width={Responsive.wp(4)} height={Responsive.hp(5)} fill={COLOR.GREY} />
                             </TouchableOpacity>
                             <Text style={IndexStyles.StylesItemListCart.textQuantityProducts}>{item.quantity}</Text>
-                            <TouchableOpacity>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    if (item.quantity > 1) {
+                                        IndexHandleCart.handleUpdateCart(updateCart, { _id: item._id, quantity: item.quantity - 1 });
+                                    } else {
+                                        setModalVisible(true);
+                                    }
+                                }}>
                                 <Icon.MinusSVG width={Responsive.wp(5)} height={Responsive.hp(5)} fill={COLOR.GREY} />
                             </TouchableOpacity>
                         </View>
@@ -123,10 +121,25 @@ const ItemListCart = ({ item, navigation, currentlyOpenSwipeable }: PropsCart) =
                 </View>
             </TouchableOpacity>
             {show && itemCartDetail &&
-                <ItemDetailUpdateArticle 
-                show={show} onDismiss={() => setShow(false)} item={itemCartDetail} />}
+                <ItemDetailUpdateArticle
+                    show={show}
+                    onDismiss={() => setShow(false)}
+                    item={itemCartDetail}
+                    enableBackDropDismiss={true}
+                    quantity={item.quantity}
+                    id={item._id}
+                />
+            }
+            <CustomModalConfirm
+                title={'Xác nhận'}
+                message={'Bạn có chắc chắn muốn xóa sản phẩm này không?'}
+                isVisible={modalVisible}
+                onPressCancel={() => setModalVisible(false)}
+                onPressConfirm={() => IndexHandleCart.handleDeleteCart(deleteCart, item._id, dispatch, decrementItemCount)}
+            />
         </Swipeable>
     )
 }
 
-export defaul
+export default ItemListCart
+

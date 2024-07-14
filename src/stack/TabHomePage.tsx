@@ -15,12 +15,12 @@ import Information from '../screens/other/infor/Information';
 import React from 'react';
 
 import { useAppSelector } from '../import/IndexFeatures';
-import { useGetCartByUserQuery } from '../service/Api/IndexCart';
 
 const BottomTabHomePage = createBottomTabNavigator<TabHomePageListParam>();
 
 const TabHomePage = () => {
-    const { data: cartData } = useGetCartByUserQuery(useAppSelector(state => state.root.Auth.user?._id));
+
+    const cartData = useAppSelector(state => state.root.CountCart.itemCount);
     
     const tabHome: TabHomeType[] = [
         {
@@ -32,7 +32,7 @@ const TabHomePage = () => {
             component: Cart,
             name: TabHomeEnum.Cart,
             icon: Icon.CART,
-            badge: cartData?.data.length ?? undefined
+            badge: cartData
         },
         {
             component: CategoryProduct,
@@ -82,7 +82,8 @@ const TabHomePage = () => {
                                 {item.name}
                             </Text>
                         ),
-                        tabBarBadge: item.badge
+                        //nếu là 0 thì sẽ không hiển thị badge trên icon
+                        tabBarBadge: item.badge === 0 ? undefined : item.badge
                     }}
                 />
             ))}

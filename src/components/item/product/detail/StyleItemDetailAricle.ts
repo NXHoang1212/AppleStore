@@ -249,6 +249,27 @@ const StyleItemDetailArticle = StyleSheet.create({
         paddingBottom: Responsive.hp(1),
         paddingHorizontal: Responsive.wp(3),
     },
+    viewCartIcon: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    viewCountCart: {
+        width: Responsive.wp(5),
+        height: Responsive.hp(2.5),
+        backgroundColor: COLOR.REDTWO,
+        borderRadius: 15,
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        top: Responsive.hp(5.3),
+        left: Responsive.wp(3),
+    },
+    textCountCart: {
+        fontFamily: FontsROBOTO.ROBOTO_REGULAR,
+        fontSize: Responsive.RFPercentage(1.5),
+        color: COLOR.WHITE,
+    },
 });
 
 export { StyleItemDetailArticle }

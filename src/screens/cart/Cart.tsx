@@ -1,5 +1,5 @@
-import { View, Text, TouchableOpacity, ActivityIndicator, FlatList, ScrollView } from 'react-native'
-import React, { useRef } from 'react'
+import { View, Text, TouchableOpacity, ActivityIndicator, RefreshControl, ScrollView } from 'react-native'
+import React, { useRef, useState } from 'react'
 import { Icon } from '../../constant/Icon'
 import { IndexStyles } from '../../import/IndexStyles';
 
@@ -8,19 +8,38 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import { useGetCartByUserQuery } from '../../service/Api/IndexCart';
-import { useAppSelector } from '../../import/IndexFeatures';
-import { ItemListCart } from '../../import/IndexComponent';
+import { useAppSelector, useAppDispatch } from '../../import/IndexFeatures';
+import { decrementItemCount } from '../../redux/slices/CountCartSlice';
+import { ItemListCart, CustomCheckBox } from '../../import/IndexComponent';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
+import { FormatPrice } from '../../utils/FormatPrice';
+import LinearGradient from 'react-native-linear-gradient';
 
 const Cart: React.FC = () => {
   useStatusBarConfig('dark-content', 'transparent', true)
   const navigation = useNavigation<NativeStackNavigationProp<any>>()
+
+  const dispatch = useAppDispatch()
 
   const user = useAppSelector(state => state.root.Auth.user._id)
 
   const { data, isLoading } = useGetCartByUserQuery(user)
 
   const currentlyOpenSwipeable = useRef<Swipeable | null>(null);
+
+  const [selectedItems, setSelectedItems] = useState<string[]>([]);
+
+  const [selectAll, setSelectAll] = useState<boolean>(false);
+
+  const shipper = '22.500đ'
+
+  const handleItemSelect = (itemId: string) => {
+    if (selectedItems.includes(itemId)) {
+      setSelectedItems(prev => prev.filter(id => id !== itemId));
+    } else {
+      setSelectedItems(prev => [...prev, itemId]);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -29,6 +48,14 @@ const Cart: React.FC = () => {
       </View>
     )
   }
+
+  let total = 0
+
+  data?.data.forEach((item) => {
+    if (selectedItems.includes(item._id)) {
+      total += item.products.priceColor.price * item.quantity;
+    }
+  });
 
   return (
     <View style={IndexStyles.StyleCart.container}>
@@ -42,15 +69,45 @@ const Cart: React.FC = () => {
       </View>
       <View style={IndexStyles.StyleCart.containerBody}>
         {data?.data.map((item) => (
-          <ScrollView key={item._id} showsVerticalScrollIndicator={false}>
+          <ScrollView key={item._id} showsVerticalScrollIndicator={false} refreshControl={
+            <RefreshControl
+              refreshing={isLoading}
+              onRefresh={() => { }}
+            />
+          }>
             <ItemListCart
               item={item}
               navigation={navigation}
               currentlyOpenSwipeable={currentlyOpenSwipeable}
+              decrementItemCount={decrementItemCount}
+              dispatch={dispatch}
+              isSelected={selectedItems.includes(item._id)}
+              onItemSelect={handleItemSelect}
             />
           </ScrollView>
         ))
         }
+      </View>
+      <View style={{ flex: 1, justifyContent: 'flex-end' }}>
+        <View style={IndexStyles.StyleCart.viewButton} >
+          <View>
+            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+              <Text style={IndexStyles.StyleCart.textPayment}>Tổng cộng</Text>
+              <Text style={IndexStyles.StyleCart.textTotal}>{FormatPrice(total)}</Text>
+            </View>
+            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+              <Text style={IndexStyles.StyleCart.textShipper}>Phí vận chuyển</Text>
+              <Text style={IndexStyles.StyleCart.textTotalShipper}>{shipper}</Text>
+            </View>
+          </View>
+          <TouchableOpacity>
+            <LinearGradient colors={['#ff5d00', '#ff00a5']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
+              style={IndexStyles.StyleCart.viewPayment}>
+              <Text style={IndexStyles.StyleCart.textButton}>Thanh toán({selectedItems.length})</Text>
+            </LinearGradient>
+          </TouchableOpacity>
+        </View>
+
       </View>
     </View>
   )

@@ -1,13 +1,22 @@
-import { Animated, Easing } from 'react-native';
+import { Animated, Easing, ImageSourcePropType } from 'react-native';
 import ToastMessage from '../../utils/ToastMessage';
 import { addFavourite, fetchFavourites, removeFavourite } from '../../redux/slices/Favourties.Slice';
-import { useCreateCartMutation } from './IndexCart';
 import { DetailProductParams } from '../../model/entity/IndexProduct.entity';
 import { calculateDiscountedPrice } from '../../utils/FormatPrice';
 
+const createColorImageMap = (product: DetailProductParams) => {
+    const colorImageMap: { [key: string]: ImageSourcePropType } = {};
+    product.priceColor.forEach((colorOption, index) => {
+        colorImageMap[colorOption.color] = product.images[index];
+    });
+    return colorImageMap;
+};
+
 class IndexHandleDetails {
     static async handleAddToCart(animatedValue: Animated.Value,
-        userId: string, selectedPrice: { price: number, color: string }, item: DetailProductParams, createCart: any, discountPrice: number) {
+        userId: string, selectedPrice: { price: number, color: string }, item: DetailProductParams, createCart: any, discountPrice: number,
+        dispatch: any, incrementItemCount: any
+    ) {
         try {
             Animated.timing(animatedValue, {
                 toValue: 1,
@@ -23,6 +32,11 @@ class IndexHandleDetails {
             if (!selectedPrice.color) {
                 return ToastMessage('error', 'Vui lòng chọn màu sản phẩm');
             }
+
+            // Tạo ánh xạ màu sắc và hình ảnh động
+            const colorImageMap = createColorImageMap(item);
+            const selectedImage = colorImageMap[selectedPrice.color] || item.images[0];
+
             const res = await createCart({
                 user: userId,
                 products: {
@@ -33,18 +47,19 @@ class IndexHandleDetails {
                     priceColor: {
                         color: selectedPrice.color,
                         price: discountPrice,
-                        image: item.images[0],
+                        image: selectedImage,
                     }
                 },
                 quantity: 1,
             });
             if (res.data) {
                 ToastMessage('success', 'Thêm vào giỏ hàng thành công');
+                dispatch(incrementItemCount());
             }
         } catch (error) {
             console.log("🚀 ~ handleAddToCart ~ error:", error);
         }
-    };
+    }
     static async handleAddFavourite(item: any, userId: string, navigation: any, dispatch: any) {
         try {
             if (!userId) {
@@ -69,9 +84,7 @@ class IndexHandleDetails {
         }
     }
 
-    static async handleSelectPrice(price: number, color: string, setSelectedPrice: React.Dispatch<React.SetStateAction<{ price: number, color: string }>>,
-        setDiscountedPrice: React.Dispatch<React.SetStateAction<number>>,
-        item: DetailProductParams) {
+    static async handleSelectPrice(price: number, color: string, setSelectedPrice: any, setDiscountedPrice: any, item: DetailProductParams) {
         try {
             setSelectedPrice({ price, color });
             setDiscountedPrice(calculateDiscountedPrice(price, item.discount.percentage));

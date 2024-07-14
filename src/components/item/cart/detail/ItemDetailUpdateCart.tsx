@@ -15,25 +15,27 @@ import { Portal } from 'react-native-paper';
 import { PanGestureHandler } from 'react-native-gesture-handler';
 import { findImageByColor } from '../../../../utils/FindImageColor';
 import { useUpdateCartMutation } from '../../../../service/Api/IndexCart';
-import { UpdateCartEntity } from '../../../../model/entity/IndexCart.entity';
 
 type PropsCart = {
     item: DetailProductParams,
     show: boolean;
     onDismiss: () => void;
     enableBackDropDismiss?: boolean;
-    quantity?: number;
+    quantity?: number | undefined;
+    id?: string;
 }
 
-const ItemDetailUpdateArticle: React.FC<PropsCart> = ({ item, show, onDismiss, enableBackDropDismiss = true, quantity }) => {
-
+const ItemDetailUpdateArticle: React.FC<PropsCart> = ({ item, show, onDismiss, enableBackDropDismiss = true, quantity, id }) => {
     const [selectedPrice, setSelectedPrice] = useState<{ price: number, color: string }>({
         price: item.priceColor[0].price ?? 0,
         color: item.priceColor[0].color ?? '',
     });
 
     const [discountedPrice, setDiscountedPrice] = useState<number>(calculateDiscountedPrice(selectedPrice.price, item.discount.percentage));
+
     const [selectedImage, setSelectedImage] = useState<string>(item.images[0].toString());
+
+    const [selectedQuantity, setSelectedQuantity] = useState<number>(quantity ?? 1);
 
     const [open, setopen] = useState<boolean>(show);
 
@@ -90,7 +92,7 @@ const ItemDetailUpdateArticle: React.FC<PropsCart> = ({ item, show, onDismiss, e
     const handleUpdateCart = async () => {
         try {
             const data: any = {
-                _id: item._id,
+                _id: id,
                 products: {
                     _id: item._id,
                     name: item.name,
@@ -102,11 +104,12 @@ const ItemDetailUpdateArticle: React.FC<PropsCart> = ({ item, show, onDismiss, e
                         image: selectedImage,
                     }
                 },
-                quantity: 1,
+                quantity: selectedQuantity,
             }
             const res = await updateCart(data)
             if (res.data) {
                 ToastMessage('success', 'Cập nhật giỏ hàng thành công');
+                onDismiss();
             } else {
                 ToastMessage('error', 'Cập nhật giỏ hàng thất bại');
             }
@@ -156,19 +159,19 @@ const ItemDetailUpdateArticle: React.FC<PropsCart> = ({ item, show, onDismiss, e
                             <View style={IndexStyles.StylesItemDetailUpdateCart.containerQuantity}>
                                 <Text style={IndexStyles.StylesItemDetailUpdateCart.textTilte}>Số lượng</Text>
                                 <View style={IndexStyles.StylesItemDetailUpdateCart.containerQuantityItem}>
-                                    <TouchableOpacity style={IndexStyles.StylesItemDetailUpdateCart.viewQuantity}>
+                                    <TouchableOpacity style={IndexStyles.StylesItemDetailUpdateCart.viewQuantity} onPress={() => setSelectedQuantity(selectedQuantity + 1)}>
                                         <Icon.PlusSVG width={Responsive.wp(3)} height={Responsive.hp(4)} fill={COLOR.REDONE} />
                                     </TouchableOpacity>
-                                    <Text style={IndexStyles.StylesItemDetailUpdateCart.textQuantity}>{quantity}</Text>
-                                    <TouchableOpacity style={IndexStyles.StylesItemDetailUpdateCart.viewQuantity}>
+                                    <Text style={IndexStyles.StylesItemDetailUpdateCart.textQuantity}>{selectedQuantity}</Text>
+                                    <TouchableOpacity style={IndexStyles.StylesItemDetailUpdateCart.viewQuantity} onPress={() => { if (selectedQuantity > 1) { setSelectedQuantity(selectedQuantity - 1) } }}>
                                         <Icon.MinusSVG width={Responsive.wp(4)} height={Responsive.hp(5)} fill={COLOR.REDONE} />
                                     </TouchableOpacity>
                                 </View>
                             </View>
                         </View>
                     </View>
-                    <View>
-                        <TouchableOpacity style={IndexStyles.StylesItemDetailUpdateCart.viewTotal}>
+                    <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end' }}>
+                        <TouchableOpacity style={IndexStyles.StylesItemDetailUpdateCart.viewTotal} onPress={handleUpdateCart}>
                             <Text style={IndexStyles.StylesItemDetailUpdateCart.textTotal}>Xác nhận</Text>
                         </TouchableOpacity>
                     </View>

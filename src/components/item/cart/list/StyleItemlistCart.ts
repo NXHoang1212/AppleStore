@@ -5,7 +5,7 @@ import { Responsive } from "../../../../constant/Responsive";
 
 const StylesItemListCart = StyleSheet.create({
     container: {
-        width: Responsive.wp(95),
+        width: Responsive.wp(98),
         height: Responsive.hp(20),
         alignSelf: 'center',
         flexDirection: 'row',
@@ -20,6 +20,13 @@ const StylesItemListCart = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 8,
+    },
+    viewCheckbox: {
+        width: Responsive.wp(10),
+        height: Responsive.hp(20),
+        alignSelf: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     viewImage: {
         justifyContent: 'center',
@@ -37,8 +44,9 @@ const StylesItemListCart = StyleSheet.create({
     },
     textNameProducts: {
         fontFamily: FontsROBOTO.ROBOTO_REGULAR,
-        fontSize: Responsive.RFPercentage(2),
+        fontSize: Responsive.RFPercentage(1.9),
         color: COLOR.BLACK,
+        width: Responsive.wp(58),
     },
     textPriceProducts: {
         fontFamily: FontsROBOTO.ROBOTO_BOLD,
@@ -56,14 +64,14 @@ const StylesItemListCart = StyleSheet.create({
     },
     textColorProducts: {
         fontFamily: FontsROBOTO.ROBOTO_REGULAR,
-        fontSize: Responsive.RFPercentage(1.9),
+        fontSize: Responsive.RFPercentage(1.8),
         color: COLOR.BLACK,
         fontWeight: 'bold',
         marginLeft: Responsive.wp(3),
     },
     textChangeProducts: {
         fontFamily: FontsROBOTO.ROBOTO_REGULAR,
-        fontSize: Responsive.RFPercentage(1.9),
+        fontSize: Responsive.RFPercentage(1.8),
         color: COLOR.RED,
         width: Responsive.wp(23),
         height: Responsive.hp(3),
@@ -77,13 +85,13 @@ const StylesItemListCart = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        width: Responsive.wp(61),
+        width: Responsive.wp(55),
     },
     viewQuantity: {
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
-        width: Responsive.wp(20),
+        width: Responsive.wp(18),
         height: Responsive.hp(3),
         borderWidth: 1,
         borderColor: COLOR.BLACK,

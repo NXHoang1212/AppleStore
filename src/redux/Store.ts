@@ -11,6 +11,7 @@ import ProductReducer from './slices/Product.Slice';
 import ProductPaginationReducer from './slices/ProductLimited.Slice';
 import AddressReducer from './slices/Address.Slice';
 import FavourtiesReducer from './slices/Favourties.Slice';
+import CountCartReducer from './slices/CountCartSlice'
 
 /*BaseQuery */
 import { DetailProducts } from '../service/Api/IndexProduct';
@@ -29,6 +30,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
     Auth: AuthReducer,
+    CountCart: CountCartReducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -12,28 +12,39 @@ import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { StackHomeTypeParam } from '../../model/param/IndexStack.Param'
 
-import { useAppDispatch } from '../../import/IndexFeatures'
+import { useAppDispatch, useAppSelector } from '../../import/IndexFeatures'
 import { fetchCategoryProduct } from '../../service/Api/IndexCategory'
 import { fetchBannerProduct } from '../../service/Api/IndexBanner'
 import { fetchProducts, fetProductsPagination } from '../../service/Api/IndexProduct'
+import { useGetCartByUserQuery } from '../../service/Api/IndexCart'
+import { setItemCount } from '../../redux/slices/CountCartSlice'
 
 const Slash: React.FC = () => {
     const dispatch = useAppDispatch()
     const [loading, setLoading] = useState<boolean>(true)
     const navigation = useNavigation<NativeStackNavigationProp<StackHomeTypeParam>>();
+    let id = useAppSelector(state => state.root.Auth.user?._id)
+    const { data: cartData, isLoading, isError } = useGetCartByUserQuery(id)
 
     useEffect(() => {
         dispatch(fetchBannerProduct())
         dispatch(fetProductsPagination({ page: 1, limit: 10 }))
-        dispatch(fetchProducts());
+        dispatch(fetchProducts())
         dispatch(fetchCategoryProduct())
+    }, [dispatch]);
+
+    useEffect(() => {
+        if (!isLoading && !isError && cartData?.data && id) {
+            dispatch(setItemCount(cartData.data.length));
+        }
+    }, [cartData, isLoading, isError, id, dispatch]);
+
+    useEffect(() => {
         setTimeout(() => {
             setLoading(false)
             navigation.replace('TabHome')
         }, 1500)
-
-        
-    }, [])
+    }, [navigation]);
 
     return (
         <View style={styles.container}>
