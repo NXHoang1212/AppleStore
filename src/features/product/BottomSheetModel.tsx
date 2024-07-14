@@ -19,6 +19,9 @@ const UseBottomSheetModel = ({ item }: Props) => {
 
     const snapPoints = useMemo(() => ['50%', '50%'], []);
 
+
+    const snapPointsCart = useMemo(() => ['60%', '60%'], []);
+
     const [selectedItem, setSelectedItem] = useState<DetailProductParams | null>(null);
 
     const handlePresentModalPress = useCallback(() => {
@@ -51,7 +54,7 @@ const UseBottomSheetModel = ({ item }: Props) => {
 
 
 
-    return { bottomSheetModalRef, snapPoints, selectedItem, setSelectedItem, handlePresentModalPress, handleDismissModal, handleAddFavourite }
+    return { bottomSheetModalRef, snapPoints, snapPointsCart, selectedItem, setSelectedItem, handlePresentModalPress, handleDismissModal, handleAddFavourite }
 }
 
 export default UseBottomSheetModel

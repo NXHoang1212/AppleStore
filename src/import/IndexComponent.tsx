@@ -6,6 +6,7 @@ import CustomSwtich from "../components/toggle/CustomSwtich";
 import PickerCustom from "../components/other/PickerCustom";
 import CustomBackdrop from "../components/other/CustomBarckdrop";
 import CustomModalConfirm from "../components/other/CustomModalConfirm";
+import CustomVeriftyInput from "../components/input/VeriftyInput";
 
 /*BANNER */
 import Paginations from "../components/banner/Paginations";
@@ -34,6 +35,8 @@ import ItemDetailArticle from "../components/item/product/detail/ItemDetailArtic
 import ItemModelInfor from "../components/item/product/detail/ItemModelInfor";
 import ItemListAddress from "../components/item/address/ItemListAddress";
 import ItemFavourites from "../components/item/product/list/ItemFavourites";
+import ItemListCart from "../components/item/cart/list/ItemListCart";
+import ItemDetailUpdateCart from "../components/item/cart/detail/ItemDetailUpdateCart";
 
 
 /*MEDIA */
@@ -51,6 +54,7 @@ export {
     PickerCustom,
     CustomBackdrop,
     CustomModalConfirm,
+    CustomVeriftyInput,
     DistrictItem,
     DistrictList,
     WardItem,
@@ -65,6 +69,8 @@ export {
     ItemModelInfor,
     ItemListAddress,
     ItemFavourites,
+    ItemListCart,
+    ItemDetailUpdateCart,
     ItemDetailArticle,
     ImagePicker,
     Loading,

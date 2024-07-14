@@ -1,4 +1,4 @@
-import { View, Text, StatusBar, TouchableOpacity, ScrollView, Image, Linking, FlatList } from 'react-native'
+import { View, Text, TouchableOpacity, ScrollView, Image, FlatList } from 'react-native'
 import React, { useState, useRef, useEffect } from 'react'
 import { Icon } from '../../../constant/Icon';
 
@@ -37,6 +37,7 @@ const HomePage: React.FC = () => {
     if (product.error) {
         return <Loading loading={product.loading} />
     }
+
 
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false} ref={scrollRef}>
@@ -127,7 +128,7 @@ const HomePage: React.FC = () => {
                     <View style={IndexStyles.StylesHomePage.ViewProduct}>
                         <FlatList
                             data={product.data.filter((item) => item.category.name === 'Ipad').slice(0, 10)}
-                            renderItem={({ item }) => <ItemProductHomePage item={item} navigation={navigation} userId={user.user._id} dispatch={dispatch}/>}
+                            renderItem={({ item }) => <ItemProductHomePage item={item} navigation={navigation} userId={user.user._id} dispatch={dispatch} />}
                             keyExtractor={item => item._id}
                             horizontal
                             showsHorizontalScrollIndicator={false}
@@ -143,7 +144,7 @@ const HomePage: React.FC = () => {
                     <View style={IndexStyles.StylesHomePage.ViewProduct}>
                         <FlatList
                             data={product.data.filter((item) => item.category.name === 'Phụ kiện').slice(0, 10)}
-                            renderItem={({ item }) => <ItemProductHomePage item={item} navigation={navigation} userId={user.user._id} dispatch={dispatch}/>}
+                            renderItem={({ item }) => <ItemProductHomePage item={item} navigation={navigation} userId={user.user._id} dispatch={dispatch} />}
                             keyExtractor={item => item._id}
                             horizontal
                             showsHorizontalScrollIndicator={false}

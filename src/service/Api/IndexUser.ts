@@ -1,6 +1,15 @@
 import AxiosInstance from "../../utils/AxiosIntance";
 import { Users, UpdateUser } from '../../model/entity/IndexUsers.entity';
 
+const HandleLoginProvider = async (photoUrl: string, provider: string) => {
+    try {
+        const response = await AxiosInstance().post('/api/auth/loginProvider', { photoUrl, provider })
+        return response
+    } catch (error: any) {
+        throw new Error(error)
+    }
+}
+
 const HandleLoginUser = async (email: string, password: string, phone: string) => {
     try {
         const response = await AxiosInstance().post('/api/auth/login', { email, password, phone })
@@ -71,4 +80,36 @@ const HandleDeleteUser = async (id: String) => {
     }
 }
 
-export { HandleRegisterUser, HandleLoginUser, HandleUpdateUser, HandleUploadAvatar, HandleAuthenticatePassword, HandleResetPassword, HandleDeleteUser }
+const HandleResendEmail = async (email: String) => {
+    try {
+        const response = await AxiosInstance().post('/api/auth/sendMail', { email })
+        return response
+    } catch (error: any) {
+        throw new Error(error)
+    }
+}
+
+const HandleVerifyOtp = async (otp: String) => {
+    try {
+        const response = await AxiosInstance().post('/api/auth/verifyMailOtp', { otp })
+        return response
+    } catch (error: any) {
+        throw new Error(error)
+    }
+}
+
+const HandleResetPasswordFromMail = async (email: String, newPassword: String, confirmPassword: String) => {
+    try {
+        const response = await AxiosInstance().post('/api/auth/resetPasswordFromMail', { email, newPassword, confirmPassword })
+        return response
+    } catch (error: any) {
+        throw new Error(error)
+    }
+}
+
+export {
+    HandleRegisterUser, HandleLoginUser, HandleUpdateUser,
+    HandleUploadAvatar, HandleAuthenticatePassword, HandleResetPassword,
+    HandleDeleteUser, HandleResendEmail, HandleVerifyOtp, HandleResetPasswordFromMail,
+    HandleLoginProvider
+}

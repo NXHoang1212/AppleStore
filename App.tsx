@@ -13,12 +13,12 @@ function App(): React.JSX.Element {
   return (
     <ProviderRedux store={StoreRedux}>
       <PersistGate persistor={persistor} loading={null}>
-        <PaperProvider>
-          <GestureHandlerRootView style={{ flex: 1 }}>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <PaperProvider>
             <RootStack />
             <Toast position='top' />
-          </GestureHandlerRootView>
-        </PaperProvider>
+          </PaperProvider>
+        </GestureHandlerRootView>
       </PersistGate>
     </ProviderRedux>
   );

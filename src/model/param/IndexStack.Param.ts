@@ -39,4 +39,5 @@ export type StackAuthUserParams = {
     AuthRegister: undefined;
     ForgotPassword: undefined;
     OtpPassword: undefined;
+    CreatePassword: undefined;
 };

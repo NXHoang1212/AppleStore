@@ -28,6 +28,11 @@ import IconHeart from '../assets/svg/heart.svg';
 import IconHeartChecked from '../assets/svg/heartChecked.svg';
 import IconAccount from '../assets/svg/account.svg';
 import IconQuestion from '../assets/svg/question.svg';
+import IconDown from '../assets/svg/down.svg';
+import IconPlus from '../assets/svg/plus.svg';
+import IconMinus from '../assets/svg/minus.svg';
+import IconClose from '../assets/svg/close.svg';
+import IconTrash from '../assets/svg/trash.svg';
 
 export class Icon {
     static BackSVG = IconBack;
@@ -60,6 +65,11 @@ export class Icon {
     static HeartCheckedSVG = IconHeartChecked;
     static AccountSVG = IconAccount;
     static QuestionSVG = IconQuestion;
+    static DownSVG = IconDown;
+    static PlusSVG = IconPlus;
+    static MinusSVG = IconMinus;
+    static CloseSVG = IconClose;
+    static TrashSVG = IconTrash;
     static HOME = require('../assets/images/house.png');
     static CART = require('../assets/images/cart.png');
     static CATEGORY = require('../assets/images/category.png');

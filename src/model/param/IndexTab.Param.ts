@@ -24,5 +24,6 @@ export type TabOrderStatusType = {
 export type TabHomeType = {
     component: React.FC;
     name: keyof TabHomePageListParam;
-    icon: ImageSourcePropType
+    icon: ImageSourcePropType;
+    badge?: number;
 };

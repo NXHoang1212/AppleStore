@@ -19,7 +19,7 @@ export const DetailProducts = createApi({
     }),
 });
 
-export const { useGetProductsByIdQuery } = DetailProducts;
+export const { useGetProductsByIdQuery, useLazyGetProductsByIdQuery } = DetailProducts;
 
 const fetchProducts = createAsyncThunk<ProductState[], void>(
     'product/fetchProducts',

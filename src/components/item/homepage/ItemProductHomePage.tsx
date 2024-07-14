@@ -8,7 +8,7 @@ import { Responsive } from '../../../constant/Responsive'
 import { FormatPrice, calculateDiscountedPrice } from '../../../utils/FormatPrice'
 import { useAppSelector } from '../../../import/IndexFeatures'
 import { Icon } from '../../../constant/Icon'
-import IndexHandleFavourites from '../../../service/Api/indexFavourites'
+import IndexHandleFavourites from '../../../service/Api/IndexHandleDetails'
 
 type PropsProduct = {
     item: ProductState,

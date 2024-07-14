@@ -13,7 +13,9 @@ const useImagePicker = () => {
                 cropping: true,
             }).then((image: any) => {
                 setPhotoUrl(image.path);
-            })
+            }).catch((error: any) => {
+                console.log('Error', error);
+            });
         } catch (error) {
             console.log('Error', error);
         }

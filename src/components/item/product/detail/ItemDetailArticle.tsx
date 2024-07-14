@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { View, Text, TouchableOpacity, Animated, ScrollView, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Animated, ScrollView, Image, Easing } from 'react-native';
 
 import { COLOR } from '../../../../constant/Colors';
 import { Icon } from '../../../../constant/Icon';
@@ -18,7 +18,9 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import { ShareItemDetail, UseBottomSheetModel, useAppSelector } from '../../../../import/IndexFeatures';
 import { BottomSheetModal, BottomSheetModalProvider, BottomSheetScrollView, BottomSheetView } from '@gorhom/bottom-sheet';
-import IndexHandleFavourites from '../../../../service/Api/indexFavourites';
+import IndexHandleDetails from '../../../../service/Api/IndexHandleDetails';
+
+import { useCreateCartMutation } from '../../../../service/Api/IndexCart';
 
 type PropsProduct = {
     item: DetailProductParams,
@@ -34,6 +36,8 @@ const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation, userId = 
         price: item.priceColor[0].price,
         color: item.priceColor[0].color,
     });
+    const [discountedPrice, setDiscountedPrice] = useState<number>(calculateDiscountedPrice(selectedPrice.price, item.discount.percentage));
+
     const product = Shuffle(useAppSelector((state) => state.Product.data).filter((product) => product._id !== item._id)).slice(0, 15);
 
     const animatedValue = useRef(new Animated.Value(0)).current;
@@ -41,8 +45,11 @@ const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation, userId = 
     const favourites = useAppSelector((state) => state.Favourites.items);
     const isFavourite = favourites.some(favItem => favItem.productId._id === item._id);
 
+    const [createCart] = useCreateCartMutation();
+
+
     return (
-        <BottomSheetModalProvider>
+        <BottomSheetModalProvider >
             <View style={IndexStyles.StyleItemDetailArticle.container}>
                 <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
                     <View style={IndexStyles.StyleItemDetailArticle.containerHeader}>
@@ -99,18 +106,18 @@ const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation, userId = 
                             <View style={IndexStyles.StyleItemDetailArticle.viewName}>
                                 <Text style={IndexStyles.StyleItemDetailArticle.textname}>{item.name} {item.storage} {item.model}</Text>
                                 {isFavourite ? (
-                                    <TouchableOpacity style={IndexStyles.StyleItemDetailArticle.viewHeart} onPress={() => IndexHandleFavourites.handleRemoveFavourite(favourites.find(favItem => favItem.productId._id === item._id)?._id as string, dispatch, userId)} >
+                                    <TouchableOpacity style={IndexStyles.StyleItemDetailArticle.viewHeart} onPress={() => IndexHandleDetails.handleRemoveFavourite(favourites.find(favItem => favItem.productId._id === item._id)?._id as string, dispatch, userId)} >
                                         <Icon.HeartCheckedSVG width={Responsive.wp(5)} height={Responsive.hp(3)} fill={COLOR.REDONE} />
                                     </TouchableOpacity>
                                 ) : (
-                                    <TouchableOpacity style={IndexStyles.StyleItemDetailArticle.viewHeart} onPress={() => IndexHandleFavourites.handleAddFavourite(item, userId, navigation, dispatch)}>
+                                    <TouchableOpacity style={IndexStyles.StyleItemDetailArticle.viewHeart} onPress={() => IndexHandleDetails.handleAddFavourite(item, userId, navigation, dispatch)}>
                                         <Icon.HeartSVG width={Responsive.wp(5)} height={Responsive.hp(3)} fill={COLOR.BLACKONE} />
                                     </TouchableOpacity>
                                 )}
                             </View>
                             <View style={{ flexDirection: 'row', alignItems: 'center', gap: Responsive.wp(2), paddingBottom: Responsive.hp(2) }}>
-                                <Text style={IndexStyles.StyleItemDetailArticle.textPriceDiscount}>{FormatPrice(calculateDiscountedPrice(item.priceColor[0].price, item.discount.percentage))}</Text>
-                                <Text style={IndexStyles.StyleItemDetailArticle.textPrice}>{FormatPrice(item.priceColor[0].price)}</Text>
+                                <Text style={IndexStyles.StyleItemDetailArticle.textPriceDiscount}>{FormatPrice(discountedPrice)}</Text>
+                                <Text style={IndexStyles.StyleItemDetailArticle.textPrice}>{FormatPrice(selectedPrice.price)}</Text>
                                 <Text style={IndexStyles.StyleItemDetailArticle.textDiscount}>Giảm {item.discount.percentage}%</Text>
                             </View>
                             <Text style={IndexStyles.StyleItemDetailArticle.textTilte}>Sản phẩm</Text>
@@ -119,7 +126,7 @@ const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation, userId = 
                                     <TouchableOpacity key={index}
                                         style={[IndexStyles.StyleItemDetailArticle.viewPriceColor,
                                         selectedPrice.color === product.color ? { backgroundColor: COLOR.REDONE } : { backgroundColor: COLOR.ORANGE }]}
-                                        onPress={() => { setSelectedPrice({ price: product.price, color: product.color }) }} >
+                                        onPress={() => IndexHandleDetails.handleSelectPrice(product.price, product.color, setSelectedPrice, setDiscountedPrice, item)} >
                                         <Text style={IndexStyles.StyleItemDetailArticle.textPirceColor}>{product.color}</Text>
                                         <Text style={IndexStyles.StyleItemDetailArticle.textPirceColor}>{FormatPrice(calculateDiscountedPrice(product.price, item.discount.percentage))}</Text>
                                     </TouchableOpacity>
@@ -172,7 +179,7 @@ const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation, userId = 
                             <Text style={IndexStyles.StyleItemDetailArticle.textChat}>Chat ngay</Text>
                         </TouchableOpacity>
                         <View style={IndexStyles.StyleItemDetailArticle.lineheight} />
-                        <TouchableOpacity style={IndexStyles.StyleItemDetailArticle.viewChat} onPress={() => IndexHandleFavourites.handleAddToCart(animatedValue)}>
+                        <TouchableOpacity style={IndexStyles.StyleItemDetailArticle.viewChat} onPress={() => IndexHandleDetails.handleAddToCart(animatedValue, userId, selectedPrice, item, createCart, discountedPrice)}>
                             <Animated.View style={[IndexStyles.StyleItemDetailArticle.viewCart, {
                                 transform:
                                     [{
@@ -190,7 +197,7 @@ const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation, userId = 
                     </View>
                     <TouchableOpacity style={IndexStyles.StyleItemDetailArticle.viewTotal}>
                         <Text style={IndexStyles.StyleItemDetailArticle.textTotal}>Mua sản phẩm</Text>
-                        <Text style={IndexStyles.StyleItemDetailArticle.textTotalPrice}>{FormatPrice(calculateDiscountedPrice(selectedPrice.price, item.discount.percentage))}</Text>
+                        <Text style={IndexStyles.StyleItemDetailArticle.textTotalPrice}>{FormatPrice(discountedPrice)}</Text>
                     </TouchableOpacity>
                 </View>
                 <BottomSheetModal

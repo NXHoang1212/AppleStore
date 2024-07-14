@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "../features/redux/ReduxHook";
 import ShareItemDetail from "../features/product/ShareItemDetail";
 /*BOTTOMSHEET */
 import UseBottomSheetModel from "../features/product/BottomSheetModel";
+import UseBottomSheetModallCart from "../features/cart/BottomSheetModelCart";
 /*ADDRESS */
 import UseAddress from "../features/address/UseAddress";
 
@@ -19,5 +20,6 @@ export {
     useAppSelector,
     ShareItemDetail,
     UseBottomSheetModel,
+    UseBottomSheetModallCart,
     UseAddress
 }

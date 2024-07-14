@@ -1,5 +1,4 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
 import { TabHomePageListParam, TabHomeType } from '../model/param/IndexTab.Param';
 import { TabHomeEnum } from '../model/enum/IndexTab.enum';
 
@@ -13,16 +12,16 @@ import HomePage from '../screens/homeproduct/home/HomePage';
 import Cart from '../screens/cart/Cart';
 import CategoryProduct from '../screens/category/CategoryProduct';
 import Information from '../screens/other/infor/Information';
-import { useFocusEffect } from '@react-navigation/native';
 import React from 'react';
-import { fetchBannerProduct } from '../service/Api/IndexBanner';
-import { fetchProducts, fetProductsPagination } from '../service/Api/IndexProduct';
-import { fetchCategoryProduct } from '../service/Api/IndexCategory';
-import { useAppDispatch } from '../import/IndexFeatures';
+
+import { useAppSelector } from '../import/IndexFeatures';
+import { useGetCartByUserQuery } from '../service/Api/IndexCart';
 
 const BottomTabHomePage = createBottomTabNavigator<TabHomePageListParam>();
 
 const TabHomePage = () => {
+    const { data: cartData } = useGetCartByUserQuery(useAppSelector(state => state.root.Auth.user?._id));
+    
     const tabHome: TabHomeType[] = [
         {
             component: HomePage,
@@ -32,7 +31,8 @@ const TabHomePage = () => {
         {
             component: Cart,
             name: TabHomeEnum.Cart,
-            icon: Icon.CART
+            icon: Icon.CART,
+            badge: cartData?.data.length ?? undefined
         },
         {
             component: CategoryProduct,
@@ -45,19 +45,6 @@ const TabHomePage = () => {
             icon: Icon.INFOR
         },
     ]
-    // const dispatch = useAppDispatch()
-    // useFocusEffect(
-    //     React.useCallback(() => {
-    //         const loadData = async () => {
-    //             await dispatch(fetchBannerProduct());
-    //             await dispatch(fetProductsPagination({ page: 1, limit: 10 }));
-    //             await dispatch(fetchProducts());
-    //             await dispatch(fetchCategoryProduct());
-    //         };
-
-    //         loadData();
-    //     }, [dispatch])
-    // )
 
     return (
         <BottomTabHomePage.Navigator
@@ -95,6 +82,7 @@ const TabHomePage = () => {
                                 {item.name}
                             </Text>
                         ),
+                        tabBarBadge: item.badge
                     }}
                 />
             ))}

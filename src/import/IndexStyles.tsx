@@ -3,6 +3,7 @@ import StyleAuthLoginUser from "../screens/auth/login/StyleAuthLoginUser";
 import StyleAuthRegisterUser from "../screens/auth/register/StyleAuthRegisterUser";
 import StyleForgotPassword from "../screens/auth/password/reset/StyleForgotPassword";
 import StyleOtpPassword from "../screens/auth/password/otp/StyleOtpPassword";
+import StyleCreatePassword from "../screens/auth/password/create/StyleCreatePassword";
 
 /*CART,ORDER */
 import { StyleCart } from "../screens/cart/StyleCart";
@@ -49,12 +50,15 @@ import { StyleNotFound } from "../screens/notfound/StyleNotFound";
 import { StyleItemDetailArticle } from "../components/item/product/detail/StyleItemDetailAricle";
 import StyleBottomSheetModelDetail from "../components/item/product/detail/StyleBottomSheetModelDetail";
 import { StyleItemListAddress } from "../components/item/address/StyleItemListAddress";
+import { StylesItemListCart } from "../components/item/cart/list/StyleItemlistCart";
+import { StylesItemDetailUpdateCart } from "../components/item/cart/detail/StyleItemDetailUpdateCart";
 
 export const IndexStyles = {
     StyleAuthLoginUser,
     StyleAuthRegisterUser,
     StyleForgotPassword,
     StyleOtpPassword,
+    StyleCreatePassword,
     StyleCart,
     StyleSearchOrder,
     StyleCategoryProduct,
@@ -82,5 +86,7 @@ export const IndexStyles = {
     StyleNotFound,
     StyleItemDetailArticle,
     StyleBottomSheetModelDetail,
-    StyleItemListAddress
+    StyleItemListAddress,
+    StylesItemListCart,
+    StylesItemDetailUpdateCart,
 }

@@ -30,6 +30,7 @@ export enum StackAuthUserEnum {
     AuthRegister = 'AuthRegister',
     ForgotPassword = 'ForgotPassword',
     OtpPassword = 'OtpPassword',
+    CreatePassword = 'CreatePassword',
 }
 
 export enum StackMiscEnum {

@@ -39,7 +39,6 @@ const EditProfile: React.FC = () => {
     gender: true,
     photoUrl: true,
   })
-  const [loading, setLoading] = useState<boolean>(false)
 
   const isInfoChanged = () => {
     return !inputDisabled.fullname
@@ -61,12 +60,10 @@ const EditProfile: React.FC = () => {
           if (uploadPhoto && uploadPhoto.status === 200) {
             const data = uploadPhoto.data.photoUrl
             dispatch(Update({ ...infor, photoUrl: data }))
-            setLoading(true)
             ToastMessage('success', 'Cập nhật thành công')
           }
         } else {
           dispatch(Update(infor))
-          setLoading(true)
           ToastMessage('success', 'Cập nhật thành công')
         }
       }

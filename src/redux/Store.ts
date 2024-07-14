@@ -15,6 +15,7 @@ import FavourtiesReducer from './slices/Favourties.Slice';
 /*BaseQuery */
 import { DetailProducts } from '../service/Api/IndexProduct';
 import { AddressQuery } from '../service/Api/IndexAddress';
+import { CartQuery } from '../service/Api/IndexCart';
 import { setupListeners } from '@reduxjs/toolkit/query';
 
 /*AsyncStorage, Redux Persist */
@@ -43,6 +44,7 @@ const StoreRedux = configureStore({
         Favourites: FavourtiesReducer,
         [DetailProducts.reducerPath]: DetailProducts.reducer,
         [AddressQuery.reducerPath]: AddressQuery.reducer,
+        [CartQuery.reducerPath]: CartQuery.reducer
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
@@ -52,6 +54,7 @@ const StoreRedux = configureStore({
             .concat(createImmutableStateInvariantMiddleware())
             .concat(DetailProducts.middleware)
             .concat(AddressQuery.middleware)
+            .concat(CartQuery.middleware),
 
 });
 

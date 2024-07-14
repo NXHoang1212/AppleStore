@@ -12,14 +12,19 @@ import { StackHomeTypeParam } from '../../../model/param/IndexStack.Param';
 import LinearGradient from 'react-native-linear-gradient';
 import useStatusBarConfig from '../../../utils/UseStatusBarConfig'
 import { Validation } from '../../../utils/Validation';
-import { AccountManagement } from '../../../import/IndexFeatures';
+import { AccountManagement, useAppDispatch } from '../../../import/IndexFeatures';
+
+import { loginGoogle } from '../../../service/provider/LoginGoogle';
+import ToastMessage from '../../../utils/ToastMessage';
 
 
 const AuthLoginUser: React.FC = () => {
     useStatusBarConfig('dark-content', 'transparent', true)
     const navigation = useNavigation<NativeStackNavigationProp<StackHomeTypeParam, 'AuthUser'>>()
+    const dispatch = useAppDispatch()
     const { handleLogin, email, setEmail, password, setPassword, phone, setPhone } = AccountManagement()
     const [showPassword, setShowPassword] = useState<boolean>(false)
+
 
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -82,14 +87,14 @@ const AuthLoginUser: React.FC = () => {
                         </TouchableOpacity>
                     </View>
                     <View style={IndexStyles.StyleAuthLoginUser.viewLoginOther}>
-                        <View style={IndexStyles.StyleAuthLoginUser.viewLogin}>
+                        <TouchableOpacity style={IndexStyles.StyleAuthLoginUser.viewLogin} onPress={() => loginGoogle(dispatch, navigation)}>
                             <Text style={IndexStyles.StyleAuthLoginUser.textLoginOther}>Đăng nhập bằng Google</Text>
                             <Image source={Icon.GOOGLE} style={IndexStyles.StyleAuthLoginUser.iconLoginOther} />
-                        </View>
-                        <View style={IndexStyles.StyleAuthLoginUser.viewLogin}>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={IndexStyles.StyleAuthLoginUser.viewLogin} onPress={() => ToastMessage('info', 'Chức năng đang phát triển')}>
                             <Text style={IndexStyles.StyleAuthLoginUser.textLoginOther}>Đăng nhập bằng Zalo</Text>
                             <Image source={Icon.ZALO} style={IndexStyles.StyleAuthLoginUser.iconLoginOther} />
-                        </View>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>

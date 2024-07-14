@@ -24,7 +24,7 @@ const StyleCategoryProduct = StyleSheet.create({
     },
     textheader: {
         fontFamily: FontsOSANS.OSANS_BOLD,
-        fontSize: 18,
+        fontSize: Responsive.RFPercentage(2.3),
         color: COLOR.WHITE,
     },
     containerProduct: {
