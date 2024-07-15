@@ -8,15 +8,12 @@ const useStatusBarConfig = (
 ) => {
     useLayoutEffect(() => {
         StatusBar.setBarStyle(barStyle);
-
         if (Platform.OS === 'android') {
             StatusBar.setBackgroundColor(backgroundColor);
             StatusBar.setTranslucent(translucent);
         }
-
         return () => {
             StatusBar.setBarStyle('dark-content');
-
             if (Platform.OS === 'android') {
                 StatusBar.setBackgroundColor('transparent');
                 StatusBar.setTranslucent(true);
