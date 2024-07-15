@@ -21,7 +21,6 @@ const BottomTabHomePage = createBottomTabNavigator<TabHomePageListParam>();
 const TabHomePage = () => {
 
     const cartData = useAppSelector(state => state.root.CountCart.itemCount);
-    console.log("🚀 ~ TabHomePage ~ cartData:", cartData)
     
     const tabHome: TabHomeType[] = [
         {

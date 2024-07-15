@@ -11,6 +11,7 @@ import { CustomCheckBox } from '../../../import/IndexComponent'
 import { IndexStyles } from '../../../import/IndexStyles';
 import { HandleDeleteUser } from '../../../service/Api/IndexUser'
 import ToastMessage from '../../../utils/ToastMessage';
+import { setItemCount } from '../../../redux/slices/CountCartSlice';
 
 
 const DeleteAccount: React.FC = () => {
@@ -25,6 +26,7 @@ const DeleteAccount: React.FC = () => {
             ToastMessage('success', 'Xóa tài khoản thành công')
             navigation.navigate('AuthUser')
             dispatch(Logout())
+            dispatch(setItemCount(0))
             console.log("🚀 ~ HandleDeleteAccount ~ response", response)
         } catch (error) {
             console.log("🚀 ~ HandleDeleteAccount ~ error", error)

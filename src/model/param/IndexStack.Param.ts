@@ -32,6 +32,7 @@ export type StackMiscParams = {
     Article: undefined;
     CategoryArticle: undefined;
     DetailArticle: undefined;
+    PaymentOrders: undefined;
 }
 
 export type StackAuthUserParams = {

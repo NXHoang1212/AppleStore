@@ -15,6 +15,7 @@ import { useAppSelector, useAppDispatch } from '../../../features/redux/ReduxHoo
 import { Logout } from '../../../redux/slices/Auth.Slice'
 import { CustomModalConfirm } from '../../../import/IndexComponent'
 import { setItemCount } from '../../../redux/slices/CountCartSlice'
+import ToastMessage from '../../../utils/ToastMessage'
 
 const Information: React.FC = () => {
   useStatusBarConfig('dark-content', 'transparent', true)
@@ -58,7 +59,7 @@ const Information: React.FC = () => {
           </View>
           <View style={IndexStyles.StyleInformation.decor}></View>
           <View>
-            {renderInformationItem({ text: 'Khách hàng thân thiết', image: Icon.LOYALCUSTOMER })}
+            {renderInformationItem({ text: 'Khách hàng thân thiết', image: Icon.LOYALCUSTOMER, onPress: () => ToastMessage('info', 'Chức năng đang phát triển') })}
             {renderInformationItem({ text: 'Thông tin cá nhân', image: Icon.INFOR, onPress: () => navigation.navigate(isLoggedIn.isLogged ? 'StackIndividual' : 'AuthUser', { screen: 'EditProfile' } as any) })}
             {renderInformationItem({ text: 'Địa chỉ', image: Icon.ADDRESS, onPress: () => navigation.navigate(isLoggedIn.isLogged ? 'StackIndividual' : 'AuthUser', { screen: 'ViewAddRess' } as any) })}
             {renderInformationItem({ text: 'Yêu thích', image: Icon.FAVOURITE, onPress: () => navigation.navigate(isLoggedIn.isLogged ? 'StackIndividual' : 'AuthUser', { screen: 'Favorites' } as any) })}

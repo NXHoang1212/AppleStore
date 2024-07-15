@@ -43,6 +43,9 @@ import { StyleFavorites } from "../screens/other/wishList/StyleFavorites";
 import { StyleArticle } from "../screens/homeproduct/product/StyleArticle";
 import { StyleDetailArticle } from "../screens/homeproduct/detail/StyleDetailArticle";
 
+/*ORDER*/
+import { StylePaymentOrders } from "../screens/order/StylePaymentOrders";
+
 /*NOTFOUND */
 import { StyleNotFound } from "../screens/notfound/StyleNotFound";
 
@@ -83,6 +86,7 @@ export const IndexStyles = {
     StyleFavorites,
     StyleArticle,
     StyleDetailArticle,
+    StylePaymentOrders,
     StyleNotFound,
     StyleItemDetailArticle,
     StyleBottomSheetModelDetail,

@@ -112,7 +112,7 @@ const Cart: React.FC = () => {
               <Text style={IndexStyles.StyleCart.textTotalShipper}>{shipper}</Text>
             </View>
           </View>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('StackMisc', { screen: 'PaymentOrders' })}>
             <LinearGradient colors={['#ff5d00', '#ff00a5']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
               style={IndexStyles.StyleCart.viewPayment}>
               <Text style={IndexStyles.StyleCart.textButton}>Thanh toán({selectedItems.length})</Text>
