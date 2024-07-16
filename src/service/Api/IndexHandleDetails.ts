@@ -4,7 +4,7 @@ import { addFavourite, fetchFavourites, removeFavourite } from '../../redux/slic
 import { DetailProductParams } from '../../model/entity/IndexProduct.entity';
 import { calculateDiscountedPrice } from '../../utils/FormatPrice';
 
-const createColorImageMap = (product: DetailProductParams) => {
+export const createColorImageMap = (product: DetailProductParams) => {
     const colorImageMap: { [key: string]: ImageSourcePropType } = {};
     product.priceColor.forEach((colorOption, index) => {
         colorImageMap[colorOption.color] = product.images[index];
@@ -32,8 +32,6 @@ class IndexHandleDetails {
             if (!selectedPrice.color) {
                 return ToastMessage('error', 'Vui lòng chọn màu sản phẩm');
             }
-
-            // Tạo ánh xạ màu sắc và hình ảnh động
             const colorImageMap = createColorImageMap(item);
             const selectedImage = colorImageMap[selectedPrice.color] || item.images[0];
 
@@ -60,6 +58,44 @@ class IndexHandleDetails {
             console.log("🚀 ~ handleAddToCart ~ error:", error);
         }
     }
+
+    static async handleByCart(userId: string, selectedPrice: { price: number, color: string }, item: DetailProductParams, createCart: any, discountPrice: number,
+        dispatch: any, incrementItemCount: any, navigation: any
+    ) {
+        try {
+            if (!userId) {
+                return ToastMessage('error', 'Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng');
+            }
+            if (!selectedPrice.color) {
+                return ToastMessage('error', 'Vui lòng chọn màu sản phẩm');
+            }
+            const colorImageMap = createColorImageMap(item);
+            const selectedImage = colorImageMap[selectedPrice.color] || item.images[0];
+
+            const res = await createCart({
+                user: userId,
+                products: {
+                    _id: item._id,
+                    name: item.name,
+                    model: item.model,
+                    storage: item.storage,
+                    priceColor: {
+                        color: selectedPrice.color,
+                        price: discountPrice,
+                        image: selectedImage,
+                    }
+                },
+                quantity: 1,
+            });
+            if (res.data) {
+                navigation.navigate('StackMisc', { screen: 'PaymentOrders', params: { id: res.data.data._id } });
+                dispatch(incrementItemCount());
+            }
+        } catch (error) {
+            console.log("🚀 ~ handleAddToCart ~ error:", error);
+        }
+    }
+
     static async handleAddFavourite(item: any, userId: string, navigation: any, dispatch: any) {
         try {
             if (!userId) {

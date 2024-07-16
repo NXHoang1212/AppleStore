@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, ActivityIndicator, RefreshControl, ScrollView } from 'react-native'
+import { View, Text, TouchableOpacity, ActivityIndicator, RefreshControl, ScrollView, Image } from 'react-native'
 import React, { useRef, useState } from 'react'
 import { Icon } from '../../constant/Icon'
 import { IndexStyles } from '../../import/IndexStyles';
@@ -14,6 +14,8 @@ import { ItemListCart, CustomCheckBox } from '../../import/IndexComponent';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { FormatPrice } from '../../utils/FormatPrice';
 import LinearGradient from 'react-native-linear-gradient';
+import ToastMessage from '../../utils/ToastMessage';
+import { Responsive } from '../../constant/Responsive';
 
 const Cart: React.FC = () => {
   useStatusBarConfig('dark-content', 'transparent', true)
@@ -24,6 +26,8 @@ const Cart: React.FC = () => {
   const user = useAppSelector(state => state.root.Auth.user._id)
 
   const { data, isLoading } = useGetCartByUserQuery(user)
+
+  const dataCart = data?.data || []
 
   const currentlyOpenSwipeable = useRef<Swipeable | null>(null);
 
@@ -50,12 +54,33 @@ const Cart: React.FC = () => {
   }
 
   let total = 0
-
-  data?.data.forEach((item) => {
+  dataCart.forEach(item => {
     if (selectedItems.includes(item._id)) {
-      total += item.products.priceColor.price * item.quantity;
+      total += item.products.priceColor.price * item.quantity
     }
-  });
+  })
+
+  if (dataCart.length === 0) {
+    return (
+      <View style={IndexStyles.StyleCart.container}>
+        <View style={IndexStyles.StyleCart.viewheader}>
+          <View style={IndexStyles.StyleCart.headerSmall}>
+            <TouchableOpacity style={IndexStyles.StyleCart.iconback} onPress={() => navigation.goBack()}>
+              <Icon.BackSVG width={25} height={25} fill='#fff' />
+            </TouchableOpacity>
+            <Text style={IndexStyles.StyleCart.textheader}>Giỏ hàng của bạn</Text>
+          </View>
+        </View>
+        <View style={IndexStyles.StyleCart.viewEmpty}>
+          <Image source={Icon.NoCarts} style={IndexStyles.StyleCart.imageEmpty} />
+          <Text style={IndexStyles.StyleCart.textEmpty}>Giỏ hàng của bạn đang trống</Text>
+          <TouchableOpacity style={IndexStyles.StyleCart.buttonEmpty} onPress={() => navigation.goBack()}>
+            <Text style={IndexStyles.StyleCart.textButtonEmpty}>Tiếp tục mua sắm</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    )
+  }
 
   return (
     <View style={IndexStyles.StyleCart.container}>
@@ -67,15 +92,14 @@ const Cart: React.FC = () => {
           <Text style={IndexStyles.StyleCart.textheader}>Giỏ hàng của bạn</Text>
         </View>
       </View>
-      <View style={IndexStyles.StyleCart.containerBody}>
-        {data?.data.map((item) => (
-          <ScrollView key={item._id} showsVerticalScrollIndicator={false} refreshControl={
-            <RefreshControl
-              refreshing={isLoading}
-              onRefresh={() => { }}
-            />
-          }>
+      <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: Responsive.hp(10) }}
+        showsVerticalScrollIndicator={false} refreshControl={
+          <RefreshControl refreshing={isLoading} onRefresh={() => { }} />
+        }>
+        <View style={IndexStyles.StyleCart.containerBody}>
+          {dataCart.map((item) => (
             <ItemListCart
+              key={item._id}
               item={item}
               navigation={navigation}
               currentlyOpenSwipeable={currentlyOpenSwipeable}
@@ -84,42 +108,50 @@ const Cart: React.FC = () => {
               isSelected={selectedItems.includes(item._id)}
               onItemSelect={handleItemSelect}
             />
-          </ScrollView>
-        ))
-        }
-      </View>
-      <View style={{ flex: 1, justifyContent: 'flex-end' }}>
-        <View style={IndexStyles.StyleCart.viewButton} >
-          <CustomCheckBox
-            checked={selectAll}
-            onPress={() => {
-              setSelectAll(!selectAll);
-              if (!selectAll) {
-                setSelectedItems(data?.data.map(item => item._id) || []);
-              } else {
-                setSelectedItems([]);
-              }
-            }}
-            title='Tất cả'
-          />
-          <View>
-            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-              <Text style={IndexStyles.StyleCart.textPayment}>Tổng cộng</Text>
-              <Text style={IndexStyles.StyleCart.textTotal}>{FormatPrice(total)}</Text>
-            </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-              <Text style={IndexStyles.StyleCart.textShipper}>Phí vận chuyển</Text>
-              <Text style={IndexStyles.StyleCart.textTotalShipper}>{shipper}</Text>
-            </View>
-          </View>
-          <TouchableOpacity onPress={() => navigation.navigate('StackMisc', { screen: 'PaymentOrders' })}>
-            <LinearGradient colors={['#ff5d00', '#ff00a5']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
-              style={IndexStyles.StyleCart.viewPayment}>
-              <Text style={IndexStyles.StyleCart.textButton}>Thanh toán({selectedItems.length})</Text>
-            </LinearGradient>
-          </TouchableOpacity>
+          ))
+          }
         </View>
-      </View>
+      </ScrollView>
+      {dataCart.length > 0 && (
+        <View style={{ flex: 1, justifyContent: 'flex-end' }}>
+          <View style={IndexStyles.StyleCart.viewButton} >
+            <CustomCheckBox
+              checked={selectAll}
+              onPress={() => {
+                setSelectAll(!selectAll);
+                if (!selectAll) {
+                  setSelectedItems(data?.data.map(item => item._id) || []);
+                } else {
+                  setSelectedItems([]);
+                }
+              }}
+              title='Tất cả'
+            />
+            <View>
+              <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={IndexStyles.StyleCart.textPayment}>Tổng cộng</Text>
+                <Text style={IndexStyles.StyleCart.textTotal}>{FormatPrice(total)}</Text>
+              </View>
+              <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={IndexStyles.StyleCart.textShipper}>Phí vận chuyển</Text>
+                <Text style={IndexStyles.StyleCart.textTotalShipper}>{shipper}</Text>
+              </View>
+            </View>
+            <TouchableOpacity onPress={() => {
+              if (selectedItems.length === 0) {
+                ToastMessage('error', 'Bạn chưa có sản phẩm nào để thanh toán')
+              } else {
+                navigation.navigate('StackMisc', { screen: 'PaymentOrders', params: { id: selectedItems, shipper } })
+              }
+            }} >
+              <LinearGradient colors={['#ff5d00', '#ff00a5']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
+                style={IndexStyles.StyleCart.viewPayment}>
+                <Text style={IndexStyles.StyleCart.textButton}>Thanh toán({selectedItems.length})</Text>
+              </LinearGradient>
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
     </View>
   )
 }

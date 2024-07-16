@@ -43,7 +43,11 @@ const CountCartSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(fetchGetCountCart.fulfilled, (state, action) => {
-            state.itemCount = action.payload.length;
+            if (action.payload) {
+                state.itemCount = action.payload.length;
+            } else {
+                state.itemCount = 0; // hoặc giá trị mặc định khác
+            }
         });
         builder.addCase(fetchGetCountCart.rejected, (state, action) => {
             console.log('fetchGetCountCart error:', action.error);
@@ -52,6 +56,7 @@ const CountCartSlice = createSlice({
             console.log('fetchGetCountCart pending');
         });
     }
+
 })
 
 export default CountCartSlice.reducer;

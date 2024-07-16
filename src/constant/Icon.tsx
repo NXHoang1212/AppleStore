@@ -33,6 +33,8 @@ import IconPlus from '../assets/svg/plus.svg';
 import IconMinus from '../assets/svg/minus.svg';
 import IconClose from '../assets/svg/close.svg';
 import IconTrash from '../assets/svg/trash.svg';
+import IconLocation from '../assets/svg/location.svg';
+import IconVoucher from '../assets/svg/voucher.svg';
 
 export class Icon {
     static BackSVG = IconBack;
@@ -70,6 +72,8 @@ export class Icon {
     static MinusSVG = IconMinus;
     static CloseSVG = IconClose;
     static TrashSVG = IconTrash;
+    static LocationSVG = IconLocation;
+    static VoucherSVG = IconVoucher;
     static HOME = require('../assets/images/house.png');
     static CART = require('../assets/images/cart.png');
     static CATEGORY = require('../assets/images/category.png');
@@ -98,6 +102,7 @@ export class Icon {
     static FACEBOOK = require('../assets/images/facebook.png');
     static CANCELSEARCH = require('../assets/images/canecelSearch.png');
     static NotFoundProduct = require('../assets/images/NotfoundProduct.png');
+    static NoCarts = require('../assets/images/NoCarts.png');
 }
 
 

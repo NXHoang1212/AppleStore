@@ -29,7 +29,7 @@ type PropsProduct = {
     navigation?: any,
     userId?: string,
     dispatch?: any,
-    countCart?: number
+    countCart: number
 }
 
 const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation, userId = '', dispatch, countCart }) => {
@@ -49,8 +49,6 @@ const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation, userId = 
     const isFavourite = favourites.some(favItem => favItem.productId._id === item._id);
 
     const [createCart] = useCreateCartMutation();
-
-
 
     return (
         <BottomSheetModalProvider >
@@ -84,9 +82,11 @@ const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation, userId = 
                                             fill={COLOR.REDONE}
                                             style={IndexStyles.StyleItemDetailArticle.iconCart}
                                         />
-                                        <View style={IndexStyles.StyleItemDetailArticle.viewCountCart}>
-                                            <Text style={IndexStyles.StyleItemDetailArticle.textCountCart}>{countCart}</Text>
-                                        </View>
+                                        {countCart > 0 &&
+                                            <View style={IndexStyles.StyleItemDetailArticle.viewCountCart}>
+                                                <Text style={IndexStyles.StyleItemDetailArticle.textCountCart}>{countCart}</Text>
+                                            </View>
+                                        }
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -187,7 +187,8 @@ const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation, userId = 
                             <Text style={IndexStyles.StyleItemDetailArticle.textChat}>Chat ngay</Text>
                         </TouchableOpacity>
                         <View style={IndexStyles.StyleItemDetailArticle.lineheight} />
-                        <TouchableOpacity style={IndexStyles.StyleItemDetailArticle.viewChat} onPress={() => IndexHandleDetails.handleAddToCart(animatedValue, userId, selectedPrice, item, createCart, discountedPrice, dispatch, incrementItemCount)}>
+                        <TouchableOpacity style={IndexStyles.StyleItemDetailArticle.viewChat}
+                            onPress={() => IndexHandleDetails.handleAddToCart(animatedValue, userId, selectedPrice, item, createCart, discountedPrice, dispatch, incrementItemCount)}>
                             <Animated.View style={[IndexStyles.StyleItemDetailArticle.viewCart, {
                                 transform:
                                     [{
@@ -203,7 +204,8 @@ const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation, userId = 
                             <Text style={IndexStyles.StyleItemDetailArticle.textCart}>Giỏ hàng</Text>
                         </TouchableOpacity>
                     </View>
-                    <TouchableOpacity style={IndexStyles.StyleItemDetailArticle.viewTotal}>
+                    <TouchableOpacity style={IndexStyles.StyleItemDetailArticle.viewTotal}
+                        onPress={() => IndexHandleDetails.handleByCart(userId, selectedPrice, item, createCart, discountedPrice, dispatch, incrementItemCount, navigation)}>
                         <Text style={IndexStyles.StyleItemDetailArticle.textTotal}>Mua sản phẩm</Text>
                         <Text style={IndexStyles.StyleItemDetailArticle.textTotalPrice}>{FormatPrice(discountedPrice)}</Text>
                     </TouchableOpacity>

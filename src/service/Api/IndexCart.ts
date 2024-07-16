@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { HOST } from "../../constant/Host";
-import { CartEntity, CreateCartEntity, ResponseCartEntity, UpdateCartEntity } from "../../model/entity/IndexCart.entity";
+import { CartEntity, CreateCartEntity, UpdateCartEntity } from "../../model/entity/IndexCart.entity";
 
 
 const CartQuery = createApi({
@@ -8,12 +8,20 @@ const CartQuery = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: HOST.API }),
     tagTypes: ['Cart'],
     endpoints: build => ({
-        getCartId: build.query<{ data: CartEntity[] }, string>({
+        getCartId: build.query<{ data: CartEntity }, string>({
             query: (id) => `/api/cart/getCartId/${id}`,
             providesTags: [{ type: 'Cart', id: 'LIST' }],
         }),
         getCartByUser: build.query<{ data: CartEntity[] }, string>({
             query: (id) => `/api/cart/getCartUserId/${id}`,
+            providesTags: [{ type: 'Cart', id: 'LIST' }],
+        }),
+        getCartIds: build.query<{ data: CartEntity[] }, string>({
+            query: (ids) => ({
+                url: '/api/cart/getCartsIds',
+                method: 'POST',
+                body: { ids },
+            }),
             providesTags: [{ type: 'Cart', id: 'LIST' }],
         }),
         createCart: build.mutation<CartEntity, CreateCartEntity>({
@@ -42,5 +50,5 @@ const CartQuery = createApi({
     })
 });
 
-export const { useGetCartIdQuery, useGetCartByUserQuery, useLazyGetCartByUserQuery, useCreateCartMutation, useUpdateCartMutation, useDeleteCartMutation } = CartQuery;
+export const { useGetCartIdQuery, useGetCartByUserQuery, useLazyGetCartByUserQuery, useGetCartIdsQuery, useCreateCartMutation, useUpdateCartMutation, useDeleteCartMutation } = CartQuery;
 export { CartQuery };

@@ -45,6 +45,8 @@ import ImagePicker from "../components/media/CamraPicker";
 /*LOADING */
 import Loading from "../components/activity/ActivityIndicator";
 
+/*COLOR */
+import MultiColorLine from "../components/MultiColorLine";
 
 export {
     CustomCheckBox,
@@ -75,4 +77,5 @@ export {
     ItemDetailUpdateArticle,
     ImagePicker,
     Loading,
+    MultiColorLine
 }

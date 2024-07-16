@@ -17,12 +17,6 @@ export interface CartEntity {
         }
     },
     quantity: number;
-    total: number;
-    status: string;
-    payment: string;
-    delivery: string;
-    address: AddressEntity;
-    note: string;
 }
 
 export interface ResponseCartEntity {

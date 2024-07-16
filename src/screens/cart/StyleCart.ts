@@ -99,6 +99,34 @@ const StyleCart = StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 5,
     },
+    imageEmpty: {
+        width: Responsive.wp(40),
+        height: Responsive.hp(22),
+        resizeMode: 'contain',
+    },
+    textEmpty: {
+        fontFamily: FontsOSANS.OSANS_BOLD,
+        fontSize: Responsive.RFPercentage(2.5),
+        color: COLOR.BLACK,
+    },
+    viewEmpty: {
+        alignItems: 'center',
+        top: Responsive.hp(20),
+    },
+    buttonEmpty: {
+        backgroundColor: COLOR.REDONE,
+        width: Responsive.wp(45),
+        height: Responsive.hp(6),
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 5,
+        marginTop: Responsive.hp(2),
+    },
+    textButtonEmpty: {
+        fontFamily: FontsOSANS.OSANS_BOLD,
+        fontSize: Responsive.RFPercentage(2.5),
+        color: COLOR.WHITE,
+    },
 });
 
 export { StyleCart }
