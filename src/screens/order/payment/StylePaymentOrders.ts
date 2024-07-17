@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
-import { COLOR } from "../../constant/Colors";
-import { FontsOSANS, FontsROBOTO } from "../../constant/Fonts";
-import { Responsive } from "../../constant/Responsive";
+import { COLOR } from "../../../constant/Colors";
+import { FontsOSANS, FontsROBOTO } from "../../../constant/Fonts";
+import { Responsive } from "../../../constant/Responsive";
 
 
 const StylePaymentOrders = StyleSheet.create({
@@ -27,7 +27,7 @@ const StylePaymentOrders = StyleSheet.create({
     },
     textHeader: {
         fontSize: Responsive.RFPercentage(2.8),
-        fontFamily: FontsROBOTO.ROBOTO_REGULAR,
+        fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
         color: COLOR.BLACK,
         fontWeight: 'bold',
         textAlign: 'center',
@@ -52,7 +52,7 @@ const StylePaymentOrders = StyleSheet.create({
     },
     textAddress: {
         fontSize: Responsive.RFPercentage(2.2),
-        fontFamily: FontsROBOTO.ROBOTO_REGULAR,
+        fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
         color: COLOR.BLACK,
         fontWeight: 'bold',
         letterSpacing: 0.25
@@ -87,7 +87,7 @@ const StylePaymentOrders = StyleSheet.create({
     },
     textChangeOrder: {
         fontSize: Responsive.RFPercentage(1.9),
-        fontFamily: FontsROBOTO.ROBOTO_REGULAR,
+        fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
         color: COLOR.REDONE,
         borderWidth: 1,
         borderColor: COLOR.REDONE,
@@ -114,6 +114,7 @@ const StylePaymentOrders = StyleSheet.create({
         borderBottomColor: COLOR.GREY,
         width: Responsive.wp(100),
         alignSelf: 'center',
+
     },
     viewVoucher: {
         flexDirection: 'row',
@@ -122,10 +123,11 @@ const StylePaymentOrders = StyleSheet.create({
         backgroundColor: COLOR.WHITE,
         paddingHorizontal: Responsive.wp(3),
         marginTop: Responsive.hp(2),
+        height: Responsive.hp(7),
     },
     textVoucher: {
         fontSize: Responsive.RFPercentage(2.2),
-        fontFamily: FontsROBOTO.ROBOTO_REGULAR,
+        fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
         color: COLOR.BLACK,
         fontWeight: 'bold',
         letterSpacing: 0.25
@@ -150,16 +152,19 @@ const StylePaymentOrders = StyleSheet.create({
         borderBottomWidth: 1,
         borderTopWidth: 1,
         borderColor: COLOR.BLUE,
+        flexDirection: 'column',
+        gap: Responsive.hp(1),
     },
     textShipper: {
         fontSize: Responsive.RFPercentage(2.2),
-        fontFamily: FontsROBOTO.ROBOTO_REGULAR,
+        fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
         color: COLOR.BLACK,
         fontWeight: 'bold',
         letterSpacing: 0.25
     },
     viewShipperDetail: {
         flexDirection: 'column',
+        gap: Responsive.hp(1),
     },
     textShipperDetail: {
         fontSize: Responsive.RFPercentage(2),
@@ -176,6 +181,107 @@ const StylePaymentOrders = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         gap: 5,
+    },
+    viewNote: {
+        backgroundColor: COLOR.WHITE,
+        paddingHorizontal: Responsive.wp(3),
+        marginTop: Responsive.hp(1),
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+    textNote: {
+        fontSize: Responsive.RFPercentage(2.2),
+        fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
+        color: COLOR.BLACK,
+        fontWeight: 'bold',
+        letterSpacing: 0.25
+    },
+    inputNote: {
+        textAlign: 'right',
+        fontSize: Responsive.RFPercentage(2.2),
+        color: COLOR.BLACK,
+    },
+    viewPayment: {
+        backgroundColor: COLOR.WHITE,
+        paddingHorizontal: Responsive.wp(3),
+        marginTop: Responsive.hp(1),
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        height: Responsive.hp(7),
+    },
+    viewIcon: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 10
+    },
+    textPayment: {
+        fontSize: Responsive.RFPercentage(2.2),
+        fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
+        color: COLOR.BLACK,
+        fontWeight: 'bold',
+        letterSpacing: 0.25
+    },
+    viewDetailOrderPayment: {
+        backgroundColor: COLOR.WHITE,
+        paddingHorizontal: Responsive.wp(3),
+        marginTop: Responsive.hp(1),
+    },
+    textDetailOrder: {
+        fontSize: Responsive.RFPercentage(2.2),
+        fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
+        color: COLOR.BLACK,
+        fontWeight: 'bold',
+    },
+    viewDetailOrder: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingVertical: Responsive.hp(1),
+    },
+    textTotalTitle: {
+        fontSize: Responsive.RFPercentage(2.2),
+        fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
+        color: COLOR.BLACK,
+        fontWeight: 'bold',
+    },
+    textTotalPayment: {
+        fontSize: Responsive.RFPercentage(2.4),
+        fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
+        color: COLOR.REDONE,
+        fontWeight: 'bold',
+    },
+    containerFooter: {
+        flex: 1,
+        justifyContent: 'flex-end',
+    },
+    viewButton: {
+        backgroundColor: COLOR.WHITE,
+        height: Responsive.hp(8),
+        justifyContent: 'center',
+        alignItems: 'flex-end',
+        flexDirection: 'row',
+    },
+    viewTotalPayment: {
+        marginLeft: 'auto',
+        alignItems: 'flex-end',
+        justifyContent: 'center',
+        height: Responsive.hp(8),
+        flexDirection: 'column',
+        gap: Responsive.hp(0.25),
+        right: Responsive.wp(3),
+    },
+    textButton: {
+        fontSize: Responsive.RFPercentage(2.4),
+        fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
+        color: COLOR.WHITE,
+        fontWeight: 'bold',
+        width: Responsive.wp(40),
+        height: Responsive.hp(8),
+        backgroundColor: COLOR.REDONE,
+        textAlign: 'center',
+        textAlignVertical: 'center',
     },
 });
 

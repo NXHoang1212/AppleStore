@@ -7,7 +7,7 @@ import { useAppSelector, useAppDispatch } from '../../../import/IndexFeatures';
 import { Logout } from '../../../redux/slices/Auth.Slice';
 
 import { Icon } from '../../../constant/Icon'
-import { CustomCheckBox } from '../../../import/IndexComponent'
+import { CustomCheckBox, CustomHeader } from '../../../import/IndexComponent'
 import { IndexStyles } from '../../../import/IndexStyles';
 import { HandleDeleteUser } from '../../../service/Api/IndexUser'
 import ToastMessage from '../../../utils/ToastMessage';
@@ -37,8 +37,9 @@ const DeleteAccount: React.FC = () => {
         <View style={IndexStyles.StyleDeleteAccount.container}>
             <View style={IndexStyles.StyleDeleteAccount.viewheader}>
                 <View style={IndexStyles.StyleDeleteAccount.headerTitle}>
-                    <Icon.BackSVG width={25} height={25} fill='red' onPress={() => navigation.goBack()} />
-                    <Text style={IndexStyles.StyleDeleteAccount.textHeader}>Xóa tài khoản</Text>
+                    {/* <Icon.BackSVG width={25} height={25} fill='red' onPress={() => navigation.goBack()} />
+                    <Text style={IndexStyles.StyleDeleteAccount.textHeader}>Xóa tài khoản</Text> */}
+                    <CustomHeader title='Xóa tài khoản' color='red' />
                 </View>
             </View>
             <View style={IndexStyles.StyleDeleteAccount.containerBody}>

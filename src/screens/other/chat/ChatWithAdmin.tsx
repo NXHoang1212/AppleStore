@@ -3,6 +3,8 @@ import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { Icon } from '../../../constant/Icon'
 import { IndexStyles } from '../../../import/IndexStyles'
+import { CustomHeader } from '../../../import/IndexComponent'
+import { Responsive } from '../../../constant/Responsive'
 
 
 
@@ -12,8 +14,7 @@ const ChatWithAdmin: React.FC = () => {
         <View style={IndexStyles.StyleChatWithAdmin.container}>
             <View style={IndexStyles.StyleChatWithAdmin.viewheader}>
                 <View style={IndexStyles.StyleChatWithAdmin.headerTitle}>
-                    <Icon.BackSVG width={25} height={25} fill='red' onPress={() => navigation.goBack()} />
-                    <Text style={IndexStyles.StyleChatWithAdmin.textHeader}>Trò chuyện với tôi</Text>
+                    <CustomHeader title='Trò chuyện với tôi' color='red' fontSize={Responsive.RFPercentage(2.6)}/>
                 </View>
             </View>
             <View style={IndexStyles.StyleChatWithAdmin.containerBody}>

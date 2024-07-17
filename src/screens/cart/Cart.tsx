@@ -10,7 +10,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useGetCartByUserQuery } from '../../service/Api/IndexCart';
 import { useAppSelector, useAppDispatch } from '../../import/IndexFeatures';
 import { decrementItemCount } from '../../redux/slices/CountCartSlice';
-import { ItemListCart, CustomCheckBox } from '../../import/IndexComponent';
+import { ItemListCart, CustomCheckBox, CustomHeader } from '../../import/IndexComponent';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { FormatPrice } from '../../utils/FormatPrice';
 import LinearGradient from 'react-native-linear-gradient';
@@ -65,10 +65,7 @@ const Cart: React.FC = () => {
       <View style={IndexStyles.StyleCart.container}>
         <View style={IndexStyles.StyleCart.viewheader}>
           <View style={IndexStyles.StyleCart.headerSmall}>
-            <TouchableOpacity style={IndexStyles.StyleCart.iconback} onPress={() => navigation.goBack()}>
-              <Icon.BackSVG width={25} height={25} fill='#fff' />
-            </TouchableOpacity>
-            <Text style={IndexStyles.StyleCart.textheader}>Giỏ hàng của bạn</Text>
+            <CustomHeader title='Giỏ hàng của bạn' color='#fff' />
           </View>
         </View>
         <View style={IndexStyles.StyleCart.viewEmpty}>
@@ -86,10 +83,7 @@ const Cart: React.FC = () => {
     <View style={IndexStyles.StyleCart.container}>
       <View style={IndexStyles.StyleCart.viewheader}>
         <View style={IndexStyles.StyleCart.headerSmall}>
-          <TouchableOpacity style={IndexStyles.StyleCart.iconback} onPress={() => navigation.goBack()}>
-            <Icon.BackSVG width={25} height={25} fill='#fff' />
-          </TouchableOpacity>
-          <Text style={IndexStyles.StyleCart.textheader}>Giỏ hàng của bạn</Text>
+          <CustomHeader title='Giỏ hàng của bạn' color='#fff' />
         </View>
       </View>
       <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: Responsive.hp(10) }}

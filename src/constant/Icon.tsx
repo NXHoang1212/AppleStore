@@ -35,6 +35,8 @@ import IconClose from '../assets/svg/close.svg';
 import IconTrash from '../assets/svg/trash.svg';
 import IconLocation from '../assets/svg/location.svg';
 import IconVoucher from '../assets/svg/voucher.svg';
+import IconPayment from '../assets/svg/payment.svg';
+import IconInvoice from '../assets/svg/invoice.svg';
 
 export class Icon {
     static BackSVG = IconBack;
@@ -74,6 +76,8 @@ export class Icon {
     static TrashSVG = IconTrash;
     static LocationSVG = IconLocation;
     static VoucherSVG = IconVoucher;
+    static PaymentSVG = IconPayment;
+    static InvoiceSVG = IconInvoice;
     static HOME = require('../assets/images/house.png');
     static CART = require('../assets/images/cart.png');
     static CATEGORY = require('../assets/images/category.png');

@@ -10,7 +10,8 @@ import { StackIndividualParams } from '../../../../model/param/IndexStack.Param'
 
 import { useGetAddressIdUserQuery } from '../../../../service/Api/IndexAddress';
 import { useAppSelector, useAppDispatch } from '../../../../import/IndexFeatures';
-import { ItemListAddress } from '../../../../import/IndexComponent';
+import { CustomHeader, ItemListAddress } from '../../../../import/IndexComponent';
+import { Responsive } from '../../../../constant/Responsive';
 
 const ViewAddress: React.FC = () => {
     const navigation = useNavigation<NativeStackNavigationProp<StackIndividualParams, 'ViewAddRess'>>();
@@ -31,8 +32,7 @@ const ViewAddress: React.FC = () => {
         <View style={IndexStyles.StyleViewAddRess.container}>
             <View style={IndexStyles.StyleViewAddRess.viewheader}>
                 <View style={IndexStyles.StyleViewAddRess.headerTitle}>
-                    <Icon.BackSVG width={25} height={25} fill='red' onPress={() => navigation.goBack()} />
-                    <Text style={IndexStyles.StyleViewAddRess.textHeader}>Địa chỉ của tôi</Text>
+                    <CustomHeader title='Địa chỉ của tôi' color='red' fontSize={Responsive.RFPercentage(2.5)} />
                 </View>
             </View>
             <View style={IndexStyles.StyleViewAddRess.containerBody}>

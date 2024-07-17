@@ -52,9 +52,6 @@ const CountCartSlice = createSlice({
         builder.addCase(fetchGetCountCart.rejected, (state, action) => {
             console.log('fetchGetCountCart error:', action.error);
         });
-        builder.addCase(fetchGetCountCart.pending, (state) => {
-            console.log('fetchGetCountCart pending');
-        });
     }
 
 })

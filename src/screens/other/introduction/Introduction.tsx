@@ -4,6 +4,8 @@ import { useNavigation } from '@react-navigation/native'
 import { Icon } from '../../../constant/Icon'
 import { IndexStyles } from '../../../import/IndexStyles';
 import { HandleClearCache } from '../../../utils/HandleClearCache';
+import { CustomHeader } from '../../../import/IndexComponent';
+import { Responsive } from '../../../constant/Responsive';
 
 const Introduction: React.FC = () => {
     const navigation = useNavigation();
@@ -17,8 +19,7 @@ const Introduction: React.FC = () => {
         <View style={IndexStyles.StyleIntroduction.container}>
             <View style={IndexStyles.StyleIntroduction.viewheader}>
                 <View style={IndexStyles.StyleIntroduction.headerTitle}>
-                    <Icon.BackSVG width={25} height={25} fill='red' onPress={() => navigation.goBack()} />
-                    <Text style={IndexStyles.StyleIntroduction.textHeader}>Giới thiệu</Text>
+                    <CustomHeader title='Giới thiệu' color='red' fontSize={Responsive.RFPercentage(2.5)}/>
                     <Icon.AboutSVG width={23} height={25} fill='red' />
                 </View>
             </View>

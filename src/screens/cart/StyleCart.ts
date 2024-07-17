@@ -28,16 +28,10 @@ const StyleCart = StyleSheet.create({
         elevation: 10,
     },
     headerSmall: {
-        flexDirection: 'row',
-        alignItems: 'center',
+        justifyContent: 'center',
         gap: Responsive.wp(2),
         top: Responsive.hp(1.8),
-    },
-    textheader: {
-        fontFamily: FontsOSANS.OSANS_BOLD,
-        fontSize: Responsive.RFPercentage(2.5),
-        color: COLOR.WHITE,
-        left: Responsive.wp(19),
+        left: Responsive.wp(5),
     },
     iconback: {
         marginLeft: Responsive.wp(4),

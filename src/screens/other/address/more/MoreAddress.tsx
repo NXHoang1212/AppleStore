@@ -3,7 +3,7 @@ import { useNavigation, useRoute } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { Icon } from '../../../../constant/Icon'
-import { InputCustom, CustomSwtich } from '../../../../import/IndexComponent'
+import { InputCustom, CustomSwtich, CustomHeader } from '../../../../import/IndexComponent'
 
 import { StackIndividualParams } from '../../../../model/param/IndexStack.Param'
 import { SubdivisionsParams } from '../../../../model/entity/IndexMap.entity';
@@ -48,8 +48,7 @@ const MoreAddress: React.FC = () => {
         <View style={IndexStyles.StyleMoreAddress.container}>
             <View style={IndexStyles.StyleMoreAddress.viewheader}>
                 <View style={IndexStyles.StyleMoreAddress.headerTitle}>
-                    <Icon.BackSVG width={25} height={25} fill='red' onPress={() => navigation.goBack()} />
-                    <Text style={IndexStyles.StyleMoreAddress.textHeader}>Địa chỉ mới</Text>
+                   <CustomHeader title='Địa chỉ mới' color='red'/>
                 </View>
             </View>
             <View style={IndexStyles.StyleMoreAddress.containerBody}>

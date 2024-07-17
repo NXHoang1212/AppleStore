@@ -22,7 +22,7 @@ const StyleReviewInfor = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         top: Responsive.hp(6),
-        paddingHorizontal: Responsive.wp(3),
+        paddingHorizontal: Responsive.wp(5),
     },
     textHeader: {
         fontSize: Responsive.RFPercentage(2.3),

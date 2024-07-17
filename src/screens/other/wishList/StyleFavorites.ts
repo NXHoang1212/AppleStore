@@ -24,19 +24,10 @@ const StyleFavorites = StyleSheet.create({
         top: Responsive.hp(7),
         paddingHorizontal: Responsive.wp(5),
     },
-    textHeader: {
-        fontSize: 18,
-        fontFamily: FontsROBOTO.ROBOTO_REGULAR,
-        color: COLOR.REDONE,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        letterSpacing: 0.25,
-        marginLeft: Responsive.wp(9),
-    },
     headerIcon: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
         gap: Responsive.wp(2),
+        right: Responsive.wp(7),
     },
     containerBody: {
         flex: 1,
@@ -79,7 +70,27 @@ const StyleFavorites = StyleSheet.create({
         fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
         fontSize: Responsive.RFPercentage(2.5),
         color: COLOR.BLACK,
-
+    },
+    viewCartIcon: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    viewCountCart: {
+        width: Responsive.wp(5),
+        height: Responsive.hp(2.7),
+        backgroundColor: COLOR.REDTWO,
+        borderRadius: 15,
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        left: Responsive.wp(4),
+        bottom: Responsive.hp(1.5),
+    },
+    textCountCart: {
+        fontFamily: FontsROBOTO.ROBOTO_REGULAR,
+        fontSize: Responsive.RFPercentage(1.5),
+        color: COLOR.WHITE,
     },
 });
 

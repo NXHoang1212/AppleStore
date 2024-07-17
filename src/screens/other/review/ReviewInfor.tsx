@@ -7,6 +7,8 @@ import { useNavigation } from '@react-navigation/native'
 
 import { UseActiveTab } from '../../../utils/ActiveTab'
 import { IndexStyles } from '../../../import/IndexStyles'
+import { CustomHeader } from '../../../import/IndexComponent'
+import { Responsive } from '../../../constant/Responsive'
 
 
 const ReviewInfor: React.FC = () => {
@@ -17,8 +19,7 @@ const ReviewInfor: React.FC = () => {
         <View style={IndexStyles.StyleReviewInfor.container} >
             <View style={IndexStyles.StyleReviewInfor.viewheader}>
                 <View style={IndexStyles.StyleReviewInfor.headerTitle}>
-                    <Icon.BackSVG width={25} height={25} fill='red' onPress={() => navigation.goBack()} />
-                    <Text style={IndexStyles.StyleReviewInfor.textHeader}>Đánh giá của tôi</Text>
+                    <CustomHeader title='Đánh giá của tôi' color='red' fontSize={Responsive.RFPercentage(2.5)}/>
                 </View>
             </View>
             <View style={IndexStyles.StyleReviewInfor.containerBody}>

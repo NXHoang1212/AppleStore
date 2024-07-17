@@ -2,9 +2,10 @@ import { View, Text, Image, TouchableOpacity, Animated } from 'react-native';
 import React, { useState, useRef } from 'react';
 
 import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Icon } from '../../../constant/Icon';
 
-import { InputCustom, ItemArticle, ItemFavourites } from '../../../import/IndexComponent';
+import { CustomHeader, InputCustom, ItemArticle, ItemFavourites } from '../../../import/IndexComponent';
 import { Responsive } from '../../../constant/Responsive';
 import { IndexStyles } from '../../../import/IndexStyles';
 
@@ -12,12 +13,12 @@ import { useAppSelector } from '../../../import/IndexFeatures';
 import { FlashList } from '@shopify/flash-list';
 
 const Favorites: React.FC = () => {
-    const navigation = useNavigation();
+    const navigation = useNavigation<NativeStackNavigationProp<any>>();
     const [search, setSearch] = useState<string>('');
     const [isSearchVisible, setIsSearchVisible] = useState<boolean>(false);
     const animatedValue = useRef(new Animated.Value(0)).current;
     const favourites = useAppSelector((state) => state.Favourites.items);
-
+    const cartData = useAppSelector(state => state.root.CountCart.itemCount);
     const searchProduct = favourites.filter((item) => {
         return item.productId.name.toLowerCase().includes(search.toLowerCase());
     });
@@ -53,14 +54,19 @@ const Favorites: React.FC = () => {
         <View style={IndexStyles.StyleFavorites.container}>
             <Animated.View style={[IndexStyles.StyleFavorites.viewheader, { height: headerHeight, opacity: inputOpacity.interpolate({ inputRange: [0, 1], outputRange: [1, 0] }) }]}>
                 <View style={IndexStyles.StyleFavorites.headerTitle}>
-                    <Icon.BackSVG width={25} height={25} fill='red' onPress={() => navigation.goBack()} />
-                    <Text style={IndexStyles.StyleFavorites.textHeader}>Lượt thích</Text>
+                    {/* <Icon.BackSVG width={25} height={25} fill='red' onPress={() => navigation.goBack()} />
+                    <Text style={IndexStyles.StyleFavorites.textHeader}>Lượt thích</Text> */}
+                    <CustomHeader title='Lượt thích' color='red' />
                     <View style={IndexStyles.StyleFavorites.headerIcon}>
                         <TouchableOpacity onPress={toggleSearch}>
                             <Icon.SearchSVG width={23} height={25} fill='red' />
                         </TouchableOpacity>
-                        <TouchableOpacity>
+                        <TouchableOpacity style={IndexStyles.StyleFavorites.viewCartIcon}
+                            onPress={() => navigation.navigate('TabHome', { screen: 'Giỏ hàng' })}>
                             <Image source={Icon.CART} style={{ width: 25, height: 25, tintColor: 'red' }} />
+                            <View style={IndexStyles.StyleFavorites.viewCountCart}>
+                                <Text style={IndexStyles.StyleFavorites.textCountCart}>{cartData}</Text>
+                            </View>
                         </TouchableOpacity>
                     </View>
                 </View>

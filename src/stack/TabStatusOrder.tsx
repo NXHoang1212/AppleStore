@@ -19,6 +19,7 @@ import PendingConfirmation from '../screens/other/orderstatus/pending/PendingCon
 import PendingDelivery from '../screens/other/orderstatus/delivery/PendingDelivery';
 import StatusCancelled from '../screens/other/orderstatus/delivered/StatusDelivered';
 import StatusDelivered from '../screens/other/orderstatus/cancelled/StatusCancelled';
+import { CustomHeader } from '../import/IndexComponent';
 
 const MaterialTopTabs = createMaterialTopTabNavigator<TabOrderStatusListParams>();
 
@@ -48,10 +49,7 @@ const TabStatusOrder = () => {
         <View style={styles.container}>
             <View style={styles.viewheader}>
                 <View style={styles.headerTitle}>
-                    <TouchableOpacity onPress={() => navigation.goBack()}>
-                        <Icon.BackSVG width={23} height={23} fill={COLOR.REDONE} />
-                    </TouchableOpacity>
-                    <Text style={styles.textHeader}>Đơn mua hàng</Text>
+                    <CustomHeader title='Đơn mua hàng' color='red' fontSize={Responsive.RFPercentage(2.5)}/>
                     <View style={styles.headerIcon}>
                         <TouchableOpacity onPress={() => navigation.navigate('StackIndividual' as any, { screen: 'SearchOrder' })}>
                             <Icon.SearchSVG width={20} height={20} fill={COLOR.REDONE} style={{ top: 4 }} />
@@ -109,7 +107,7 @@ const styles = StyleSheet.create({
         backgroundColor: COLOR.WHITE,
     },
     viewheader: {
-        height: Responsive.hp(6),
+        height: Responsive.hp(7.5),
         backgroundColor: COLOR.WHITE,
         marginTop: Responsive.hp(3),
     },
@@ -117,17 +115,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        top: Responsive.hp(2.2),
+        top: Responsive.hp(3),
         paddingHorizontal: Responsive.wp(5),
-    },
-    textHeader: {
-        fontSize: 18,
-        fontFamily: FontsROBOTO.ROBOTO_REGULAR,
-        color: COLOR.REDONE,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        letterSpacing: 0.25,
-        marginLeft: Responsive.wp(10),
     },
     bottomBar: {
         borderTopColor: COLOR.PRIMARY,
@@ -136,7 +125,7 @@ const styles = StyleSheet.create({
     },
     headerIcon: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
         gap: Responsive.wp(2),
+        right: Responsive.wp(7),
     },
 });

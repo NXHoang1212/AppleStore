@@ -1,4 +1,7 @@
 
+/*HEADER */
+import CustomHeader from "../components/header/CustomHeader";
+
 /*BUTTON,TEXTINPUT,SWITCH,PICKER,MODAL*/
 import CustomCheckBox from "../components/checkbox/CustomCheckbox";
 import InputCustom from "../components/input/Textinput";
@@ -49,6 +52,7 @@ import Loading from "../components/activity/ActivityIndicator";
 import MultiColorLine from "../components/MultiColorLine";
 
 export {
+    CustomHeader,
     CustomCheckBox,
     InputCustom,
     CustomSwtich,

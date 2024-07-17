@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { Icon } from '../../../constant/Icon'
 import { IndexStyles } from '../../../import/IndexStyles';
+import { CustomHeader } from '../../../import/IndexComponent';
+import { Responsive } from '../../../constant/Responsive';
 
 const ContactFeedback: React.FC = () => {
     const navigation = useNavigation();
@@ -15,8 +17,7 @@ const ContactFeedback: React.FC = () => {
         <View style={IndexStyles.StyleContactFeedback.container}>
             <View style={IndexStyles.StyleContactFeedback.viewheader}>
                 <View style={IndexStyles.StyleContactFeedback.headerTitle}>
-                    <Icon.BackSVG width={25} height={25} fill='red' onPress={() => navigation.goBack()} />
-                    <Text style={IndexStyles.StyleContactFeedback.textHeader}>Liên hệ và góp ý</Text>
+                    <CustomHeader title='Liên hệ và góp ý' color='red' fontSize={Responsive.RFPercentage(2.5)} />
                 </View>
             </View>
             <View style={IndexStyles.StyleContactFeedback.containerBody}>

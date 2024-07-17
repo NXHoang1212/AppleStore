@@ -39,4 +39,5 @@ export enum StackMiscEnum {
     CategoryArticle = 'CategoryArticle',
     DetailArticle = 'DetailArticle',
     PaymentOrders = 'PaymentOrders',
+    SelectedAddress = 'SelectedAddress',
 }

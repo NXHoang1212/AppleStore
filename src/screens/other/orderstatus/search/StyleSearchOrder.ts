@@ -18,7 +18,7 @@ const StyleSearchOrder = StyleSheet.create({
         borderBottomColor: COLOR.GRAY,
         marginTop: Responsive.hp(4),
         paddingHorizontal: Responsive.wp(4),
-        height: Responsive.hp(6),
+        height: Responsive.hp(7),
     },
     textheader: {
         color: COLOR.RED,

@@ -8,12 +8,13 @@ import { IndexStyles } from '../../../../import/IndexStyles'
 import { useRoute } from '@react-navigation/native'
 import { AddressType, TypeEditAddressParmas } from '../../../../model/entity/IndexAddress.entity'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { CustomSwtich, InputCustom, CustomModalConfirm } from '../../../../import/IndexComponent'
+import { CustomSwtich, InputCustom, CustomModalConfirm, CustomHeader } from '../../../../import/IndexComponent'
 
 import { useAppSelector, useAppDispatch } from '../../../../import/IndexFeatures'
 import { setAddressFromParams, setUpdate } from '../../../../redux/slices/Address.Slice'
 import { useUpdateAddressMutation, useDeleteAddressMutation } from '../../../../service/Api/IndexAddress'
 import ToastMessage from '../../../../utils/ToastMessage'
+import { Responsive } from '../../../../constant/Responsive'
 
 
 const EditAddress: React.FC = () => {
@@ -97,8 +98,7 @@ const EditAddress: React.FC = () => {
         <View style={IndexStyles.StyleEditAddress.container}>
             <View style={IndexStyles.StyleEditAddress.viewheader}>
                 <View style={IndexStyles.StyleEditAddress.headerTitle}>
-                    <Icon.BackSVG width={25} height={25} fill='red' onPress={() => navigation.goBack()} />
-                    <Text style={IndexStyles.StyleEditAddress.textHeader}>Thay đổi địa chỉ của bạn</Text>
+                    <CustomHeader title='Thay đổi địa chỉ của bạn' color='red' fontSize={Responsive.RFPercentage(2.4)}/>
                 </View>
             </View>
             <View style={IndexStyles.StyleEditAddress.viewinput}>

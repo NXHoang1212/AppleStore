@@ -21,6 +21,7 @@ import { StyleEditAddress } from "../screens/other/address/edit/StyleEditAddress
 import { StyleChooseAddress } from "../screens/other/address/maps/StyleChooseAddress";
 import { StyleMoreAddress } from "../screens/other/address/more/StyleMoreAddress";
 import { StyleViewAddRess } from "../screens/other/address/view/StyleViewAddress";
+import { StyleSelectedAddress } from "../screens/order/selected/StyleSelectedAddress";
 
 /*OTHER */
 import { StyleChatWithAdmin } from "../screens/other/chat/StyleChatWithAdmin";
@@ -44,7 +45,7 @@ import { StyleArticle } from "../screens/homeproduct/product/StyleArticle";
 import { StyleDetailArticle } from "../screens/homeproduct/detail/StyleDetailArticle";
 
 /*ORDER*/
-import { StylePaymentOrders } from "../screens/order/StylePaymentOrders";
+import { StylePaymentOrders } from "../screens/order/payment/StylePaymentOrders";
 
 /*NOTFOUND */
 import { StyleNotFound } from "../screens/notfound/StyleNotFound";
@@ -71,6 +72,7 @@ export const IndexStyles = {
     StyleChooseAddress,
     StyleMoreAddress,
     StyleViewAddRess,
+    StyleSelectedAddress,
     StyleChatWithAdmin,
     StyleDeleteAccount,
     StyleContactFeedback,

@@ -14,6 +14,7 @@ import { FlashList } from '@shopify/flash-list'
 import ItemArticle from '../../../components/item/product/list/ItemArticle'
 import { fetProductsPagination } from '../../../service/Api/IndexProduct'
 import { TypeNameProductParams } from '../../../model/entity/IndexProduct.entity'
+import { CustomHeader } from '../../../import/IndexComponent'
 
 const Article: React.FC = () => {
     useStatusBarConfig('dark-content', 'transparent', true)
@@ -42,10 +43,7 @@ const Article: React.FC = () => {
         <View style={IndexStyles.StyleArticle.container}>
             <View style={IndexStyles.StyleArticle.headerContainer}>
                 <View style={IndexStyles.StyleArticle.viewHeader}>
-                    <TouchableOpacity onPress={() => navigation.goBack()}>
-                        <Icon.BackSVG width={25} height={25} fill={COLOR.WHITE} />
-                    </TouchableOpacity>
-                    <Text style={IndexStyles.StyleArticle.textHeader}>Sản phẩm nổi bật</Text>
+                    <CustomHeader title='Sản phẩm nổi bật' color={COLOR.WHITE} />
                 </View>
             </View>
             <View style={IndexStyles.StyleArticle.containerBody}>

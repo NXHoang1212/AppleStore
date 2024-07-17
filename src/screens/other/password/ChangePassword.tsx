@@ -5,11 +5,12 @@ import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import { Icon } from '../../../constant/Icon'
-import { InputCustom } from '../../../import/IndexComponent'
+import { CustomHeader, InputCustom } from '../../../import/IndexComponent'
 import { IndexStyles } from '../../../import/IndexStyles';
 import { useAppSelector } from '../../../import/IndexFeatures';
 import { HandleAuthenticatePassword, HandleResetPassword } from '../../../service/Api/IndexUser';
 import ToastMessage from '../../../utils/ToastMessage';
+import { Responsive } from '../../../constant/Responsive';
 
 const ChangePassword: React.FC = () => {
     const navigation = useNavigation<NativeStackNavigationProp<any>>()
@@ -49,8 +50,7 @@ const ChangePassword: React.FC = () => {
             <View style={IndexStyles.StyleChangePassword.container}>
                 <View style={IndexStyles.StyleChangePassword.viewheader}>
                     <View style={IndexStyles.StyleChangePassword.headerTitle}>
-                        <Icon.BackSVG width={25} height={25} fill='red' onPress={() => navigation.goBack()} />
-                        <Text style={IndexStyles.StyleChangePassword.textHeader}>Thay đổi mật khẩu</Text>
+                        <CustomHeader title='Thay đổi mật khẩu' color='red' fontSize={Responsive.RFPercentage(2.4)} />
                     </View>
                 </View>
                 <View style={IndexStyles.StyleChangePassword.containerBody}>

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { IndexStyles } from '../../../import/IndexStyles'
 
 import { Icon } from '../../../constant/Icon';
-import { PickerCustom, ImagePicker, InputCustom, Loading } from '../../../import/IndexComponent';
+import { PickerCustom, ImagePicker, InputCustom, Loading, CustomHeader } from '../../../import/IndexComponent';
 
 import DatePicker from 'react-native-date-picker'
 import { FormatDate } from '../../../utils/FormatDate'
@@ -18,6 +18,7 @@ import { COLOR } from '../../../constant/Colors'
 
 import { useImagePicker } from '../../../import/IndexFeatures';
 import { useAppDispatch, useAppSelector } from '../../../features/redux/ReduxHook'
+import { Responsive } from '../../../constant/Responsive';
 
 const EditProfile: React.FC = () => {
   const navigation = useNavigation()
@@ -79,8 +80,7 @@ const EditProfile: React.FC = () => {
         <View style={IndexStyles.StyleEditProfile.container}>
           <View style={IndexStyles.StyleEditProfile.viewheader}>
             <View style={IndexStyles.StyleEditProfile.headerTitle}>
-              <Icon.BackSVG width={25} height={25} fill='red' onPress={() => navigation.goBack()} />
-              <Text style={IndexStyles.StyleEditProfile.textHeader}>Chỉnh sửa hồ sơ</Text>
+              <CustomHeader title='Chỉnh sửa hồ sơ' color={COLOR.REDONE} fontSize={Responsive.RFPercentage(2.5)}/>
               <TouchableOpacity
                 onPress={handleUpdate}
                 disabled={!isInfoChanged()}

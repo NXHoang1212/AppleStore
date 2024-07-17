@@ -33,6 +33,7 @@ export type StackMiscParams = {
     CategoryArticle: undefined;
     DetailArticle: undefined;
     PaymentOrders: undefined;
+    SelectedAddress: undefined;
 }
 
 export type StackAuthUserParams = {

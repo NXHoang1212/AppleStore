@@ -9,7 +9,7 @@ type TextinputProps = {
     secureTextEntry?: boolean
     keyboardType?: 'default' | 'email-address' | 'numeric' | 'phone-pad'
     icon?: React.ReactNode;
-    style?: StyleProp<ImageStyle>;
+    style?: StyleProp<ImageStyle>
     placeholderTextColor?: string;
     onPressIn?: () => void;
     autoFocus?: boolean;
