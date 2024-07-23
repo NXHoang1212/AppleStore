@@ -17,6 +17,7 @@ export interface CartEntity {
         }
     },
     quantity: number;
+    status: string;
 }
 
 export interface ResponseCartEntity {
@@ -38,6 +39,7 @@ export interface CreateCartEntity {
         }
     },
     quantity: number;
+    status: string;
 }
 
 export interface UpdateCartEntity {
@@ -54,4 +56,5 @@ export interface UpdateCartEntity {
         }
     },
     quantity: number;
+    status: string;
 }

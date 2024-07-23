@@ -6,15 +6,33 @@ const FormatPrice = (price: number) => {
     return formattedPrice + "đ";
 }
 
+const FormatPriceVND = (price: number) => {
+    if (price < 1000) {
+        return price + "đ";
+    }
+    if (price < 1000000) {
+        return (price / 1000) + "k";
+    }
+    if (price < 1000000000) {
+        return (price / 1000000) + "tr";
+    }
+    return (price / 1000000000) + "tỷ";
+}
+
+const FormatPriceForVoucher = (price: number) => {
+    if (price < 1000) {
+        return price + "đ";
+    }
+    if (price < 1000000) {
+        return (price / 1000).toFixed(3) + "đ";
+    }
+    return price + "đ";
+}
+
 const calculateDiscountedPrice = (price: number, discountPercentage: number) => {
     return price - (price * discountPercentage / 100);
 };
 
 
-export { FormatPrice, calculateDiscountedPrice }
+export { FormatPrice, calculateDiscountedPrice, FormatPriceVND, FormatPriceForVoucher };
 
-
-// const hasDiscount = item.discount && item.discount.percentage > 0;
-// const discountedPrice = hasDiscount
-//   ? calculateDiscountedPrice(selectedPrice.price, item.discount.percentage)
-//   : selectedPrice.price;

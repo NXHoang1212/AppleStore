@@ -2,27 +2,28 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import AxiosInstance from '../../utils/AxiosIntance';
 import { CartEntity } from '../../model/entity/IndexCart.entity';
 
-
+// Thunk để lấy danh sách mặt hàng trong giỏ hàng
 export const fetchGetCountCart = createAsyncThunk<CartEntity[], string>(
     'cart/fetchGetCountCart',
-    async (id) => {
+    async (id, { rejectWithValue }) => {
         try {
             const response = await AxiosInstance().get(`/api/cart/getCartUserId/${id}`);
-            return response.data
+            return response.data;
         } catch (error) {
             console.log('fetchGetCountCart error:', error);
+            return rejectWithValue('Failed to fetch cart items');
         }
     }
 );
 
-
 interface CountCartsState {
     itemCount: number;
+    status: 'idle' | 'loading' | 'failed';
 }
 
-
 const initialState: CountCartsState = {
-    itemCount: 0
+    itemCount: 0,
+    status: 'idle'
 }
 
 const CountCartSlice = createSlice({
@@ -35,25 +36,33 @@ const CountCartSlice = createSlice({
         incrementItemCount: (state: CountCartsState) => {
             state.itemCount += 1;
         },
-        decrementItemCount: (state: CountCartsState) => {
+        decrementItemCount: (state: CountCartsState, action: PayloadAction<number>) => {
+            state.itemCount -= action.payload;
             if (state.itemCount > 0) {
                 state.itemCount -= 1;
             }
         },
     },
     extraReducers: (builder) => {
-        builder.addCase(fetchGetCountCart.fulfilled, (state, action) => {
-            if (action.payload) {
-                state.itemCount = action.payload.length;
-            } else {
-                state.itemCount = 0; // hoặc giá trị mặc định khác
-            }
-        });
-        builder.addCase(fetchGetCountCart.rejected, (state, action) => {
-            console.log('fetchGetCountCart error:', action.error);
-        });
+        builder
+            .addCase(fetchGetCountCart.pending, (state) => {
+                state.status = 'loading';
+            })
+            .addCase(fetchGetCountCart.fulfilled, (state, action) => {
+                state.status = 'idle';
+                if (action.payload) {
+                    // Lọc mặt hàng có trạng thái là "giỏ hàng"
+                    const cartItemsInCart = action.payload.filter(item => item.status === 'giỏ hàng');
+                    state.itemCount = cartItemsInCart.length;
+                } else {
+                    state.itemCount = 0;
+                }
+            })
+            .addCase(fetchGetCountCart.rejected, (state, action) => {
+                state.status = 'failed';
+                console.log('fetchGetCountCart error:', action.payload);
+            });
     }
-
 })
 
 export default CountCartSlice.reducer;

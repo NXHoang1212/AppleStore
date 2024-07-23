@@ -1,5 +1,4 @@
 export const FormatDate = (date: Date) => {
-   //kiểm tra xem date có phải là dạng ngày tháng năm không và trả về chuỗi ngày tháng năm nếu đúng và ngược lại
     if (date) {
         const day = date.getDate();
         const month = date.getMonth() + 1;
@@ -8,3 +7,13 @@ export const FormatDate = (date: Date) => {
     }
     return '';
 };
+
+export const FormatDate2 = (date: string) => {
+    if (date) {
+        const day = date.split('T')[0].split('-')[2];
+        const month = date.split('T')[0].split('-')[1];
+        const year = date.split('T')[0].split('-')[0];
+        return `${day}-${month}-${year}`;
+    }
+    return '';
+}

@@ -21,7 +21,7 @@ import { StyleEditAddress } from "../screens/other/address/edit/StyleEditAddress
 import { StyleChooseAddress } from "../screens/other/address/maps/StyleChooseAddress";
 import { StyleMoreAddress } from "../screens/other/address/more/StyleMoreAddress";
 import { StyleViewAddRess } from "../screens/other/address/view/StyleViewAddress";
-import { StyleSelectedAddress } from "../screens/order/selected/StyleSelectedAddress";
+import { StyleSelectedAddress } from "../screens/order/selected/addressorder/StyleSelectedAddress";
 
 /*OTHER */
 import { StyleChatWithAdmin } from "../screens/other/chat/StyleChatWithAdmin";
@@ -46,6 +46,12 @@ import { StyleDetailArticle } from "../screens/homeproduct/detail/StyleDetailArt
 
 /*ORDER*/
 import { StylePaymentOrders } from "../screens/order/payment/StylePaymentOrders";
+import { StylePaymentProvider } from "../screens/order/selected/paymentmethod/StylePaymentProvider";
+import { StyleDetailOrder } from "../screens/other/orderstatus/detail/StyleDetailOrder";
+
+/*VOURCHER */
+import { StyleVoucherCoupon } from "../screens/order/voucher/list/StyleVoucherCoupon";
+import { StyleDetailVoucherCoupon } from "../screens/order/voucher/detail/StyleDetailVoucherCoupon";
 
 /*NOTFOUND */
 import { StyleNotFound } from "../screens/notfound/StyleNotFound";
@@ -89,6 +95,10 @@ export const IndexStyles = {
     StyleArticle,
     StyleDetailArticle,
     StylePaymentOrders,
+    StylePaymentProvider,
+    StyleDetailOrder,
+    StyleVoucherCoupon,
+    StyleDetailVoucherCoupon,
     StyleNotFound,
     StyleItemDetailArticle,
     StyleBottomSheetModelDetail,

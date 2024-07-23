@@ -34,6 +34,10 @@ export type StackMiscParams = {
     DetailArticle: undefined;
     PaymentOrders: undefined;
     SelectedAddress: undefined;
+    VoucherCoupon: undefined;
+    DetailVoucherCoupon: undefined;
+    PaymentProvider: undefined;
+    DetailOrder: undefined;
 }
 
 export type StackAuthUserParams = {

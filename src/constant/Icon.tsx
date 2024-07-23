@@ -37,6 +37,13 @@ import IconLocation from '../assets/svg/location.svg';
 import IconVoucher from '../assets/svg/voucher.svg';
 import IconPayment from '../assets/svg/payment.svg';
 import IconInvoice from '../assets/svg/invoice.svg';
+import PaymentAtHome from '../assets/svg/PaymentAtHome.svg';
+import PaymentBanking from '../assets/svg/PaymentBanking.svg';
+import PayTransfer from '../assets/svg/PayTransfer.svg';
+import PaymentInstallment from '../assets/svg/PaymentInstallment.svg';
+import PaymentPending from '../assets/svg/paymentpending.svg';
+import PaymentSuccess from '../assets/svg/paymentsuccess.svg';
+import IconStore from '../assets/svg/store.svg';
 
 export class Icon {
     static BackSVG = IconBack;
@@ -78,6 +85,13 @@ export class Icon {
     static VoucherSVG = IconVoucher;
     static PaymentSVG = IconPayment;
     static InvoiceSVG = IconInvoice;
+    static PaymentAtHomeSVG = PaymentAtHome;
+    static PaymentBankingSVG = PaymentBanking;
+    static PayTransferSVG = PayTransfer;
+    static PaymentInstallmentSVG = PaymentInstallment;
+    static PaymentPendingSVG = PaymentPending;
+    static PaymentSuccessSVG = PaymentSuccess;
+    static StoreSVG = IconStore;
     static HOME = require('../assets/images/house.png');
     static CART = require('../assets/images/cart.png');
     static CATEGORY = require('../assets/images/category.png');
@@ -107,6 +121,8 @@ export class Icon {
     static CANCELSEARCH = require('../assets/images/canecelSearch.png');
     static NotFoundProduct = require('../assets/images/NotfoundProduct.png');
     static NoCarts = require('../assets/images/NoCarts.png');
+    static BACKGROUNDVOUCHER = require('../assets/images/backgroundVoucher.png');
+    static PAYMENTVNPAY = require('../assets/images/Vnpay.png');
 }
 
 

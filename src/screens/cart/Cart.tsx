@@ -27,7 +27,8 @@ const Cart: React.FC = () => {
 
   const { data, isLoading } = useGetCartByUserQuery(user)
 
-  const dataCart = data?.data || []
+  //tìm nhưng đơn hàng có trạng thái status là giỏ hàng
+  const dataCart = data?.data.filter(item => item.status === 'giỏ hàng') || []
 
   const currentlyOpenSwipeable = useRef<Swipeable | null>(null);
 
@@ -35,7 +36,7 @@ const Cart: React.FC = () => {
 
   const [selectAll, setSelectAll] = useState<boolean>(false);
 
-  const shipper = '22.500đ'
+  const shipper = selectedItems.length > 0 ? '22.500đ' : '0đ'
 
   const handleItemSelect = (itemId: string) => {
     if (selectedItems.includes(itemId)) {
@@ -109,18 +110,20 @@ const Cart: React.FC = () => {
       {dataCart.length > 0 && (
         <View style={{ flex: 1, justifyContent: 'flex-end' }}>
           <View style={IndexStyles.StyleCart.viewButton} >
-            <CustomCheckBox
-              checked={selectAll}
-              onPress={() => {
-                setSelectAll(!selectAll);
-                if (!selectAll) {
-                  setSelectedItems(data?.data.map(item => item._id) || []);
-                } else {
-                  setSelectedItems([]);
-                }
-              }}
-              title='Tất cả'
-            />
+            <View style={IndexStyles.StyleCart.checkbox}>
+              <CustomCheckBox
+                checked={selectAll}
+                onPress={() => {
+                  setSelectAll(!selectAll);
+                  if (!selectAll) {
+                    setSelectedItems(data?.data.map(item => item._id) || []);
+                  } else {
+                    setSelectedItems([]);
+                  }
+                }}
+                title='Tất cả'
+              />
+            </View>
             <View>
               <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
                 <Text style={IndexStyles.StyleCart.textPayment}>Tổng cộng</Text>

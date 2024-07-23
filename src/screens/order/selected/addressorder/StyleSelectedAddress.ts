@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
-import { COLOR } from "../../../constant/Colors";
-import { FontsOSANS, FontsROBOTO } from "../../../constant/Fonts";
-import { Responsive } from "../../../constant/Responsive";
+import { COLOR } from "../../../../constant/Colors";
+import { FontsOSANS, FontsROBOTO } from "../../../../constant/Fonts";
+import { Responsive } from "../../../../constant/Responsive";
 
 
 const StyleSelectedAddress = StyleSheet.create({
@@ -119,6 +119,19 @@ const StyleSelectedAddress = StyleSheet.create({
         width: Responsive.wp(90),
         alignSelf: 'center',
         top: Responsive.hp(1.8),
+    },
+    viewButton: {
+        backgroundColor: COLOR.WHITE,
+        height: Responsive.hp(8),
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: Responsive.wp(2),
+    },
+    textButton: {
+        fontSize: Responsive.RFPercentage(2.2),
+        fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
+        color: COLOR.REDONE,
     },
 });
 

@@ -28,6 +28,20 @@ class IndexHandleCart {
         }
     }
 
+    public static async handleUpdateCartOrder(updateCartStatus: any, data: any, dispatch: any, decrementItemCount: any, quantityToDecrement: any) {
+        try {
+            const res = await updateCartStatus(data);
+            if (res.data) {
+                //trừ theo số lượng sản phẩm đã mua  trong giỏ hàng
+                dispatch(decrementItemCount(quantityToDecrement));
+            } else {
+                ToastMessage('error', 'Cập nhật giỏ hàng thất bại');
+            }
+        } catch (error) {
+            console.log('handleUpdateCart error:', error);
+        }
+    }
+
     public static async handleSwipeableOpen(swipeableRef: any, currentlyOpenSwipeable: any) {
         if (currentlyOpenSwipeable.current && currentlyOpenSwipeable.current !== swipeableRef.current) {
             currentlyOpenSwipeable.current.close();

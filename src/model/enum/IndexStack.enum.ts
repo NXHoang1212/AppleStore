@@ -40,4 +40,8 @@ export enum StackMiscEnum {
     DetailArticle = 'DetailArticle',
     PaymentOrders = 'PaymentOrders',
     SelectedAddress = 'SelectedAddress',
+    VoucherCoupon = 'VoucherCoupon',
+    DetailVoucherCoupon = 'DetailVoucherCoupon',
+    PaymentProvider = 'PaymentProvider',
+    DetailOrder = 'DetailOrder',
 }

@@ -47,7 +47,7 @@ const StylePaymentOrders = StyleSheet.create({
         marginTop: Responsive.hp(1),
     },
     iconLotaion: {
-        width: Responsive.wp(2),
+        width: Responsive.wp(8),
         height: Responsive.hp(10),
     },
     textAddress: {
@@ -69,6 +69,7 @@ const StylePaymentOrders = StyleSheet.create({
         width: Responsive.wp(7),
         height: Responsive.hp(5),
         resizeMode: 'contain',
+        marginLeft: 'auto'
     },
     viewOrder: {
         backgroundColor: COLOR.WHITE,
@@ -140,6 +141,17 @@ const StylePaymentOrders = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         marginLeft: Responsive.wp(10),
+    },
+    textPriceVoucherDetail: {
+        fontSize: Responsive.RFPercentage(2),
+        fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
+        color: COLOR.REDONE,
+        width: Responsive.wp(15),
+        borderWidth: 1,
+        borderColor: COLOR.REDONE,
+        height: Responsive.hp(3),
+        textAlign: 'center',
+        textAlignVertical: 'center',
     },
     textVoucherDetail: {
         fontSize: Responsive.RFPercentage(2),
@@ -216,12 +228,23 @@ const StylePaymentOrders = StyleSheet.create({
         alignItems: 'center',
         gap: 10
     },
+    viewText: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        left: Responsive.wp(4)
+    },
     textPayment: {
         fontSize: Responsive.RFPercentage(2.2),
         fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
         color: COLOR.BLACK,
         fontWeight: 'bold',
         letterSpacing: 0.25
+    },
+    textSelectedPayment: {
+        fontSize: Responsive.RFPercentage(2),
+        fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
+        color: COLOR.REDONE,
+        fontWeight: 'bold',
     },
     viewDetailOrderPayment: {
         backgroundColor: COLOR.WHITE,

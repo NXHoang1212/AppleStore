@@ -121,6 +121,9 @@ const StyleCart = StyleSheet.create({
         fontSize: Responsive.RFPercentage(2.5),
         color: COLOR.WHITE,
     },
+    checkbox: {
+        width: Responsive.wp(18),
+    },
 });
 
 export { StyleCart }
