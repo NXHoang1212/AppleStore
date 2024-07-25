@@ -37,6 +37,7 @@ export enum StackMiscEnum {
     SearchHome = 'SearchHome',
     Article = 'Article',
     CategoryArticle = 'CategoryArticle',
+    AllCategoryProduct = 'AllCategoryProduct',
     DetailArticle = 'DetailArticle',
     PaymentOrders = 'PaymentOrders',
     SelectedAddress = 'SelectedAddress',
@@ -44,4 +45,7 @@ export enum StackMiscEnum {
     DetailVoucherCoupon = 'DetailVoucherCoupon',
     PaymentProvider = 'PaymentProvider',
     DetailOrder = 'DetailOrder',
+    DetailStatusCancelled = 'DetailStatusCancelled',
+    DetailPendingDelivery = 'DetailPendingDelivery',
+    DetailStatusDelivered = 'DetailStatusDelivered',
 }

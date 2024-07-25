@@ -78,7 +78,8 @@ const PaymentOrders: React.FC = () => {
             const orderData: any = {
                 userId: userId,
                 cartId: id,
-                totalAmount: totalPayment,
+                //số toatlAmount là :17.012.500đ cần loại bỏ chữ đ không cần loại bỏ dấu chấm
+                totalAmount: FormatPrice(totalPayment).replace('đ', '').replace(/\./g, ''),
                 ipAddr: 'IP_ADDRESS',
                 bankCode: null,
                 shippingAddress: currentAddress,
@@ -107,6 +108,7 @@ const PaymentOrders: React.FC = () => {
 
                 case 'Vnpay':
                     const paymentUrl = await GetPaymentUrl(orderData);
+                    console.log("🚀 ~ handlePlaceOrder ~ paymentUrl:", paymentUrl)
                     if (paymentUrl.status === 200) {
                         ToastMessage('success', 'Chuyển hướng đến trang thanh toán');
                         // Linking.openURL(paymentUrl.data);
@@ -114,7 +116,7 @@ const PaymentOrders: React.FC = () => {
                             ids: id,
                             status: 'Đã đặt hàng',
                         }
-                        const quantityToDecrement = cart?.data.filter(item => item.status === 'giỏ hàng').length
+                        const quantityToDecrement = cart?.data.filter(item => item.status === 'Đã đặt hàng').length
                         IndexHandleCart.handleUpdateCartOrder(updateCartStatus, data, dipatch, decrementItemCount, quantityToDecrement)
                         if (selectedVoucher) {
                             const voucherData = {

@@ -26,11 +26,19 @@ type PropsOrderStatus = {
     text: string;
     navigate?: () => void;
     image?: ImageSourcePropType;
+    badget?: number;
 }
 
-const renderOrderStatus = ({ icon, text, navigate, image }: PropsOrderStatus) => (
+const renderOrderStatus = ({ icon, text, navigate, image, badget }: PropsOrderStatus) => (
     <TouchableOpacity style={StyleItemIndividual.viewconfirm3} key={text} onPress={navigate}>
-        {icon}
+        <View style={{ position: 'relative' }}>
+            {icon}
+            {badget !== 0 && (
+                <View style={StyleItemIndividual.badge}>
+                    <Text style={StyleItemIndividual.badgeText}>{badget}</Text>
+                </View>
+            )}
+        </View>
         <Text style={StyleItemIndividual.textconfirm}>{text}</Text>
     </TouchableOpacity>
 );
@@ -66,6 +74,22 @@ const StyleItemIndividual = StyleSheet.create({
         letterSpacing: 0.5,
         textAlignVertical: 'center',
         color: COLOR.BLACK,
+    },
+    badge: {
+        position: 'absolute',
+        top: -5,
+        right: -5,
+        backgroundColor: 'red',
+        borderRadius: 10,
+        width: 20,
+        height: 20,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    badgeText: {
+        color: 'white',
+        fontSize: 12,
+        fontWeight: 'bold',
     },
 });
 

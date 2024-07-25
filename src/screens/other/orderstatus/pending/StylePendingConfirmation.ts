@@ -26,6 +26,7 @@ const StylePendingConfirmation = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
+        marginBottom: Responsive.hp(2),
     },
     viewText: {
         flexDirection: 'row',
@@ -121,6 +122,13 @@ const StylePendingConfirmation = StyleSheet.create({
         fontSize: Responsive.RFPercentage(2),
         color: COLOR.BLACK,
         width: Responsive.wp(51),
+        textAlign: 'justify'
+    },
+    textConfirm: {
+        fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
+        fontSize: Responsive.RFPercentage(2),
+        color: COLOR.BLACK,
+        width: Responsive.wp(45),
         textAlign: 'justify'
     },
     textMoreProducts: {

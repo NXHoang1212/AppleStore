@@ -10,7 +10,8 @@ import { StyleCart } from "../screens/cart/StyleCart";
 import { StyleSearchOrder } from "../screens/other/orderstatus/search/StyleSearchOrder";
 
 /*CATEGORY */
-import { StyleCategoryProduct } from "../screens/category/StyleCategoryProduct";
+import { StyleCategoryProduct } from "../screens/category/list/StyleCategoryProduct";
+import { StyleAllCategoryProduct } from "../screens/category/all/StyleAllCategoryProduct";
 
 /*HOME */
 import { StylesHomePage } from "../screens/homeproduct/home/StyleHomePage";
@@ -29,9 +30,9 @@ import { StyleDeleteAccount } from "../screens/other/account/StyleDeleteAccount"
 import { StyleContactFeedback } from "../screens/other/feedback/StyleContactFeedback";
 import { StyleInformation } from "../screens/other/infor/StyleInformation";
 import { StyleIntroduction } from "../screens/other/introduction/StyleIntroduction";
-import { StyleStatusCancelled } from "../screens/other/orderstatus/cancelled/StyleStatusCancelled";
-import { StyleStatusDelivered } from "../screens/other/orderstatus/delivered/StyleStatusDelivered";
-import { StylePendingDelivery } from "../screens/other/orderstatus/delivery/StylePendingDelivery";
+import { StyleStatusCancelled } from "../screens/other/orderstatus/cancelled/list/StyleStatusCancelled";
+import { StyleStatusDelivered } from "../screens/other/orderstatus/delivered/list/StyleStatusDelivered";
+import { StylePendingDelivery } from "../screens/other/orderstatus/delivery/list/StylePendingDelivery";
 import { StylePendingConfirmation } from "../screens/other/orderstatus/pending/StylePendingConfirmation";
 import { StyleChangePassword } from "../screens/other/password/StyleChangePassword";
 import { StyleEditProfile } from "../screens/other/profile/StyleEditProfile";
@@ -48,6 +49,9 @@ import { StyleDetailArticle } from "../screens/homeproduct/detail/StyleDetailArt
 import { StylePaymentOrders } from "../screens/order/payment/StylePaymentOrders";
 import { StylePaymentProvider } from "../screens/order/selected/paymentmethod/StylePaymentProvider";
 import { StyleDetailOrder } from "../screens/other/orderstatus/detail/StyleDetailOrder";
+import { StyleDetailCancelled } from "../screens/other/orderstatus/cancelled/detail/StyleDetailCancelled";
+import { StyleDetailPendingDelivey } from "../screens/other/orderstatus/delivery/detail/StyleDetailPendingDelivery";
+import { StyleDetailStatusDelivered } from "../screens/other/orderstatus/delivered/detail/StyleDetailStatusDelivered";
 
 /*VOURCHER */
 import { StyleVoucherCoupon } from "../screens/order/voucher/list/StyleVoucherCoupon";
@@ -72,6 +76,7 @@ export const IndexStyles = {
     StyleCart,
     StyleSearchOrder,
     StyleCategoryProduct,
+    StyleAllCategoryProduct,
     StylesHomePage,
     StyleSearchHome,
     StyleEditAddress,
@@ -97,6 +102,9 @@ export const IndexStyles = {
     StylePaymentOrders,
     StylePaymentProvider,
     StyleDetailOrder,
+    StyleDetailCancelled,
+    StyleDetailPendingDelivey,
+    StyleDetailStatusDelivered,
     StyleVoucherCoupon,
     StyleDetailVoucherCoupon,
     StyleNotFound,

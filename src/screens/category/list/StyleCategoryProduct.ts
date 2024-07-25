@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
-import { COLOR } from "../../constant/Colors";
-import { FontsOSANS, FontsROBOTO } from "../../constant/Fonts";
-import { Responsive } from "../../constant/Responsive";
+import { COLOR } from "../../../constant/Colors";
+import { FontsOSANS, FontsROBOTO } from "../../../constant/Fonts";
+import { Responsive } from "../../../constant/Responsive";
 
 
 const StyleCategoryProduct = StyleSheet.create({

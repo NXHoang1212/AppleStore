@@ -24,7 +24,6 @@ const CategoryArticle: React.FC = () => {
     const { name } = route.params
     const data = useAppSelector(state => state.Product)
     
- 
 
     const renderFooter = () => {
         if (!data.loading) return null;

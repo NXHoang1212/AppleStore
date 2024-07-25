@@ -41,6 +41,7 @@ import PaymentAtHome from '../assets/svg/PaymentAtHome.svg';
 import PaymentBanking from '../assets/svg/PaymentBanking.svg';
 import PayTransfer from '../assets/svg/PayTransfer.svg';
 import PaymentInstallment from '../assets/svg/PaymentInstallment.svg';
+import PaymentCancell from '../assets/svg/PaymentCancell.svg';
 import PaymentPending from '../assets/svg/paymentpending.svg';
 import PaymentSuccess from '../assets/svg/paymentsuccess.svg';
 import IconStore from '../assets/svg/store.svg';
@@ -89,6 +90,7 @@ export class Icon {
     static PaymentBankingSVG = PaymentBanking;
     static PayTransferSVG = PayTransfer;
     static PaymentInstallmentSVG = PaymentInstallment;
+    static PaymentCancellSVG = PaymentCancell;
     static PaymentPendingSVG = PaymentPending;
     static PaymentSuccessSVG = PaymentSuccess;
     static StoreSVG = IconStore;

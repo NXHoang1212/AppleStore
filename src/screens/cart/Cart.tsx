@@ -138,7 +138,8 @@ const Cart: React.FC = () => {
               if (selectedItems.length === 0) {
                 ToastMessage('error', 'Bạn chưa có sản phẩm nào để thanh toán')
               } else {
-                navigation.navigate('StackMisc', { screen: 'PaymentOrders', params: { id: selectedItems, shipper } })
+                navigation.navigate('StackMisc', { screen: 'PaymentOrders', params: { id: selectedItems, shipper } });
+                setSelectedItems([]);
               }
             }} >
               <LinearGradient colors={['#ff5d00', '#ff00a5']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}

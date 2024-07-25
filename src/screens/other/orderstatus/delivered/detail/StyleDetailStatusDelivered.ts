@@ -1,10 +1,10 @@
 import { StyleSheet } from "react-native";
-import { COLOR } from "../../../../constant/Colors";
-import { FontsOSANS, FontsROBOTO } from "../../../../constant/Fonts";
-import { Responsive } from "../../../../constant/Responsive";
+import { COLOR } from "../../../../../constant/Colors";
+import { FontsOSANS, FontsROBOTO } from "../../../../../constant/Fonts";
+import { Responsive } from "../../../../../constant/Responsive";
 
 
-const StyleDetailOrder = StyleSheet.create({
+const StyleDetailStatusDelivered = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: COLOR.WHITE,
@@ -248,7 +248,18 @@ const StyleDetailOrder = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-
+    viewButton: {
+        backgroundColor: COLOR.ORANGEONE,
+        padding: Responsive.hp(2),
+        borderRadius: 5,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    textButton: {
+        fontFamily: FontsROBOTO.ROBOTO_REGULAR,
+        fontSize: Responsive.RFPercentage(2.3),
+        color: COLOR.WHITE,
+    },
 });
 
-export { StyleDetailOrder }
+export { StyleDetailStatusDelivered }

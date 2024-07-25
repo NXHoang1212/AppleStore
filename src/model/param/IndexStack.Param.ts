@@ -31,6 +31,7 @@ export type StackMiscParams = {
     SearchHome: undefined;
     Article: undefined;
     CategoryArticle: undefined;
+    AllCategoryProduct: undefined;
     DetailArticle: undefined;
     PaymentOrders: undefined;
     SelectedAddress: undefined;
@@ -38,6 +39,9 @@ export type StackMiscParams = {
     DetailVoucherCoupon: undefined;
     PaymentProvider: undefined;
     DetailOrder: undefined;
+    DetailStatusCancelled: undefined;
+    DetailPendingDelivery: undefined;
+    DetailStatusDelivered: undefined;
 }
 
 export type StackAuthUserParams = {

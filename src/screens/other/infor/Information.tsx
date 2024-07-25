@@ -16,6 +16,8 @@ import { Logout } from '../../../redux/slices/Auth.Slice'
 import { CustomModalConfirm } from '../../../import/IndexComponent'
 import { setItemCount } from '../../../redux/slices/CountCartSlice'
 import ToastMessage from '../../../utils/ToastMessage'
+import { useGetOrderUserQuery, useGetStatusOrderQuery } from '../../../service/Api/Index.Order'
+import { paymentStatus, status } from '../../../model/entity/IndexOrder.Entity'
 
 const Information: React.FC = () => {
   useStatusBarConfig('dark-content', 'transparent', true)
@@ -23,6 +25,19 @@ const Information: React.FC = () => {
   const dispatch = useAppDispatch()
   const [isVisible, setIsVisible] = useState<boolean>(false)
   const isLoggedIn = useAppSelector(state => state.root.Auth)
+
+  const { data } = useGetStatusOrderQuery({ id: isLoggedIn.user._id, status: status, paymentStatus: paymentStatus });
+
+  const { data: cart } = useGetOrderUserQuery(isLoggedIn.user._id);
+
+  const countOrderStatus = data?.data.length
+
+  const countOrderPendingDelivery = cart?.data.filter((item) => item.status === "Đang giao").length
+
+  const countOrderDelivered = cart?.data.filter((item) => item.status === "Đã giao").length
+
+  const countOrderCancelled = cart?.data.filter((item) => item.status === "Đã hủy").length
+
 
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
@@ -52,11 +67,32 @@ const Information: React.FC = () => {
             </TouchableOpacity>
           </View>
           <View style={IndexStyles.StyleInformation.containerConfirm}>
-            {renderOrderStatus({ icon: <Icon.WaitOrderSVG width={27} height={27} fill='#5e5e5e' />, text: 'Chờ xác nhận', navigate: () => navigation.navigate(isLoggedIn.isLogged ? 'TabStatusOrder' : 'AuthUser', { screen: 'Xác nhận' } as any) })}
-            {renderOrderStatus({ icon: <Icon.WaitPickupSVG width={27} height={27} fill='#5e5e5e' />, text: 'Chờ giao hàng', navigate: () => navigation.navigate(isLoggedIn.isLogged ? 'TabStatusOrder' : 'AuthUser', { screen: 'Giao hàng' } as any) })}
-            {renderOrderStatus({ icon: <Icon.WaitShipperSVG width={27} height={27} fill='#5e5e5e' />, text: 'Đã giao hàng', navigate: () => navigation.navigate(isLoggedIn.isLogged ? 'TabStatusOrder' : 'AuthUser', { screen: 'Đã giao' } as any) })}
-            {renderOrderStatus({ icon: <Icon.OrderCancelledSVG width={27} height={27} fill='#5e5e5e' />, text: 'Đã hủy đơn', navigate: () => navigation.navigate(isLoggedIn.isLogged ? 'TabStatusOrder' : 'AuthUser', { screen: 'Đã hủy' } as any) })}
+            {renderOrderStatus({
+              icon: <Icon.WaitOrderSVG width={27} height={27} fill='#5e5e5e' />,
+              text: 'Chờ xác nhận',
+              navigate: () => navigation.navigate(isLoggedIn.isLogged ? 'TabStatusOrder' : 'AuthUser', { screen: 'Xác nhận' } as any),
+              badget: countOrderStatus
+            })}
+            {renderOrderStatus({
+              icon: <Icon.WaitPickupSVG width={27} height={27} fill='#5e5e5e' />,
+              text: 'Đang giao hàng',
+              navigate: () => navigation.navigate(isLoggedIn.isLogged ? 'TabStatusOrder' : 'AuthUser', { screen: 'Giao hàng' } as any),
+              badget: countOrderPendingDelivery
+            })}
+            {renderOrderStatus({
+              icon: <Icon.WaitShipperSVG width={27} height={27} fill='#5e5e5e' />,
+              text: 'Đã giao hàng',
+              navigate: () => navigation.navigate(isLoggedIn.isLogged ? 'TabStatusOrder' : 'AuthUser', { screen: 'Đã giao' } as any),
+              badget: countOrderDelivered
+            })}
+            {renderOrderStatus({
+              icon: <Icon.OrderCancelledSVG width={27} height={27} fill='#5e5e5e' />,
+              text: 'Đã hủy đơn',
+              navigate: () => navigation.navigate(isLoggedIn.isLogged ? 'TabStatusOrder' : 'AuthUser', { screen: 'Đã hủy' } as any),
+              badget: countOrderCancelled
+            })}
           </View>
+
           <View style={IndexStyles.StyleInformation.decor}></View>
           <View>
             {renderInformationItem({ text: 'Khách hàng thân thiết', image: Icon.LOYALCUSTOMER, onPress: () => ToastMessage('info', 'Chức năng đang phát triển') })}

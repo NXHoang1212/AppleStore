@@ -10,7 +10,7 @@ import { Responsive } from '../constant/Responsive';
 
 import HomePage from '../screens/homeproduct/home/HomePage';
 import Cart from '../screens/cart/Cart';
-import CategoryProduct from '../screens/category/CategoryProduct';
+import CategoryProduct from '../screens/category/list/CategoryProduct';
 import Information from '../screens/other/infor/Information';
 import React from 'react';
 

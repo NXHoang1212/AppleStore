@@ -54,8 +54,14 @@ const StoreRedux = configureStore({
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
+            immutableCheck: {
+                ignoredPaths: ['root.Auth.user', 'root.Auth.isLogin', 'root.Auth.loading',
+                    'root.Auth.error', 'root.CountCart', 'root.Category', 'root.Banner',
+                    'root.Product', 'root.ProductPagination', 'root.Address', 'root.Favourites',
+                    'root.DetailProducts', 'root.AddressQuery', 'root.CartQuery', 'root.VoucherQuery',
+                    'root.OrderQuery']
+            },
             serializableCheck: false,
-            immutableCheck: false,
         })
             .concat(createImmutableStateInvariantMiddleware())
             .concat(DetailProducts.middleware)

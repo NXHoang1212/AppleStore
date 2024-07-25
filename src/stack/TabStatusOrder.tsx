@@ -16,10 +16,10 @@ import useStatusBarConfig from '../utils/UseStatusBarConfig';
 import { Icon } from '../constant/Icon';
 
 import PendingConfirmation from '../screens/other/orderstatus/pending/PendingConfirmation';
-import PendingDelivery from '../screens/other/orderstatus/delivery/PendingDelivery';
-import StatusCancelled from '../screens/other/orderstatus/delivered/StatusDelivered';
-import StatusDelivered from '../screens/other/orderstatus/cancelled/StatusCancelled';
+import PendingDelivery from '../screens/other/orderstatus/delivery/list/PendingDelivery';
 import { CustomHeader } from '../import/IndexComponent';
+import StatusDelivered from '../screens/other/orderstatus/delivered/list/StatusDelivered';
+import StatusCancelled from '../screens/other/orderstatus/cancelled/list/StatusCancelled';
 
 const MaterialTopTabs = createMaterialTopTabNavigator<TabOrderStatusListParams>();
 

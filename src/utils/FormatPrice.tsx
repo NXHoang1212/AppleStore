@@ -33,6 +33,12 @@ const calculateDiscountedPrice = (price: number, discountPercentage: number) => 
     return price - (price * discountPercentage / 100);
 };
 
+const FormatPriceVND2 = (price: number) => {
+    const priceString = (price * 1).toString();
+    const formattedPrice = priceString.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    return formattedPrice + "đ";
+}
 
-export { FormatPrice, calculateDiscountedPrice, FormatPriceVND, FormatPriceForVoucher };
+
+export { FormatPrice, calculateDiscountedPrice, FormatPriceVND, FormatPriceForVoucher, FormatPriceVND2 };
 

@@ -22,8 +22,8 @@ const StyleInformation = StyleSheet.create({
         top: Responsive.hp(2),
     },
     image: {
-        width: Responsive.wp(19),
-        height: Responsive.hp(9),
+        width: Responsive.wp(19.8),
+        height: Responsive.hp(10),
         borderRadius: 50,
         marginTop: Responsive.hp(0.5),
     },

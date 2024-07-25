@@ -13,4 +13,17 @@ export interface OrderEntity {
     orderCode: string;
     createdAt: string;
     updatedAt: string;
+    deliveredAt: Date;
+    canceledAt: Date;
 }
+
+export interface UpdateOrderEntity {
+    _id: string
+    status: string;
+    canceledAt: Date;
+
+}
+export const status = ["Chờ xác nhận", "Đã xác nhận"];
+export const paymentStatus = ["Chờ thanh toán", "Đã thanh toán"];
+
+
