@@ -33,18 +33,28 @@ const VoucherQuery = createApi({
             },
             providesTags: ['Voucher'],
         }),
-        updateVoucher: build.mutation<VoucherEntity, VoucherEntity>({
-            query: (voucher) => {
+        updateVoucher: build.mutation<VoucherEntity, { id: string, voucher: VoucherEntity }>({
+            query: ({ id, voucher }) => {
                 return {
-                    url: `api/voucher/update/${voucher._id}`,
+                    url: `api/voucher/update/${id}`,
                     method: 'PUT',
                     body: voucher
                 }
             },
             invalidatesTags: [{ type: 'Voucher', id: 'LIST' }],
         }),
+        resetUsage: build.mutation<VoucherEntity, { id: string, userId: string }>({
+            query: ({ id, userId }) => {
+                return {
+                    url: `api/voucher/reset-usage`,
+                    method: 'PUT',
+                    body: { id, userId }
+                }
+            },
+            invalidatesTags: [{ type: 'Voucher', id: 'LIST' }],
+        })
     }),
 });
 
-export const { useGetVoucherQuery, useGetVoucherByIdQuery, useUseVoucherMutation, useUpdateVoucherMutation } = VoucherQuery;
+export const { useGetVoucherQuery, useGetVoucherByIdQuery, useUseVoucherMutation, useUpdateVoucherMutation, useResetUsageMutation } = VoucherQuery;
 export default VoucherQuery

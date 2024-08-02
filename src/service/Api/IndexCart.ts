@@ -55,12 +55,21 @@ const CartQuery = createApi({
             }),
             invalidatesTags: [{ type: 'Cart', id: 'LIST' }],
         }),
+        updateStatusRemove: build.mutation<CartEntity, { id: string, status: string }>({
+            query: ({ id, status }) => ({
+                url: `/api/cart/updateStatusRemove/${id}`,
+                method: 'PUT',
+                body: { status },
+            }),
+            invalidatesTags: [{ type: 'Cart', id: 'LIST' }],
+        })
     })
 });
 
 export const { useGetCartIdQuery, useGetCartByUserQuery,
     useLazyGetCartByUserQuery, useGetCartIdsQuery,
     useCreateCartMutation, useUpdateCartMutation,
-    useDeleteCartMutation, useUpdateCartStatusMutation
+    useDeleteCartMutation, useUpdateCartStatusMutation,
+    useUpdateStatusRemoveMutation
 } = CartQuery;
 export { CartQuery };

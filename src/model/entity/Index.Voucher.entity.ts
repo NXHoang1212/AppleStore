@@ -26,12 +26,6 @@ export interface UseVoucherEntity {
     paymentMethod: string;
 }
 
-export const enum paymentMethod {
-    credit_card = 'credit_card',
-    paypal = 'paypal',
-    cash_on_delivery = 'cash_on_delivery',
-    all = 'all',
-}
 
 type VoucherState = {
     idVoucher: {

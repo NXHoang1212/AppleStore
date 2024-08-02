@@ -17,6 +17,8 @@ import DetailOrder from '../screens/other/orderstatus/detail/DetailOrder';
 import DetailStatusCancelled from '../screens/other/orderstatus/cancelled/detail/DetailStatusCancelled';
 import DetailPendingDelivery from '../screens/other/orderstatus/delivery/detail/DetailPendingDelivery';
 import DetailStatusDelivered from '../screens/other/orderstatus/delivered/detail/DetailStatusDelivered';
+import OrderSuccess from '../screens/order/result/OrderSuccess';
+import OrderFailed from '../screens/order/result/OrderFailed';
 
 const Stack = createNativeStackNavigator<StackMiscParams>();
 
@@ -37,6 +39,8 @@ const StackMisc = (): React.JSX.Element => {
             <Stack.Screen name={StackMiscEnum.DetailStatusCancelled} component={DetailStatusCancelled} />
             <Stack.Screen name={StackMiscEnum.DetailPendingDelivery} component={DetailPendingDelivery} />
             <Stack.Screen name={StackMiscEnum.DetailStatusDelivered} component={DetailStatusDelivered} />
+            <Stack.Screen name={StackMiscEnum.OrderSuccess} component={OrderSuccess} />
+            <Stack.Screen name={StackMiscEnum.OrderFailed} component={OrderFailed} />
         </Stack.Navigator>
     );
 };

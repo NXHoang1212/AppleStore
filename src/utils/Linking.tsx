@@ -8,6 +8,12 @@ const config = {
             screens: {
                 DetailArticle: {
                     path: 'getdetail/:_id'
+                },
+                OrderSuccess: {
+                    path: 'order/success',
+                },
+                OrderFailed: {
+                    path: 'order/failed',
                 }
             },
         },
@@ -16,7 +22,6 @@ const config = {
             screens: {
                 HomePage: { path: 'Trang chủ' },
             },
-
         },
     },
 };

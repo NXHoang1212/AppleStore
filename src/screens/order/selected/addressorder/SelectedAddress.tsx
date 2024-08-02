@@ -16,7 +16,7 @@ const SelectedAddress: React.FC = () => {
 
   const route = useRoute()
 
-  const { id, shipper, address } = route.params as { id: string, shipper: string, address: any }
+  const { id, shipper, address, selectedPayment } = route.params as { id: string, shipper: string, address: any, selectedPayment: any }
 
   const { data } = useGetAddressIdUserQuery(useAppSelector(state => state.root.Auth.user._id))
 
@@ -24,7 +24,7 @@ const SelectedAddress: React.FC = () => {
 
   const handlePress = (item: any) => {
     setSelected(item._id)
-    navigation.navigate('StackMisc', { screen: 'PaymentOrders', params: { address: item, id: id, shipper: shipper } })
+    navigation.navigate('StackMisc', { screen: 'PaymentOrders', params: { address: item, id: id, shipper: shipper, selectedPayment: selectedPayment } })
   };
 
 

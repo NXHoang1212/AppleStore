@@ -142,6 +142,7 @@ const StyleDetailOrder = StyleSheet.create({
         fontFamily: FontsROBOTO.ROBOTO_REGULAR,
         fontSize: Responsive.RFPercentage(2.2),
         color: COLOR.BLACK,
+        width: Responsive.wp(48),
     },
     textChangeProducts: {
         fontFamily: FontsROBOTO.ROBOTO_MEDIUM,

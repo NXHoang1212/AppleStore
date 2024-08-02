@@ -42,6 +42,8 @@ export type StackMiscParams = {
     DetailStatusCancelled: undefined;
     DetailPendingDelivery: undefined;
     DetailStatusDelivered: undefined;
+    OrderSuccess: undefined;
+    OrderFailed: undefined;
 }
 
 export type StackAuthUserParams = {

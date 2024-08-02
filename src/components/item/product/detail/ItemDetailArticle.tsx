@@ -21,7 +21,7 @@ import { BottomSheetModal, BottomSheetModalProvider, BottomSheetScrollView, Bott
 import IndexHandleDetails from '../../../../service/Api/IndexHandleDetails';
 
 import { useCreateCartMutation } from '../../../../service/Api/IndexCart';
-import { incrementItemCount } from '../../../../redux/slices/CountCartSlice';
+import { incountCrement } from '../../../../redux/slices/CountCartSlice';
 
 
 type PropsProduct = {
@@ -188,7 +188,7 @@ const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation, userId = 
                         </TouchableOpacity>
                         <View style={IndexStyles.StyleItemDetailArticle.lineheight} />
                         <TouchableOpacity style={IndexStyles.StyleItemDetailArticle.viewChat}
-                            onPress={() => IndexHandleDetails.handleAddToCart(animatedValue, userId, selectedPrice, item, createCart, discountedPrice, dispatch, incrementItemCount)}>
+                            onPress={() => IndexHandleDetails.handleAddToCart(animatedValue, userId, selectedPrice, item, createCart, discountedPrice, dispatch, incountCrement)}>
                             <Animated.View style={[IndexStyles.StyleItemDetailArticle.viewCart, {
                                 transform:
                                     [{
@@ -205,7 +205,7 @@ const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation, userId = 
                         </TouchableOpacity>
                     </View>
                     <TouchableOpacity style={IndexStyles.StyleItemDetailArticle.viewTotal}
-                        onPress={() => IndexHandleDetails.handleByCart(userId, selectedPrice, item, createCart, discountedPrice, dispatch, incrementItemCount, navigation)}>
+                        onPress={() => IndexHandleDetails.handleByCart(userId, selectedPrice, item, createCart, discountedPrice, dispatch, incountCrement, navigation)}>
                         <Text style={IndexStyles.StyleItemDetailArticle.textTotal}>Mua sản phẩm</Text>
                         <Text style={IndexStyles.StyleItemDetailArticle.textTotalPrice}>{FormatPrice(discountedPrice)}</Text>
                     </TouchableOpacity>

@@ -45,29 +45,29 @@ const StatusDelivered: React.FC = () => {
                             </View>
                             <View style={IndexStyles.StyleStatusDelivered.viewCart}>
                                 <View style={IndexStyles.StyleStatusDelivered.viewImagge}>
-                                    <Image source={{ uri: item.cart[0].products.priceColor.image }} style={IndexStyles.StyleStatusDelivered.image} />
+                                    <Image source={{ uri: item.products[0].priceColor.image }} style={IndexStyles.StyleStatusDelivered.image} />
                                 </View>
                                 <View style={IndexStyles.StyleStatusDelivered.viewInfor}>
-                                    <Text style={IndexStyles.StyleStatusDelivered.textInfor}>{item.cart[0].products.name} {item.cart[0].products.model} {item.cart[0].products.storage}</Text>
+                                    <Text style={IndexStyles.StyleStatusDelivered.textInfor}>{item.products[0].name} {item.products[0].model} {item.products[0].storage}</Text>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                        <Text style={IndexStyles.StyleStatusDelivered.textInfor}>{item.cart[0].products.priceColor.color}</Text>
-                                        <Text style={IndexStyles.StyleStatusDelivered.textQuantity}>x{item.cart[0].quantity}</Text>
+                                        <Text style={IndexStyles.StyleStatusDelivered.textInfor}>{item.products[0].priceColor.color}</Text>
+                                        <Text style={IndexStyles.StyleStatusDelivered.textQuantity}>x{item.products[0].quantity}</Text>
                                     </View>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: Responsive.wp(10) }}>
                                         <Text style={IndexStyles.StyleStatusDelivered.textChangeProducts}>Đổi trả miễn phí 7 ngày</Text>
-                                        <Text style={IndexStyles.StyleStatusDelivered.textPrice}>{FormatPrice(item.cart[0].products.priceColor.price)}</Text>
+                                        <Text style={IndexStyles.StyleStatusDelivered.textPrice}>{FormatPrice(item.products[0].priceColor.price)}</Text>
                                     </View>
                                 </View>
                             </View>
                             <View style={IndexStyles.StyleStatusDelivered.line} />
-                            {item.cart.length > 1 ? (
+                            {item.products.length > 1 ? (
                                 <TouchableOpacity onPress={() => navigation.navigate('StackMisc', { screen: 'DetailStatusDelivered', params: { id: item._id, payment: payment } })}>
                                     <Text style={IndexStyles.StyleStatusDelivered.textMoreProducts}>Xem thêm sản phẩm</Text>
                                     <View style={IndexStyles.StyleStatusDelivered.line} />
                                 </TouchableOpacity>
                             ) : null}
                             <View style={IndexStyles.StyleStatusDelivered.viewLengthCart}>
-                                <Text style={IndexStyles.StyleStatusDelivered.textLengthCart}>{item.cart.length} sản phẩm</Text>
+                                <Text style={IndexStyles.StyleStatusDelivered.textLengthCart}>{item.products.length} sản phẩm</Text>
                                 <Text style={IndexStyles.StyleStatusDelivered.textTotal}>Tổng thanh toán: {FormatPriceVND2(item.totalAmount)}</Text>
                             </View>
                             <View style={IndexStyles.StyleStatusDelivered.line} />

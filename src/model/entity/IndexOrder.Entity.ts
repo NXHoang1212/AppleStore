@@ -1,7 +1,18 @@
 export interface OrderEntity {
     _id: string;
     user: string;
-    cart: any[];
+    products: [{
+        _id: string;
+        name: string;
+        model: string;
+        storage: string;
+        priceColor: {
+            color: string;
+            price: number;
+            image: string;
+        };
+        quantity: number;
+    }]
     totalAmount: number;
     status: string;
     paymentMethod: string;
@@ -18,11 +29,33 @@ export interface OrderEntity {
 }
 
 export interface UpdateOrderEntity {
-    _id: string
     status: string;
     canceledAt: Date;
 
 }
+
+export interface CreateOrderEntity {
+    _id: string;
+    user: string;
+    products: [{
+        _id: string;
+        name: string;
+        model: string;
+        storage: string;
+        priceColor: {
+            color: string;
+            price: number;
+            image: string;
+        };
+        quantity: number;
+    }]
+    totalAmount: number;
+    shippingAddress: string;
+    shippingFee: number;
+    voucher: string;
+    createdAt: string;
+}
+
 export const status = ["Chờ xác nhận", "Đã xác nhận"];
 export const paymentStatus = ["Chờ thanh toán", "Đã thanh toán"];
 

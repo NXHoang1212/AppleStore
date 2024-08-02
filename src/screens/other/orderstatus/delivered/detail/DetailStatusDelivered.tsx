@@ -76,18 +76,18 @@ const DetailStatusDelivered: React.FC = () => {
                             <Icon.ShoppingCartSVG width={25} height={25} fill='black' />
                             <Text style={IndexStyles.StyleDetailStatusDelivered.textCartTitle}>ShopApple</Text>
                         </View>
-                        {item.cart.map((value: any, index: number) => (
+                        {item.products.map((value: any, index: number) => (
                             <View key={index} style={IndexStyles.StyleDetailStatusDelivered.viewCartContent}>
-                                <Image source={{ uri: value.products.priceColor.image }} style={IndexStyles.StyleDetailStatusDelivered.imageCartContent} />
+                                <Image source={{ uri: value.priceColor.image }} style={IndexStyles.StyleDetailStatusDelivered.imageCartContent} />
                                 <View style={IndexStyles.StyleDetailStatusDelivered.viewCartInfor}>
-                                    <Text style={IndexStyles.StyleDetailStatusDelivered.textCartContent}>{value.products.name} {value.products.model} {value.products.storage}</Text>
+                                    <Text style={IndexStyles.StyleDetailStatusDelivered.textCartContent}>{value.name} {value.model} {value.storage}</Text>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                                        <Text style={IndexStyles.StyleDetailStatusDelivered.textCartContent}>{value.products.priceColor.color}</Text>
+                                        <Text style={IndexStyles.StyleDetailStatusDelivered.textCartContent}>{value.priceColor.color}</Text>
                                         <Text style={IndexStyles.StyleDetailStatusDelivered.textCartContent}>x{value.quantity}</Text>
                                     </View>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                                         <Text style={IndexStyles.StyleDetailStatusDelivered.textChangeProducts}>Đổi trả miễn phí 7 ngày</Text>
-                                        <Text style={IndexStyles.StyleDetailStatusDelivered.textCartContent}>{FormatPrice(value.products.priceColor.price)}</Text>
+                                        <Text style={IndexStyles.StyleDetailStatusDelivered.textCartContent}>{FormatPrice(value.priceColor.price)}</Text>
                                     </View>
                                 </View>
                             </View>
@@ -96,7 +96,7 @@ const DetailStatusDelivered: React.FC = () => {
                     <View style={IndexStyles.StyleDetailStatusDelivered.viewTotal}>
                         <View style={IndexStyles.StyleDetailStatusDelivered.viewTotalTitle}>
                             <Text style={IndexStyles.StyleDetailStatusDelivered.textTotalTitle}>Tổng tiền hàng</Text>
-                            <Text style={IndexStyles.StyleDetailStatusDelivered.textTotal}>{FormatPrice(item.cart.reduce((total: number, value: any) => total + value.products.priceColor.price * value.quantity, 0))}</Text>
+                            <Text style={IndexStyles.StyleDetailStatusDelivered.textTotal}>{FormatPrice(item.products.reduce((total: number, value: any) => total + value.priceColor.price * value.quantity, 0))}</Text>
                         </View>
                         <View style={IndexStyles.StyleDetailStatusDelivered.viewTotalTitle}>
                             <Text style={IndexStyles.StyleDetailStatusDelivered.textTotalTitle}>Phí vận chuyển</Text>

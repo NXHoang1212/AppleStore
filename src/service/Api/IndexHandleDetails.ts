@@ -15,7 +15,7 @@ export const createColorImageMap = (product: DetailProductParams) => {
 class IndexHandleDetails {
     static async handleAddToCart(animatedValue: Animated.Value,
         userId: string, selectedPrice: { price: number, color: string }, item: DetailProductParams, createCart: any, discountPrice: number,
-        dispatch: any, incrementItemCount: any
+        dispatch: any, incountCrement: any
     ) {
         try {
             Animated.timing(animatedValue, {
@@ -52,7 +52,7 @@ class IndexHandleDetails {
             });
             if (res.data) {
                 ToastMessage('success', 'Thêm vào giỏ hàng thành công');
-                dispatch(incrementItemCount());
+                dispatch(incountCrement());
             }
         } catch (error) {
             console.log("🚀 ~ handleAddToCart ~ error:", error);
@@ -60,7 +60,7 @@ class IndexHandleDetails {
     }
 
     static async handleByCart(userId: string, selectedPrice: { price: number, color: string }, item: DetailProductParams, createCart: any, discountPrice: number,
-        dispatch: any, incrementItemCount: any, navigation: any
+        dispatch: any, incountCrement: any, navigation: any
     ) {
         try {
             if (!userId) {
@@ -89,7 +89,7 @@ class IndexHandleDetails {
             });
             if (res.data) {
                 navigation.navigate('StackMisc', { screen: 'PaymentOrders', params: { id: res.data.data._id } });
-                dispatch(incrementItemCount());
+                dispatch(incountCrement());
             }
         } catch (error) {
             console.log("🚀 ~ handleAddToCart ~ error:", error);

@@ -48,4 +48,6 @@ export enum StackMiscEnum {
     DetailStatusCancelled = 'DetailStatusCancelled',
     DetailPendingDelivery = 'DetailPendingDelivery',
     DetailStatusDelivered = 'DetailStatusDelivered',
+    OrderSuccess = 'OrderSuccess',
+    OrderFailed = 'OrderFailed',
 }

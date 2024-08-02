@@ -18,7 +18,7 @@ const PendingConfirmation: React.FC = () => {
 
     const user = useAppSelector(state => state.root.Auth.user._id);
 
-    const { data, error, isLoading } = useGetStatusOrderQuery({ id: user, status: status, paymentStatus: paymentStatus });
+    const { data, isLoading } = useGetStatusOrderQuery({ id: user, status: status, paymentStatus: paymentStatus });
 
     const pendingOrder = data?.data
 
@@ -49,44 +49,44 @@ const PendingConfirmation: React.FC = () => {
                             </View>
                             <View style={IndexStyles.StylePendingConfirmation.viewCart}>
                                 <View style={IndexStyles.StylePendingConfirmation.viewImagge}>
-                                    <Image source={{ uri: item.cart[0].products.priceColor.image }} style={IndexStyles.StylePendingConfirmation.image} />
+                                    <Image source={{ uri: item.products[0].priceColor.image }} style={IndexStyles.StylePendingConfirmation.image} />
                                 </View>
                                 <View style={IndexStyles.StylePendingConfirmation.viewInfor}>
-                                    <Text style={IndexStyles.StylePendingConfirmation.textInfor}>{item.cart[0].products.name} {item.cart[0].products.model} {item.cart[0].products.storage}</Text>
+                                    <Text style={IndexStyles.StylePendingConfirmation.textInfor}>{item.products[0].name} {item.products[0].model} {item.products[0].storage}</Text>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                                        <Text style={IndexStyles.StylePendingConfirmation.textInfor}>{item.cart[0].products.priceColor.color}</Text>
-                                        <Text style={IndexStyles.StylePendingConfirmation.textQuantity}>x{item.cart[0].quantity}</Text>
+                                        <Text style={IndexStyles.StylePendingConfirmation.textInfor}>{item.products[0].priceColor.color}</Text>
+                                        <Text style={IndexStyles.StylePendingConfirmation.textQuantity}>x{item.products[0].quantity}</Text>
                                     </View>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: Responsive.wp(10) }}>
                                         <Text style={IndexStyles.StylePendingConfirmation.textChangeProducts}>Đổi trả miễn phí 7 ngày</Text>
-                                        <Text style={IndexStyles.StylePendingConfirmation.textPrice}>{FormatPrice(item.cart[0].products.priceColor.price)}</Text>
+                                        <Text style={IndexStyles.StylePendingConfirmation.textPrice}>{FormatPrice(item.products[0].priceColor.price)}</Text>
                                     </View>
                                 </View>
                             </View>
                             <View style={IndexStyles.StylePendingConfirmation.line} />
-                            {item.cart.length > 1 ? (
+                            {item.products.length > 1 ? (
                                 <TouchableOpacity onPress={() => navigation.navigate('StackMisc', { screen: 'DetailOrder', params: { id: item._id, payment: payment } })}>
                                     <Text style={IndexStyles.StylePendingConfirmation.textMoreProducts}>Xem thêm sản phẩm</Text>
                                     <View style={IndexStyles.StylePendingConfirmation.line} />
                                 </TouchableOpacity>
                             ) : null}
                             <View style={IndexStyles.StylePendingConfirmation.viewLengthCart}>
-                                <Text style={IndexStyles.StylePendingConfirmation.textLengthCart}>{item.cart.length} sản phẩm</Text>
+                                <Text style={IndexStyles.StylePendingConfirmation.textLengthCart}>{item.products.length} sản phẩm</Text>
                                 <Text style={IndexStyles.StylePendingConfirmation.textTotal}>Tổng thanh toán: {FormatPriceVND2(item.totalAmount)}</Text>
                             </View>
                             <View style={IndexStyles.StylePendingConfirmation.line} />
-                            {item.paymentStatus === "Chờ thanh toán" ? (
+                            {item.paymentStatus === "Đã thanh toán" || item.paymentMethod === "Nhận hàng tại nhà" || item.paymentMethod === "Trả góp" ? (
                                 <View style={IndexStyles.StylePendingConfirmation.viewPayment}>
-                                    <Text style={IndexStyles.StylePendingConfirmation.textPayment}>{payment}</Text>
+                                    <Text style={IndexStyles.StylePendingConfirmation.textConfirm}>{confirmStatus}</Text>
                                     <TouchableOpacity style={IndexStyles.StylePendingConfirmation.viewButton}>
-                                        <Text style={IndexStyles.StylePendingConfirmation.textButton}>Thanh toán ngay</Text>
+                                        <Text style={IndexStyles.StylePendingConfirmation.textButton}>Đang xác nhận</Text>
                                     </TouchableOpacity>
                                 </View>
                             ) : (
                                 <View style={IndexStyles.StylePendingConfirmation.viewPayment}>
-                                    <Text style={IndexStyles.StylePendingConfirmation.textConfirm}>{confirmStatus}</Text>
-                                    <TouchableOpacity style={IndexStyles.StylePendingConfirmation.viewButton} >
-                                        <Text style={IndexStyles.StylePendingConfirmation.textButton}>Đang xác nhận</Text>
+                                    <Text style={IndexStyles.StylePendingConfirmation.textPayment}>{payment}</Text>
+                                    <TouchableOpacity style={IndexStyles.StylePendingConfirmation.viewButton}>
+                                        <Text style={IndexStyles.StylePendingConfirmation.textButton}>Thanh toán ngay</Text>
                                     </TouchableOpacity>
                                 </View>
                             )}

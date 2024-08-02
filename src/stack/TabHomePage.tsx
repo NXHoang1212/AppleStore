@@ -82,7 +82,6 @@ const TabHomePage = () => {
                                 {item.name}
                             </Text>
                         ),
-                        //nếu là 0 thì sẽ không hiển thị badge trên icon
                         tabBarBadge: item.badge === 0 ? undefined : item.badge
                     }}
                 />

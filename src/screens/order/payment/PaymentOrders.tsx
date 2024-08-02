@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image, TextInput, ScrollView, Linking } from 'react-native'
+import { View, Text, TouchableOpacity, Image, TextInput, ScrollView, Linking, AppState } from 'react-native'
 import React, { useState, useEffect } from 'react'
 
 import { IndexStyles } from '../../../import/IndexStyles'
@@ -19,8 +19,8 @@ import ToastMessage from '../../../utils/ToastMessage'
 import IndexHandleCart from '../../../service/Api/IndexHandleCart'
 
 import { decrementItemCount } from '../../../redux/slices/CountCartSlice'
-import { GetPaymentUrl } from '../../../service/Api/Index.Order'
 import { useUseVoucherMutation } from '../../../service/Api/Index.Voucher'
+import { useCreateOrderMutation, useGetPaymentUrlVnpayMutation, useReturnFromAppQuery } from '../../../service/Api/Index.Order'
 
 interface PaymentOrdersProps {
     id: string,
@@ -51,9 +51,15 @@ const PaymentOrders: React.FC = () => {
 
     const { data: cart } = useGetCartIdsQuery(id)
 
+    const [createOrder] = useCreateOrderMutation()
+
     const [updateCartStatus] = useUpdateCartStatusMutation()
 
     const [useVoucher] = useUseVoucherMutation()
+
+    const [GetPaymentUrlVnpay] = useGetPaymentUrlVnpayMutation()
+
+    const { data: appState } = useReturnFromAppQuery()
 
     const [note, setNote] = useState<string>('')
 
@@ -71,34 +77,82 @@ const PaymentOrders: React.FC = () => {
         if (isFocused) {
             setCurrentAddress(address || addressDefault)
         }
-    }, [isFocused, address, addressDefault])
+    }, [isFocused, address, addressDefault]);
 
     const handlePlaceOrder = async () => {
         try {
             const orderData: any = {
                 userId: userId,
-                cartId: id,
-                //số toatlAmount là :17.012.500đ cần loại bỏ chữ đ không cần loại bỏ dấu chấm
+                products: cart?.data.map(item => ({
+                    _id: item._id,
+                    name: item.products.name,
+                    model: item.products.model,
+                    storage: item.products.storage,
+                    priceColor: {
+                        color: item.products.priceColor.color,
+                        price: item.products.priceColor.price,
+                        image: item.products.priceColor.image,
+                    },
+                    quantity: item.quantity,
+                })),
                 totalAmount: FormatPrice(totalPayment).replace('đ', '').replace(/\./g, ''),
                 ipAddr: 'IP_ADDRESS',
                 bankCode: null,
-                shippingAddress: currentAddress,
+                shippingAddress: currentAddress._id,
                 shippingFee: shipperFee,
                 language: 'vn',
                 voucher: selectedVoucher?._id,
             };
+            const orderDataAtHome: any = {
+                userId: userId,
+                products: cart?.data.map(item => ({
+                    _id: item._id,
+                    name: item.products.name,
+                    model: item.products.model,
+                    storage: item.products.storage,
+                    priceColor: {
+                        color: item.products.priceColor.color,
+                        price: item.products.priceColor.price,
+                        image: item.products.priceColor.image,
+                    },
+                    quantity: item.quantity,
+                })),
+                totalAmount: FormatPrice(totalPayment).replace('đ', '').replace(/\./g, ''),
+                paymentMethod: currentPayment,
+                shippingAddress: currentAddress._id,
+                shippingFee: shipperFee,
+                voucher: selectedVoucher?._id,
+            }
+            const data: any = {
+                ids: id,
+                status: 'Đã đặt hàng',
+            }
             switch (currentPayment) {
                 case 'Nhận hàng tại nhà':
-                    ToastMessage('success', 'Nhận hàng tại nhà');
-                    if (selectedVoucher._id) {
-                        const voucherData = {
-                            id: selectedVoucher._id,
-                            userId: userId,
-                            paymentMethod: currentPayment,
+                    const res: any = await createOrder(orderDataAtHome)
+                    if (res.data) {
+                        IndexHandleCart.handleUpdateCartOrder(updateCartStatus, data, dipatch, decrementItemCount)
+                        if (selectedVoucher) {
+                            const voucherData = {
+                                id: selectedVoucher._id,
+                                userId: userId,
+                                paymentMethod: currentPayment,
+                            }
+                            const res = await useVoucher(voucherData);
+                        } else {
+                            console.log('Không có voucher')
                         }
-                        const res = await useVoucher(voucherData);
+                        ToastMessage('success', 'Đặt hàng thành công');
+                        navigation.navigate('StackMisc', {
+                            screen: 'OrderSuccess',
+                            params: {
+                                totalAmount: res.data.data.totalAmount,
+                                status: res.data.data.status,
+                                paymentStatus: res.data.data.paymentStatus,
+                            }
+                        })
                     } else {
-                        console.log('Không có voucher')
+                        ToastMessage('error', 'Đặt hàng không thành công');
                     }
                     break;
 
@@ -107,17 +161,15 @@ const PaymentOrders: React.FC = () => {
                     break;
 
                 case 'Vnpay':
-                    const paymentUrl = await GetPaymentUrl(orderData);
-                    console.log("🚀 ~ handlePlaceOrder ~ paymentUrl:", paymentUrl)
-                    if (paymentUrl.status === 200) {
+                    const paymentUrl: any = await GetPaymentUrlVnpay(orderData)
+                    if (paymentUrl.data.status === 200) {
                         ToastMessage('success', 'Chuyển hướng đến trang thanh toán');
-                        // Linking.openURL(paymentUrl.data);
+                        Linking.openURL(paymentUrl.data.data);
                         const data: any = {
                             ids: id,
                             status: 'Đã đặt hàng',
                         }
-                        const quantityToDecrement = cart?.data.filter(item => item.status === 'Đã đặt hàng').length
-                        IndexHandleCart.handleUpdateCartOrder(updateCartStatus, data, dipatch, decrementItemCount, quantityToDecrement)
+                        IndexHandleCart.handleUpdateCartOrder(updateCartStatus, data, dipatch, decrementItemCount)
                         if (selectedVoucher) {
                             const voucherData = {
                                 id: selectedVoucher._id,
@@ -134,9 +186,32 @@ const PaymentOrders: React.FC = () => {
                     break;
 
                 case 'Trả góp':
-                    ToastMessage('success', 'Trả góp');
+                    const result: any = await createOrder(orderDataAtHome)
+                    if (result.data) {
+                        IndexHandleCart.handleUpdateCartOrder(updateCartStatus, data, dipatch, decrementItemCount)
+                        if (selectedVoucher) {
+                            const voucherData = {
+                                id: selectedVoucher._id,
+                                userId: userId,
+                                paymentMethod: currentPayment,
+                            }
+                            const res = await useVoucher(voucherData);
+                        } else {
+                            console.log('Không có voucher')
+                        }
+                        ToastMessage('success', 'Đặt hàng thành công');
+                        navigation.navigate('StackMisc', {
+                            screen: 'OrderSuccess',
+                            params: {
+                                totalAmount: result.data.data.totalAmount,
+                                status: result.data.data.status,
+                                paymentStatus: result.data.data.paymentStatus,
+                            }
+                        })
+                    } else {
+                        ToastMessage('error', 'Đặt hàng không thành công');
+                    }
                     break;
-
                 default:
                     ToastMessage('error', 'Phương thức thanh toán không hợp lệ');
                     break;
@@ -155,7 +230,7 @@ const PaymentOrders: React.FC = () => {
             </View>
             <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ flexGrow: 1, paddingBottom: Responsive.hp(14) }}>
                 <View style={IndexStyles.StylePaymentOrders.containerBody}>
-                    <TouchableOpacity style={IndexStyles.StylePaymentOrders.viewAddress} onPress={() => navigation.navigate('SelectedAddress', { id: id, shipper: shipper, address: currentAddress })}>
+                    <TouchableOpacity style={IndexStyles.StylePaymentOrders.viewAddress} onPress={() => navigation.navigate('SelectedAddress', { id: id, shipper: shipper, address: currentAddress, selectedPayment: selectedPayment })}>
                         <View style={IndexStyles.StylePaymentOrders.iconLotaion}>
                             <Icon.LocationSVG width={20} height={20} fill={COLOR.REDONE} />
                         </View>
@@ -257,18 +332,12 @@ const PaymentOrders: React.FC = () => {
                             <Text style={IndexStyles.StylePaymentOrders.textDetailOrder}>Phí vận chuyển</Text>
                             <Text style={IndexStyles.StylePaymentOrders.textDetailOrder}>{shipper}</Text>
                         </View>
-                        {selectedVoucher && (
+                        {selectedVoucher ? (
                             <View style={IndexStyles.StylePaymentOrders.viewDetailOrder}>
                                 <Text style={IndexStyles.StylePaymentOrders.textDetailOrder}>Giảm giá sản phẩm</Text>
                                 <Text style={IndexStyles.StylePaymentOrders.textDetailOrder}>-{FormatPrice(voucherDiscount)}</Text>
                             </View>
-                        ) || (
-                                <View style={IndexStyles.StylePaymentOrders.viewDetailOrder}>
-                                    <Text style={IndexStyles.StylePaymentOrders.textDetailOrder}>Giảm giá sản phẩm</Text>
-                                    <Text style={IndexStyles.StylePaymentOrders.textDetailOrder}>0</Text>
-                                </View>
-                            )
-                        }
+                        ) : null}
                         <View style={IndexStyles.StylePaymentOrders.viewDetailOrder}>
                             <Text style={IndexStyles.StylePaymentOrders.textTotalPayment}>Tổng thanh toán đơn hàng</Text>
                             <Text style={IndexStyles.StylePaymentOrders.textTotalPayment}>{FormatPrice(totalPayment)}</Text>

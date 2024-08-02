@@ -5,7 +5,8 @@ import { IndexStyles } from '../../../../import/IndexStyles'
 import { Icon } from '../../../../constant/Icon'
 import { useRoute, RouteProp, useNavigation } from '@react-navigation/native'
 import { useGetDetailOrderQuery, useUpdateOrderMutation } from '../../../../service/Api/Index.Order'
-import { FormatPrice } from '../../../../utils/FormatPrice'
+import { useResetUsageMutation } from '../../../../service/Api/Index.Voucher'
+import { FormatPrice, FormatPriceVND2 } from '../../../../utils/FormatPrice'
 import { ScrollView } from 'react-native-gesture-handler'
 import { FormatDate3 } from '../../../../utils/FormatDate'
 import Clipboard from '@react-native-clipboard/clipboard'
@@ -32,16 +33,42 @@ const DetailOrder: React.FC = () => {
 
     const [updateOrder] = useUpdateOrderMutation()
 
+    const [resetUsage] = useResetUsageMutation()
+
     const handleCancelUpdateOrder = async () => {
         try {
-            const response = await updateOrder({ _id: item._id, status: 'Đã hủy', canceledAt: new Date() })
+            const response = await updateOrder({ id: item._id, data: { status: 'Đã hủy', canceledAt: new Date() } })
             if (response.data) {
-                ToastMessage('success', 'Cập nhật đơn hàng thành công')
+                if (item.voucher) {
+                    handleUpdateVoucher()
+                    ToastMessage('success', 'Hủy đơn hàng thành công')
+                    navigation.goBack()
+                } else {
+                    ToastMessage('success', 'Hủy đơn hàng thành công')
+                    navigation.goBack()
+                }
             } else {
                 ToastMessage('error', 'Cập nhật đơn hàng không thành công')
             }
         } catch (error: any) {
             console.log("🚀 ~ handleUpdateOrder ~ error:", error)
+        }
+    }
+
+    const handleUpdateVoucher = async () => {
+        try {
+            const body = {
+                id: item.voucher._id,
+                userId: item.user
+            }
+            const response = await resetUsage(body)
+            if (response.data) {
+                console.log("🚀 ~ handleUpdateVoucher ~ response:", response)
+            } else {
+                console.log("🚀 ~ handleUpdateVoucher ~ response:", response)
+            }
+        } catch (error: any) {
+            console.log("🚀 ~ handleUpdateVoucher ~ error:", error)
         }
     }
 
@@ -105,18 +132,18 @@ const DetailOrder: React.FC = () => {
                             <Icon.ShoppingCartSVG width={25} height={25} fill='black' />
                             <Text style={IndexStyles.StyleDetailOrder.textCartTitle}>ShopApple</Text>
                         </View>
-                        {item.cart.map((value: any, index: number) => (
+                        {item.products.map((value: any, index: number) => (
                             <View key={index} style={IndexStyles.StyleDetailOrder.viewCartContent}>
-                                <Image source={{ uri: value.products.priceColor.image }} style={IndexStyles.StyleDetailOrder.imageCartContent} />
+                                <Image source={{ uri: value.priceColor.image }} style={IndexStyles.StyleDetailOrder.imageCartContent} />
                                 <View style={IndexStyles.StyleDetailOrder.viewCartInfor}>
-                                    <Text style={IndexStyles.StyleDetailOrder.textCartContent}>{value.products.name} {value.products.model} {value.products.storage}</Text>
+                                    <Text style={IndexStyles.StyleDetailOrder.textCartContent}>{value.name} {value.model} {value.storage}</Text>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                                        <Text style={IndexStyles.StyleDetailOrder.textCartContent}>{value.products.priceColor.color}</Text>
+                                        <Text style={IndexStyles.StyleDetailOrder.textCartContent}>{value.priceColor.color}</Text>
                                         <Text style={IndexStyles.StyleDetailOrder.textCartContent}>x{value.quantity}</Text>
                                     </View>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                                         <Text style={IndexStyles.StyleDetailOrder.textChangeProducts}>Đổi trả miễn phí 7 ngày</Text>
-                                        <Text style={IndexStyles.StyleDetailOrder.textCartContent}>{FormatPrice(value.products.priceColor.price)}</Text>
+                                        <Text style={IndexStyles.StyleDetailOrder.textCartContent}>{FormatPrice(value.priceColor.price)}</Text>
                                     </View>
                                 </View>
                             </View>
@@ -125,7 +152,7 @@ const DetailOrder: React.FC = () => {
                     <View style={IndexStyles.StyleDetailOrder.viewTotal}>
                         <View style={IndexStyles.StyleDetailOrder.viewTotalTitle}>
                             <Text style={IndexStyles.StyleDetailOrder.textTotalTitle}>Tổng tiền hàng</Text>
-                            <Text style={IndexStyles.StyleDetailOrder.textTotal}>{FormatPrice(item.cart.reduce((total: number, value: any) => total + value.products.priceColor.price * value.quantity, 0))}</Text>
+                            <Text style={IndexStyles.StyleDetailOrder.textTotal}>{FormatPrice(item.products.reduce((total: number, value: any) => total + value.priceColor.price * value.quantity, 0))}</Text>
                         </View>
                         <View style={IndexStyles.StyleDetailOrder.viewTotalTitle}>
                             <Text style={IndexStyles.StyleDetailOrder.textTotalTitle}>Phí vận chuyển</Text>
@@ -134,12 +161,12 @@ const DetailOrder: React.FC = () => {
                         {item.voucher ? (
                             <View style={IndexStyles.StyleDetailOrder.viewTotalTitle}>
                                 <Text style={IndexStyles.StyleDetailOrder.textTotalTitle}>ShopApple Voucher</Text>
-                                <Text style={IndexStyles.StyleDetailOrder.textTotal}>-{item.voucher}</Text>
+                                <Text style={IndexStyles.StyleDetailOrder.textTotal}>-{FormatPrice(item.voucher.maxDiscountAmount)}</Text>
                             </View>
                         ) : null}
                         <View style={IndexStyles.StyleDetailOrder.viewTotalTitle}>
                             <Text style={IndexStyles.StyleDetailOrder.textTotalTitle}>Thành tiền</Text>
-                            <Text style={IndexStyles.StyleDetailOrder.textTotal}>{FormatPrice(item.totalAmount)}</Text>
+                            <Text style={IndexStyles.StyleDetailOrder.textTotal}>{FormatPriceVND2(item.totalAmount)}</Text>
                         </View>
                     </View>
                     <View style={IndexStyles.StyleDetailOrder.viewPaymentMethod}>
@@ -179,7 +206,7 @@ const DetailOrder: React.FC = () => {
                                 <TouchableOpacity style={IndexStyles.StyleDetailOrder.viewPaymentNow} onPress={() => navigation.navigate('TabHome', { screen: 'HomePage' })}>
                                     <Text style={IndexStyles.StyleDetailOrder.textPaymentMethodTitle}>Tiếp tục mua hàng</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={IndexStyles.StyleDetailOrder.viewPaymentNow} >
+                                <TouchableOpacity style={IndexStyles.StyleDetailOrder.viewPaymentNow} onPress={handleCancelUpdateOrder}>
                                     <Text style={IndexStyles.StyleDetailOrder.textPaymentMethodTitle}>Hủy đơn hàng</Text>
                                 </TouchableOpacity>
                             </View>

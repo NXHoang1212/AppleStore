@@ -33,15 +33,21 @@ const CountCartSlice = createSlice({
         setItemCount: (state: CountCartsState, action: PayloadAction<number>) => {
             state.itemCount = action.payload;
         },
-        incrementItemCount: (state: CountCartsState) => {
+        incountCrement: (state: CountCartsState) => {
             state.itemCount += 1;
+        },
+        incrementItemCount: (state: CountCartsState, action: PayloadAction<number>) => {
+            state.itemCount += action.payload;
+            if (state.itemCount < 0) {
+                state.itemCount = 0;
+            }
         },
         decrementItemCount: (state: CountCartsState, action: PayloadAction<number>) => {
             state.itemCount -= action.payload;
-            if (state.itemCount > 0) {
-                state.itemCount -= 1;
+            if (state.itemCount < 0) {
+                state.itemCount = 0;
             }
-        },
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -66,4 +72,4 @@ const CountCartSlice = createSlice({
 })
 
 export default CountCartSlice.reducer;
-export const { setItemCount, incrementItemCount, decrementItemCount } = CountCartSlice.actions;
+export const { setItemCount, incrementItemCount, decrementItemCount, incountCrement } = CountCartSlice.actions;

@@ -27,8 +27,7 @@ const Cart: React.FC = () => {
 
   const { data, isLoading } = useGetCartByUserQuery(user)
 
-  //tìm nhưng đơn hàng có trạng thái status là giỏ hàng
-  const dataCart = data?.data.filter(item => item.status === 'giỏ hàng') || []
+  const dataCart = (data?.data ?? []).filter(item => item.status === 'giỏ hàng' && item.status != null);
 
   const currentlyOpenSwipeable = useRef<Swipeable | null>(null);
 
@@ -116,7 +115,7 @@ const Cart: React.FC = () => {
                 onPress={() => {
                   setSelectAll(!selectAll);
                   if (!selectAll) {
-                    setSelectedItems(data?.data.map(item => item._id) || []);
+                    setSelectedItems(data?.data.filter(item => item.status === 'giỏ hàng').map(item => item._id) || []);
                   } else {
                     setSelectedItems([]);
                   }
