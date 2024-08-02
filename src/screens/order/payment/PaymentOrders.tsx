@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image, TextInput, ScrollView, Linking, AppState } from 'react-native'
+import { View, Text, TouchableOpacity, Image, TextInput, ScrollView, Linking } from 'react-native'
 import React, { useState, useEffect } from 'react'
 
 import { IndexStyles } from '../../../import/IndexStyles'
@@ -39,8 +39,6 @@ const PaymentOrders: React.FC = () => {
 
     const dipatch = useAppDispatch()
 
-    const [appState, setAppState] = useState(AppState.currentState)
-
     const userId = useAppSelector(state => state.root.Auth.user._id)
 
     const { id, shipper, address, selectedVoucher, selectedPayment } = route.params as PaymentOrdersProps
@@ -63,9 +61,7 @@ const PaymentOrders: React.FC = () => {
 
     const [paymentCode, setPaymentCode] = useState<string | null>(null)
 
-    const { data: CheckReturnFormApp } = useReturnFromAppQuery(paymentCode as string, {
-        skip: !paymentCode
-    }) as any
+    const { data: CheckReturnFormApp } = useReturnFromAppQuery(paymentCode as string, { skip: !paymentCode }) as any
 
     const [note, setNote] = useState<string>('')
 
@@ -97,8 +93,6 @@ const PaymentOrders: React.FC = () => {
                     });
                 }
             }
-            console.log(paymentCode)
-            console.log(CheckReturnFormApp)
         }
     }, [isFocused, address, addressDefault, paymentCode, CheckReturnFormApp])
 
@@ -125,6 +119,7 @@ const PaymentOrders: React.FC = () => {
                 shippingFee: shipperFee,
                 language: 'vn',
                 voucher: selectedVoucher?._id,
+                note: note,
             };
             const orderDataAtHome: any = {
                 userId: userId,
@@ -145,6 +140,7 @@ const PaymentOrders: React.FC = () => {
                 shippingAddress: currentAddress._id,
                 shippingFee: shipperFee,
                 voucher: selectedVoucher?._id,
+                note: note,
             }
             const data: any = {
                 ids: id,

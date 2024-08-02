@@ -20,6 +20,8 @@ export interface OrderEntity {
     shippingAddress: string;
     shippingFee: number;
     voucher: string;
+    note: string;
+    reasonCancel: string;
     paymentCode: string;
     orderCode: string;
     createdAt: string;
@@ -31,7 +33,6 @@ export interface OrderEntity {
 export interface UpdateOrderEntity {
     status: string;
     canceledAt: Date;
-
 }
 
 export interface CreateOrderEntity {
@@ -53,6 +54,7 @@ export interface CreateOrderEntity {
     shippingAddress: string;
     shippingFee: number;
     voucher: string;
+    note: string;
     createdAt: string;
 }
 

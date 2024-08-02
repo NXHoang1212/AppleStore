@@ -12,8 +12,7 @@
     "buildAPK": "npm run android -- --mode=release",
     "buildIOS": "npm run ios -- --mode=Release",
     "clear": "cd android && gradlew clean && cd ../",
-    "prebuild": "npx react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
-    "SHA1": "cd android && ./gradlew signingReport && cd ../",
+    "SHA1:android": "cd android && ./gradlew signingReport && cd ../",
     "test": "jest"
   },
   "dependencies": {

@@ -17,6 +17,9 @@ import { StyleAllCategoryProduct } from "../screens/category/all/StyleAllCategor
 import { StylesHomePage } from "../screens/homeproduct/home/StyleHomePage";
 import { StyleSearchHome } from "../screens/homeproduct/search/StyleSearchHome";
 
+/*NOTIFICATION */
+import { StyleNotification } from "../screens/homeproduct/notify/StyleNotification";
+
 /*ADDRESS */
 import { StyleEditAddress } from "../screens/other/address/edit/StyleEditAddress";
 import { StyleChooseAddress } from "../screens/other/address/maps/StyleChooseAddress";
@@ -79,6 +82,7 @@ export const IndexStyles = {
     StyleAllCategoryProduct,
     StylesHomePage,
     StyleSearchHome,
+    StyleNotification,
     StyleEditAddress,
     StyleChooseAddress,
     StyleMoreAddress,

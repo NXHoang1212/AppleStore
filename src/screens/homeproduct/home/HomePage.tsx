@@ -52,7 +52,7 @@ const HomePage: React.FC = () => {
                             <Text style={IndexStyles.StylesHomePage.textcrossbar}>iStore</Text>
                         </View>
                         <View style={IndexStyles.StylesHomePage.viewcrossbar2}>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={() => navigation.navigate(user.isLogged ? 'StackMisc' : 'AuthUser', { screen: 'Notification' } as any)}>
                                 <Icon.BellSVG width={25} height={25} fill='#fff' />
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => navigation.navigate(user.isLogged ? 'StackIndividual' : 'AuthUser', { screen: 'EditProfile' } as any)}>
