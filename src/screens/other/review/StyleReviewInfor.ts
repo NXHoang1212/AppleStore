@@ -57,7 +57,7 @@ const StyleReviewInfor = StyleSheet.create({
         letterSpacing: 0.25,
         borderBottomWidth: 2,
         borderBottomColor: COLOR.RED,
-        width: Responsive.wp(25.8),
+        width: Responsive.wp(30),
         textAlign: 'center',
     },
 });

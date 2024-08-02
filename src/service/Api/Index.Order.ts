@@ -46,12 +46,17 @@ const OrderQuery = createApi({
                 method: 'POST',
                 body: data
             }),
+            invalidatesTags: [{ type: 'Order', id: 'LIST' }],
         }),
         ReturnFromApp: build.query<{ data: string }, string>({
             query: (paymentCode) => ({
-                url: `/api/order/return_from_app?paymentCode=${paymentCode}`,
+                url: `/api/order/return_from_app`,
+                params: {
+                    paymentCode: paymentCode
+                },
                 method: 'GET',
             }),
+            providesTags: [{ type: 'Order', id: 'LIST' }],
         }),
     }),
 });

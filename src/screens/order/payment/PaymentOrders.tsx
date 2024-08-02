@@ -39,6 +39,8 @@ const PaymentOrders: React.FC = () => {
 
     const dipatch = useAppDispatch()
 
+    const [appState, setAppState] = useState(AppState.currentState)
+
     const userId = useAppSelector(state => state.root.Auth.user._id)
 
     const { id, shipper, address, selectedVoucher, selectedPayment } = route.params as PaymentOrdersProps
@@ -59,7 +61,11 @@ const PaymentOrders: React.FC = () => {
 
     const [GetPaymentUrlVnpay] = useGetPaymentUrlVnpayMutation()
 
-    const { data: appState } = useReturnFromAppQuery()
+    const [paymentCode, setPaymentCode] = useState<string | null>(null)
+
+    const { data: CheckReturnFormApp } = useReturnFromAppQuery(paymentCode as string, {
+        skip: !paymentCode
+    }) as any
 
     const [note, setNote] = useState<string>('')
 
@@ -76,8 +82,25 @@ const PaymentOrders: React.FC = () => {
     useEffect(() => {
         if (isFocused) {
             setCurrentAddress(address || addressDefault)
+            if (paymentCode && CheckReturnFormApp) {
+                const orderData = CheckReturnFormApp.data
+                if (orderData && orderData.paymentStatus === 'Chờ thanh toán') {
+                    ToastMessage('error', 'Thanh toán thất bại');
+                    navigation.navigate('StackMisc', {
+                        screen: 'OrderSuccess',
+                        params: {
+                            title: 'Thanh toán thất bại',
+                            totalAmount: orderData.totalAmount,
+                            status: 'Thất bại',
+                            paymentStatus: 'Chờ thanh toán',
+                        }
+                    });
+                }
+            }
+            console.log(paymentCode)
+            console.log(CheckReturnFormApp)
         }
-    }, [isFocused, address, addressDefault]);
+    }, [isFocused, address, addressDefault, paymentCode, CheckReturnFormApp])
 
     const handlePlaceOrder = async () => {
         try {
@@ -131,16 +154,14 @@ const PaymentOrders: React.FC = () => {
                 case 'Nhận hàng tại nhà':
                     const res: any = await createOrder(orderDataAtHome)
                     if (res.data) {
-                        IndexHandleCart.handleUpdateCartOrder(updateCartStatus, data, dipatch, decrementItemCount)
+                        await IndexHandleCart.handleUpdateCartOrder(updateCartStatus, data, dipatch, decrementItemCount)
                         if (selectedVoucher) {
                             const voucherData = {
                                 id: selectedVoucher._id,
                                 userId: userId,
                                 paymentMethod: currentPayment,
                             }
-                            const res = await useVoucher(voucherData);
-                        } else {
-                            console.log('Không có voucher')
+                            await useVoucher(voucherData);
                         }
                         ToastMessage('success', 'Đặt hàng thành công');
                         navigation.navigate('StackMisc', {
@@ -164,11 +185,12 @@ const PaymentOrders: React.FC = () => {
                     const paymentUrl: any = await GetPaymentUrlVnpay(orderData)
                     if (paymentUrl.data.status === 200) {
                         ToastMessage('success', 'Chuyển hướng đến trang thanh toán');
-                        Linking.openURL(paymentUrl.data.data);
+                        Linking.openURL(paymentUrl.data.data.vnpUrl);
                         const data: any = {
                             ids: id,
                             status: 'Đã đặt hàng',
                         }
+                        setPaymentCode(paymentUrl.data.data.order.paymentCode)
                         IndexHandleCart.handleUpdateCartOrder(updateCartStatus, data, dipatch, decrementItemCount)
                         if (selectedVoucher) {
                             const voucherData = {

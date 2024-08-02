@@ -16,13 +16,14 @@ type OrderSuccessProps = {
         totalAmount: number,
         status: string,
         paymentStatus: string,
+        title: string,
     },
 }
 
 const OrderSuccess: React.FC = () => {
     const navigation = useNavigation<NativeStackNavigationProp<any>>();
     const route = useRoute<RouteProp<OrderSuccessProps, 'order'>>();
-    const { paymentStatus, status, totalAmount } = route.params;
+    const { paymentStatus, status, totalAmount, title } = route.params;
     const product = Shuffle(useAppSelector((state) => state.Product.data)).slice(0, 20);
 
     const order = `Đơn hàng của bạn đã được đặt thành công với số tiền là ${FormatPriceVND2(totalAmount)}. Vui lòng thường xuyên kiểm tra trạng thái đơn hàng của bạn để nhận thông báo cập nhật từ cửa hàng.Đơn hàng của bạn đang có trạng thái ${status} và trạng thái thanh toán là ${paymentStatus}.`;
@@ -36,7 +37,7 @@ const OrderSuccess: React.FC = () => {
             </View>
             <View style={{ alignItems: 'center' }}>
                 <View style={styles.viewBody}>
-                    <Text style={{ fontSize: 20, fontWeight: 'bold', color: COLOR.WHITE }}>Đơn hàng đang chờ xác nhận</Text>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', color: COLOR.WHITE }}>{title}</Text>
                 </View>
                 <View style={styles.viewText}>
                     <Text style={styles.textBody}>{order}</Text>

@@ -19,6 +19,7 @@ const SelectedAddress: React.FC = () => {
   const { id, shipper, address, selectedPayment } = route.params as { id: string, shipper: string, address: any, selectedPayment: any }
 
   const { data } = useGetAddressIdUserQuery(useAppSelector(state => state.root.Auth.user._id))
+  console.log("🚀 ~ data:", data)
 
   const [selected, setSelected] = useState<string>(address?._id)
 
@@ -58,7 +59,7 @@ const SelectedAddress: React.FC = () => {
                 </View>
                 <View style={IndexStyles.StyleSelectedAddress.viewAddress}>
                   <Text style={IndexStyles.StyleSelectedAddress.textAddress}>{item.houseNumber}</Text>
-                  <Text style={IndexStyles.StyleSelectedAddress.textAddress}>Phường {item.ward}, {item.district}, {item.province}</Text>
+                  <Text style={IndexStyles.StyleSelectedAddress.textAddress}>{item.ward}, {item.district}, {item.province}</Text>
                 </View>
                 <View style={IndexStyles.StyleSelectedAddress.viewShipper}>
                   {item.isDefault ? <Text style={IndexStyles.StyleSelectedAddress.textLocation}>Mặc định</Text> : null}
