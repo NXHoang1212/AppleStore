@@ -107,9 +107,27 @@ const HandleResetPasswordFromMail = async (email: String, newPassword: String, c
     }
 }
 
+const HandleUpdateFcmToken = async (id: String, fcmToken: String) => {
+    try {
+        const response = await AxiosInstance().put(`/api/auth/updateFcmToken/${id}`, { fcmToken })
+        return response
+    } catch (error: any) {
+        throw new Error(error)
+    }
+}
+
+const HandleRemoveFcmToken = async (id: String, fcmToken: String) => {
+    try {
+        const response = await AxiosInstance().put(`/api/auth/removeFcmToken/${id}`, { fcmToken })
+        return response
+    } catch (error: any) {
+        throw new Error(error)
+    }
+}
+
 export {
     HandleRegisterUser, HandleLoginUser, HandleUpdateUser,
     HandleUploadAvatar, HandleAuthenticatePassword, HandleResetPassword,
     HandleDeleteUser, HandleResendEmail, HandleVerifyOtp, HandleResetPasswordFromMail,
-    HandleLoginProvider
+    HandleLoginProvider, HandleUpdateFcmToken, HandleRemoveFcmToken
 }

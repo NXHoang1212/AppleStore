@@ -1,8 +1,9 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator, NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 
 import { StackHomeEnum } from '../model/enum/IndexStack.enum';
 import { StackHomeTypeParam } from '../model/param/IndexStack.Param';
+import { navigationRef } from './RootNavigationRef';
 
 import Slash from '../screens/slash/Slash';
 
@@ -18,7 +19,7 @@ const Stack = createNativeStackNavigator<StackHomeTypeParam>();
 
 const RootStack = () => {
     return (
-        <NavigationContainer linking={Linking}>
+        <NavigationContainer ref={navigationRef} linking={Linking} >
             <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName={StackHomeEnum.slash}>
                 <Stack.Screen
                     name={StackHomeEnum.slash}

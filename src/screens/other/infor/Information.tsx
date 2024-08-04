@@ -1,5 +1,5 @@
 import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import useStatusBarConfig from '../../../utils/UseStatusBarConfig'
 import LinearGradient from 'react-native-linear-gradient'
@@ -18,6 +18,8 @@ import { setItemCount } from '../../../redux/slices/CountCartSlice'
 import ToastMessage from '../../../utils/ToastMessage'
 import { useGetOrderUserQuery, useGetStatusOrderQuery } from '../../../service/Api/Index.Order'
 import { paymentStatus, status } from '../../../model/entity/IndexOrder.Entity'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { HandleUpdateFcmToken, HandleRemoveFcmToken } from '../../../service/Api/IndexUser'
 
 const Information: React.FC = () => {
   useStatusBarConfig('dark-content', 'transparent', true)
@@ -26,19 +28,46 @@ const Information: React.FC = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false)
   const isLoggedIn = useAppSelector(state => state.root.Auth)
 
-  const { data } = useGetStatusOrderQuery({ id: isLoggedIn.user._id, status: status, paymentStatus: paymentStatus });
+  const { data } = useGetStatusOrderQuery({ id: isLoggedIn.user._id, status: status, paymentStatus: paymentStatus }, {
+    skip: !isLoggedIn.isLogged,
+    skipPollingIfUnfocused: true
+  });
 
-  const { data: cart } = useGetOrderUserQuery(isLoggedIn.user._id);
+  const { data: cart } = useGetOrderUserQuery(isLoggedIn.user._id, {
+    skip: !isLoggedIn.isLogged,
+    skipPollingIfUnfocused: true
+  });
 
-  const countOrderStatus = data?.data.length
+  const countOrderStatus = isLoggedIn.isLogged ? data?.data.length : 0;
 
-  const countOrderPendingDelivery = cart?.data.filter((item) => item.status === "Đang giao").length
+  const countOrderPendingDelivery = isLoggedIn.isLogged ? cart?.data.filter((item) => item.status === "Đang giao").length : 0;
 
-  const countOrderDelivered = cart?.data.filter((item) => item.status === "Đã giao").length
+  const countOrderDelivered = isLoggedIn.isLogged ? cart?.data.filter((item) => item.status === "Đã giao").length : 0;
 
-  const countOrderCancelled = cart?.data.filter((item) => item.status === "Đã hủy").length
+  const countOrderCancelled = isLoggedIn.isLogged ? cart?.data.filter((item) => item.status === "Đã hủy").length : 0;
 
+  const handleRemoveToken = async () => {
+    try {
+      const result = await HandleRemoveFcmToken(isLoggedIn.user._id, isLoggedIn.user.fcmToken);
+      if (result.status === 200) {
+        console.log('Token removed successfully');
+      }
+    } catch (error) {
+      console.error('Failed to update token for user:', isLoggedIn.user._id, error);
+    }
+  }
 
+  const handleLogout = async () => {
+    try {
+      dispatch(Logout());
+      await AsyncStorage.removeItem('fcmToken');
+      dispatch(setItemCount(0));
+      setIsVisible(false);
+      await handleRemoveToken();
+    } catch (error) {
+      console.error('Logout failed', error);
+    }
+  };
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
       <View style={IndexStyles.StyleInformation.container}>
@@ -115,8 +144,8 @@ const Information: React.FC = () => {
             isVisible={isVisible}
             title='Xác nhận'
             message='Bạn có chắc chắn muốn đăng xuất không?'
-            onPressConfirm={() => { dispatch(Logout()); dispatch(setItemCount(0)); setIsVisible(false) }}
             onPressCancel={() => setIsVisible(false)}
+            onPressConfirm={handleLogout}
           />
         </View>
       </View>

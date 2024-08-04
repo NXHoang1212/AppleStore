@@ -15,6 +15,7 @@ const initialState: UserState = {
         photoUrl: "",
         otp: "",
         provider: "",
+        fcmToken: ""
     }
 }
 
@@ -33,6 +34,9 @@ const AuthSlice = createSlice({
             state.user.gender = action.payload.gender;
             state.user.photoUrl = action.payload.photoUrl;
         },
+        updateToken: (state, action: PayloadAction<string>) => {
+            state.user.fcmToken = action.payload;
+        },
         Logout: (state) => {
             state.isLogged = false;
             state.user = {
@@ -46,10 +50,11 @@ const AuthSlice = createSlice({
                 photoUrl: "",
                 otp: "",
                 provider: "",
+                fcmToken: ""
             }
         }
     }
 })
 
-export const { Login, Update, Logout } = AuthSlice.actions;
+export const { Login, Update, Logout, updateToken } = AuthSlice.actions;
 export default AuthSlice.reducer;

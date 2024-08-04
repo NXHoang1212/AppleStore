@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, ScrollView, Image, FlatList } from 'react-native'
+import { View, Text, TouchableOpacity, ScrollView, Image, FlatList, Linking } from 'react-native'
 import React, { useState, useRef, useEffect } from 'react'
 import { Icon } from '../../../constant/Icon';
 
@@ -18,23 +18,36 @@ import { ItemProductHomePage } from '../../../import/IndexComponent';
 import { Loading } from '../../../import/IndexComponent';
 import { fetchFavourites } from '../../../redux/slices/Favourties.Slice';
 import { fetchGetCountCart } from '../../../redux/slices/CountCartSlice';
+import HandleNotification from '../../../utils/HandleNotification';
+import notifee, { AndroidImportance, EventType } from '@notifee/react-native';
+import messaging from '@react-native-firebase/messaging';
+import { handleLinking } from '../../../utils/HandleLinking';
 
 
 const HomePage: React.FC = () => {
     useStatusBarConfig('dark-content', 'transparent', true)
+
     const navigation = useNavigation<NativeStackNavigationProp<StackHomeTypeParam, 'AuthUser'>>()
+
     const scrollRef = useRef<ScrollView>(null)
+
     useScrollToTop(scrollRef)
+
     const dispatch = useAppDispatch()
+
     const user = useAppSelector(state => state.root.Auth)
+
     const product = useAppSelector(state => state.Product)
 
     useEffect(() => {
         if (user.user._id) {
             dispatch(fetchGetCountCart(user.user._id))
             dispatch(fetchFavourites(user.user._id))
+            HandleNotification.checkNotificationPermission(user.user, dispatch);
         }
     }, [user.user._id, dispatch])
+
+   
 
     if (product.error) {
         return <Loading loading={product.loading} />

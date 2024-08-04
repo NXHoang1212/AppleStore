@@ -77,7 +77,7 @@ const AccountManagement = () => {
                 const data: Users = response.data;
                 console.log("🚀 ~ handleRegister ~ data:", data);
                 ToastMessage('success', 'Đăng ký thành công');
-                navigation.goBack()
+                navigation.navigate('TabHome', { screen: 'Trang chủ' } as any)
             } else if (response.status === 400) {
                 ToastMessage('error', 'Tài khoản đã tồn tại vui lòng kiểm tra lại thông tin');
             }

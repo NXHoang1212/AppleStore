@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Keyboard, Pressable, Image, ScrollView } from 'react-native'
+import { View, Text, TouchableOpacity, Keyboard, Pressable, Image } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { IndexStyles } from '../../../import/IndexStyles'
 
@@ -19,6 +19,7 @@ import { COLOR } from '../../../constant/Colors'
 import { useImagePicker } from '../../../import/IndexFeatures';
 import { useAppDispatch, useAppSelector } from '../../../features/redux/ReduxHook'
 import { Responsive } from '../../../constant/Responsive';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const EditProfile: React.FC = () => {
   const navigation = useNavigation()
@@ -76,25 +77,25 @@ const EditProfile: React.FC = () => {
 
   return (
     <Pressable onPress={Keyboard.dismiss} style={IndexStyles.StyleEditProfile.container}>
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ flexGrow: 1, paddingBottom: 20 }}>
-        <View style={IndexStyles.StyleEditProfile.container}>
-          <View style={IndexStyles.StyleEditProfile.viewheader}>
-            <View style={IndexStyles.StyleEditProfile.headerTitle}>
-              <CustomHeader title='Chỉnh sửa hồ sơ' color={COLOR.REDONE} fontSize={Responsive.RFPercentage(2.5)}/>
-              <TouchableOpacity
-                onPress={handleUpdate}
-                disabled={!isInfoChanged()}
-                style={{ opacity: isInfoChanged() ? 1 : 0.5 }}
-              >
-                <Text style={{
-                  ...IndexStyles.StyleEditProfile.textHeader,
-                  color: isInfoChanged() ? COLOR.REDONE : COLOR.BLACK
-                }}>
-                  Lưu
-                </Text>
-              </TouchableOpacity>
-            </View>
+      <View style={IndexStyles.StyleEditProfile.container}>
+        <View style={IndexStyles.StyleEditProfile.viewheader}>
+          <View style={IndexStyles.StyleEditProfile.headerTitle}>
+            <CustomHeader title='Chỉnh sửa hồ sơ' color={COLOR.REDONE} fontSize={Responsive.RFPercentage(2.5)} />
+            <TouchableOpacity
+              onPress={handleUpdate}
+              disabled={!isInfoChanged()}
+              style={{ opacity: isInfoChanged() ? 1 : 0.5 }}
+            >
+              <Text style={{
+                ...IndexStyles.StyleEditProfile.textHeader,
+                color: isInfoChanged() ? COLOR.REDONE : COLOR.BLACK
+              }}>
+                Lưu
+              </Text>
+            </TouchableOpacity>
           </View>
+        </View>
+        <ScrollView contentContainerStyle={{ flexGrow: 1, paddingBottom: 10 }} showsVerticalScrollIndicator={false}>
           <View style={IndexStyles.StyleEditProfile.containerBody}>
             {photoUrl ? (
               <ImagePicker
@@ -190,8 +191,8 @@ const EditProfile: React.FC = () => {
               </TouchableOpacity>
             </View>
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </View>
     </Pressable>
   )
 }

@@ -9,6 +9,7 @@ export interface Users {
     gender: string;
     provider?: string;
     otp?: string;
+    fcmToken: string;
 }
 
 export interface UserState {

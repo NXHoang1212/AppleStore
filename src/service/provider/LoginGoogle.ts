@@ -26,7 +26,7 @@ const loginGoogle = async (dispatch: any, navigation: any) => {
         }
         if (response.status === 200) {
             dispatch(Login({ isLogged: true, user: data }))
-            navigation.navigate('TabHome', { screen: 'HomePage' } as any)
+            navigation.navigate('TabHome', { screen: 'Trang chủ' } as any)
             ToastMessage('success', 'Đăng nhập thành công')
         }
     } catch (error: any) {
