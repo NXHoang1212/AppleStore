@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, ScrollView, Image, FlatList, Linking } from 'react-native'
+import { View, Text, TouchableOpacity, ScrollView, Image, FlatList, Modal } from 'react-native'
 import React, { useState, useRef, useEffect } from 'react'
 import { Icon } from '../../../constant/Icon';
 
@@ -11,18 +11,15 @@ import { StackHomeTypeParam } from '../../../model/param/IndexStack.Param'
 
 import { useAppSelector, useAppDispatch } from '../../../features/redux/ReduxHook'
 import { IndexStyles } from '../../../import/IndexStyles';
-
 import BannerSlider from '../../../components/banner/Advertisement';
 
-import { ItemProductHomePage } from '../../../import/IndexComponent';
-import { Loading } from '../../../import/IndexComponent';
+import { ItemProductHomePage, Loading } from '../../../import/IndexComponent';
 import { fetchFavourites } from '../../../redux/slices/Favourties.Slice';
 import { fetchGetCountCart } from '../../../redux/slices/CountCartSlice';
-import HandleNotification from '../../../utils/HandleNotification';
-import notifee, { AndroidImportance, EventType } from '@notifee/react-native';
-import messaging from '@react-native-firebase/messaging';
-import { handleLinking } from '../../../utils/HandleLinking';
 
+import HandleNotification from '../../../utils/HandleNotification';
+import NetInfor from '@react-native-community/netinfo';
+import RNRestart from 'react-native-restart';
 
 const HomePage: React.FC = () => {
     useStatusBarConfig('dark-content', 'transparent', true)
@@ -39,6 +36,8 @@ const HomePage: React.FC = () => {
 
     const product = useAppSelector(state => state.Product)
 
+    const [isConnected, setIsConnected] = useState<boolean>(false)
+
     useEffect(() => {
         if (user.user._id) {
             dispatch(fetchGetCountCart(user.user._id))
@@ -47,12 +46,17 @@ const HomePage: React.FC = () => {
         }
     }, [user.user._id, dispatch])
 
-   
+    useEffect(() => {
+        const unsubscribe = NetInfor.addEventListener(state => {
+            setIsConnected(state.isConnected ?? false)
+        })
+        return () => unsubscribe()
+    }, [])
+
 
     if (product.error) {
         return <Loading loading={product.loading} />
     }
-
 
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false} ref={scrollRef}>
@@ -212,6 +216,24 @@ const HomePage: React.FC = () => {
                     </View>
                 </View>
             </View>
+            <Modal
+                visible={!isConnected}
+                animationType='slide'
+                transparent={true}
+                statusBarTranslucent={true}
+            >
+                <View style={IndexStyles.StylesHomePage.modalBackground}>
+                    <View style={IndexStyles.StylesHomePage.viewModal}>
+                        <View style={IndexStyles.StylesHomePage.viewTextModal}>
+                            <Text style={IndexStyles.StylesHomePage.textTitleModal}>Thông báo</Text>
+                            <Text style={IndexStyles.StylesHomePage.textModal}>Không có kết nối internet. Vui lòng kiểm tra thử lại mạng</Text>
+                        </View>
+                        <TouchableOpacity onPress={() => RNRestart.Restart()} style={IndexStyles.StylesHomePage.viewButton}>
+                            <Text style={IndexStyles.StylesHomePage.textButton}>Thử lại</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
         </ScrollView>
     )
 }

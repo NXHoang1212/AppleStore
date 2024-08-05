@@ -12,16 +12,15 @@ import HomePage from '../screens/homeproduct/home/HomePage';
 import Cart from '../screens/cart/Cart';
 import CategoryProduct from '../screens/category/list/CategoryProduct';
 import Information from '../screens/other/infor/Information';
-import React from 'react';
-
+import React, { useEffect, useState } from 'react';
 import { useAppSelector } from '../import/IndexFeatures';
+import NetInfo from '@react-native-community/netinfo';
 
 const BottomTabHomePage = createBottomTabNavigator<TabHomePageListParam>();
 
 const TabHomePage = () => {
-
     const cartData = useAppSelector(state => state.root.CountCart.itemCount);
-    
+
     const tabHome: TabHomeType[] = [
         {
             component: HomePage,

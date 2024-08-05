@@ -26,9 +26,9 @@ const config = {
     },
 };
 
-const Linking: any = {
+const ConfigLinking: any = {
     prefixes: [HOST.DOMAIN],
     config,
 };
 
-export default Linking;
+export default ConfigLinking;

@@ -8,6 +8,7 @@ export type StackHomeTypeParam = {
     TabStatusOrder: undefined;
     StackMisc: undefined;
     NotFound: undefined;
+    ConnectInternet: undefined;
 };
 
 export type StackIndividualParams = {

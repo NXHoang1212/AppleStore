@@ -6,6 +6,7 @@ export enum StackHomeEnum {
     TabStatusOrder = 'TabStatusOrder',
     StackMisc = 'StackMisc',
     NotFound = 'NotFound',
+    ConnectInternet = 'ConnectInternet',
 }
 
 export enum StackIndividualEnum {

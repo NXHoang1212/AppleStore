@@ -57,7 +57,7 @@ const ItemDetailArticle: React.FC<PropsProduct> = ({ item, navigation, userId = 
                     <View style={IndexStyles.StyleItemDetailArticle.containerHeader}>
                         <LinearGradient colors={['#ffffff', '#e8e8e8']} style={IndexStyles.StyleItemDetailArticle.viewimage}>
                             <View style={IndexStyles.StyleItemDetailArticle.viewIcon}>
-                                <TouchableOpacity onPress={() => navigation.canGoBack() && navigation.goBack()}>
+                                <TouchableOpacity onPress={() => navigation.canGoBack() ? navigation.goBack() : navigation.navigate('TabHome')}>
                                     <Icon.BackSVG
                                         width={Responsive.wp(8)}
                                         height={Responsive.hp(8)}

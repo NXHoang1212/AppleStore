@@ -129,6 +129,64 @@ const StylesHomePage = StyleSheet.create({
         alignItems: 'center',
         marginTop: Responsive.hp(2),
     },
+    modalBackground: {
+        flex: 1,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)', // Màu đen với độ trong suốt 50%
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    viewModal: {
+        backgroundColor: COLOR.WHITE,
+        width: Responsive.wp(88),
+        height: Responsive.hp(28),
+        alignSelf: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
+        shadowColor: COLOR.BLACK,
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+        flexDirection: 'column',
+        gap: Responsive.hp(4),
+        borderRadius: 10,
+    },
+    viewTextModal: {
+        flexDirection: 'column',
+        gap: Responsive.hp(2),
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    textTitleModal: {
+        fontFamily: FontsOSANS.OSANS_BOLD,
+        fontSize: Responsive.RFPercentage(2.7),
+        color: COLOR.RED,
+    },
+    textModal: {
+        fontFamily: FontsOSANS.OSANS_BOLD,
+        fontSize: Responsive.RFPercentage(2.2),
+        color: COLOR.BLACK,
+        textAlign: 'center',
+        width: Responsive.wp(80),
+    },
+    viewButton: {
+        width: Responsive.wp(70),
+        height: Responsive.hp(6),
+        backgroundColor: COLOR.RED,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 10,
+        alignSelf: 'center',
+    },
+    textButton: {
+        fontFamily: FontsOSANS.OSANS_BOLD,
+        fontSize: Responsive.RFPercentage(2.2),
+        color: COLOR.WHITE,
+    },
+
 });
 
 export { StylesHomePage }

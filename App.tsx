@@ -8,8 +8,6 @@ import Toast from 'react-native-toast-message';
 import notifee, { AndroidImportance, EventType } from '@notifee/react-native';
 import messaging from '@react-native-firebase/messaging';
 import { useEffect } from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { handleLinking } from './src/utils/HandleLinking';
 import { navigationRef } from './src/stack/RootNavigationRef';
 
@@ -62,6 +60,7 @@ function App(): React.JSX.Element {
       notifee.cancelAllNotifications();
     }
   }, [])
+  
   return (
     <ProviderRedux store={StoreRedux}>
       <PersistGate persistor={persistor} loading={null}>

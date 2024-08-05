@@ -27,8 +27,8 @@ end
 
 target 'ShopApple' do
   config = use_native_modules!
-  # use_frameworks! :linkage => :static
-  # $RNFirebaseAsStaticFramework = true
+  use_frameworks! :linkage => :static
+  $RNFirebaseAsStaticFramework = true
   use_react_native!(
     :path => config[:reactNativePath],
     # Enables Flipper.
@@ -39,7 +39,7 @@ target 'ShopApple' do
     # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
-
+  
   target 'ShopAppleTests' do
     inherit! :complete
     # Pods for testing
