@@ -139,6 +139,7 @@ const Cart: React.FC = () => {
               } else {
                 navigation.navigate('StackMisc', { screen: 'PaymentOrders', params: { id: selectedItems, shipper } });
                 setSelectedItems([]);
+                setSelectAll(false);
               }
             }} >
               <LinearGradient colors={['#ff5d00', '#ff00a5']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}

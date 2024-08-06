@@ -7,7 +7,6 @@ const initialState: UserState = {
     user: {
         _id: "",
         email: "",
-        password: "",
         phone: "",
         fullname: "",
         gender: "",
@@ -42,7 +41,6 @@ const AuthSlice = createSlice({
             state.user = {
                 _id: "",
                 email: "",
-                password: "",
                 phone: "",
                 fullname: "",
                 gender: "",

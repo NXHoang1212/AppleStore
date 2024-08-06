@@ -48,10 +48,10 @@ const HomePage: React.FC = () => {
 
     useEffect(() => {
         const unsubscribe = NetInfor.addEventListener(state => {
-            setIsConnected(state.isConnected ?? false)
+            setIsConnected(state.isConnected ? true : false)
         })
         return () => unsubscribe()
-    }, [])
+    }, [isConnected])
 
 
     if (product.error) {

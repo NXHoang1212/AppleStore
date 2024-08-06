@@ -12,6 +12,8 @@ import { FormatDate3 } from '../../../../utils/FormatDate'
 import Clipboard from '@react-native-clipboard/clipboard'
 import ToastMessage from '../../../../utils/ToastMessage'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useAppDispatch } from '../../../../import/IndexFeatures'
+import { incrementItemCount } from '../../../../redux/slices/CountCartSlice'
 
 type RootStackParamList = {
     DetailOrder: {
@@ -30,6 +32,8 @@ const DetailOrder: React.FC = () => {
     const { data, isLoading } = useGetDetailOrderQuery(id)
 
     const item = data?.data || [] as any
+
+    const dispatch = useAppDispatch()
 
     const [updateOrder] = useUpdateOrderMutation()
 

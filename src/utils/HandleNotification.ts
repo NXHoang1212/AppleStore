@@ -30,7 +30,7 @@ class HandleNotification {
                 console.log('Token is up to date, no update required.');
             }
         } catch (error) {
-            console.error('Failed to get FCM token:', error);
+            console.log('Failed to get FCM token:', error);
         }
     }
 

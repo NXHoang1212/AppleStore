@@ -159,10 +159,10 @@ const PaymentOrders: React.FC = () => {
                             }
                             await useVoucher(voucherData);
                         }
-                        ToastMessage('success', 'Đặt hàng thành công');
                         navigation.navigate('StackMisc', {
                             screen: 'OrderSuccess',
                             params: {
+                                title: 'Đặt hàng thành công',
                                 totalAmount: res.data.data.totalAmount,
                                 status: res.data.data.status,
                                 paymentStatus: res.data.data.paymentStatus,
@@ -221,6 +221,7 @@ const PaymentOrders: React.FC = () => {
                         navigation.navigate('StackMisc', {
                             screen: 'OrderSuccess',
                             params: {
+                                title: 'Đặt hàng thành công',
                                 totalAmount: result.data.data.totalAmount,
                                 status: result.data.data.status,
                                 paymentStatus: result.data.data.paymentStatus,
