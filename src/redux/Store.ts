@@ -19,6 +19,7 @@ import { AddressQuery } from '../service/Api/IndexAddress';
 import { CartQuery } from '../service/Api/IndexCart';
 import VoucherQuery from '../service/Api/Index.Voucher';
 import OrderQuery from '../service/Api/Index.Order';
+import NotificationQuery from '../service/Api/Index.Notification';
 import { setupListeners } from '@reduxjs/toolkit/query';
 
 /*AsyncStorage, Redux Persist */
@@ -51,6 +52,7 @@ const StoreRedux = configureStore({
         [CartQuery.reducerPath]: CartQuery.reducer,
         [VoucherQuery.reducerPath]: VoucherQuery.reducer,
         [OrderQuery.reducerPath]: OrderQuery.reducer,
+        [NotificationQuery.reducerPath]: NotificationQuery.reducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
@@ -62,6 +64,7 @@ const StoreRedux = configureStore({
             .concat(VoucherQuery.middleware)
             .concat(CartQuery.middleware)
             .concat(OrderQuery.middleware)
+            .concat(NotificationQuery.middleware)
 
 });
 

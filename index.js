@@ -13,7 +13,7 @@ messaging().setBackgroundMessageHandler(async remoteMessage => {
     const type = remoteMessage.data.type;
     let url = '';
     if (type === 'orderSuccess' || type === 'orderFailed') {
-        url = `${HOST.DOMAIN}/StackMisc/notification`;
+        url = `${HOST.DOMAIN}/StackMisc/Notification`;
     } else {
         url = `${HOST.DOMAIN}/StackMisc/getdetail/${remoteMessage.data.id}`;
     }
@@ -26,7 +26,7 @@ messaging().onNotificationOpenedApp(remoteMessage => {
     let url = '';
 
     if (type === 'orderSuccess' || type === 'orderFailed') {
-        url = `${HOST.DOMAIN}/StackMisc/notification`;
+        url = `${HOST.DOMAIN}/StackMisc/Notification`;
     } else {
         url = `${HOST.DOMAIN}/StackMisc/getdetail/${remoteMessage.data.id}`;
     }

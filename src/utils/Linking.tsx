@@ -16,7 +16,7 @@ const config = {
                     path: 'order/failed',
                 },
                 Notification: {
-                    path: 'notification',
+                    path: 'Notification',
                 }
             },
         },

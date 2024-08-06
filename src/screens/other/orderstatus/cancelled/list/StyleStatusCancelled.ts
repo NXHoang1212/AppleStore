@@ -73,6 +73,7 @@ const StyleStatusCancelled = StyleSheet.create({
         fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
         fontSize: Responsive.RFPercentage(2),
         color: COLOR.BLACK,
+        width: Responsive.wp(70),
     },
     textQuantity: {
         fontFamily: FontsROBOTO.ROBOTO_MEDIUM,

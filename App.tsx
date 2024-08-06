@@ -34,6 +34,7 @@ function App(): React.JSX.Element {
         },
         data: {
           id: remoteMessage.data?.id || '',
+          type: remoteMessage.data?.type || '',
         },
       });
     });
@@ -44,13 +45,12 @@ function App(): React.JSX.Element {
           const type = remoteMessage.data.type;
           let url = '';
           if (type === 'orderSuccess' || type === 'orderFailed') {
-            url = `${HOST.DOMAIN}/StackMisc/notification`;
+            url = `${HOST.DOMAIN}/StackMisc/Notification`;
           } else {
             url = `${HOST.DOMAIN}/StackMisc/getdetail/${remoteMessage.data.id}`;
           }
           handleLinking(url);
-          console.log('getInitialNotification', remoteMessage.data.id);
-          console.log('getInitialNotification', remoteMessage.data.type);
+          console.log('getInitialNotification', remoteMessage);
         }
       });
     notifee.onForegroundEvent(async ({ type, detail }: any) => {
@@ -62,14 +62,12 @@ function App(): React.JSX.Element {
         } else {
           navigationRef.current?.navigate('StackMisc', { screen: 'DetailArticle', params: { _id: id } } as any);
         }
-        console.log('onForegroundEvent', detail.notification.data.id);
-        console.log('onForegroundEvent', detail.notification.data.type);
       }
     });
     notifee.onBackgroundEvent(async ({ type, detail }: any) => {
       if (type === EventType.ACTION_PRESS || type === EventType.PRESS) {
-        const type = detail.notification.data.type;
         const id = detail.notification.data.id;
+        const type = detail.notification.data.type;
         let url = '';
         if (type === 'orderSuccess' || type === 'orderFailed') {
           url = `${HOST.DOMAIN}/StackMisc/notification`;
@@ -77,10 +75,9 @@ function App(): React.JSX.Element {
           url = `${HOST.DOMAIN}/StackMisc/getdetail/${id}`;
         }
         handleLinking(url);
-        console.log('onBackgroundEvent', detail.notification.data.id);
-        console.log('onBackgroundEvent', detail.notification.data.type);
       }
     });
+
     return () => {
       notifee.cancelAllNotifications();
     }
