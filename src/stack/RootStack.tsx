@@ -6,21 +6,28 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import { StackHomeEnum } from '../model/enum/IndexStack.enum';
 import { StackHomeTypeParam } from '../model/param/IndexStack.Param';
-import { navigationRef } from './RootNavigationRef';
+import { navigationRef } from '../utils/RootNavigationRef';
 
+/*User*/
 import Slash from '../screens/slash/Slash';
-import TabHomePage from './TabHomePage';
-import StackIndividual from './StackIndividual';
-import TabStatusOrder from './TabStatusOrder';
-import StackAuthUser from './StackAuthUser';
-import StackMisc from './StackMisc';
+import TabHomePage from './user/TabHomePage';
+import StackIndividual from './user/StackIndividual';
+import TabStatusOrder from './user/TabStatusOrder';
+import StackAuthUser from './user/StackAuthUser';
+import StackMisc from './user/StackMisc';
 import NotFound from '../screens/notfound/NotFound';
 
+/*Admin*/
+import TabAdminManager from './admin/TabAdminManager';
+
 import ConfigLinking from '../utils/Linking';
+import { useAppSelector } from '../import/IndexFeatures';
 
 const Stack = createNativeStackNavigator<StackHomeTypeParam>();
 
 const RootStack = () => {
+
+    const user = useAppSelector(state => state.root.Auth.user);
 
     useEffect(() => {
         const handleInitialUrl = async () => {
@@ -51,30 +58,42 @@ const RootStack = () => {
                     name={StackHomeEnum.slash}
                     component={Slash}
                 />
-                <Stack.Screen
-                    name={StackHomeEnum.TabHomePage}
-                    component={TabHomePage}
-                />
-                <Stack.Screen
-                    name={StackHomeEnum.StackIndividual}
-                    component={StackIndividual}
-                />
-                <Stack.Screen
-                    name={StackHomeEnum.TabStatusOrder}
-                    component={TabStatusOrder}
-                />
-                <Stack.Screen
-                    name={StackHomeEnum.NotFound}
-                    component={NotFound}
-                />
-                <Stack.Screen
-                    name={StackHomeEnum.AuthStackUser}
-                    component={StackAuthUser}
-                />
-                <Stack.Screen
-                    name={StackHomeEnum.StackMisc}
-                    component={StackMisc}
-                />
+                {user.role === 'admin' ? (
+                    <>
+                        <Stack.Screen
+                            name={StackHomeEnum.TabAdminManager}
+                            component={TabAdminManager}
+                        />
+                    </>
+                ) : (
+                    <>
+                        <Stack.Screen
+                            name={StackHomeEnum.TabHomePage}
+                            component={TabHomePage}
+                        />
+                        <Stack.Screen
+                            name={StackHomeEnum.StackIndividual}
+                            component={StackIndividual}
+                        />
+                        <Stack.Screen
+                            name={StackHomeEnum.TabStatusOrder}
+                            component={TabStatusOrder}
+                        />
+                        <Stack.Screen
+                            name={StackHomeEnum.NotFound}
+                            component={NotFound}
+                        />
+                        <Stack.Screen
+                            name={StackHomeEnum.AuthStackUser}
+                            component={StackAuthUser}
+                        />
+                        <Stack.Screen
+                            name={StackHomeEnum.StackMisc}
+                            component={StackMisc}
+                        />
+                    </>
+                )
+                }
             </Stack.Navigator>
         </NavigationContainer>
     );

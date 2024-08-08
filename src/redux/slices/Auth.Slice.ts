@@ -14,6 +14,7 @@ const initialState: UserState = {
         photoUrl: "",
         otp: "",
         provider: "",
+        role: "",
         fcmToken: ""
     }
 }
@@ -38,18 +39,7 @@ const AuthSlice = createSlice({
         },
         Logout: (state) => {
             state.isLogged = false;
-            state.user = {
-                _id: "",
-                email: "",
-                phone: "",
-                fullname: "",
-                gender: "",
-                date_of_birth: new Date(),
-                photoUrl: "",
-                otp: "",
-                provider: "",
-                fcmToken: ""
-            }
+            state.user = {} as UserState['user'];
         }
     }
 })

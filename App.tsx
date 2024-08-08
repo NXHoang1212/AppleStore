@@ -9,7 +9,7 @@ import notifee, { AndroidImportance, EventType } from '@notifee/react-native';
 import messaging from '@react-native-firebase/messaging';
 import { useEffect } from 'react';
 import { handleLinking } from './src/utils/HandleLinking';
-import { navigationRef } from './src/stack/RootNavigationRef';
+import { navigationRef } from './src/utils/RootNavigationRef';
 import { HOST } from './src/constant/Host';
 
 function App(): React.JSX.Element {

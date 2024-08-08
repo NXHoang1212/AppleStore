@@ -58,6 +58,18 @@ const OrderQuery = createApi({
             }),
             providesTags: [{ type: 'Order', id: 'LIST' }],
         }),
+        GetAllOrderForAdmin: build.query<{ data: OrderEntity[] }, void>({
+            query: () => '/api/order/admin/get_all_orders',
+            providesTags: [{ type: 'Order', id: 'LIST' }],
+        }),
+        UpdateOrderAdmin: build.mutation<OrderEntity, { id: string, data: UpdateOrderEntity }>({
+            query: ({ id, data }) => ({
+                url: `/api/order/admin/update_order/${id}`,
+                method: 'PUT',
+                body: data
+            }),
+            invalidatesTags: [{ type: 'Order', id: 'LIST' }],
+        })
     }),
 });
 
@@ -65,5 +77,5 @@ export default OrderQuery
 export const {
     useCreateOrderMutation, useGetOrderUserQuery, useGetDetailOrderQuery,
     useUpdateOrderMutation, useGetStatusOrderQuery, useGetPaymentUrlVnpayMutation,
-    useReturnFromAppQuery
+    useReturnFromAppQuery, useGetAllOrderForAdminQuery, useUpdateOrderAdminMutation
 } = OrderQuery;

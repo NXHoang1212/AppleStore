@@ -23,8 +23,8 @@ const Slash: React.FC = () => {
     const dispatch = useAppDispatch()
     const [loading, setLoading] = useState<boolean>(true)
     const navigation = useNavigation<NativeStackNavigationProp<StackHomeTypeParam>>();
-    let id = useAppSelector(state => state.root.Auth.user?._id)
-    const { data: cartData, isLoading, isError } = useGetCartByUserQuery(id)
+    let user = useAppSelector(state => state.root.Auth.user)
+    const { data: cartData, isLoading, isError } = useGetCartByUserQuery(user._id)
 
     useEffect(() => {
         dispatch(fetchBannerProduct())
@@ -34,15 +34,17 @@ const Slash: React.FC = () => {
     }, [dispatch]);
 
     useEffect(() => {
-        if (!isLoading && !isError && cartData?.data && id) {
+        if (!isLoading && !isError && cartData?.data && user._id) {
             dispatch(setItemCount(cartData.data.length));
         }
-    }, [cartData, isLoading, isError, id, dispatch]);
+    }, [cartData, isLoading, isError, user, dispatch]);
 
     useEffect(() => {
         setTimeout(() => {
             setLoading(false)
-            navigation.replace('TabHome')
+            // navigation.replace('TabHome')
+            //kiểm tra role nếu là admin thì chuyển sang trang admin ngược lại chuyển sang trang user
+            navigation.replace(user.role === 'admin' ? 'TabAdminManager' : 'TabHome')
         }, 1500)
     }, [navigation]);
 

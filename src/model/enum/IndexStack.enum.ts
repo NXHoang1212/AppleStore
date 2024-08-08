@@ -7,6 +7,7 @@ export enum StackHomeEnum {
     StackMisc = 'StackMisc',
     NotFound = 'NotFound',
     ConnectInternet = 'ConnectInternet',
+    TabAdminManager = 'TabAdminManager',
 }
 
 export enum StackIndividualEnum {

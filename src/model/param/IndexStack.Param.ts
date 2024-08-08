@@ -9,6 +9,7 @@ export type StackHomeTypeParam = {
     StackMisc: undefined;
     NotFound: undefined;
     ConnectInternet: undefined;
+    TabAdminManager: undefined;
 };
 
 export type StackIndividualParams = {

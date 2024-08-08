@@ -9,6 +9,7 @@ export interface Users {
     provider?: string;
     otp?: string;
     fcmToken: string;
+    role: string;
 }
 
 export interface UserState {
@@ -20,6 +21,6 @@ export interface UpdateUser {
     fullname: string;
     phone: string;
     photoUrl: string;
-    date_of_birth: Date ;
+    date_of_birth: Date;
     gender: string;
 }

@@ -11,3 +11,10 @@ export enum TabOrderStatusEnum {
     Delivered = 'Đã giao',
     Cancelled = 'Đã hủy',
 }
+
+export enum TabAdminManagerEnum {
+    Order = 'Đơn hàng',
+    Manager = 'Quản lý',
+    Statistic = 'Thống kê',
+    Other = 'Khác',
+}
