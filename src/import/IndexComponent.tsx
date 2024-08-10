@@ -41,6 +41,7 @@ import ItemFavourites from "../components/item/product/list/ItemFavourites";
 import ItemListCart from "../components/item/cart/list/ItemListCart";
 import ItemDetailUpdateCart from "../components/item/cart/detail/ItemDetailUpdateCart";
 import ItemDetailUpdateArticle from "../components/item/cart/detail/ItemDetailUpdateCart";
+import ItemAdminListProducts from "../components/item/product/list/ItemAdminListProducts";
 
 /*MEDIA */
 import ImagePicker from "../components/media/CamraPicker";
@@ -79,6 +80,7 @@ export {
     ItemDetailUpdateCart,
     ItemDetailArticle,
     ItemDetailUpdateArticle,
+    ItemAdminListProducts,
     ImagePicker,
     Loading,
     MultiColorLine

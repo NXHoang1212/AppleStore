@@ -14,6 +14,7 @@ export type StackHomeTypeParam = {
     /*Admin*/
     TabAdminManager: undefined;
     StackAdminManagerOrder: undefined;
+    StackAdminManagerProduct: undefined;
 };
 
 export type StackIndividualParams = {
@@ -66,8 +67,6 @@ export type StackAuthUserParams = {
 export type StackAdminManagerOrderParams = {
     DetailManagerOrder: undefined;
     DetailOrderCancel: undefined;
-    AllProducts: undefined;
-    StackAdminManagerProduct: undefined;
 }
 
 export type StackAdminManagerProductParams = {

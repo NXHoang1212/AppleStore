@@ -2,7 +2,7 @@ import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import useStatusBarConfig from '../../../utils/UseStatusBarConfig'
 import { CustomHeader } from '../../../import/IndexComponent'
-import StyleMangerProducts from './StyleManagerProducts'
+import StyleAll from './StyleAll'
 import { Icon } from '../../../constant/Icon'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
@@ -13,29 +13,29 @@ const ManagerAll: React.FC = () => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>()
 
   return (
-    <View style={StyleMangerProducts.container}>
-      <View style={StyleMangerProducts.viewheader}>
-        <View style={StyleMangerProducts.headerTitle}>
+    <View style={StyleAll.container}>
+      <View style={StyleAll.viewheader}>
+        <View style={StyleAll.headerTitle}>
           <CustomHeader title='Quản lý danh mục' color='red' />
         </View>
       </View>
-      <View style={StyleMangerProducts.containerBody}>
-        <TouchableOpacity style={StyleMangerProducts.viewTab}
-          onPress={() => navigation.navigate('StackAdminManagerOrder', { screen: 'AllProducts' })}>
-          <Image source={Icon.PRODUCTADMIN} style={StyleMangerProducts.image} />
-          <Text style={StyleMangerProducts.textTitle}>Quản lý sản phẩm</Text>
+      <View style={StyleAll.containerBody}>
+        <TouchableOpacity style={StyleAll.viewTab}
+          onPress={() => navigation.navigate('StackAdminManagerProduct', { screen: 'ListProducts' })}>
+          <Image source={Icon.PRODUCTADMIN} style={StyleAll.image} />
+          <Text style={StyleAll.textTitle}>Quản lý sản phẩm</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={StyleMangerProducts.viewTab}>
-          <Image source={Icon.CATEGORYADMIN} style={StyleMangerProducts.image} />
-          <Text style={StyleMangerProducts.textTitle}>Quản lý danh mục sản phẩm</Text>
+        <TouchableOpacity style={StyleAll.viewTab}>
+          <Image source={Icon.CATEGORYADMIN} style={StyleAll.image} />
+          <Text style={StyleAll.textTitle}>Quản lý danh mục sản phẩm</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={StyleMangerProducts.viewTab}>
-          <Image source={Icon.BANNERADMIN} style={StyleMangerProducts.image} />
-          <Text style={StyleMangerProducts.textTitle}>Quản lý quảng cáo</Text>
+        <TouchableOpacity style={StyleAll.viewTab}>
+          <Image source={Icon.BANNERADMIN} style={StyleAll.image} />
+          <Text style={StyleAll.textTitle}>Quản lý quảng cáo</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={StyleMangerProducts.viewTab}>
-          <Image source={Icon.CUSTOMERADMIN} style={StyleMangerProducts.image} />
-          <Text style={StyleMangerProducts.textTitle}>Quản lý Khách hàng</Text>
+        <TouchableOpacity style={StyleAll.viewTab}>
+          <Image source={Icon.CUSTOMERADMIN} style={StyleAll.image} />
+          <Text style={StyleAll.textTitle}>Quản lý Khách hàng</Text>
         </TouchableOpacity>
       </View>
     </View>

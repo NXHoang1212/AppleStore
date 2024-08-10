@@ -34,6 +34,7 @@ const StyleListProducts = StyleSheet.create({
         letterSpacing: 0.25
     },
     containerBody: {
+        flex: 1,
         backgroundColor: COLOR.GRAYONE,
         marginTop: Responsive.hp(2),
     },
@@ -60,6 +61,16 @@ const StyleListProducts = StyleSheet.create({
         color: COLOR.BLUE,
         fontWeight: 'bold',
         letterSpacing: 0.25
+    },
+    textNumber: {
+        fontSize: Responsive.RFPercentage(2.5),
+        fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
+        color: COLOR.REDONE,
+        fontWeight: 'bold',
+        letterSpacing: 0.25
+    },
+    loading: {
+        marginVertical: Responsive.hp(2),
     },
 });
 

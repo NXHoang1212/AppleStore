@@ -1,9 +1,9 @@
 import { StyleSheet } from "react-native";
-import { COLOR } from "../../../../../constant/Colors";
-import { FontsROBOTO } from "../../../../../constant/Fonts";
-import { Responsive } from "../../../../../constant/Responsive";
+import { COLOR } from "../../../constant/Colors";
+import { FontsROBOTO } from "../../../constant/Fonts";
+import { Responsive } from "../../../constant/Responsive";
 
-const StyleDeleteProducts = StyleSheet.create({
+const StyleAll = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: COLOR.GRAYONE
@@ -34,6 +34,7 @@ const StyleDeleteProducts = StyleSheet.create({
         letterSpacing: 0.25
     },
     containerBody: {
+        flex: 1,
         backgroundColor: COLOR.GRAYONE,
         marginTop: Responsive.hp(2),
     },
@@ -63,4 +64,4 @@ const StyleDeleteProducts = StyleSheet.create({
     },
 });
 
-export default StyleDeleteProducts
+export default StyleAll

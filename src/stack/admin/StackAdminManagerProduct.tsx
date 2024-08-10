@@ -6,7 +6,6 @@ import { StackAdminManagerProductParams } from '../../model/param/IndexStack.Par
 import ListProducts from '../../screens/admin/manager/products/list/ListProducts';
 import AddProducts from '../../screens/admin/manager/products/add/AddProducts';
 import EditProducts from '../../screens/admin/manager/products/edit/EditProducts';
-import DeleteProducts from '../../screens/admin/manager/products/remove/DeleteProducts';
 
 
 const Stack = createNativeStackNavigator<StackAdminManagerProductParams>();
@@ -17,7 +16,6 @@ const StackAdminManagerProduct = (): React.JSX.Element => {
             <Stack.Screen name={StackAdminManagerProductEnum.ListProducts} component={ListProducts} />
             <Stack.Screen name={StackAdminManagerProductEnum.AddProducts} component={AddProducts} />
             <Stack.Screen name={StackAdminManagerProductEnum.EditProducts} component={EditProducts} />
-            <Stack.Screen name={StackAdminManagerProductEnum.DeleteProducts} component={DeleteProducts} />
         </Stack.Navigator>
     );
 };
