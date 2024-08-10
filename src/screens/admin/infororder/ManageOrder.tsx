@@ -8,9 +8,9 @@ import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useAppSelector } from '../../../import/IndexFeatures'
 import StyleMangerOrder from './StyleMangerOrder'
-import { IndexStyles } from '../../../import/IndexStyles'
 import { UseActiveTab } from '../../../utils/ActiveTab'
 import { FlashList } from '@shopify/flash-list'
+import { FormatPriceVND2 } from '../../../utils/FormatPrice'
 
 const ManageOrder = () => {
   useStatusBarConfig('dark-content', 'transparent', true)
@@ -32,22 +32,28 @@ const ManageOrder = () => {
         style={StyleMangerOrder.header}>
         <View style={StyleMangerOrder.headerTitle}>
           <Icon.LogoAppleSVG width={70} height={130} fill='red' />
-          <Text style={StyleMangerOrder.headerText}>Quản lý đơn hàng</Text>
+          <Text style={StyleMangerOrder.headerText}>Quản lý đơn hàng admin</Text>
           <TouchableOpacity>
             <Icon.BellSVG width={28} height={25} fill='#fff' />
           </TouchableOpacity>
         </View>
       </LinearGradient>
       <View style={StyleMangerOrder.containerBody}>
-        <View style={IndexStyles.StyleReviewInfor.viewTab}>
-          <TouchableOpacity onPress={() => { handleActiveTab('Chờ xác nhận') }}>
+        <View style={StyleMangerOrder.viewTab}>
+          <TouchableOpacity
+            style={activeTab === 'Chờ xác nhận' ? StyleMangerOrder.viewTabButton : {}}
+            onPress={() => { handleActiveTab('Chờ xác nhận') }}>
             <Text style={activeTab === 'Chờ xác nhận' ? StyleMangerOrder.textActive : StyleMangerOrder.textTab}>Chưa xác nhận</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => { handleActiveTab('Đã xác nhận') }}>
+          <TouchableOpacity
+            style={activeTab === 'Đã xác nhận' ? StyleMangerOrder.viewTabButton : {}}
+            onPress={() => { handleActiveTab('Đã xác nhận') }}>
             <Text style={activeTab === 'Đã xác nhận' ? StyleMangerOrder.textActive : StyleMangerOrder.textTab}>Đã xác nhận</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => { handleActiveTab('Đã hủy') }}>
-            <Text style={activeTab === 'Đã hủy' ? StyleMangerOrder.textActiveCancel : StyleMangerOrder.textTab}>Đã hủy đơn</Text>
+          <TouchableOpacity
+            style={activeTab === 'Đã hủy' ? StyleMangerOrder.viewTabButton : {}}
+            onPress={() => { handleActiveTab('Đã hủy') }}>
+            <Text style={activeTab === 'Đã hủy' ? StyleMangerOrder.textActiveCancel : StyleMangerOrder.textTab}>Đơn đã hủy</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -55,68 +61,82 @@ const ManageOrder = () => {
         <FlashList
           data={data?.data.filter(item => item.status === 'Chờ xác nhận')}
           renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => navigation.navigate('StackAdmin', { screen: 'DetailOrder', params: { item } })}>
+            <TouchableOpacity>
               <View style={StyleMangerOrder.viewOrder}>
-                <View style={StyleMangerOrder.viewOrderLeft}>
-                  <View style={StyleMangerOrder.viewOrderText}>
-                    <Text style={StyleMangerOrder.textOrder}>{item.name}</Text>
-                    <Text style={StyleMangerOrder.textOrder}>{item.phone}</Text>
-                    <Text style={StyleMangerOrder.textOrder}>{item.address}</Text>
+                <View style={StyleMangerOrder.viewOrderText}>
+                  <View style={StyleMangerOrder.viewOrderProduct}>
+                    <View>
+                      <Image source={{ uri: item.products[0].priceColor.image }} style={StyleMangerOrder.imageOrder} />
+                    </View>
+                    <View style={StyleMangerOrder.viewOrderProductText}>
+                      <Text style={StyleMangerOrder.textOrder}>{item.products[0].name} {item.products[0].model} {item.products[0].storage}</Text>
+                      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <Text style={StyleMangerOrder.textOrder}>Số lượng:</Text>
+                        <Text style={StyleMangerOrder.textProduct}>x{item.products[0].quantity}</Text>
+                      </View>
+                      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <Text style={StyleMangerOrder.textOrder}>Màu sắc</Text>
+                        <Text style={StyleMangerOrder.textProduct}>{item.products[0].priceColor.color}</Text>
+                      </View>
+                      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <Text style={StyleMangerOrder.textOrder}>Tổng tiền:</Text>
+                        <Text style={StyleMangerOrder.textProduct}>{FormatPriceVND2(item.totalAmount)}</Text>
+                      </View>
+                    </View>
                   </View>
                 </View>
-                <View style={StyleMangerOrder.viewOrderRight}>
-                  <Text style={StyleMangerOrder.textOrder}>{item.totalPrice}đ</Text>
-                  <Text style={StyleMangerOrder.textOrder}>{item.status}</Text>
-                </View>
+                <TouchableOpacity style={StyleMangerOrder.viewOrderButton}>
+                    <Text style={StyleMangerOrder.textOrder}>Xác nhận</Text>
+                  </TouchableOpacity>
               </View>
             </TouchableOpacity>
           )}
+          showsVerticalScrollIndicator={false}
+          estimatedItemSize={200}
         />
       ) : activeTab === 'Đã xác nhận' ? (
         <FlashList
           data={data?.data.filter(item => item.status === 'Đã xác nhận')}
           renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => navigation.navigate('StackAdmin', { screen: 'DetailOrder', params: { item } })}>
+            <TouchableOpacity>
               <View style={StyleMangerOrder.viewOrder}>
-                <View style={StyleMangerOrder.viewOrderLeft}>
-                  <View style={StyleMangerOrder.viewOrderText}>
-                    <Text style={StyleMangerOrder.textOrder}>{item.orderCode}</Text>
-                    <Text style={StyleMangerOrder.textOrder}>{item.phone}</Text>
-                    <Text style={StyleMangerOrder.textOrder}>{item.address}</Text>
-                  </View>
+                <View style={StyleMangerOrder.viewOrderText}>
+                  <Text style={StyleMangerOrder.textOrder}>{item.orderCode}</Text>
+                  <Text style={StyleMangerOrder.textOrder}></Text>
+                  <Text style={StyleMangerOrder.textOrder}></Text>
                 </View>
-                <View style={StyleMangerOrder.viewOrderRight}>
-                  <Text style={StyleMangerOrder.textOrder}>{item.totalPrice}đ</Text>
-                  <Text style={StyleMangerOrder.textOrder}>{item.status}</Text>
-                </View>
+              </View>
+              <View style={StyleMangerOrder.viewOrderRight}>
+                <Text style={StyleMangerOrder.textOrder}>d</Text>
+                <Text style={StyleMangerOrder.textOrder}>{item.status}</Text>
               </View>
             </TouchableOpacity>
           )}
+          showsVerticalScrollIndicator={false}
+          estimatedItemSize={200}
         />
       ) : (
         <FlashList
           data={data?.data.filter(item => item.status === 'Đã hủy')}
           renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => navigation.navigate('StackAdmin', { screen: 'DetailOrder', params: { item } })}>
+            <TouchableOpacity>
               <View style={StyleMangerOrder.viewOrder}>
-                <View style={StyleMangerOrder.viewOrderLeft}>
-                  <View style={StyleMangerOrder.viewOrderText}>
-                    <Text style={StyleMangerOrder.textOrder}>{item.orderCode}</Text>
-                    <Text style={StyleMangerOrder.textOrder}>{item.phone}</Text>
-                    <Text style={StyleMangerOrder.textOrder}>{item.address}</Text>
-                  </View>
+                <View style={StyleMangerOrder.viewOrderText}>
+                  <Text style={StyleMangerOrder.textOrder}>a</Text>
+                  <Text style={StyleMangerOrder.textOrder}>b</Text>
+                  <Text style={StyleMangerOrder.textOrder}>c</Text>
                 </View>
-                <View style={StyleMangerOrder.viewOrderRight}>
-                  <Text style={StyleMangerOrder.textOrder}>{item.totalPrice}đ</Text>
-                  <Text style={StyleMangerOrder.textOrder}>{item.status}</Text>
-                </View>
+              </View>
+              <View style={StyleMangerOrder.viewOrderRight}>
+                <Text style={StyleMangerOrder.textOrder}>đ</Text>
+                <Text style={StyleMangerOrder.textOrder}>{item.status}</Text>
               </View>
             </TouchableOpacity>
           )}
+          showsVerticalScrollIndicator={false}
+          estimatedItemSize={200}
         />
-      )
-
-      }
+      )}
     </View>
   )
 }
