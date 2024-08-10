@@ -16,7 +16,7 @@ type RouteParams = {
     }
 }
 
-const DetailOrderCancel = () => {
+const DetailOrderCancel: React.FC = () => {
 
     const route = useRoute<RouteProp<RouteParams, 'DetailManagerOrder'>>()
 

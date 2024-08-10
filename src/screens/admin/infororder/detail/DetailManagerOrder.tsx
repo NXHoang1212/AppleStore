@@ -16,7 +16,7 @@ type RouteParams = {
     }
 }
 
-const DetailManagerOrder = () => {
+const DetailManagerOrder: React.FC = () => {
 
     const route = useRoute<RouteProp<RouteParams, 'DetailManagerOrder'>>()
 

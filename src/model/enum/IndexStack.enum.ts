@@ -61,4 +61,13 @@ export enum StackMiscEnum {
 export enum StackAdminManagerOrderEnum {
     DetailManagerOrder = 'DetailManagerOrder',
     DetailOrderCancel = 'DetailOrderCancel',
+    AllProducts = 'AllProducts',
+    StackAdminManagerProduct = 'StackAdminManagerProduct',
+}
+
+export enum StackAdminManagerProductEnum {
+    ListProducts = 'ListProducts',
+    AddProducts = 'AddProducts',
+    EditProducts = 'EditProducts',
+    DeleteProducts = 'DeleteProducts',
 }

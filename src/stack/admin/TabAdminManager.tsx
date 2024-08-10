@@ -11,7 +11,7 @@ import { Responsive } from '../../constant/Responsive';
 import { SvgProps } from 'react-native-svg';
 
 import ManageOrder from '../../screens/admin/infororder/list/ManageOrder';
-import ManagerProducts from '../../screens/admin/manager/ManagerProducts';
+import ManagerAll from '../../screens/admin/manager/ManagerAll';
 import StatisticAdmin from '../../screens/admin/statistic/StatisticAdmin';
 import OtherAdmin from '../../screens/admin/other/OtherAdmin';
 
@@ -27,7 +27,7 @@ const TabAdminManager = () => {
             isSvg: true
         },
         {
-            component: ManagerProducts,
+            component: ManagerAll,
             name: TabAdminManagerEnum.Manager,
             icon: Icon.CART,
             isSvg: false

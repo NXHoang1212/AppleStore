@@ -45,6 +45,10 @@ import PaymentCancell from '../assets/svg/PaymentCancell.svg';
 import PaymentPending from '../assets/svg/paymentpending.svg';
 import PaymentSuccess from '../assets/svg/paymentsuccess.svg';
 import IconStore from '../assets/svg/store.svg';
+import All from '../assets/svg/all.svg';
+import Create from '../assets/svg/create.svg';
+import Delete from '../assets/svg/delete.svg';
+import Edit from '../assets/svg/edit.svg';
 
 export class Icon {
     static BackSVG = IconBack;
@@ -94,6 +98,10 @@ export class Icon {
     static PaymentPendingSVG = PaymentPending;
     static PaymentSuccessSVG = PaymentSuccess;
     static StoreSVG = IconStore;
+    static AllSVG = All;
+    static CreateSVG = Create;
+    static DeleteSVG = Delete;
+    static EditSVG = Edit;
     static HOME = require('../assets/images/house.png');
     static CART = require('../assets/images/cart.png');
     static CATEGORY = require('../assets/images/category.png');

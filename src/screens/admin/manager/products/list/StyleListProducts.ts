@@ -1,9 +1,9 @@
 import { StyleSheet } from "react-native";
-import { COLOR } from "../../../constant/Colors";
-import { FontsROBOTO } from "../../../constant/Fonts";
-import { Responsive } from "../../../constant/Responsive";
+import { COLOR } from "../../../../../constant/Colors";
+import { FontsROBOTO } from "../../../../../constant/Fonts";
+import { Responsive } from "../../../../../constant/Responsive";
 
-const StyleMangerProducts = StyleSheet.create({
+const StyleListProducts = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: COLOR.GRAYONE
@@ -57,10 +57,10 @@ const StyleMangerProducts = StyleSheet.create({
     textTitle: {
         fontSize: Responsive.RFPercentage(2.5),
         fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
-        color: COLOR.BLACK,
+        color: COLOR.BLUE,
         fontWeight: 'bold',
         letterSpacing: 0.25
     },
 });
 
-export default StyleMangerProducts
+export default StyleListProducts

@@ -12,7 +12,7 @@ import { UseActiveTab } from '../../../../utils/ActiveTab'
 import { FlashList } from '@shopify/flash-list'
 import { FormatPriceVND2 } from '../../../../utils/FormatPrice'
 
-const ManageOrder = () => {
+const ManageOrder: React.FC = () => {
   useStatusBarConfig('dark-content', 'transparent', true)
 
   const navigation = useNavigation<NativeStackNavigationProp<any>>()
