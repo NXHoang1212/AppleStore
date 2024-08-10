@@ -1,6 +1,7 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 export type StackHomeTypeParam = {
+    /*User*/
     TabHome: undefined;
     StackIndividual: undefined;
     AuthUser: undefined;
@@ -9,7 +10,10 @@ export type StackHomeTypeParam = {
     StackMisc: undefined;
     NotFound: undefined;
     ConnectInternet: undefined;
+
+    /*Admin*/
     TabAdminManager: undefined;
+    StackAdminManagerOrder: undefined;
 };
 
 export type StackIndividualParams = {
@@ -56,3 +60,10 @@ export type StackAuthUserParams = {
     OtpPassword: undefined;
     CreatePassword: undefined;
 };
+
+
+/*ADMIN*/
+export type StackAdminManagerOrderParams = {
+    DetailManagerOrder: undefined;
+    DetailOrderCancel: undefined;
+}

@@ -125,6 +125,10 @@ export class Icon {
     static NoCarts = require('../assets/images/NoCarts.png');
     static BACKGROUNDVOUCHER = require('../assets/images/backgroundVoucher.png');
     static PAYMENTVNPAY = require('../assets/images/Vnpay.png');
+    static CATEGORYADMIN = require('../assets/images/categoryAdmin.png');
+    static PRODUCTADMIN = require('../assets/images/product.png');
+    static BANNERADMIN = require('../assets/images/advertising.png');
+    static CUSTOMERADMIN = require('../assets/images/customer.png');
 }
 
 

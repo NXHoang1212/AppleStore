@@ -76,18 +76,18 @@ const DetailPendingDelivery: React.FC = () => {
                             <Icon.ShoppingCartSVG width={25} height={25} fill='black' />
                             <Text style={IndexStyles.StyleDetailPendingDelivey.textCartTitle}>ShopApple</Text>
                         </View>
-                        {item.cart.map((value: any, index: number) => (
+                        {item.products.map((value: any, index: number) => (
                             <View key={index} style={IndexStyles.StyleDetailPendingDelivey.viewCartContent}>
-                                <Image source={{ uri: value.products.priceColor.image }} style={IndexStyles.StyleDetailPendingDelivey.imageCartContent} />
+                                <Image source={{ uri: value.priceColor.image }} style={IndexStyles.StyleDetailPendingDelivey.imageCartContent} />
                                 <View style={IndexStyles.StyleDetailPendingDelivey.viewCartInfor}>
-                                    <Text style={IndexStyles.StyleDetailPendingDelivey.textCartContent}>{value.products.name} {value.products.model} {value.products.storage}</Text>
+                                    <Text style={IndexStyles.StyleDetailPendingDelivey.textCartContent}>{value.name} {value.model} {value.storage}</Text>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                                        <Text style={IndexStyles.StyleDetailPendingDelivey.textCartContent}>{value.products.priceColor.color}</Text>
+                                        <Text style={IndexStyles.StyleDetailPendingDelivey.textCartContent}>{value.priceColor.color}</Text>
                                         <Text style={IndexStyles.StyleDetailPendingDelivey.textCartContent}>x{value.quantity}</Text>
                                     </View>
                                     <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                                         <Text style={IndexStyles.StyleDetailPendingDelivey.textChangeProducts}>Đổi trả miễn phí 7 ngày</Text>
-                                        <Text style={IndexStyles.StyleDetailPendingDelivey.textCartContent}>{FormatPrice(value.products.priceColor.price)}</Text>
+                                        <Text style={IndexStyles.StyleDetailPendingDelivey.textCartContent}>{FormatPrice(value.priceColor.price)}</Text>
                                     </View>
                                 </View>
                             </View>
@@ -96,7 +96,7 @@ const DetailPendingDelivery: React.FC = () => {
                     <View style={IndexStyles.StyleDetailPendingDelivey.viewTotal}>
                         <View style={IndexStyles.StyleDetailPendingDelivey.viewTotalTitle}>
                             <Text style={IndexStyles.StyleDetailPendingDelivey.textTotalTitle}>Tổng tiền hàng</Text>
-                            <Text style={IndexStyles.StyleDetailPendingDelivey.textTotal}>{FormatPrice(item.cart.reduce((total: number, value: any) => total + value.products.priceColor.price * value.quantity, 0))}</Text>
+                            <Text style={IndexStyles.StyleDetailPendingDelivey.textTotal}>{FormatPrice(item.products.reduce((total: number, value: any) => total + value.priceColor.price * value.quantity, 0))}</Text>
                         </View>
                         <View style={IndexStyles.StyleDetailPendingDelivey.viewTotalTitle}>
                             <Text style={IndexStyles.StyleDetailPendingDelivey.textTotalTitle}>Phí vận chuyển</Text>

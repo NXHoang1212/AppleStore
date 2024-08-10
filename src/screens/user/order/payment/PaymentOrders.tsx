@@ -231,6 +231,7 @@ const PaymentOrders: React.FC = () => {
                         ToastMessage('error', 'Đặt hàng không thành công');
                     }
                     break;
+                    
                 default:
                     ToastMessage('error', 'Phương thức thanh toán không hợp lệ');
                     break;

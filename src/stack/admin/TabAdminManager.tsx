@@ -10,7 +10,7 @@ import { Responsive } from '../../constant/Responsive';
 
 import { SvgProps } from 'react-native-svg';
 
-import ManageOrder from '../../screens/admin/infororder/ManageOrder';
+import ManageOrder from '../../screens/admin/infororder/list/ManageOrder';
 import ManagerProducts from '../../screens/admin/manager/ManagerProducts';
 import StatisticAdmin from '../../screens/admin/statistic/StatisticAdmin';
 import OtherAdmin from '../../screens/admin/other/OtherAdmin';

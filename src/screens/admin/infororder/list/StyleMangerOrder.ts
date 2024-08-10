@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
-import { COLOR } from "../../../constant/Colors";
-import { FontsROBOTO } from "../../../constant/Fonts";
-import { Responsive } from "../../../constant/Responsive";
+import { COLOR } from "../../../../constant/Colors";
+import { FontsROBOTO } from "../../../../constant/Fonts";
+import { Responsive } from "../../../../constant/Responsive";
 
 const StyleMangerOrder = StyleSheet.create({
     container: {
@@ -73,10 +73,16 @@ const StyleMangerOrder = StyleSheet.create({
         borderBottomColor: COLOR.GREY,
         backgroundColor: COLOR.WHITE,
         marginBottom: Responsive.hp(2),
+        height: Responsive.hp(21),
+    },
+    viewOrderCancel: {
+        borderBottomWidth: 1,
+        borderBottomColor: COLOR.GREY,
+        backgroundColor: COLOR.WHITE,
+        marginBottom: Responsive.hp(2),
     },
     viewOrderText: {
         flexDirection: 'column',
-        marginLeft: Responsive.wp(2),
     },
     viewOrderRight: {
         flexDirection: 'column',
@@ -112,12 +118,13 @@ const StyleMangerOrder = StyleSheet.create({
     },
     viewOrderButton: {
         backgroundColor: COLOR.REDONE,
-        width: Responsive.wp(30),
+        width: Responsive.wp(40),
         height: Responsive.hp(5),
         justifyContent: 'center',
         alignItems: 'center',
+        alignSelf: 'center',
         borderRadius: 10,
-        marginTop: Responsive.hp(1),
+        marginTop: Responsive.hp(0.5),
     },
 });
 

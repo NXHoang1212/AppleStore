@@ -19,6 +19,7 @@ import NotFound from '../screens/notfound/NotFound';
 
 /*Admin*/
 import TabAdminManager from './admin/TabAdminManager';
+import StacKAdminManagerOrder from './admin/StackAdminManagerOrder';
 
 import ConfigLinking from '../utils/Linking';
 import { useAppSelector } from '../import/IndexFeatures';
@@ -63,6 +64,10 @@ const RootStack = () => {
                         <Stack.Screen
                             name={StackHomeEnum.TabAdminManager}
                             component={TabAdminManager}
+                        />
+                        <Stack.Screen
+                            name={StackHomeEnum.StackAdminManagerOrder}
+                            component={StacKAdminManagerOrder}
                         />
                     </>
                 ) : (

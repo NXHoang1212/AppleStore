@@ -8,6 +8,7 @@ export enum StackHomeEnum {
     NotFound = 'NotFound',
     ConnectInternet = 'ConnectInternet',
     TabAdminManager = 'TabAdminManager',
+    StackAdminManagerOrder = 'StackAdminManagerOrder',
 }
 
 export enum StackIndividualEnum {
@@ -53,4 +54,11 @@ export enum StackMiscEnum {
     OrderSuccess = 'OrderSuccess',
     OrderFailed = 'OrderFailed',
     Notification = 'Notification',
+}
+
+
+/*ADMIN*/
+export enum StackAdminManagerOrderEnum {
+    DetailManagerOrder = 'DetailManagerOrder',
+    DetailOrderCancel = 'DetailOrderCancel',
 }
