@@ -62,7 +62,6 @@ const ItemAdminListProducts = ({ item, navigation, currentlyOpenSwipeable }: Pro
                         <Text style={styles.textPriceDiscount}>Giá được giảm: {FormatPrice(calculateDiscountedPrice(item.priceColor[0].price, item.discount.percentage))}</Text>
                         <Text style={styles.textPrice}>Giá gốc: {FormatPrice(item.priceColor[0].price)}</Text>
                         <Text style={styles.textPrice}>Trạng thái: {item.status === 'available' ? 'Còn hàng' : 'Hết hàng'}</Text>
-                        <Text style={styles.textPrice}>Số lượng: {item.stock}</Text>
                     </View>
                 </View>
             </TouchableOpacity>

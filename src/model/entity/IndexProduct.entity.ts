@@ -21,6 +21,38 @@ export interface ProductState {
     specifications: {
         screen?: string;
         battery?: string;
+        memory?: string;
+        camera?: string;
+        processor?: string;
+        weight?: string;
+        dimensions?: string;
+    };
+    status: string;
+    discount: {
+        percentage: number;
+        description: string;
+    };
+    condition: string;
+}
+
+export interface CreateProductState {
+    name: string;
+    model: string;
+    storage: string;
+    priceColor: [
+        {
+            color: string;
+            price: number;
+        }
+    ];
+    description: string;
+    category: any;
+    brand: string;
+    stock: number;
+    specifications: {
+        screen?: string;
+        battery?: string;
+        memory?: string;
         camera?: string;
         processor?: string;
         weight?: string;
@@ -53,6 +85,7 @@ export interface ProductPaginationState {
     specifications: {
         screen?: string;
         battery?: string;
+        memory?: string;
         camera?: string;
         processor?: string;
         weight?: string;
@@ -63,6 +96,7 @@ export interface ProductPaginationState {
         percentage: number;
         description: string;
     };
+    condition: string;
 }
 
 export type DetailProductParams = {
@@ -84,6 +118,7 @@ export type DetailProductParams = {
     specifications: {
         screen?: string;
         battery?: string;
+        memory?: string;
         camera?: string;
         processor?: string;
         weight?: string;
@@ -94,6 +129,7 @@ export type DetailProductParams = {
         percentage: number;
         description: string;
     };
+    condition: string;
 }
 
 type IdDetailProduct = {
