@@ -19,6 +19,11 @@ import ListVouchers from '../../screens/admin/manager/voucher/list/ListVoucher';
 import AddVouchers from '../../screens/admin/manager/voucher/add/AddVoucher';
 import EditVouchers from '../../screens/admin/manager/voucher/edit/EditVoucher';
 
+import SendNotifications from '../../screens/admin/manager/notifications/send/SendNotification';
+import ListNotifications from '../../screens/admin/manager/notifications/list/ListNotification';
+
+import ListCustomer from '../../screens/admin/manager/customer/ListCustomer';
+
 const Stack = createNativeStackNavigator<StackAdminManagerProductParams>();
 
 const StackAdminManagerProduct = (): React.JSX.Element => {
@@ -40,6 +45,11 @@ const StackAdminManagerProduct = (): React.JSX.Element => {
             <Stack.Screen name={StackAdminManagerProductEnum.ListVouchers} component={ListVouchers} />
             <Stack.Screen name={StackAdminManagerProductEnum.AddVouchers} component={AddVouchers} />
             <Stack.Screen name={StackAdminManagerProductEnum.EditVouchers} component={EditVouchers} />
+
+            <Stack.Screen name={StackAdminManagerProductEnum.SendNotifications} component={SendNotifications} />
+            <Stack.Screen name={StackAdminManagerProductEnum.ListNotifications} component={ListNotifications} />
+
+            <Stack.Screen name={StackAdminManagerProductEnum.ListCustomer} component={ListCustomer} />
 
         </Stack.Navigator>
     );

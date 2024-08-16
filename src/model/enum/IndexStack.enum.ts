@@ -77,4 +77,7 @@ export enum StackAdminManagerProductEnum {
     ListVouchers = 'ListVouchers',
     AddVouchers = 'AddVouchers',
     EditVouchers = 'EditVouchers',
+    ListCustomer = 'ListCustomer',
+    SendNotifications = 'SendNotifications',
+    ListNotifications = 'ListNotifications',
 }

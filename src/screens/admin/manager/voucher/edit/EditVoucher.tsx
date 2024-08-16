@@ -9,22 +9,21 @@ import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import ToastMessage from '../../../../../utils/ToastMessage';
-import { useAppDispatch } from '../../../../../import/IndexFeatures';
+import { useGetDetailAdminVoucherQuery } from '../../../../../service/Api/Index.Voucher';
 
 
 const EditVouchers: React.FC = () => {
 
     const navigation = useNavigation<NativeStackNavigationProp<any>>();
 
-    const dispatch = useAppDispatch();
-
     const route = useRoute<RouteProp<{ route: any }, 'route'>>();
 
     const id = route.params?.id;
 
+    const { data, isLoading } = useGetDetailAdminVoucherQuery(id);
+
 
     const [images, setImages] = useState<string>('');
-
 
 
     const handleSelectPhoto = async () => {
@@ -45,13 +44,13 @@ const EditVouchers: React.FC = () => {
     };
 
 
-    // if (isLoading) {
-    //     return (
-    //         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    //             <ActivityIndicator size='large' color='red' />
-    //         </View>
-    //     )
-    // }
+    if (isLoading) {
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <ActivityIndicator size='large' color='red' />
+            </View>
+        )
+    }
 
     return (
         <View style={StyleEditVouchers.container}>

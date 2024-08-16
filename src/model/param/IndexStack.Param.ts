@@ -82,4 +82,7 @@ export type StackAdminManagerProductParams = {
     ListVouchers: undefined;
     AddVouchers: undefined;
     EditVouchers: undefined;
+    SendNotifications: undefined;
+    ListNotifications: undefined;
+    ListCustomer: undefined;
 }

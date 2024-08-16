@@ -41,6 +41,11 @@ const ManagerAll: React.FC = () => {
           <Text style={StyleAll.textTitle}>Quản lý voucher</Text>
         </TouchableOpacity>
         <TouchableOpacity style={StyleAll.viewTab}
+          onPress={() => navigation.navigate('StackAdminManagerProduct', { screen: 'ListNotifications' })}>
+          <Image source={Icon.CUSTOMERADMIN} style={StyleAll.image} />
+          <Text style={StyleAll.textTitle}>Quản lý thông báo, sự kiện</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={StyleAll.viewTab}
           onPress={() => navigation.navigate('StackAdminManagerProduct', { screen: 'ListCustomers' })}>
           <Image source={Icon.CUSTOMERADMIN} style={StyleAll.image} />
           <Text style={StyleAll.textTitle}>Quản lý Khách hàng</Text>

@@ -8,8 +8,6 @@ import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 import IndexHandleCart from '../../../../service/Api/IndexHandleCart'
 import { Icon } from '../../../../constant/Icon'
-import { CategoryState } from '../../../../model/entity/IndexCategory.entity'
-import { BannerState } from '../../../../model/entity/IndexBanner.entity'
 import { VoucherEntity } from '../../../../model/entity/Index.Voucher.entity'
 
 type PropsProduct = {
@@ -20,7 +18,7 @@ type PropsProduct = {
 
 const imageAnimated = new Animated.Value(0)
 
-const ItemAdminListVoucher = ({ item, navigation, currentlyOpenSwipeable }: PropsProduct) => {
+const ItemAdminListNotification = ({ item, navigation, currentlyOpenSwipeable }: PropsProduct) => {
 
     const onImageLoad = () => {
         Animated.timing(imageAnimated, {
@@ -62,7 +60,7 @@ const ItemAdminListVoucher = ({ item, navigation, currentlyOpenSwipeable }: Prop
     )
 }
 
-export default ItemAdminListVoucher
+export default ItemAdminListNotification
 
 const styles = StyleSheet.create({
     viewItem: {
