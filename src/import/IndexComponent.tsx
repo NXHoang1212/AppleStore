@@ -42,6 +42,9 @@ import ItemListCart from "../components/item/cart/list/ItemListCart";
 import ItemDetailUpdateCart from "../components/item/cart/detail/ItemDetailUpdateCart";
 import ItemDetailUpdateArticle from "../components/item/cart/detail/ItemDetailUpdateCart";
 import ItemAdminListProducts from "../components/item/product/list/ItemAdminListProducts";
+import ItemAdminListCategories from "../components/item/product/list/ItemAdminListCategory";
+import ItemAdminListBanner from '../components/item/product/list/ItemAdminListBanner';
+import ItemAdminListVoucher from "../components/item/product/list/ItemAdminListVoucher";
 
 /*MEDIA */
 import ImagePicker from "../components/media/CamraPicker";
@@ -81,6 +84,9 @@ export {
     ItemDetailArticle,
     ItemDetailUpdateArticle,
     ItemAdminListProducts,
+    ItemAdminListCategories,
+    ItemAdminListBanner,
+    ItemAdminListVoucher,
     ImagePicker,
     Loading,
     MultiColorLine

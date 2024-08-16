@@ -20,6 +20,8 @@ import { CartQuery } from '../service/Api/IndexCart';
 import VoucherQuery from '../service/Api/Index.Voucher';
 import OrderQuery from '../service/Api/Index.Order';
 import NotificationQuery from '../service/Api/Index.Notification';
+import { AdminBannerQuery } from '../service/Api/IndexBanner';
+import { AdminCategoriesQuery } from '../service/Api/IndexCategory';
 import { setupListeners } from '@reduxjs/toolkit/query';
 
 /*AsyncStorage, Redux Persist */
@@ -53,6 +55,8 @@ const StoreRedux = configureStore({
         [VoucherQuery.reducerPath]: VoucherQuery.reducer,
         [OrderQuery.reducerPath]: OrderQuery.reducer,
         [NotificationQuery.reducerPath]: NotificationQuery.reducer,
+        [AdminCategoriesQuery.reducerPath]: AdminCategoriesQuery.reducer,
+        [AdminBannerQuery.reducerPath]: AdminBannerQuery.reducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
@@ -65,6 +69,8 @@ const StoreRedux = configureStore({
             .concat(CartQuery.middleware)
             .concat(OrderQuery.middleware)
             .concat(NotificationQuery.middleware)
+            .concat(AdminCategoriesQuery.middleware)
+            .concat(AdminBannerQuery.middleware)
 
 });
 

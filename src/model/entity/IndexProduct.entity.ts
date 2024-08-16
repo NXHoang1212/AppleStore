@@ -112,7 +112,7 @@ export type DetailProductParams = {
     ];
     description: string;
     images: ImageSourcePropType[];
-    category: CategoryState;
+    category: any;
     brand: string;
     stock: number;
     specifications: {

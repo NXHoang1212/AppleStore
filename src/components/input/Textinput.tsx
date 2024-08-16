@@ -16,12 +16,13 @@ type TextinputProps = {
     onEndEditing?: () => void;
     color?: string;
     disabled?: boolean;
+    defaultValue?: string;
 }
 
 const InputCustom: React.FC<TextinputProps> = ({
     placeholder, placeholderTextColor, value,
     onChangeText, onPressIn, onEndEditing,
-    secureTextEntry, keyboardType, icon, style, autoFocus, color, disabled
+    secureTextEntry, keyboardType, icon, style, autoFocus, color, disabled, defaultValue
 }) => {
     return (
         <View style={[{ flexDirection: 'row', alignItems: 'center', }, style]}>
@@ -42,6 +43,7 @@ const InputCustom: React.FC<TextinputProps> = ({
                 autoFocus={autoFocus}
                 onEndEditing={onEndEditing}
                 editable={!disabled}
+                defaultValue={defaultValue}
             />
         </View>
     )

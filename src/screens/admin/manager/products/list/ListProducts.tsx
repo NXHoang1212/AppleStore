@@ -25,6 +25,8 @@ const ListProducts: React.FC = () => {
 
     const data = useAppSelector(state => state.ProductPagination);
 
+    const productlength = useAppSelector(state => state.Product.data.length);
+
     const currentlyOpenSwipeable = useRef<Swipeable | null>(null);
 
     const handleOnReached = () => {
@@ -55,7 +57,7 @@ const ListProducts: React.FC = () => {
             <View style={StyleListProducts.containerBody}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 10, bottom: 5 }}>
                     <Text style={StyleListProducts.textTitle}>Số lượng sản phẩm</Text>
-                    <Text style={StyleListProducts.textNumber}>{data.data.length}</Text>
+                    <Text style={StyleListProducts.textNumber}>{productlength}</Text>
                 </View>
                 <FlashList
                     data={data.data}

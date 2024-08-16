@@ -1,21 +1,29 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import React, { useState } from 'react';
 import { CustomHeader, InputCustom } from '../../../../../import/IndexComponent';
+
 import StyleAddProducts from './StyleAddProducts';
 import ImageCropPicker from 'react-native-image-crop-picker';
 import { Icon } from '../../../../../constant/Icon';
+
 import { ScrollView } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
 import { createProduct } from '../../../../../service/Api/IndexProduct';
 import ToastMessage from '../../../../../utils/ToastMessage';
 import { useAppDispatch, useAppSelector } from '../../../../../import/IndexFeatures';
+
 import { Dropdown } from 'react-native-element-dropdown';
 import { CreateProductState } from '../../../../../model/entity/IndexProduct.entity';
+import { fetchProducts } from '../../../../../service/Api/IndexProduct';
+import { fetProductsPagination } from '../../../../../service/Api/IndexProduct';
 
 const AddProducts: React.FC = () => {
 
     const navigation = useNavigation<NativeStackNavigationProp<any>>();
+
+    const dispatch = useAppDispatch();
 
     const DataCategory = useAppSelector((state) => state.Category.data);
 
@@ -94,6 +102,11 @@ const AddProducts: React.FC = () => {
         }
     };
 
+    const removePriceColor = (index: number) => {
+        const updatedPriceColors = priceColors.filter((item, i) => i !== index);
+        setPriceColors(updatedPriceColors);
+    };
+
     const handleSubmit = async () => {
         const data: CreateProductState = {
             name: formValues[0],
@@ -113,7 +126,7 @@ const AddProducts: React.FC = () => {
                 weight: formValues[11],
                 dimensions: formValues[12],
             },
-            status: 'active',
+            status: 'available',
             discount: {
                 percentage: parseFloat(formValues[13]),
                 description: formValues[14],
@@ -123,9 +136,10 @@ const AddProducts: React.FC = () => {
         const images = photoUrl
         try {
             const response = await createProduct(data, images);
-            console.log("🚀 ~ handleSubmit ~ response:", response);
             if (response?.status === 201) {
                 ToastMessage('success', 'Thêm sản phẩm thành công');
+                dispatch(fetchProducts());
+                navigation.goBack();
             }
         } catch (error) {
             ToastMessage('error', 'Thêm sản phẩm thất bại');
@@ -168,9 +182,14 @@ const AddProducts: React.FC = () => {
                         <Text style={StyleAddProducts.textButton}>Thêm Màu & Giá</Text>
                     </TouchableOpacity>
                     {priceColors.length > 0 && (
-                        <View style={StyleAddProducts.priceColorContainer}>
+                        <View>
                             {priceColors.map((item, index) => (
-                                <Text key={index}>Màu: {item.color} - Giá: {item.price}</Text>
+                                <View style={StyleAddProducts.priceColorContainer}>
+                                    <Text key={index}>Màu: {item.color} - Giá: {item.price}</Text>
+                                    <TouchableOpacity onPress={() => removePriceColor(index)}>
+                                        <Icon.TrashSVG width={20} height={20} fill='red' />
+                                    </TouchableOpacity>
+                                </View>
                             ))}
                         </View>
                     )}

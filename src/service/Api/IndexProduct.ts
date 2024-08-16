@@ -118,5 +118,5 @@ const deleteProduct = async (id: string) => {
 }
 
 
-export { fetchProducts, fetProductsPagination, createProduct, updateProduct };
+export { fetchProducts, fetProductsPagination, createProduct, updateProduct, deleteProduct };
 

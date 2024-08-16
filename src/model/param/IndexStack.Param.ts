@@ -73,5 +73,13 @@ export type StackAdminManagerProductParams = {
     ListProducts: undefined;
     AddProducts: undefined;
     EditProducts: undefined;
-    DeleteProducts: undefined;
+    ListCategories: undefined;
+    AddCategories: undefined;
+    EditCategories: undefined;
+    ListBanner: undefined;
+    AddBanner: undefined;
+    EditBanner: undefined;
+    ListVouchers: undefined;
+    AddVouchers: undefined;
+    EditVouchers: undefined;
 }

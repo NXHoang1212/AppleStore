@@ -35,7 +35,6 @@ const StyleEditProducts = StyleSheet.create({
     },
     containerBody: {
         backgroundColor: COLOR.GRAYONE,
-        marginTop: Responsive.hp(2),
     },
     image: {
         width: Responsive.wp(15),
@@ -43,15 +42,11 @@ const StyleEditProducts = StyleSheet.create({
         resizeMode: 'contain',
     },
     viewTab: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        height: Responsive.hp(15),
+
+        height: Responsive.hp(7),
         backgroundColor: COLOR.WHITE,
-        marginTop: Responsive.hp(2),
         borderBottomWidth: 1,
         borderBottomColor: COLOR.GREY,
-        gap: Responsive.wp(5),
         paddingHorizontal: Responsive.wp(5),
     },
     textTitle: {
@@ -60,6 +55,77 @@ const StyleEditProducts = StyleSheet.create({
         color: COLOR.BLUE,
         fontWeight: 'bold',
         letterSpacing: 0.25
+    },
+    row: {
+        flexWrap: 'wrap',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginTop: Responsive.hp(2),
+        paddingHorizontal: Responsive.wp(5),
+    },
+    viewInput: {
+        flexDirection: 'column',
+        gap: Responsive.hp(1),
+        justifyContent: 'center',
+    },
+    quantityButton: {
+        position: 'absolute',
+        right: Responsive.wp(4),
+        top: Responsive.hp(5),
+    },
+    inputWrapper: {
+        width: Responsive.wp(90),
+        height: Responsive.hp(6),
+        backgroundColor: COLOR.WHITE,
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: COLOR.GREY,
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingHorizontal: Responsive.wp(3),
+    },
+    button: {
+        width: Responsive.wp(90),
+        height: Responsive.hp(6),
+        backgroundColor: COLOR.BLUE,
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'center',
+        marginTop: Responsive.hp(2),
+    },
+    textButton: {
+        fontSize: Responsive.RFPercentage(2.5),
+        fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
+        color: COLOR.WHITE,
+        fontWeight: 'bold',
+        letterSpacing: 0.25
+    },
+    dropdown: {
+        height: Responsive.hp(6),
+        width: Responsive.wp(94),
+        borderColor: COLOR.GREY,
+        borderWidth: 0.5,
+        borderRadius: 8,
+        paddingHorizontal: 8,
+    },
+    placeholderStyle: {
+        fontSize: Responsive.RFPercentage(2.5),
+    },
+    selectedTextStyle: {
+        fontSize: Responsive.RFPercentage(2.5),
+        color: COLOR.BLACK,
+    },
+    inputSearchStyle: {
+        height: 40,
+        borderColor: COLOR.REDONE,
+        fontSize: Responsive.RFPercentage(2.5),
+    },
+    loading: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });
 

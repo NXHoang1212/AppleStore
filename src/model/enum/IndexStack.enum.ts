@@ -68,4 +68,13 @@ export enum StackAdminManagerProductEnum {
     ListProducts = 'ListProducts',
     AddProducts = 'AddProducts',
     EditProducts = 'EditProducts',
+    ListCategories = 'ListCategories',
+    AddCategories = 'AddCategories',
+    EditCategories = 'EditCategories',
+    ListBanner = 'ListBanner',
+    AddBanner = 'AddBanner',
+    EditBanner = 'EditBanner',
+    ListVouchers = 'ListVouchers',
+    AddVouchers = 'AddVouchers',
+    EditVouchers = 'EditVouchers',
 }
