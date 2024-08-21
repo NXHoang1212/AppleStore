@@ -35,112 +35,116 @@ const StyleAddVouchers = StyleSheet.create({
     },
     containerBody: {
         flex: 1,
-        backgroundColor: COLOR.GRAYONE,
+        backgroundColor: COLOR.WHITE,
         marginTop: Responsive.hp(2),
     },
     viewImage: {
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: Responsive.hp(40),
-        backgroundColor: COLOR.WHITE,
-        borderBottomWidth: 1,
-        borderBottomColor: COLOR.GREY,
-        paddingHorizontal: Responsive.wp(5),
-    },
-    image: {
-        width: Responsive.wp(50),
-        height: Responsive.hp(30),
-        resizeMode: 'contain',
-    },
-    buttonImage: {
-        width: Responsive.wp(50),
-        height: Responsive.hp(7),
-        backgroundColor: COLOR.GREY,
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 10,
-        alignSelf: 'center',
-        marginTop: Responsive.hp(1)
-    },
-    textButtonImage: {
-        fontSize: Responsive.RFPercentage(2.5),
-        fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
-        color: COLOR.WHITE,
-        fontWeight: 'bold',
-        letterSpacing: 0.25
-    },
-    viewInput: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
         backgroundColor: COLOR.WHITE,
-        marginTop: Responsive.hp(2),
         borderBottomWidth: 1,
         borderBottomColor: COLOR.GREY,
         paddingHorizontal: Responsive.wp(5),
     },
-    text: {
-        fontSize: Responsive.RFPercentage(2.5),
-        fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
-        color: COLOR.BLACK,
-        fontWeight: 'bold',
-        letterSpacing: 0.25
+    imageLogo: {
+        width: Responsive.wp(14),
+        height: Responsive.hp(8),
+        resizeMode: 'contain',
     },
-    viewTab: {
+    image: {
+        width: Responsive.wp(14),
+        height: Responsive.hp(8),
+        resizeMode: 'contain',
+        tintColor: COLOR.REDONE
+    },
+    buttonImage: {
         flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        height: Responsive.hp(15),
+        width: Responsive.wp(40),
+        height: Responsive.hp(5),
         backgroundColor: COLOR.WHITE,
-        marginTop: Responsive.hp(2),
-        borderBottomWidth: 1,
-        borderBottomColor: COLOR.GREY,
-        gap: Responsive.wp(5),
-        paddingHorizontal: Responsive.wp(5),
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: COLOR.REDONE,
     },
-    textTitle: {
-        fontSize: Responsive.RFPercentage(2.5),
-        fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
-        color: COLOR.BLUE,
-        fontWeight: 'bold',
-        letterSpacing: 0.25
-    },
-    textNumber: {
+    textButtonImage: {
         fontSize: Responsive.RFPercentage(2.5),
         fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
         color: COLOR.REDONE,
         fontWeight: 'bold',
         letterSpacing: 0.25
     },
-    button: {
-        width: Responsive.wp(80),
+    iconButtonImage: {
+        width: Responsive.wp(5),
+        height: Responsive.hp(3),
+        resizeMode: 'contain',
+        tintColor: COLOR.REDONE
+    },
+    viewInput: {
+        paddingHorizontal: Responsive.wp(5),
+        backgroundColor: COLOR.WHITE,
+        paddingVertical: Responsive.hp(2),
+        flexDirection: 'column',
+        gap: Responsive.hp(1),
+    },
+    textTitle: {
+        fontSize: Responsive.RFPercentage(2.5),
+        fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
+        color: COLOR.BLACK,
+        fontWeight: 'bold',
+        letterSpacing: 0.25
+    },
+    input: {
+        width: Responsive.wp(90),
+        height: Responsive.hp(6),
+        backgroundColor: COLOR.WHITE,
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: COLOR.GREY,
+    },
+    buttonSave: {
+        width: Responsive.wp(90),
         height: Responsive.hp(6),
         backgroundColor: COLOR.REDONE,
-        alignItems: 'center',
-        justifyContent: 'center',
         borderRadius: 10,
-        alignSelf: 'center',
-        bottom: Responsive.hp(2),
-    },
-    buttonDelete: {
-        width: Responsive.wp(80),
-        height: Responsive.hp(6),
-        backgroundColor: COLOR.REDTWO,
-        alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: 10,
+        alignItems: 'center',
         alignSelf: 'center',
-        marginTop: Responsive.hp(2)
+        marginVertical: Responsive.hp(2),
+        shadowColor: COLOR.BLACK,
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 8,
+        elevation: 10,
     },
-    textButton: {
+    textButtonSave: {
         fontSize: Responsive.RFPercentage(2.5),
         fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
         color: COLOR.WHITE,
         fontWeight: 'bold',
         letterSpacing: 0.25
     },
-
+    dropdown: {
+        height: Responsive.hp(6),
+        width: Responsive.wp(90),
+        borderColor: COLOR.GREY,
+        borderWidth: 0.5,
+        borderRadius: 8,
+        paddingHorizontal: 8,
+    },
+    placeholderStyle: {
+        fontSize: Responsive.RFPercentage(2.5),
+    },
+    selectedTextStyle: {
+        fontSize: Responsive.RFPercentage(2.5),
+        color: COLOR.BLACK,
+    },
+    inputSearchStyle: {
+        height: 40,
+        borderColor: COLOR.REDONE,
+        fontSize: Responsive.RFPercentage(2.5),
+    },
 });
 
 export default StyleAddVouchers

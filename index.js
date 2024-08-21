@@ -9,6 +9,10 @@ import messaging from '@react-native-firebase/messaging';
 import { handleLinking } from './src/utils/HandleLinking';
 import { HOST } from './src/constant/Host';
 
+if (__DEV__) {
+    require("./ReactotronConfig")
+}
+
 messaging().setBackgroundMessageHandler(async remoteMessage => {
     const type = remoteMessage.data.type;
     let url = '';

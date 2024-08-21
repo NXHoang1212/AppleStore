@@ -18,7 +18,7 @@ const VoucherQuery = createApi({
         getVoucher: build.query<{ data: VoucherEntity[] }, { userId: string, usersApplicable: string }>({
             query: ({ userId, usersApplicable }) => {
                 return {
-                    url: `api/voucher/list/${usersApplicable}?userId=${userId}`,
+                    url: `/api/voucher/list/${usersApplicable}?userId=${userId}`,
                     method: 'GET'
                 }
             },
@@ -27,7 +27,7 @@ const VoucherQuery = createApi({
         getVoucherById: build.query<{ data: VoucherEntity }, string>({
             query: (id) => {
                 return {
-                    url: `api/voucher/detail/${id}`,
+                    url: `/api/voucher/detail/${id}`,
                     method: 'GET'
                 }
             },
@@ -36,7 +36,7 @@ const VoucherQuery = createApi({
         updateVoucher: build.mutation<VoucherEntity, { id: string, voucher: VoucherEntity }>({
             query: ({ id, voucher }) => {
                 return {
-                    url: `api/voucher/update/${id}`,
+                    url: `/api/voucher/update/${id}`,
                     method: 'PUT',
                     body: voucher
                 }
@@ -46,7 +46,7 @@ const VoucherQuery = createApi({
         resetUsage: build.mutation<VoucherEntity, { id: string, userId: string }>({
             query: ({ id, userId }) => {
                 return {
-                    url: `api/voucher/reset-usage`,
+                    url: `/api/voucher/reset-usage`,
                     method: 'PUT',
                     body: { id, userId }
                 }
@@ -55,35 +55,39 @@ const VoucherQuery = createApi({
         }),
         getAllAdminVoucher: build.query<{ data: VoucherEntity[] }, void>({
             query: () => ({
-                url: 'api/voucher/admin/list/get-all',
+                url: '/api/voucher/admin/list/get-all',
                 method: 'GET'
             }),
             providesTags: [{ type: 'Voucher', id: 'LIST' }],
         }),
         deleteAdminVoucher: build.mutation<VoucherEntity, string>({
             query: (id) => ({
-                url: `api/voucher/admin/delete/${id}`,
+                url: `/api/voucher/admin/delete/${id}`,
                 method: 'DELETE'
             }),
             invalidatesTags: [{ type: 'Voucher', id: 'LIST' }],
         }),
-        createAdminVoucher: build.mutation<VoucherEntity, { voucher: CreateVoucherEntity, images: string }>({
-            query: ({ voucher, images }) => {
+        createAdminVoucher: build.mutation<VoucherEntity, any>({
+            query: (body) => {
                 const formData = new FormData();
-                formData.append('name', voucher.name);
-                formData.append('code', voucher.code);
-                formData.append('discount', voucher.discount.toString());
-                formData.append('description', voucher.description);
-                formData.append('condition', voucher.condition);
-                formData.append('maxDiscountAmount', voucher.maxDiscountAmount.toString());
-                formData.append('minOrderAmount', voucher.minOrderAmount.toString());
-                formData.append('usageLimit', voucher.usageLimit.toString());
-                formData.append('paymentMethod', voucher.paymentMethod);
-                formData.append('expirationDate', voucher.expirationDate);
-                formData.append('usersApplicable', JSON.stringify(voucher.usersApplicable));
-                formData.append('images', images);
+                formData.append('name', body.name);
+                formData.append('code', body.code);
+                formData.append('discount', body.discount.toString());
+                formData.append('description', body.description);
+                formData.append('condition', body.condition);
+                formData.append('maxDiscountAmount', body.maxDiscountAmount.toString());
+                formData.append('minOrderAmount', body.minOrderAmount.toString());
+                formData.append('usageLimit', body.usageLimit.toString());
+                formData.append('paymentMethod', body.paymentMethod);
+                formData.append('expirationDate', body.expirationDate);
+                formData.append('usersApplicable', body.usersApplicable);
+                formData.append('images', {
+                    name: body.images.fileName,
+                    type: body.images.type,
+                    uri: body.images.uri,
+                });
                 return {
-                    url: 'api/voucher/admin/create',
+                    url: '/api/voucher/admin/create',
                     method: 'POST',
                     body: formData,
                     headers: {
@@ -92,23 +96,33 @@ const VoucherQuery = createApi({
                 }
             }
         }),
-        updateAdminVoucher: build.mutation<VoucherEntity, { id: string, voucher: UpdateVoucherEntity, images: string }>({
-            query: ({ id, voucher, images }) => {
+        updateAdminVoucher: build.mutation<{ data: VoucherEntity }, { id: string, body: any }>({
+            query: ({ id, body }) => {
                 const formData = new FormData();
-                formData.append('name', voucher.name);
-                formData.append('code', voucher.code);
-                formData.append('discount', voucher.discount.toString());
-                formData.append('description', voucher.description);
-                formData.append('condition', voucher.condition);
-                formData.append('maxDiscountAmount', voucher.maxDiscountAmount.toString());
-                formData.append('minOrderAmount', voucher.minOrderAmount.toString());
-                formData.append('usageLimit', voucher.usageLimit.toString());
-                formData.append('paymentMethod', voucher.paymentMethod);
-                formData.append('expirationDate', voucher.expirationDate);
-                formData.append('usersApplicable', JSON.stringify(voucher.usersApplicable));
-                formData.append('images', images);
+                formData.append('name', body.name);
+                formData.append('code', body.code);
+                formData.append('discount', body.discount.toString());
+                formData.append('description', body.description);
+                formData.append('condition', body.condition);
+                formData.append('maxDiscountAmount', body.maxDiscountAmount.toString());
+                formData.append('minOrderAmount', body.minOrderAmount.toString());
+                formData.append('usageLimit', body.usageLimit.toString());
+                formData.append('paymentMethod', body.paymentMethod);
+                formData.append('expirationDate', body.expirationDate);
+                if (body.usersApplicable) {
+                    formData.append('usersApplicable', JSON.stringify(body.usersApplicable));
+                }
+                
+                if (body.images) {
+                    formData.append('images', {
+                        name: body.images.fileName,
+                        type: body.images.type,
+                        uri: body.images.uri,
+                    });
+                }
+                console.log('formData', formData)
                 return {
-                    url: `api/voucher/admin/update/${id}`,
+                    url: `/api/voucher/admin/updateVoucher/${id}`,
                     method: 'PUT',
                     body: formData,
                     headers: {

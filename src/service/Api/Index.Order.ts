@@ -69,7 +69,11 @@ const OrderQuery = createApi({
                 body: data
             }),
             invalidatesTags: [{ type: 'Order', id: 'LIST' }],
-        })
+        }),
+        GetOrderAdmin: build.query<{ data: OrderEntity[] }, void>({
+            query: () => '/api/order/admin/get_orders_status_paymentStatus?status=Đã giao&paymentStatus=Đã thanh toán',
+            providesTags: [{ type: 'Order', id: 'LIST' }],
+        }),
     }),
 });
 
@@ -77,5 +81,6 @@ export default OrderQuery
 export const {
     useCreateOrderMutation, useGetOrderUserQuery, useGetDetailOrderQuery,
     useUpdateOrderMutation, useGetStatusOrderQuery, useGetPaymentUrlVnpayMutation,
-    useReturnFromAppQuery, useGetAllOrderForAdminQuery, useUpdateOrderAdminMutation
+    useReturnFromAppQuery, useGetAllOrderForAdminQuery, useUpdateOrderAdminMutation,
+    useGetOrderAdminQuery
 } = OrderQuery;

@@ -8,9 +8,8 @@ import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 import IndexHandleCart from '../../../../service/Api/IndexHandleCart'
 import { Icon } from '../../../../constant/Icon'
-import { CategoryState } from '../../../../model/entity/IndexCategory.entity'
-import { BannerState } from '../../../../model/entity/IndexBanner.entity'
 import { VoucherEntity } from '../../../../model/entity/Index.Voucher.entity'
+import { FormatDate2 } from '../../../../utils/FormatDate'
 
 type PropsProduct = {
     item: VoucherEntity,
@@ -56,6 +55,48 @@ const ItemAdminListVoucher = ({ item, navigation, currentlyOpenSwipeable }: Prop
                         style={styles.image}
                         onLoad={onImageLoad}
                     />
+                    <View>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Text style={styles.textName}>Tên:</Text>
+                            <Text style={styles.textPrice}>{item.name}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Text style={styles.textName}>Mã:</Text>
+                            <Text style={styles.textPrice}>{item.code}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Text style={styles.textName}>Giảm giá:</Text>
+                            <Text style={styles.textPrice}>{item.discount}%</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Text style={styles.textName}>Ngày hết hạn:</Text>
+                            <Text style={styles.textPrice}>{FormatDate2(item.expirationDate)}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Text style={styles.textName}>Trạng thái:</Text>
+                            <Text style={styles.textPrice}>{item.status}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Text style={styles.textName}>Ngày tạo:</Text>
+                            <Text style={styles.textPrice}>{FormatDate2(item.createdAt)}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Text style={styles.textName}>Số lần sử dụng:</Text>
+                            <Text style={styles.textPrice}>{item.userUsed.length}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Text style={styles.textName}>Số lần còn lại:</Text>
+                            <Text style={styles.textPrice}>{item.usageLimit}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Text style={styles.textName}>Tặng mã riêng cho người dùng</Text>
+                            <Text style={styles.textPrice}>{item.usersApplicable.length}</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Text style={styles.textName}>Trạng thái</Text>
+                            <Text style={styles.textPrice}>{item.status}</Text>
+                        </View>
+                    </View>
                 </View>
             </TouchableOpacity>
         </Swipeable>
@@ -68,7 +109,7 @@ const styles = StyleSheet.create({
     viewItem: {
         flexDirection: 'column',
         width: Responsive.wp(95),
-        height: Responsive.hp(15),
+        height: Responsive.hp(28),
         backgroundColor: COLOR.WHITE,
         borderRadius: 10,
         margin: Responsive.wp(2),
@@ -79,9 +120,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: Responsive.wp(5),
     },
     image: {
-        width: Responsive.wp(53),
+        width: Responsive.wp(20),
         height: Responsive.hp(18),
         resizeMode: 'contain',
+        tintColor: COLOR.REDONE
     },
     viewDelete: {
         width: Responsive.wp(20),
@@ -97,4 +139,15 @@ const styles = StyleSheet.create({
         color: COLOR.WHITE,
         textAlign: 'center',
     },
+    textName: {
+        fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
+        fontSize: Responsive.RFPercentage(2),
+        color: COLOR.BLACK,
+    },
+    textPrice: {
+        fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
+        fontSize: Responsive.RFPercentage(2),
+        color: COLOR.REDONE,
+        marginLeft: Responsive.wp(2),
+    }
 })
