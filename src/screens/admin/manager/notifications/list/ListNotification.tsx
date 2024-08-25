@@ -13,6 +13,7 @@ import useStatusBarConfig from '../../../../../utils/UseStatusBarConfig'
 import { Icon } from '../../../../../constant/Icon'
 
 import Swipeable from 'react-native-gesture-handler/Swipeable';
+import { useGetAdminNotificationQuery } from '../../../../../service/Api/Index.Notification'
 
 const ListNotifications: React.FC = () => {
 
@@ -22,6 +23,16 @@ const ListNotifications: React.FC = () => {
 
     const currentlyOpenSwipeable = useRef<Swipeable | null>(null);
 
+    const { data, isLoading } = useGetAdminNotificationQuery()
+
+
+    if (isLoading) {
+        return (
+            <View style={StyleListNotification.container}>
+                <ActivityIndicator size='large' color={COLOR.REDONE} />
+            </View>
+        )
+    }
 
     return (
         <View style={StyleListNotification.container}>
@@ -34,7 +45,12 @@ const ListNotifications: React.FC = () => {
                 </View>
             </View>
             <View style={StyleListNotification.containerBody}>
-
+                <FlashList
+                    data={data?.data}
+                    renderItem={({ item }) => <ItemAdminListNotification item={item} navigation={navigation} currentlyOpenSwipeable={currentlyOpenSwipeable} />}
+                    keyExtractor={item => item._id}
+                    estimatedItemSize={200}
+                />
             </View>
         </View>
     )

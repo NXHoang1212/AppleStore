@@ -38,6 +38,18 @@ const StyleSendNotifications = StyleSheet.create({
         backgroundColor: COLOR.GRAYONE,
         marginTop: Responsive.hp(2),
     },
+    containerInput: {
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: COLOR.WHITE,
+        marginTop: Responsive.hp(2),
+        borderBottomWidth: 1,
+        borderBottomColor: COLOR.GREY,
+        paddingHorizontal: Responsive.wp(5),
+        paddingVertical: Responsive.hp(2),
+        gap: Responsive.hp(2)
+    },
     viewImage: {
         flexDirection: 'column',
         alignItems: 'center',
@@ -140,7 +152,41 @@ const StyleSendNotifications = StyleSheet.create({
         fontWeight: 'bold',
         letterSpacing: 0.25
     },
-
+    viewButton: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: Responsive.hp(2),
+    },
+    dropdown: {
+        height: Responsive.hp(6),
+        width: Responsive.wp(90),
+        borderColor: COLOR.GREY,
+        borderWidth: 0.5,
+        borderRadius: 8,
+        paddingHorizontal: 8,
+    },
+    placeholderStyle: {
+        fontSize: Responsive.RFPercentage(2.5),
+    },
+    selectedTextStyle: {
+        fontSize: Responsive.RFPercentage(2.5),
+        color: COLOR.BLACK,
+    },
+    inputSearchStyle: {
+        height: 40,
+        borderColor: COLOR.REDONE,
+        fontSize: Responsive.RFPercentage(2.5),
+    },
+    input: {
+        height: Responsive.hp(6),
+        width: Responsive.wp(90),
+        borderColor: COLOR.GREY,
+        borderWidth: 0.5,
+        borderRadius: 8,
+        paddingHorizontal: 8,
+        fontSize: Responsive.RFPercentage(2.5),
+    },
 });
 
 export default StyleSendNotifications

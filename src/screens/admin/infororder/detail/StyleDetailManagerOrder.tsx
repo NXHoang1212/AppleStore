@@ -3,8 +3,6 @@ import { COLOR } from "../../../../constant/Colors";
 import { Responsive } from "../../../../constant/Responsive";
 import { FontsOSANS, FontsROBOTO } from "../../../../constant/Fonts";
 
-
-
 const StyleDetailManagerOder = StyleSheet.create({
     container: {
         flex: 1,

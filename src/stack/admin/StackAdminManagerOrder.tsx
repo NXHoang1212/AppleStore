@@ -5,6 +5,8 @@ import { StackAdminManagerOrderParams } from '../../model/param/IndexStack.Param
 
 import DetailManagerOrder from '../../screens/admin/infororder/detail/DetailManagerOrder';
 import DetailOrderCancel from '../../screens/admin/infororder/detail/DetailOrderCancel';
+import DetailOrderDelivered from '../../screens/admin/infororder/detail/DetailOrderDelivered';
+import DetailOrderDelivering from '../../screens/admin/infororder/detail/DetailOrderDelivering';
 
 const Stack = createNativeStackNavigator<StackAdminManagerOrderParams>();
 
@@ -13,6 +15,8 @@ const StacKAdminManagerOrder = (): React.JSX.Element => {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name={StackAdminManagerOrderEnum.DetailManagerOrder} component={DetailManagerOrder} />
             <Stack.Screen name={StackAdminManagerOrderEnum.DetailOrderCancel} component={DetailOrderCancel} />
+            <Stack.Screen name={StackAdminManagerOrderEnum.DetailOrderDelivered} component={DetailOrderDelivered} />
+            <Stack.Screen name={StackAdminManagerOrderEnum.DetailOrderDelivering} component={DetailOrderDelivering} />
         </Stack.Navigator>
     );
 };

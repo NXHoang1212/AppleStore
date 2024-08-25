@@ -1,16 +1,32 @@
-export interface NotificationEntity {
+interface data {
+    type?: string;
+    id?: string;
+    userId?: string;
+    name?: string;
+}
+
+interface NotificationEntity {
     _id: string;
     title: string;
     body: string;
-    userId: string;
-    type: string;
-    data: any;
+    data: data;
     isRead: boolean;
+    isAdmin: boolean;
     createdAt: string;
     updatedAt: string;
 }
 
-export interface UpdateNotificationEntity {
+interface CreateNotificationEntity {
+    title: string;
+    body: string;
+    data: data;
+    isRead: boolean;
+    isAdmin: boolean;
+}
+
+interface UpdateNotificationEntity {
     _id: string;
     isRead: boolean;
 }
+
+export type { NotificationEntity, CreateNotificationEntity, UpdateNotificationEntity };

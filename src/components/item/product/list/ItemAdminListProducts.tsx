@@ -10,6 +10,7 @@ import { FormatPrice, calculateDiscountedPrice } from '../../../../utils/FormatP
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import IndexHandleCart from '../../../../service/Api/IndexHandleCart'
 import { Icon } from '../../../../constant/Icon'
+import FastImage from 'react-native-fast-image'
 
 type PropsProduct = {
     item: ProductPaginationState,
@@ -51,10 +52,13 @@ const ItemAdminListProducts = ({ item, navigation, currentlyOpenSwipeable }: Pro
                 <Text style={styles.textdiscount}>Giảm {item.discount.percentage}%</Text>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                     <View style={{ top: Responsive.hp(1) }}>
-                        <Animated.Image
-                            source={{ uri: item.images[0] as string }}
+                        <FastImage
+                            source={{
+                                uri: item.images[0] as string,
+                                priority: FastImage.priority.high,
+                            }}
+                            resizeMode={FastImage.resizeMode.contain}
                             style={styles.image}
-                            onLoad={onImageLoad}
                         />
                     </View>
                     <View style={{ flexDirection: 'column', gap: Responsive.hp(0.5), justifyContent: 'center', }}>

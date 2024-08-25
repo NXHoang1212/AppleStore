@@ -18,23 +18,25 @@ import { fetchBannerProduct } from '../../service/Api/IndexBanner'
 import { fetchProducts, fetProductsPagination } from '../../service/Api/IndexProduct'
 import { useGetCartByUserQuery } from '../../service/Api/IndexCart'
 import { setItemCount } from '../../redux/slices/CountCartSlice'
+import HandleNotification from '../../utils/HandleNotification'
 
 const Slash: React.FC = () => {
     const dispatch = useAppDispatch()
     const [loading, setLoading] = useState<boolean>(true)
     const navigation = useNavigation<NativeStackNavigationProp<StackHomeTypeParam>>();
-    let user = useAppSelector(state => state.root.Auth.user)
-    const { data: cartData, isLoading, isError } = useGetCartByUserQuery(user._id)
+    let user = useAppSelector(state => state.root.Auth)
+    const { data: cartData, isLoading, isError } = useGetCartByUserQuery(user.user._id)
 
     useEffect(() => {
         dispatch(fetchBannerProduct())
         dispatch(fetProductsPagination({ page: 1, limit: 10 }))
         dispatch(fetchProducts())
         dispatch(fetchCategoryProduct())
+        // HandleNotification.checkNotificationPermission(user.user, dispatch);
     }, [dispatch]);
 
     useEffect(() => {
-        if (!isLoading && !isError && cartData?.data && user._id) {
+        if (!isLoading && !isError && cartData?.data && user.user._id) {
             dispatch(setItemCount(cartData.data.length));
         }
     }, [cartData, isLoading, isError, user, dispatch]);
@@ -43,8 +45,11 @@ const Slash: React.FC = () => {
         setTimeout(() => {
             setLoading(false)
             // navigation.replace('TabHome')
-            //kiểm tra role nếu là admin thì chuyển sang trang admin ngược lại chuyển sang trang user
-            navigation.replace(user.role === 'admin' ? 'TabAdminManager' : 'TabHome')
+            // navigation.navigate(user.user.role === 'admin' ? 'TabAdminManager' : 'TabHome')
+            navigation.reset({
+                index: 0,
+                routes: [{ name: user.user.role === 'admin' ? 'TabAdminManager' : 'TabHome' }]
+            })
         }, 1500)
     }, [navigation]);
 

@@ -15,6 +15,9 @@ const config = {
                 OrderFailed: {
                     path: 'order/failed',
                 },
+                VoucherCoupon: {
+                    path: 'order/voucher',
+                },
                 Notification: {
                     path: 'Notification',
                 }

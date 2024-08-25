@@ -74,6 +74,14 @@ const OrderQuery = createApi({
             query: () => '/api/order/admin/get_orders_status_paymentStatus?status=Đã giao&paymentStatus=Đã thanh toán',
             providesTags: [{ type: 'Order', id: 'LIST' }],
         }),
+        ConfirmOrderAdmin: build.mutation<{ data: OrderEntity }, { id: string, data: any }>({
+            query: ({ id, data }) => ({
+                url: `/api/order/admin/confirm_order/${id}`,
+                method: 'PUT',
+                body: data
+            }),
+            invalidatesTags: [{ type: 'Order', id: 'LIST' }],
+        })
     }),
 });
 
@@ -82,5 +90,5 @@ export const {
     useCreateOrderMutation, useGetOrderUserQuery, useGetDetailOrderQuery,
     useUpdateOrderMutation, useGetStatusOrderQuery, useGetPaymentUrlVnpayMutation,
     useReturnFromAppQuery, useGetAllOrderForAdminQuery, useUpdateOrderAdminMutation,
-    useGetOrderAdminQuery
+    useGetOrderAdminQuery, useConfirmOrderAdminMutation
 } = OrderQuery;

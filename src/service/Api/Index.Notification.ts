@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { HOST } from "../../constant/Host";
-import { NotificationEntity, UpdateNotificationEntity } from '../../model/entity/Index.Notification';
+import { NotificationEntity, UpdateNotificationEntity, CreateNotificationEntity } from '../../model/entity/Index.Notification';
 
 const NotificationQuery = createApi({
     reducerPath: 'NotificationQuery',
@@ -10,7 +10,7 @@ const NotificationQuery = createApi({
         getNotification: build.query<{ data: NotificationEntity[] }, { userId: string }>({
             query: ({ userId }) => {
                 return {
-                    url: `api/notifee/get/${userId}`,
+                    url: `/api/notifee/get/${userId}`,
                     method: 'GET'
                 }
             },
@@ -19,7 +19,7 @@ const NotificationQuery = createApi({
         createNotification: build.mutation<NotificationEntity, { data: NotificationEntity }>({
             query: ({ data }) => {
                 return {
-                    url: `api/notifee/create`,
+                    url: `/api/notifee/create`,
                     method: 'POST',
                     body: data
                 }
@@ -29,7 +29,7 @@ const NotificationQuery = createApi({
         updateNotification: build.mutation<NotificationEntity, { data: UpdateNotificationEntity }>({
             query: ({ data }) => {
                 return {
-                    url: `api/notifee/update`,
+                    url: `/api/notifee/update`,
                     method: 'PUT',
                     body: data
                 }
@@ -39,8 +39,27 @@ const NotificationQuery = createApi({
         deleteNotification: build.mutation<{ data: NotificationEntity }, { _id: string }>({
             query: ({ _id }) => {
                 return {
-                    url: `api/notifee/delete/${_id}`,
+                    url: `/api/notifee/delete/${_id}`,
                     method: 'DELETE'
+                }
+            },
+            invalidatesTags: [{ type: 'Notification', id: 'LIST' }],
+        }),
+        getAdminNotification: build.query<{ data: NotificationEntity[] }, void>({
+            query: () => {
+                return {
+                    url: `/api/notifee/admin/getNotification`,
+                    method: 'GET'
+                }
+            },
+            providesTags: [{ type: 'Notification', id: 'LIST' }],
+        }),
+        createAdminNotification: build.mutation<NotificationEntity, { body: any }>({
+            query: ({ body }) => {
+                return {
+                    url: '/api/notifee/admin/createNotifications',
+                    method: 'POST',
+                    body: body
                 }
             },
             invalidatesTags: [{ type: 'Notification', id: 'LIST' }],
@@ -52,6 +71,8 @@ export const {
     useGetNotificationQuery,
     useCreateNotificationMutation,
     useUpdateNotificationMutation,
-    useDeleteNotificationMutation
+    useDeleteNotificationMutation,
+    useGetAdminNotificationQuery,
+    useCreateAdminNotificationMutation
 } = NotificationQuery
 export default NotificationQuery

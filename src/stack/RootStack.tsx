@@ -23,13 +23,25 @@ import StacKAdminManagerOrder from './admin/StackAdminManagerOrder';
 import StackAdminManagerProduct from './admin/StackAdminManagerProduct';
 
 import ConfigLinking from '../utils/Linking';
-import { useAppSelector } from '../import/IndexFeatures';
+import { useAppSelector, useAppDispatch } from '../import/IndexFeatures';
+import HandleNotification from '../utils/HandleNotification';
+import useStatusBarConfig from '../utils/UseStatusBarConfig';
 
 const Stack = createNativeStackNavigator<StackHomeTypeParam>();
 
 const RootStack = () => {
 
+    useStatusBarConfig('dark-content', 'transparent', true)
+
     const user = useAppSelector(state => state.root.Auth.user);
+
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        if (user._id) {
+            HandleNotification.checkNotificationPermission(user, dispatch)
+        }
+    }, [user._id, dispatch]);
 
     useEffect(() => {
         const handleInitialUrl = async () => {
@@ -50,7 +62,6 @@ const RootStack = () => {
         };
 
         handleInitialUrl();
-
     }, []);
 
     return (

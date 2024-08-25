@@ -1,15 +1,19 @@
 import { View, Text, TouchableOpacity, ActivityIndicator, Image } from 'react-native'
 import React, { useState } from 'react'
 import { CustomHeader } from '../../../../../import/IndexComponent'
+
 import { IndexStyles } from '../../../../../import/IndexStyles'
 import { Icon } from '../../../../../constant/Icon'
 import { useRoute, RouteProp, useNavigation } from '@react-navigation/native'
+
 import { useGetDetailOrderQuery, useUpdateOrderMutation } from '../../../../../service/Api/Index.Order'
 import { useResetUsageMutation } from '../../../../../service/Api/Index.Voucher'
 import { FormatPrice, FormatPriceVND2 } from '../../../../../utils/FormatPrice'
+
 import { ScrollView } from 'react-native-gesture-handler'
 import { FormatDate3 } from '../../../../../utils/FormatDate'
 import Clipboard from '@react-native-clipboard/clipboard'
+
 import ToastMessage from '../../../../../utils/ToastMessage'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useAppDispatch } from '../../../../../import/IndexFeatures'
@@ -32,8 +36,6 @@ const DetailOrder: React.FC = () => {
 
     const item = data?.data || [] as any
 
-    const dispatch = useAppDispatch()
-
     const [updateOrder] = useUpdateOrderMutation()
 
     const [resetUsage] = useResetUsageMutation()
@@ -44,10 +46,6 @@ const DetailOrder: React.FC = () => {
             if (response.data) {
                 if (item.voucher) {
                     handleUpdateVoucher()
-                    ToastMessage('success', 'Hủy đơn hàng thành công')
-                    navigation.goBack()
-                } else {
-                    ToastMessage('success', 'Hủy đơn hàng thành công')
                     navigation.goBack()
                 }
             } else {

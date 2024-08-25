@@ -125,9 +125,18 @@ const HandleRemoveFcmToken = async (id: String, fcmToken: String) => {
     }
 }
 
+const HandleGetAllUser = async () => {
+    try {
+        const response = await AxiosInstance().get('/api/auth/admin/getAllUsers')
+        return response
+    } catch (error: any) {
+        throw new Error(error)
+    }
+}
+
 export {
     HandleRegisterUser, HandleLoginUser, HandleUpdateUser,
     HandleUploadAvatar, HandleAuthenticatePassword, HandleResetPassword,
     HandleDeleteUser, HandleResendEmail, HandleVerifyOtp, HandleResetPasswordFromMail,
-    HandleLoginProvider, HandleUpdateFcmToken, HandleRemoveFcmToken
+    HandleLoginProvider, HandleUpdateFcmToken, HandleRemoveFcmToken, HandleGetAllUser
 }

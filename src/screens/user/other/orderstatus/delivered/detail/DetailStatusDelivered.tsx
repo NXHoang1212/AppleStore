@@ -1,12 +1,15 @@
 import { View, Text, TouchableOpacity, ActivityIndicator, Image } from 'react-native'
 import React, { useState } from 'react'
 import { CustomHeader } from '../../../../../../import/IndexComponent'
+
 import { IndexStyles } from '../../../../../../import/IndexStyles'
 import { Icon } from '../../../../../../constant/Icon'
 import { useRoute, RouteProp } from '@react-navigation/native'
+
 import { useGetDetailOrderQuery } from '../../../../../../service/Api/Index.Order'
 import { FormatPrice, FormatPriceVND2 } from '../../../../../../utils/FormatPrice'
 import { ScrollView } from 'react-native-gesture-handler'
+
 import { FormatDate3 } from '../../../../../../utils/FormatDate'
 import Clipboard from '@react-native-clipboard/clipboard'
 

@@ -46,11 +46,12 @@ function App(): React.JSX.Element {
           let url = '';
           if (type === 'orderSuccess' || type === 'orderFailed') {
             url = `${HOST.DOMAIN}/StackMisc/Notification`;
+          } else if (type === 'voucher') {
+            url = `${HOST.DOMAIN}/StackMisc/order/voucher`;
           } else {
             url = `${HOST.DOMAIN}/StackMisc/getdetail/${remoteMessage.data.id}`;
           }
           handleLinking(url);
-          console.log('getInitialNotification', remoteMessage);
         }
       });
     notifee.onForegroundEvent(async ({ type, detail }: any) => {
@@ -59,6 +60,8 @@ function App(): React.JSX.Element {
         const type = detail.notification.data.type;
         if (type === 'orderSuccess' || type === 'orderFailed') {
           navigationRef.current?.navigate('StackMisc', { screen: 'Notification' } as any);
+        } else if (type === 'voucher') {
+          navigationRef.current?.navigate('StackMisc', { screen: 'VoucherCoupon' } as any);
         } else {
           navigationRef.current?.navigate('StackMisc', { screen: 'DetailArticle', params: { _id: id } } as any);
         }
@@ -70,7 +73,9 @@ function App(): React.JSX.Element {
         const type = detail.notification.data.type;
         let url = '';
         if (type === 'orderSuccess' || type === 'orderFailed') {
-          url = `${HOST.DOMAIN}/StackMisc/notification`;
+          url = `${HOST.DOMAIN}/StackMisc/Notification`;
+        } else if (type === 'voucher') {
+          url = `${HOST.DOMAIN}/StackMisc/order/voucher`;
         } else {
           url = `${HOST.DOMAIN}/StackMisc/getdetail/${id}`;
         }
@@ -82,6 +87,7 @@ function App(): React.JSX.Element {
       notifee.cancelAllNotifications();
     }
   }, [])
+
 
   return (
     <ProviderRedux store={StoreRedux}>

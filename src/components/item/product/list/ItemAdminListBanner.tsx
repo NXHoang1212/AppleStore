@@ -10,6 +10,7 @@ import IndexHandleCart from '../../../../service/Api/IndexHandleCart'
 import { Icon } from '../../../../constant/Icon'
 import { CategoryState } from '../../../../model/entity/IndexCategory.entity'
 import { BannerState } from '../../../../model/entity/IndexBanner.entity'
+import FastImage from 'react-native-fast-image'
 
 type PropsProduct = {
     item: BannerState,
@@ -50,10 +51,13 @@ const ItemAdminListBanner = ({ item, navigation, currentlyOpenSwipeable }: Props
             <TouchableOpacity style={styles.viewItem}
                 onPress={() => navigation.navigate('StackAdminManagerProduct', { screen: 'EditBanner', params: { id: item._id } })}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: Responsive.wp(5) }}>
-                    <Animated.Image
-                        source={{ uri: item.images as string }}
+                    <FastImage
+                        source={{
+                            uri: item.images as string,
+                            priority: FastImage.priority.high,
+                        }}
+                        resizeMode={FastImage.resizeMode.contain}
                         style={styles.image}
-                        onLoad={onImageLoad}
                     />
                     <Text style={styles.textName}>{item.title}</Text>
                 </View>

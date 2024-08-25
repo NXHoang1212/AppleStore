@@ -4,6 +4,11 @@ import { FontsROBOTO } from "../../../../constant/Fonts";
 import { Responsive } from "../../../../constant/Responsive";
 
 const StyleMangerOrder = StyleSheet.create({
+    containerLoading: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     container: {
         flex: 1,
         backgroundColor: COLOR.GRAY,
@@ -40,11 +45,19 @@ const StyleMangerOrder = StyleSheet.create({
         marginBottom: Responsive.hp(2),
         backgroundColor: COLOR.WHITE,
         height: Responsive.hp(8),
-        width: Responsive.wp(100),
+        width: '100%',
         alignItems: 'center',
+        gap: Responsive.wp(6),
     },
     viewTabButton: {
         width: Responsive.wp(33),
+        height: Responsive.hp(8),
+        backgroundColor: COLOR.REDONE,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    viewTabButton1: {
+        width: Responsive.wp(39),
         height: Responsive.hp(8),
         backgroundColor: COLOR.REDONE,
         justifyContent: 'center',

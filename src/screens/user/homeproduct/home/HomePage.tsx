@@ -42,7 +42,7 @@ const HomePage: React.FC = () => {
         if (user.user._id) {
             dispatch(fetchGetCountCart(user.user._id))
             dispatch(fetchFavourites(user.user._id))
-            HandleNotification.checkNotificationPermission(user.user, dispatch);
+            // HandleNotification.checkNotificationPermission(user.user, dispatch)
         }
     }, [user.user._id, dispatch])
 

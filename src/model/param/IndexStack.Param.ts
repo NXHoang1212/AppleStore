@@ -67,6 +67,8 @@ export type StackAuthUserParams = {
 export type StackAdminManagerOrderParams = {
     DetailManagerOrder: undefined;
     DetailOrderCancel: undefined;
+    DetailOrderDelivered: undefined;
+    DetailOrderDelivering: undefined;
 }
 
 export type StackAdminManagerProductParams = {
