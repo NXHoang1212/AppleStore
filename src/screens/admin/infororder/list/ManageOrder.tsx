@@ -17,6 +17,7 @@ import { FlashList } from '@shopify/flash-list'
 import { FormatPriceVND2 } from '../../../../utils/FormatPrice'
 import { ScrollView } from 'react-native-gesture-handler'
 import ToastMessage from '../../../../utils/ToastMessage'
+import AxiosInstance from '../../../../utils/AxiosIntance'
 
 const ManageOrder: React.FC = () => {
 
@@ -42,11 +43,18 @@ const ManageOrder: React.FC = () => {
 
   const handleConfirmOrder = async (id: string, status: string) => {
     try {
-      const result = await ConfirmOrderAdmin({ id, data: { status: status, updateAt: new Date().toISOString() } }).unwrap()
-      if (result.data) {
+      const data = {
+        data: {
+          status: status,
+          updateAt: new Date().toISOString(),
+        }
+      };
+      const result = await ConfirmOrderAdmin({ id, data }).unwrap()
+      if (result) {
         ToastMessage('success', 'Xác nhận đơn hàng thành công')
       }
     } catch (error) {
+      console.log("🚀 ~ handleConfirmOrder ~ error:", error)
       ToastMessage('error', 'Xác nhận đơn hàng không thành công')
     }
   }
@@ -103,7 +111,7 @@ const ManageOrder: React.FC = () => {
           renderItem={({ item }) => (
             <View style={StyleMangerOrder.viewOrder}>
               <TouchableOpacity style={StyleMangerOrder.viewOrderText}
-                onPress={() => navigation.navigate('StackAdminManagerOrder', { screen: 'DetailManagerOrder', params: { id: item._id } })}>
+                onPress={() => navigation.navigate('StackAdminManagerOrder', { screen: 'DetailOrderPending', params: { id: item._id } })}>
                 <View style={StyleMangerOrder.viewOrderProduct}>
                   <View>
                     <Image source={{ uri: item.products[0].priceColor.image }} style={StyleMangerOrder.imageOrder} />
@@ -159,6 +167,10 @@ const ManageOrder: React.FC = () => {
                       <Text style={StyleMangerOrder.textProduct}>{FormatPriceVND2(item.totalAmount)}</Text>
                     </View>
                   </View>
+                </View>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 15 }}>
+                  <Text style={StyleMangerOrder.textOrder}>Tình trạng</Text>
+                  <Text style={StyleMangerOrder.textProduct}>{item.status}</Text>
                 </View>
               </TouchableOpacity>
             </View>

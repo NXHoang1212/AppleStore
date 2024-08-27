@@ -64,6 +64,7 @@ export enum StackAdminManagerOrderEnum {
     DetailOrderCancel = 'DetailOrderCancel',
     DetailOrderDelivered = 'DetailOrderDelivered',
     DetailOrderDelivering = 'DetailOrderDelivering',
+    DetailOrderPending = 'DetailOrderPending',
 }
 
 export enum StackAdminManagerProductEnum {

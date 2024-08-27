@@ -1,21 +1,15 @@
 import { View, Text, ActivityIndicator, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import { useConfirmOrderAdminMutation, useGetDetailOrderQuery } from '../../../../service/Api/Index.Order'
-
 import { useRoute, RouteProp } from '@react-navigation/native'
 import { CustomHeader } from '../../../../import/IndexComponent'
 import StyleDetailManagerOder from './StyleDetailManagerOrder'
-
 import { Icon } from '../../../../constant/Icon'
 import Clipboard from '@react-native-clipboard/clipboard'
 import { FormatPrice, FormatPriceVND2 } from '../../../../utils/FormatPrice'
-
 import { FormatDate3 } from '../../../../utils/FormatDate'
 import { ScrollView } from 'react-native-gesture-handler'
 import ToastMessage from '../../../../utils/ToastMessage'
-
-import { useNavigation } from '@react-navigation/native'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 type RouteParams = {
     DetailManagerOrder: {
@@ -23,11 +17,9 @@ type RouteParams = {
     }
 }
 
-const DetailManagerOrder: React.FC = () => {
+const DetailOrderPending: React.FC = () => {
 
     const route = useRoute<RouteProp<RouteParams, 'DetailManagerOrder'>>()
-
-    const navigation = useNavigation<NativeStackNavigationProp<any>>()
 
     const { data, isLoading } = useGetDetailOrderQuery(route.params.id)
 
@@ -43,30 +35,22 @@ const DetailManagerOrder: React.FC = () => {
         )
     }
 
-    const handleConfirmOrder = async (id: string, status: string, deliveredAt?: Date, canceledAt?: Date) => {
+    const handleConfirmOrder = async (id: string, status: string) => {
         try {
-            const data = {
-                data: {
-                    status: status,
-                    deliveredAt: deliveredAt,
-                    canceledAt: canceledAt
-                }
-            }
-            const response = await ConfirmOrderAdmin({ id, data }).unwrap()
-            if (response) {
-                ToastMessage('success', 'Xác nhận đơn hàng thành công')
-                navigation.goBack()
-            }
+          const result = await ConfirmOrderAdmin({ id, data: { status: status, updateAt: new Date().toISOString() } }).unwrap()
+          if (result.data) {
+            ToastMessage('success', 'Xác nhận đơn hàng thành công')
+          }
         } catch (error) {
-            ToastMessage('error', 'Xác nhận đơn hàng không thành công')
+          ToastMessage('error', 'Xác nhận đơn hàng không thành công')
         }
-    }
+      }
 
     return (
         <View style={StyleDetailManagerOder.container}>
             <View style={StyleDetailManagerOder.viewheader}>
                 <View style={StyleDetailManagerOder.headerTitle}>
-                    <CustomHeader title='Chi tiết xác nhận đơn' color='red' />
+                    <CustomHeader title='Chi tiết chờ xác nhận' color='red' />
                 </View>
             </View>
             <ScrollView>
@@ -159,14 +143,14 @@ const DetailManagerOrder: React.FC = () => {
                     </View>
                 </View>
                 <View style={StyleDetailManagerOder.viewFooter}>
-                    <TouchableOpacity onPress={() => handleConfirmOrder(item._id, 'Đã hủy', new Date())} >
+                    <TouchableOpacity>
                         <View style={StyleDetailManagerOder.viewOrderButton}>
-                            <Text style={StyleDetailManagerOder.textActive}>Hủy giao hàng</Text>
+                            <Text style={StyleDetailManagerOder.textActive}>Hủy đơn hàng</Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => handleConfirmOrder(item._id, 'Đang giao', new Date())} >
+                    <TouchableOpacity>
                         <View style={StyleDetailManagerOder.viewOrderButton}>
-                            <Text style={StyleDetailManagerOder.textActive}>Giao hàng</Text>
+                            <Text style={StyleDetailManagerOder.textActive}>xác nhận đơn hàng</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
@@ -175,5 +159,4 @@ const DetailManagerOrder: React.FC = () => {
     )
 }
 
-export default DetailManagerOrder
-
+export default DetailOrderPending

@@ -69,6 +69,7 @@ export type StackAdminManagerOrderParams = {
     DetailOrderCancel: undefined;
     DetailOrderDelivered: undefined;
     DetailOrderDelivering: undefined;
+    DetailOrderPending: undefined;
 }
 
 export type StackAdminManagerProductParams = {

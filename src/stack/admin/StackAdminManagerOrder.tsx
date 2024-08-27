@@ -7,6 +7,7 @@ import DetailManagerOrder from '../../screens/admin/infororder/detail/DetailMana
 import DetailOrderCancel from '../../screens/admin/infororder/detail/DetailOrderCancel';
 import DetailOrderDelivered from '../../screens/admin/infororder/detail/DetailOrderDelivered';
 import DetailOrderDelivering from '../../screens/admin/infororder/detail/DetailOrderDelivering';
+import DetailOrderPending from '../../screens/admin/infororder/detail/DetailPendingOrder';
 
 const Stack = createNativeStackNavigator<StackAdminManagerOrderParams>();
 
@@ -17,6 +18,7 @@ const StacKAdminManagerOrder = (): React.JSX.Element => {
             <Stack.Screen name={StackAdminManagerOrderEnum.DetailOrderCancel} component={DetailOrderCancel} />
             <Stack.Screen name={StackAdminManagerOrderEnum.DetailOrderDelivered} component={DetailOrderDelivered} />
             <Stack.Screen name={StackAdminManagerOrderEnum.DetailOrderDelivering} component={DetailOrderDelivering} />
+            <Stack.Screen name={StackAdminManagerOrderEnum.DetailOrderPending} component={DetailOrderPending} />
         </Stack.Navigator>
     );
 };
