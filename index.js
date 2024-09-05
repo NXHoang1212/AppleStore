@@ -22,7 +22,6 @@ messaging().setBackgroundMessageHandler(async remoteMessage => {
         url = `${HOST.DOMAIN}/StackMisc/getdetail/${remoteMessage.data.id}`;
     }
     handleLinking(url);
-    console.log('Message handled in the background!', remoteMessage);
 });
 
 messaging().onNotificationOpenedApp(remoteMessage => {
@@ -36,7 +35,6 @@ messaging().onNotificationOpenedApp(remoteMessage => {
     }
 
     handleLinking(url);
-    console.log('Message handled in the foreground!', remoteMessage);
 });
 
 AppRegistry.registerComponent(appName, () => App);

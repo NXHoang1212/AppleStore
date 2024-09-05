@@ -101,7 +101,7 @@ const PaymentOrders: React.FC = () => {
             const orderData: any = {
                 userId: userId,
                 products: cart?.data.map(item => ({
-                    _id: item._id,
+                    _id: item.products._id,
                     name: item.products.name,
                     model: item.products.model,
                     storage: item.products.storage,
@@ -124,7 +124,7 @@ const PaymentOrders: React.FC = () => {
             const orderDataAtHome: any = {
                 userId: userId,
                 products: cart?.data.map(item => ({
-                    _id: item._id,
+                    _id: item.products._id,
                     name: item.products.name,
                     model: item.products.model,
                     storage: item.products.storage,

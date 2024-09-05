@@ -32,7 +32,6 @@ const Slash: React.FC = () => {
         dispatch(fetProductsPagination({ page: 1, limit: 10 }))
         dispatch(fetchProducts())
         dispatch(fetchCategoryProduct())
-        // HandleNotification.checkNotificationPermission(user.user, dispatch);
     }, [dispatch]);
 
     useEffect(() => {

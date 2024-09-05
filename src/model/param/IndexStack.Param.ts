@@ -15,6 +15,7 @@ export type StackHomeTypeParam = {
     TabAdminManager: undefined;
     StackAdminManagerOrder: undefined;
     StackAdminManagerProduct: undefined;
+    StackAdminManagerOther: undefined;
 };
 
 export type StackIndividualParams = {
@@ -88,4 +89,8 @@ export type StackAdminManagerProductParams = {
     SendNotifications: undefined;
     ListNotifications: undefined;
     ListCustomer: undefined;
+}
+
+export type StackAdminMangerOtherParams = {
+    EditProfileAdmin: undefined;
 }

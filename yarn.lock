@@ -4890,6 +4890,11 @@ get-symbol-description@^1.0.2:
     es-errors "^1.3.0"
     get-intrinsic "^1.2.4"
 
+gifted-charts-core@^0.1.32:
+  version "0.1.32"
+  resolved "https://registry.yarnpkg.com/gifted-charts-core/-/gifted-charts-core-0.1.32.tgz#94ed5c5d854bcd80abd91f33cff8a39352e46ced"
+  integrity sha512-BXAc9Dg/JK9/4RHWtEzs3EUIGPDKMxlcA7xwYt2vuEXl5UkkJqX6asrfHVv0R1YmVjkgz/0ld4OsKdNArRJOAQ==
+
 glob-parent@^5.1.2:
   version "5.1.2"
   resolved "https://registry.npmjs.org/glob-parent/-/glob-parent-5.1.2.tgz"
@@ -7318,6 +7323,13 @@ react-native-gesture-handler@^2.16.2:
     invariant "^2.2.4"
     lodash "^4.17.21"
     prop-types "^15.7.2"
+
+react-native-gifted-charts@^1.4.31:
+  version "1.4.31"
+  resolved "https://registry.yarnpkg.com/react-native-gifted-charts/-/react-native-gifted-charts-1.4.31.tgz#561b770b9f37df7a6e0df1c526156e7723d9dd17"
+  integrity sha512-5PLM64sywUX/DuGSSAbQFB0j0w3YtR6dj+OtByuq8DFsPZSQlzBvjqCaTBKVTXMrs4BT8a72cNZUe1DtZUAWcw==
+  dependencies:
+    gifted-charts-core "^0.1.32"
 
 react-native-image-crop-picker@^0.41.2:
   version "0.41.2"

@@ -81,6 +81,18 @@ const OrderQuery = createApi({
                 body: data
             }),
             invalidatesTags: [{ type: 'Order', id: 'LIST' }],
+        }),
+        getTopAdminProduct: build.query<{ data: OrderEntity[] }, void>({
+            query: () => '/api/order/admin/getTopProducts',
+            providesTags: [{ type: 'Order', id: 'LIST' }],
+        }),
+        getRevenueAdmin: build.query<{ data: OrderEntity[] }, string>({
+            query: (date) => `/api/order/admin/getRevenue/${date}`,
+            providesTags: [{ type: 'Order', id: 'LIST' }],
+        }),
+        getCompareRevenueAdmin: build.query<{ data: OrderEntity[] }, void>({
+            query: () => '/api/order/admin/compare-revenuen',
+            providesTags: [{ type: 'Order', id: 'LIST' }],
         })
     }),
 });
@@ -90,5 +102,6 @@ export const {
     useCreateOrderMutation, useGetOrderUserQuery, useGetDetailOrderQuery,
     useUpdateOrderMutation, useGetStatusOrderQuery, useGetPaymentUrlVnpayMutation,
     useReturnFromAppQuery, useGetAllOrderForAdminQuery, useUpdateOrderAdminMutation,
-    useGetOrderAdminQuery, useConfirmOrderAdminMutation
+    useGetOrderAdminQuery, useConfirmOrderAdminMutation, useGetTopAdminProductQuery,
+    useGetRevenueAdminQuery, useGetCompareRevenueAdminQuery,useLazyGetRevenueAdminQuery
 } = OrderQuery;

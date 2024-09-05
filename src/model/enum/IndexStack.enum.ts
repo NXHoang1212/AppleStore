@@ -10,6 +10,7 @@ export enum StackHomeEnum {
     TabAdminManager = 'TabAdminManager',
     StackAdminManagerOrder = 'StackAdminManagerOrder',
     StackAdminManagerProduct = 'StackAdminManagerProduct',
+    StackAdminManagerOther = 'StackAdminManagerOther',
 }
 
 export enum StackIndividualEnum {
@@ -83,4 +84,8 @@ export enum StackAdminManagerProductEnum {
     ListCustomer = 'ListCustomer',
     SendNotifications = 'SendNotifications',
     ListNotifications = 'ListNotifications',
+}
+
+export enum StackAdminManagerOtherEnum {
+    EditProfileAdmin = 'EditProfileAdmin',
 }

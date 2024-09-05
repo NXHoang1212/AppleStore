@@ -21,6 +21,7 @@ import NotFound from '../screens/notfound/NotFound';
 import TabAdminManager from './admin/TabAdminManager';
 import StacKAdminManagerOrder from './admin/StackAdminManagerOrder';
 import StackAdminManagerProduct from './admin/StackAdminManagerProduct';
+import StackAdminMangerOther from './admin/StackAdminMangerOther';
 
 import ConfigLinking from '../utils/Linking';
 import { useAppSelector, useAppDispatch } from '../import/IndexFeatures';
@@ -38,8 +39,13 @@ const RootStack = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
+        HandleNotification.checkNotificationPermission();
+    }, []);
+
+    // Lưu token FCM khi `user._id` thay đổi
+    useEffect(() => {
         if (user._id) {
-            HandleNotification.checkNotificationPermission(user, dispatch)
+            HandleNotification.getFcmToken(user, dispatch);
         }
     }, [user._id, dispatch]);
 
@@ -84,6 +90,14 @@ const RootStack = () => {
                         <Stack.Screen
                             name={StackHomeEnum.StackAdminManagerProduct}
                             component={StackAdminManagerProduct}
+                        />
+                        <Stack.Screen
+                            name={StackHomeEnum.StackIndividual}
+                            component={StackIndividual}
+                        />
+                        <Stack.Screen
+                            name={StackHomeEnum.StackAdminManagerOther}
+                            component={StackAdminMangerOther}
                         />
                     </>
                 ) : (
