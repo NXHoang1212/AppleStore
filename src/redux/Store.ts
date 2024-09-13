@@ -22,6 +22,7 @@ import OrderQuery from '../service/Api/Index.Order';
 import NotificationQuery from '../service/Api/Index.Notification';
 import { AdminBannerQuery } from '../service/Api/IndexBanner';
 import { AdminCategoriesQuery } from '../service/Api/IndexCategory';
+import EvaluateQuery from '../service/Api/Index.Evaluate';
 import { setupListeners } from '@reduxjs/toolkit/query';
 
 /*AsyncStorage, Redux Persist */
@@ -57,6 +58,7 @@ const StoreRedux = configureStore({
         [NotificationQuery.reducerPath]: NotificationQuery.reducer,
         [AdminCategoriesQuery.reducerPath]: AdminCategoriesQuery.reducer,
         [AdminBannerQuery.reducerPath]: AdminBannerQuery.reducer,
+        [EvaluateQuery.reducerPath]: EvaluateQuery.reducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
@@ -71,6 +73,7 @@ const StoreRedux = configureStore({
             .concat(NotificationQuery.middleware)
             .concat(AdminCategoriesQuery.middleware)
             .concat(AdminBannerQuery.middleware)
+            .concat(EvaluateQuery.middleware)
 
 });
 

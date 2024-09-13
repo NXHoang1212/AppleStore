@@ -93,4 +93,5 @@ export type StackAdminManagerProductParams = {
 
 export type StackAdminMangerOtherParams = {
     EditProfileAdmin: undefined;
+    ManagerCustomerAdmin: undefined;
 }

@@ -56,6 +56,9 @@ import { StyleDetailCancelled } from "../screens/user/other/orderstatus/cancelle
 import { StyleDetailPendingDelivey } from "../screens/user/other/orderstatus/delivery/detail/StyleDetailPendingDelivery";
 import { StyleDetailStatusDelivered } from "../screens/user/other/orderstatus/delivered/detail/StyleDetailStatusDelivered";
 
+/*EVALUATEPRODUCTS */
+import StyleEvaluateProducts from "../screens/user/other/evaluate/StyleEvaluateProducts";
+
 /*VOURCHER */
 import { StyleVoucherCoupon } from "../screens/user/order/voucher/list/StyleVoucherCoupon";
 import { StyleDetailVoucherCoupon } from "../screens/user/order/voucher/detail/StyleDetailVoucherCoupon";
@@ -109,6 +112,7 @@ export const IndexStyles = {
     StyleDetailCancelled,
     StyleDetailPendingDelivey,
     StyleDetailStatusDelivered,
+    StyleEvaluateProducts,
     StyleVoucherCoupon,
     StyleDetailVoucherCoupon,
     StyleNotFound,

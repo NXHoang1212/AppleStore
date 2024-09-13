@@ -22,6 +22,8 @@ import { decrementItemCount } from '../../../../redux/slices/CountCartSlice'
 import { useUseVoucherMutation } from '../../../../service/Api/Index.Voucher'
 import { useCreateOrderMutation, useGetPaymentUrlVnpayMutation, useReturnFromAppQuery } from '../../../../service/Api/Index.Order'
 
+import { useCreateEvaluateMutation } from '../../../../service/Api/Index.Evaluate'
+
 interface PaymentOrdersProps {
     id: string,
     shipper: string,
@@ -51,6 +53,8 @@ const PaymentOrders: React.FC = () => {
 
     const { data: cart } = useGetCartIdsQuery(id)
 
+    const [createEvaluate] = useCreateEvaluateMutation()
+
     const [createOrder] = useCreateOrderMutation()
 
     const [updateCartStatus] = useUpdateCartStatusMutation()
@@ -74,6 +78,15 @@ const PaymentOrders: React.FC = () => {
     const totalPayment = totalProduct + shipperFee - voucherDiscount
 
     const currentPayment = selectedPayment || 'Nhận hàng tại nhà'
+
+    const handleEvaluate = async (res: any) => {
+        try {
+            const result = await createEvaluate({ user_id: userId, order_id: res.data.data._id });
+        } catch (error) {
+            console.error('Failed to evaluate product', error);
+        }
+    }
+
 
     useEffect(() => {
         if (isFocused) {
@@ -141,9 +154,11 @@ const PaymentOrders: React.FC = () => {
                 shippingFee: shipperFee,
                 voucher: selectedVoucher?._id,
                 note: note,
+
             }
+            const idProduct = cart?.data.map(item => item.products._id)
             const data: any = {
-                ids: id,
+                ids: idProduct,
                 status: 'Đã đặt hàng',
             }
             switch (currentPayment) {
@@ -151,6 +166,7 @@ const PaymentOrders: React.FC = () => {
                     const res: any = await createOrder(orderDataAtHome)
                     if (res.data) {
                         await IndexHandleCart.handleUpdateCartOrder(updateCartStatus, data, dipatch, decrementItemCount)
+                        await handleEvaluate(res)
                         if (selectedVoucher) {
                             const voucherData = {
                                 id: selectedVoucher._id,
@@ -231,7 +247,7 @@ const PaymentOrders: React.FC = () => {
                         ToastMessage('error', 'Đặt hàng không thành công');
                     }
                     break;
-                    
+
                 default:
                     ToastMessage('error', 'Phương thức thanh toán không hợp lệ');
                     break;

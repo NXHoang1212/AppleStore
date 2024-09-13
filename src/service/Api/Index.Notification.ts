@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { HOST } from "../../constant/Host";
-import { NotificationEntity, UpdateNotificationEntity, CreateNotificationEntity } from '../../model/entity/Index.Notification';
+import { NotificationEntity, UpdateNotificationEntity, CreateNotificationEntity } from '../../model/entity/Index.Notification.entity';
 
 const NotificationQuery = createApi({
     reducerPath: 'NotificationQuery',

@@ -9,34 +9,39 @@ const StyleOtherAdmin = StyleSheet.create({
         backgroundColor: COLOR.GRAYONE
     },
     viewheader: {
-        height: Responsive.hp(12),
-        backgroundColor: COLOR.WHITE,
-        borderBottomWidth: 1.5,
-        borderBottomColor: COLOR.GREY,
-        shadowColor: COLOR.BLACK,
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 8,
-        elevation: 5,
+        flexDirection: 'row',
+        height: Responsive.hp(18),
+        gap: Responsive.wp(3),
     },
     headerTitle: {
         flexDirection: 'row',
         alignItems: 'center',
-        top: Responsive.hp(6.2),
-        paddingHorizontal: Responsive.wp(5),
+        gap: Responsive.wp(4),
+        marginLeft: Responsive.wp(3.5),
+        top: Responsive.hp(2),
     },
-    textHeader: {
-        fontSize: Responsive.RFPercentage(2.8),
-        fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
-        color: COLOR.BLACK,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        width: Responsive.wp(80),
-        letterSpacing: 0.25
+    image: {
+        width: Responsive.wp(19.8),
+        height: Responsive.hp(10),
+        borderRadius: 50,
+        marginTop: Responsive.hp(0.5),
+    },
+    textheader1: {
+        color: COLOR.WHITE,
+        fontSize: Responsive.RFPercentage(2.2),
+        fontFamily: FontsROBOTO.ROBOTO_BOLD,
+        letterSpacing: 0.5,
+    },
+    textheader2: {
+        color: COLOR.WHITE,
+        fontSize: Responsive.RFPercentage(1.9),
+        fontFamily: FontsROBOTO.ROBOTO_BOLD,
+        bottom: Responsive.hp(0.2),
+        letterSpacing: 0.3,
     },
     containerBody: {
-        flex: 1,
-        backgroundColor: COLOR.GRAYONE,
-        marginTop: Responsive.hp(2),
+        backgroundColor: COLOR.WHITE,
+        marginTop: Responsive.hp(1),
     },
 });
 

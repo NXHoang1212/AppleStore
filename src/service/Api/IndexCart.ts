@@ -44,7 +44,7 @@ const CartQuery = createApi({
             query: (body) => ({
                 url: `/api/cart/updateStatus`,
                 method: 'PUT',
-                body,
+                body: body,
             }),
             invalidatesTags: [{ type: 'Cart', id: 'LIST' }],
         }),

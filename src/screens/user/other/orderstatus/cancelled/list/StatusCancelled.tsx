@@ -43,7 +43,6 @@ const StatusCancelled: React.FC = () => {
             if (result.data) {
                 const quantityToDecrement = result.data.data.matchedCount
                 dispatch(incrementItemCount(quantityToDecrement));
-                console.log('Increment item count by:', quantityToDecrement);
                 navigation.navigate('TabHome', { screen: 'Giỏ hàng' });
             } else {
                 ToastMessage('error', 'Cập nhật giỏ hàng thất bại');

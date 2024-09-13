@@ -14,7 +14,12 @@ import { FormatPrice, FormatPriceVND2 } from '../../../../../../utils/FormatPric
 import { Responsive } from '../../../../../../constant/Responsive';
 import { ScrollView } from 'react-native-gesture-handler';
 
+import { useCreateEvaluateMutation } from '../../../../../../service/Api/Index.Evaluate';
+import { useGetEvaluateQuery } from '../../../../../../service/Api/Index.Evaluate';
+import { HOST } from '../../../../../../constant/Host';
+
 const StatusDelivered: React.FC = () => {
+
     const navigation = useNavigation<NativeStackNavigationProp<any>>();
 
     const user = useAppSelector(state => state.root.Auth.user._id);
@@ -24,6 +29,16 @@ const StatusDelivered: React.FC = () => {
     const pendingOrder = data?.data.filter((item) => item.status === "Đã giao");
 
     const payment = 'Giao hàng thành công, cảm ơn bạn đã mua hàng tại shop.';
+
+    const { data: evaluateData } = useGetEvaluateQuery(pendingOrder?.map(order => order._id).join(',') || '',
+        { refetchOnMountOrArgChange: true, refetchOnReconnect: true });
+
+    // const isEvaluated = evaluateData?.data?.some((item) => pendingOrder?.some(order => order._id === item.order_id));
+    // Kiểm tra trạng thái đánh giá của từng đơn hàng
+    const getOrderEvaluationStatus = (orderId: string) => {
+        const evaluation = evaluateData?.data?.find(item => item.order_id === orderId);
+        return evaluation?.status === 'evaluated' ? 'Đã đánh giá' : 'Chưa đánh giá';
+    };
 
     if (isLoading) {
         return (
@@ -38,7 +53,8 @@ const StatusDelivered: React.FC = () => {
             <View style={IndexStyles.StyleStatusDelivered.container}>
                 {pendingOrder?.map((item, index) => (
                     <View key={index}>
-                        <TouchableOpacity style={IndexStyles.StyleStatusDelivered.containerItem} onPress={() => navigation.navigate('StackMisc', { screen: 'DetailStatusDelivered', params: { id: item._id, payment: payment } })}>
+                        <TouchableOpacity style={IndexStyles.StyleStatusDelivered.containerItem}
+                            onPress={() => navigation.navigate('StackMisc', { screen: 'DetailStatusDelivered', params: { id: item._id, payment: payment } })} >
                             <View style={IndexStyles.StyleStatusDelivered.viewText}>
                                 <View style={IndexStyles.StyleStatusDelivered.viewIcon}>
                                     <Icon.StoreSVG width={25} height={25} />
@@ -76,14 +92,20 @@ const StatusDelivered: React.FC = () => {
                             <View style={IndexStyles.StyleStatusDelivered.line} />
                             <View style={IndexStyles.StyleStatusDelivered.viewPayment}>
                                 <Text style={IndexStyles.StyleStatusDelivered.textPayment}>{payment}</Text>
-                                <View style={IndexStyles.StyleStatusDelivered.viewButton}>
-                                    <Text style={IndexStyles.StyleStatusDelivered.textButton}>Mua lại</Text>
-                                </View>
+                                {getOrderEvaluationStatus(item._id) === 'Chưa đánh giá' ? (
+                                    <TouchableOpacity style={IndexStyles.StyleStatusDelivered.viewButton}
+                                        onPress={() => navigation.navigate('StackMisc', { screen: 'EvaluateProducts', params: { id: item._id } })}>
+                                        <Text style={IndexStyles.StyleStatusDelivered.textButton}>Đánh giá</Text>
+                                    </TouchableOpacity>
+                                ) : (
+                                    <TouchableOpacity style={IndexStyles.StyleStatusDelivered.viewButton}>
+                                        <Text style={IndexStyles.StyleStatusDelivered.textButton}>{getOrderEvaluationStatus(item._id)}</Text>
+                                    </TouchableOpacity>
+                                )}
                             </View>
                         </TouchableOpacity>
                     </View>
-                ))
-                }
+                ))}
             </View>
         </ScrollView>
     )

@@ -7,7 +7,7 @@ import { Responsive } from '../../../../constant/Responsive'
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 import { FormatDate2 } from '../../../../utils/FormatDate'
-import { NotificationEntity } from '../../../../model/entity/Index.Notification'
+import { NotificationEntity } from '../../../../model/entity/Index.Notification.entity'
 import { Icon } from '../../../../constant/Icon'
 import IndexHandleCart from '../../../../service/Api/IndexHandleCart'
 

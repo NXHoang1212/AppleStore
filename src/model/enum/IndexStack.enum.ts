@@ -88,4 +88,5 @@ export enum StackAdminManagerProductEnum {
 
 export enum StackAdminManagerOtherEnum {
     EditProfileAdmin = 'EditProfileAdmin',
+    ManagerCustomerAdmin = 'ManagerCustomerAdmin',
 }

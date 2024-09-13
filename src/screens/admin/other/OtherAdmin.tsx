@@ -10,7 +10,7 @@ import { HandleRemoveFcmToken } from '../../../service/Api/IndexUser';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Logout } from '../../../redux/slices/Auth.Slice';
 
-import { IndexStyles } from '../../../import/IndexStyles';
+import StyleOtherAdmin from './StyleOtherAdmin';
 import LinearGradient from 'react-native-linear-gradient';
 import { Icon } from '../../../constant/Icon';
 import { CustomModalConfirm, renderInformationItem } from '../../../import/IndexComponent';
@@ -49,28 +49,29 @@ const OtherAdmin: React.FC = () => {
   };
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
-      <View style={IndexStyles.StyleInformation.container}>
-        <LinearGradient colors={['#EB5A65', '#EB5A65', '#EB5A65']} style={IndexStyles.StyleInformation.viewheader}>
-          <View style={IndexStyles.StyleInformation.headerTitle}>
+      <View style={StyleOtherAdmin.container}>
+        <LinearGradient colors={['#EB5A65', '#EB5A65', '#EB5A65']} style={StyleOtherAdmin.viewheader}>
+          <View style={StyleOtherAdmin.headerTitle}>
             {isLoggedIn.user.photoUrl
-              ? <Image source={{ uri: isLoggedIn.user.photoUrl }} style={IndexStyles.StyleInformation.image} />
+              ? <Image source={{ uri: isLoggedIn.user.photoUrl }} style={StyleOtherAdmin.image} />
               : <Icon.AvatarSVG width={50} height={50} fill='#FFFFFF' />
             }
             <View style={{ flexDirection: 'column', gap: 2 }}>
-              <Text style={IndexStyles.StyleInformation.textheader1}>Nguyễn Xuân Hoàng</Text>
-              <Text style={IndexStyles.StyleInformation.textheader2}>Bạn có 3 đơn hàng</Text>
-            </View>
+              <Text style={StyleOtherAdmin.textheader1}>Nguyễn Xuân Hoàng</Text>
+              <Text style={StyleOtherAdmin.textheader2}>Bạn có 3 đơn hàng</Text>
+              <Text style={StyleOtherAdmin.textheader2}>Tài khoản admin</Text>
+            </View> 
           </View>
         </LinearGradient>
-        <View style={IndexStyles.StyleInformation.containerbody}>
+        <View style={StyleOtherAdmin.containerBody}>
           <View>
             {renderInformationItem({ text: 'Thông tin cá nhân', image: Icon.INFOR, onPress: () => navigation.navigate('StackAdminManagerOther', { screen: 'EditProfileAdmin' } as any) })}
-            {renderInformationItem({ text: 'Địa chỉ', image: Icon.ADDRESS, onPress: () => navigation.navigate(isLoggedIn.isLogged ? 'StackIndividual' : 'AuthUser', { screen: 'ViewAddRess' } as any) })}
-            {renderInformationItem({ text: 'Đổi mật khẩu', image: Icon.CHANGEPASSWORD, onPress: () => navigation.navigate(isLoggedIn.isLogged ? 'StackIndividual' : 'AuthUser', { screen: 'ChangePassword' } as any) })}
-            {renderInformationItem({ text: 'Quản lý đánh giá khách hàng', image: Icon.FEEDBACK, onPress: () => navigation.navigate(isLoggedIn.isLogged ? 'StackIndividual' : 'AuthUser', { screen: 'ReviewInfor' } as any) })}
-            {renderInformationItem({ text: 'Trò chuyện với khách hàng', image: Icon.CHATWITHSHOP, onPress: () => navigation.navigate(isLoggedIn.isLogged ? 'StackIndividual' : 'AuthUser', { screen: 'ChatWithAdmin' } as any) })}
-            {renderInformationItem({ text: 'Liên hệ và góp ý', image: Icon.CONTACT, onPress: () => navigation.navigate(isLoggedIn.isLogged ? 'StackIndividual' : 'AuthUser', { screen: 'ContactFeedback' } as any) })}
-            {renderInformationItem({ text: 'Giới thiệu', image: Icon.INTRODUCE, onPress: () => navigation.navigate(isLoggedIn.isLogged ? 'StackIndividual' : 'AuthUser', { screen: 'Introduction' } as any) })}
+            {renderInformationItem({ text: 'Quản lý khách hàng', image: Icon.ADDRESS, onPress: () => navigation.navigate('StackAdminManagerOther', { screen: 'EditProfileAdmin' } as any) })}
+            {renderInformationItem({ text: 'Đổi mật khẩu', image: Icon.CHANGEPASSWORD, onPress: () => navigation.navigate('StackAdminManagerOther', { screen: 'EditProfileAdmin' } as any) })}
+            {renderInformationItem({ text: 'Quản lý đánh giá khách hàng', image: Icon.FEEDBACK, onPress: () => navigation.navigate('StackAdminManagerOther', { screen: 'EditProfileAdmin' } as any) })}
+            {renderInformationItem({ text: 'Trò chuyện với khách hàng', image: Icon.CHATWITHSHOP, onPress: () => navigation.navigate('StackAdminManagerOther', { screen: 'EditProfileAdmin' } as any) })}
+            {renderInformationItem({ text: 'Liên hệ và góp ý', image: Icon.CONTACT, onPress: () => navigation.navigate('StackAdminManagerOther', { screen: 'EditProfileAdmin' } as any) })}
+            {renderInformationItem({ text: 'Giới thiệu', image: Icon.INTRODUCE, onPress: () => navigation.navigate('StackAdminManagerOther', { screen: 'EditProfileAdmin' } as any) })}
             {isLoggedIn.isLogged ? (
               renderInformationItem({ text: 'Đăng xuất', image: Icon.LOGOUT, onPress: () => setIsVisible(true) })
             ) : (
