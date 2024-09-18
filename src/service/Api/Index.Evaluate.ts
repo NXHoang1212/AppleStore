@@ -15,14 +15,35 @@ export const EvaluateQuery = createApi({
             }),
             invalidatesTags: [{ type: 'Evaluate', id: 'LIST' }],
         }),
-        getEvaluate: build.query<{ data: EvaluateEntity[] }, string>({
+        getEvaluateOrder: build.query<{ data: EvaluateEntity[] }, string>({
             query: (order_id) => ({
-                url: `/api/evaluate/get/${order_id}`,
+                url: `/api/evaluate/get/order/${order_id}`,
                 method: 'GET',
             }),
             providesTags: [{ type: 'Evaluate', id: 'LIST' }],
         }),
-        updateEvaluate: build.mutation<UpdateEvaluateEntity, { id: string, body: UpdateEvaluateEntity }>({
+        getEvaluateUser: build.query<{ data: any[] }, string>({
+            query: (user_id) => ({
+                url: `/api/evaluate/get/user/${user_id}`,
+                method: 'GET',
+            }),
+            providesTags: [{ type: 'Evaluate', id: 'LIST' }],
+        }),
+        getEvaluateAllAdmin: build.query<{ data: EvaluateEntity[] }, void>({
+            query: () => ({
+                url: `/api/evaluate/admin/get_all`,
+                method: 'GET',
+            }),
+            providesTags: [{ type: 'Evaluate', id: 'LIST' }],
+        }),
+        detailEvaluate: build.query<{ data: any }, string>({
+            query: (id) => ({
+                url: `/api/evaluate/detail/${id}`,
+                method: 'GET',
+            }),
+            providesTags: [{ type: 'Evaluate', id: 'LIST' }],
+        }),
+        updateEvaluate: build.mutation<{ data: EvaluateEntity }, { id: string, body: UpdateEvaluateEntity }>({
             query: ({ id, body }) => ({
                 url: `/api/evaluate/update/${id}`,
                 method: 'PUT',
@@ -33,6 +54,11 @@ export const EvaluateQuery = createApi({
     }),
 });
 
-export const { useCreateEvaluateMutation, useGetEvaluateQuery, useUpdateEvaluateMutation } = EvaluateQuery;
+export const {
+    useCreateEvaluateMutation, useGetEvaluateOrderQuery,
+    useUpdateEvaluateMutation, useDetailEvaluateQuery,
+    useGetEvaluateUserQuery
+
+} = EvaluateQuery;
 export default EvaluateQuery;
 

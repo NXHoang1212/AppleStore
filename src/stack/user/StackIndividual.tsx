@@ -16,8 +16,6 @@ import ContactFeedback from '../../screens/user/other/feedback/ContactFeedback';
 import Introduction from '../../screens/user/other/introduction/Introduction';
 import SearchOrder from '../../screens/user/other/orderstatus/search/SearchOrder';
 
-
-
 const Stack = createNativeStackNavigator<StackIndividualParams>();
 
 const StackIndividual = (): React.JSX.Element => {

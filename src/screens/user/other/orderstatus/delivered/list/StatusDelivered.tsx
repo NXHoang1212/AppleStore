@@ -3,7 +3,7 @@ import React from 'react'
 import { IndexStyles } from '../../../../../../import/IndexStyles';
 
 import { useNavigation } from '@react-navigation/native';
-import { useAppSelector } from '../../../../../../import/IndexFeatures';
+import { useAppSelector, useAppDispatch } from '../../../../../../import/IndexFeatures';
 import { useGetOrderUserQuery } from '../../../../../../service/Api/Index.Order';
 
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -14,31 +14,64 @@ import { FormatPrice, FormatPriceVND2 } from '../../../../../../utils/FormatPric
 import { Responsive } from '../../../../../../constant/Responsive';
 import { ScrollView } from 'react-native-gesture-handler';
 
-import { useCreateEvaluateMutation } from '../../../../../../service/Api/Index.Evaluate';
-import { useGetEvaluateQuery } from '../../../../../../service/Api/Index.Evaluate';
+import { useGetEvaluateOrderQuery } from '../../../../../../service/Api/Index.Evaluate';
 import { HOST } from '../../../../../../constant/Host';
+import { useUpdateCartStatusMutation } from '../../../../../../service/Api/IndexCart';
+
+import ToastMessage from '../../../../../../utils/ToastMessage';
+import { incrementItemCount } from '../../../../../../redux/slices/CountCartSlice';
 
 const StatusDelivered: React.FC = () => {
 
     const navigation = useNavigation<NativeStackNavigationProp<any>>();
 
+    const dispatch = useAppDispatch();
+
     const user = useAppSelector(state => state.root.Auth.user._id);
 
     const { data, error, isLoading } = useGetOrderUserQuery(user);
 
-    const pendingOrder = data?.data.filter((item) => item.status === "Đã giao");
+    const [updateCartStatus] = useUpdateCartStatusMutation();
+
+    const pendingOrder = data?.data.filter((item) => item.status === "Đã giao" || item.status === "Đã nhận được hàng");
 
     const payment = 'Giao hàng thành công, cảm ơn bạn đã mua hàng tại shop.';
 
-    const { data: evaluateData } = useGetEvaluateQuery(pendingOrder?.map(order => order._id).join(',') || '',
+    const { data: evaluateData } = useGetEvaluateOrderQuery(pendingOrder?.map(order => order._id).join(',') || '',
         { refetchOnMountOrArgChange: true, refetchOnReconnect: true });
 
+    // console.log("🚀 ~ file: StatusDelivered.tsx ~ line 116 ~ StatusDelivered ~ evaluateData", pendingOrder?.map(order => order._id))
     // const isEvaluated = evaluateData?.data?.some((item) => pendingOrder?.some(order => order._id === item.order_id));
-    // Kiểm tra trạng thái đánh giá của từng đơn hàng
+
     const getOrderEvaluationStatus = (orderId: string) => {
-        const evaluation = evaluateData?.data?.find(item => item.order_id === orderId);
-        return evaluation?.status === 'evaluated' ? 'Đã đánh giá' : 'Chưa đánh giá';
+        const evaluation = evaluateData?.data.find((item) => item.order_id === orderId);
+        if (evaluation) {
+            const status = evaluation.status?.trim().toLowerCase();
+            return status === 'chưa đánh giá' ? 'Chưa đánh giá' : 'Đã đánh giá';
+        }
+        return 'Chưa đánh giá';
     };
+
+    const idEvaluate = evaluateData?.data.find((item) => pendingOrder?.some(order => order._id === item.order_id))?._id;
+
+    const handleUpdateCart = async (id: any) => {
+        try {
+            const data: any = {
+                ids: id,
+                status: 'giỏ hàng',
+            }
+            const result: any = await updateCartStatus(data);
+            if (result.data) {
+                const quantityToDecrement = result.data.data.matchedCount
+                dispatch(incrementItemCount(quantityToDecrement));
+                navigation.navigate('TabHome', { screen: 'Giỏ hàng' });
+            } else {
+                ToastMessage('error', 'Cập nhật giỏ hàng thất bại');
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
     if (isLoading) {
         return (
@@ -53,8 +86,10 @@ const StatusDelivered: React.FC = () => {
             <View style={IndexStyles.StyleStatusDelivered.container}>
                 {pendingOrder?.map((item, index) => (
                     <View key={index}>
-                        <TouchableOpacity style={IndexStyles.StyleStatusDelivered.containerItem}
-                            onPress={() => navigation.navigate('StackMisc', { screen: 'DetailStatusDelivered', params: { id: item._id, payment: payment } })} >
+                        <TouchableOpacity
+                            style={IndexStyles.StyleStatusDelivered.containerItem}
+                            onPress={() => navigation.navigate('StackMisc', { screen: 'DetailStatusDelivered', params: { id: item._id, payment: payment } })}
+                        >
                             <View style={IndexStyles.StyleStatusDelivered.viewText}>
                                 <View style={IndexStyles.StyleStatusDelivered.viewIcon}>
                                     <Icon.StoreSVG width={25} height={25} />
@@ -93,13 +128,17 @@ const StatusDelivered: React.FC = () => {
                             <View style={IndexStyles.StyleStatusDelivered.viewPayment}>
                                 <Text style={IndexStyles.StyleStatusDelivered.textPayment}>{payment}</Text>
                                 {getOrderEvaluationStatus(item._id) === 'Chưa đánh giá' ? (
-                                    <TouchableOpacity style={IndexStyles.StyleStatusDelivered.viewButton}
-                                        onPress={() => navigation.navigate('StackMisc', { screen: 'EvaluateProducts', params: { id: item._id } })}>
+                                    <TouchableOpacity
+                                        style={IndexStyles.StyleStatusDelivered.viewButton}
+                                        onPress={(event) => {
+                                            event.stopPropagation();
+                                            navigation.navigate('StackMisc', { screen: 'EvaluateProducts', params: { id: idEvaluate } });
+                                        }}>
                                         <Text style={IndexStyles.StyleStatusDelivered.textButton}>Đánh giá</Text>
                                     </TouchableOpacity>
                                 ) : (
-                                    <TouchableOpacity style={IndexStyles.StyleStatusDelivered.viewButton}>
-                                        <Text style={IndexStyles.StyleStatusDelivered.textButton}>{getOrderEvaluationStatus(item._id)}</Text>
+                                    <TouchableOpacity style={IndexStyles.StyleStatusDelivered.viewButton} onPress={() => handleUpdateCart(item.products.map((item) => item._id))}>
+                                        <Text style={IndexStyles.StyleStatusDelivered.textButton}>Mua lại</Text>
                                     </TouchableOpacity>
                                 )}
                             </View>

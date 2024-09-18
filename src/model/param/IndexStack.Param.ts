@@ -53,6 +53,8 @@ export type StackMiscParams = {
     OrderSuccess: undefined;
     OrderFailed: undefined;
     Notification: undefined;
+    EvaluateProducts: undefined;
+
 }
 
 export type StackAuthUserParams = {

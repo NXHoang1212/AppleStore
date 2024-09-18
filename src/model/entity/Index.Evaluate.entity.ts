@@ -7,7 +7,8 @@ interface EvaluateEntity {
     detail: object;
     media: Array<string>;
     status: string;
-    createdAt: string;
+    created_at: string;
+    updated_at: string;
 }
 
 interface CreateEvaluateEntity {
@@ -19,8 +20,9 @@ interface UpdateEvaluateEntity {
     rating: number;
     comment: string;
     detail: object;
-    media: Array<string>;
+    media?: Array<string>;
     status: string;
+    updated_at: string;
 }
 
 export type { EvaluateEntity, CreateEvaluateEntity, UpdateEvaluateEntity };

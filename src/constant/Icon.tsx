@@ -49,6 +49,8 @@ import All from '../assets/svg/all.svg';
 import Create from '../assets/svg/create.svg';
 import Delete from '../assets/svg/delete.svg';
 import Edit from '../assets/svg/edit.svg';
+import IconVideo from '../assets/svg/video.svg'
+import IconCamera from '../assets/svg/camera.svg'
 
 export class Icon {
     static BackSVG = IconBack;
@@ -102,6 +104,8 @@ export class Icon {
     static CreateSVG = Create;
     static DeleteSVG = Delete;
     static EditSVG = Edit;
+    static VideoSVG = IconVideo;
+    static CameraSVG = IconCamera;
     static HOME = require('../assets/images/house.png');
     static CART = require('../assets/images/cart.png');
     static CATEGORY = require('../assets/images/category.png');

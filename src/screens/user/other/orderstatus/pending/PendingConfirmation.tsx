@@ -38,7 +38,7 @@ const PendingConfirmation: React.FC = () => {
     }
 
     return (
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
             <View style={IndexStyles.StylePendingConfirmation.container}>
                 {pendingOrder?.map((item, index) => (
                     <View key={index}>
@@ -56,11 +56,11 @@ const PendingConfirmation: React.FC = () => {
                                 </View>
                                 <View style={IndexStyles.StylePendingConfirmation.viewInfor}>
                                     <Text style={IndexStyles.StylePendingConfirmation.textInfor}>{item.products[0].name} {item.products[0].model} {item.products[0].storage}</Text>
-                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                                         <Text style={IndexStyles.StylePendingConfirmation.textInfor}>{item.products[0].priceColor.color}</Text>
                                         <Text style={IndexStyles.StylePendingConfirmation.textQuantity}>x{item.products[0].quantity}</Text>
                                     </View>
-                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', gap: Responsive.wp(10) }}>
+                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                                         <Text style={IndexStyles.StylePendingConfirmation.textChangeProducts}>Đổi trả miễn phí 7 ngày</Text>
                                         <Text style={IndexStyles.StylePendingConfirmation.textPrice}>{FormatPrice(item.products[0].priceColor.price)}</Text>
                                     </View>

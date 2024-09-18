@@ -56,6 +56,10 @@ import Loading from "../components/activity/ActivityIndicator";
 /*COLOR */
 import MultiColorLine from "../components/MultiColorLine";
 
+/*RATING */
+import CustomAirbnbRating from "../components/rating/CustomAirbnbRating";
+
+
 export {
     CustomHeader,
     CustomCheckBox,
@@ -91,5 +95,6 @@ export {
     ItemAdminListNotification,
     ImagePicker,
     Loading,
-    MultiColorLine
+    MultiColorLine,
+    CustomAirbnbRating
 }
