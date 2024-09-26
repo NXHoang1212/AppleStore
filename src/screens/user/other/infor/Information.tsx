@@ -72,17 +72,21 @@ const Information: React.FC = () => {
     <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
       <View style={IndexStyles.StyleInformation.container}>
         <LinearGradient colors={['#EB5A65', '#EB5A65', '#EB5A65']} style={IndexStyles.StyleInformation.viewheader}>
-          <View style={IndexStyles.StyleInformation.headerTitle}>
+          <TouchableOpacity style={IndexStyles.StyleInformation.headerTitle} onPress={() => navigation.navigate(isLoggedIn.isLogged ? 'StackIndividual' : 'AuthUser', { screen: 'EditProfile' } as any)}>
             {isLoggedIn.user.photoUrl
               ? <Image source={{ uri: isLoggedIn.user.photoUrl }} style={IndexStyles.StyleInformation.image} />
               : <Icon.AvatarSVG width={50} height={50} fill='#FFFFFF' />
             }
             <View style={{ flexDirection: 'column', gap: 2 }}>
-              <Text style={IndexStyles.StyleInformation.textheader1}>Nguyễn Xuân Hoàng</Text>
+              <Text style={IndexStyles.StyleInformation.textheader1}>{isLoggedIn.isLogged ? isLoggedIn.user.fullname : 'Đăng nhập'}</Text>
               <Text style={IndexStyles.StyleInformation.textheader2}>Thành viên bạc</Text>
-              <Text style={IndexStyles.StyleInformation.textheader2}>Bạn có 3 đơn hàng</Text>
+              {isLoggedIn.isLogged ? (
+                <Text style={IndexStyles.StyleInformation.textheader2}>Bạn có {countOrderStatus} đơn hàng chờ xác nhận</Text>
+              ) : (
+                <Text style={IndexStyles.StyleInformation.textheader2}>Đăng nhập để xem thông tin đơn hàng</Text>
+              )}
             </View>
-          </View>
+          </TouchableOpacity>
         </LinearGradient>
         <View style={IndexStyles.StyleInformation.containerbody}>
           <View style={IndexStyles.StyleInformation.containerorder}>
@@ -98,7 +102,7 @@ const Information: React.FC = () => {
           <View style={IndexStyles.StyleInformation.containerConfirm}>
             {renderOrderStatus({
               icon: <Icon.WaitOrderSVG width={27} height={27} fill='#5e5e5e' />,
-              text: 'Chờ xác nhận',
+              text: 'Chờ/Đã xác nhận',
               navigate: () => navigation.navigate(isLoggedIn.isLogged ? 'TabStatusOrder' : 'AuthUser', { screen: 'Xác nhận' } as any),
               badget: countOrderStatus
             })}

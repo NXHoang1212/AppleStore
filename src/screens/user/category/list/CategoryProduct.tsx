@@ -1,19 +1,25 @@
 import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import useStatusBarConfig from '../../../../utils/UseStatusBarConfig'
+
 import { Icon } from '../../../../constant/Icon'
 import { FlashList } from '@shopify/flash-list'
 import { ItemCategoryProduct, CustomHeader } from '../../../../import/IndexComponent'
+
 import { IndexStyles } from '../../../../import/IndexStyles';
 import { useAppSelector } from '../../../../import/IndexFeatures'
 import { Loading } from '../../../../import/IndexComponent'
+
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 const CategoryProduct: React.FC = () => {
   useStatusBarConfig('dark-content', 'transparent', true)
+
   const DataCategory = useAppSelector((state) => state.Category.data)
+
   const isLoading = useAppSelector((state) => state.Category.loading)
+
   const navigation = useNavigation<NativeStackNavigationProp<any>>()
 
   return (

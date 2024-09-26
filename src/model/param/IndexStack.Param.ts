@@ -96,4 +96,10 @@ export type StackAdminManagerProductParams = {
 export type StackAdminMangerOtherParams = {
     EditProfileAdmin: undefined;
     ManagerCustomerAdmin: undefined;
+    EvaluateAdmin: undefined;
+    ChangePasswordAdmin: undefined;
+    ChatAdmin: undefined;
+    ContactFeedbackAdmin: undefined;
+    SearchOrderAdmin: undefined;
+    ListCustomerChat: undefined;
 }

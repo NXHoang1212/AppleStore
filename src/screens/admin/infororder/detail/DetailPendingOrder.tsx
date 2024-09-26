@@ -2,12 +2,15 @@ import { View, Text, ActivityIndicator, TouchableOpacity, Image } from 'react-na
 import React from 'react'
 import { useConfirmOrderAdminMutation, useGetDetailOrderQuery } from '../../../../service/Api/Index.Order'
 import { useRoute, RouteProp } from '@react-navigation/native'
+
 import { CustomHeader } from '../../../../import/IndexComponent'
 import StyleDetailManagerOder from './StyleDetailManagerOrder'
 import { Icon } from '../../../../constant/Icon'
+
 import Clipboard from '@react-native-clipboard/clipboard'
 import { FormatPrice, FormatPriceVND2 } from '../../../../utils/FormatPrice'
 import { FormatDate3 } from '../../../../utils/FormatDate'
+
 import { ScrollView } from 'react-native-gesture-handler'
 import ToastMessage from '../../../../utils/ToastMessage'
 
@@ -27,6 +30,8 @@ const DetailOrderPending: React.FC = () => {
 
     const [ConfirmOrderAdmin] = useConfirmOrderAdminMutation()
 
+    const payment = 'Đơn hàng đang chờ xác nhận, shop sẽ xác nhận trong thời gian sớm nhất.';
+
     if (isLoading) {
         return (
             <View style={StyleDetailManagerOder.containerLoading}>
@@ -35,16 +40,24 @@ const DetailOrderPending: React.FC = () => {
         )
     }
 
-    const handleConfirmOrder = async (id: string, status: string) => {
+    const handleConfirmOrder = async (id: string, status?: string, canceledAt?: string, paymentStatus?: string) => {
         try {
-          const result = await ConfirmOrderAdmin({ id, data: { status: status, updateAt: new Date().toISOString() } }).unwrap()
-          if (result.data) {
-            ToastMessage('success', 'Xác nhận đơn hàng thành công')
-          }
+            const data = {
+                data: {
+                    status: status,
+                    updateAt: new Date().toISOString(),
+                    canceledAt: canceledAt,
+                    paymentStatus: paymentStatus
+                }
+            }
+            const result = await ConfirmOrderAdmin({ data, id }).unwrap()
+            if (result.data) {
+                ToastMessage('success', 'Xác nhận đơn hàng thành công')
+            }
         } catch (error) {
-          ToastMessage('error', 'Xác nhận đơn hàng không thành công')
+            ToastMessage('error', 'Xác nhận đơn hàng không thành công')
         }
-      }
+    }
 
     return (
         <View style={StyleDetailManagerOder.container}>
@@ -58,6 +71,7 @@ const DetailOrderPending: React.FC = () => {
                     <View style={StyleDetailManagerOder.viewPayment}>
                         <View style={StyleDetailManagerOder.viewPaymentPending}>
                             <Text style={StyleDetailManagerOder.textPayment}>{item.paymentStatus}</Text>
+                            <Text style={StyleDetailManagerOder.textPayment}>{payment}</Text>
                         </View>
                         <Icon.WaitShipperSVG width={45} height={45} fill='white' />
                     </View>
@@ -143,16 +157,28 @@ const DetailOrderPending: React.FC = () => {
                     </View>
                 </View>
                 <View style={StyleDetailManagerOder.viewFooter}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => handleConfirmOrder(item._id, 'Đã hủy', new Date().toISOString())}>
                         <View style={StyleDetailManagerOder.viewOrderButton}>
                             <Text style={StyleDetailManagerOder.textActive}>Hủy đơn hàng</Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => handleConfirmOrder(item._id, 'Đã xác nhận')}>
                         <View style={StyleDetailManagerOder.viewOrderButton}>
                             <Text style={StyleDetailManagerOder.textActive}>xác nhận đơn hàng</Text>
                         </View>
                     </TouchableOpacity>
+                    {/* <TouchableOpacity onPress={() => handleConfirmOrder(item._id, undefined, undefined, 'Đã thanh toán')}>
+                        <View style={StyleDetailManagerOder.viewOrderButton}>
+                            <Text style={StyleDetailManagerOder.textActive}>Khách thanh toán</Text>
+                        </View>
+                    </TouchableOpacity> */}
+                    {item.paymentStatus === 'Chưa thanh toán' ? (
+                        <TouchableOpacity onPress={() => handleConfirmOrder(item._id, undefined, undefined, 'Đã thanh toán')}>
+                            <View style={StyleDetailManagerOder.viewOrderButton}>
+                                <Text style={StyleDetailManagerOder.textActive}>Khách thanh toán</Text>
+                            </View>
+                        </TouchableOpacity>
+                    ) : null}
                 </View>
             </ScrollView>
         </View>

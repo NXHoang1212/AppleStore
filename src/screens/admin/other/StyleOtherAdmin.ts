@@ -39,6 +39,13 @@ const StyleOtherAdmin = StyleSheet.create({
         bottom: Responsive.hp(0.2),
         letterSpacing: 0.3,
     },
+    textheader3: {
+        color: COLOR.BLUE,
+        fontSize: Responsive.RFPercentage(1.9),
+        fontFamily: FontsROBOTO.ROBOTO_BOLD,
+        bottom: Responsive.hp(0.2),
+        letterSpacing: 0.3,
+    },
     containerBody: {
         backgroundColor: COLOR.WHITE,
         marginTop: Responsive.hp(1),

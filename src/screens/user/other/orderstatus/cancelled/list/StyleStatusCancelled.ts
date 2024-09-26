@@ -79,6 +79,7 @@ const StyleStatusCancelled = StyleSheet.create({
         fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
         fontSize: Responsive.RFPercentage(2),
         color: COLOR.BLACK,
+        right: Responsive.wp(2),
     },
     textChangeProducts: {
         fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
@@ -96,6 +97,7 @@ const StyleStatusCancelled = StyleSheet.create({
         fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
         fontSize: Responsive.RFPercentage(2.2),
         color: COLOR.REDONE,
+        right: Responsive.wp(2),
     },
     viewLengthCart: {
         flexDirection: 'row',

@@ -90,4 +90,10 @@ export enum StackAdminManagerProductEnum {
 export enum StackAdminManagerOtherEnum {
     EditProfileAdmin = 'EditProfileAdmin',
     ManagerCustomerAdmin = 'ManagerCustomerAdmin',
+    EvaluateAdmin = 'EvaluateAdmin',
+    ChangePasswordAdmin = 'ChangePasswordAdmin',
+    ChatAdmin = 'ChatAdmin',
+    ContactFeedbackAdmin = 'ContactFeedbackAdmin',
+    SearchOrderAdmin = 'SearchOrderAdmin',
+    ListCustomerChat = 'ListCustomerChat',
 }

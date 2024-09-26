@@ -51,6 +51,11 @@ import Delete from '../assets/svg/delete.svg';
 import Edit from '../assets/svg/edit.svg';
 import IconVideo from '../assets/svg/video.svg'
 import IconCamera from '../assets/svg/camera.svg'
+import IconSelectAll from '../assets/svg/selectall.svg'
+import IconEmoji from '../assets/svg/emoji.svg'
+import IconLibraryImage from '../assets/svg/libraryimage.svg'
+import IconSend from '../assets/svg/send.svg'
+import IconMic from '../assets/svg/mic.svg'
 
 export class Icon {
     static BackSVG = IconBack;
@@ -106,6 +111,11 @@ export class Icon {
     static EditSVG = Edit;
     static VideoSVG = IconVideo;
     static CameraSVG = IconCamera;
+    static SelectAllSVG = IconSelectAll;
+    static EmojiSVG = IconEmoji;
+    static LibraryImageSVG = IconLibraryImage;
+    static SendSVG = IconSend;
+    static MicSVG = IconMic;
     static HOME = require('../assets/images/house.png');
     static CART = require('../assets/images/cart.png');
     static CATEGORY = require('../assets/images/category.png');
@@ -141,6 +151,8 @@ export class Icon {
     static PRODUCTADMIN = require('../assets/images/product.png');
     static BANNERADMIN = require('../assets/images/advertising.png');
     static CUSTOMERADMIN = require('../assets/images/customer.png');
+    static POINTS = require('../assets/images/points.png');
+    static NOSEARCHORDER = require('../assets/images/nosearchorder.png');
 }
 
 

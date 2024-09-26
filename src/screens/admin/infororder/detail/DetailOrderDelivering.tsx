@@ -1,14 +1,22 @@
 import { View, Text, ActivityIndicator, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import { useGetDetailOrderQuery } from '../../../../service/Api/Index.Order'
+
 import { useRoute, RouteProp } from '@react-navigation/native'
 import { CustomHeader } from '../../../../import/IndexComponent'
 import StyleDetailManagerOder from './StyleDetailManagerOrder'
+
 import { Icon } from '../../../../constant/Icon'
 import Clipboard from '@react-native-clipboard/clipboard'
 import { FormatPrice, FormatPriceVND2 } from '../../../../utils/FormatPrice'
 import { FormatDate3 } from '../../../../utils/FormatDate'
+
 import { ScrollView } from 'react-native-gesture-handler'
+import { useConfirmOrderAdminMutation } from '../../../../service/Api/Index.Order'
+import ToastMessage from '../../../../utils/ToastMessage'
+
+import { useNavigation } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 type RouteParams = {
     DetailManagerOrder: {
@@ -17,12 +25,34 @@ type RouteParams = {
 }
 
 const DetailOrderDelivering: React.FC = () => {
+    const navigation = useNavigation<NativeStackNavigationProp<any>>()
 
     const route = useRoute<RouteProp<RouteParams, 'DetailManagerOrder'>>()
 
     const { data, isLoading } = useGetDetailOrderQuery(route.params.id)
 
     const item = data?.data || {} as any
+
+    const [ConfirmOrderAdmin] = useConfirmOrderAdminMutation()
+
+    const handleConfirmOrder = async (id: string, status?: string, deliveredAt?: Date, paymentStatus?: string) => {
+        try {
+            const data = {
+                data: {
+                    status: status,
+                    deliveredAt: deliveredAt,
+                    paymentStatus: paymentStatus
+                }
+            }
+            const response = await ConfirmOrderAdmin({ id, data }).unwrap()
+            if (response) {
+                ToastMessage('success', 'Xác nhận đơn hàng thành công')
+                navigation.goBack()
+            }
+        } catch (error) {
+            ToastMessage('error', 'Xác nhận đơn hàng không thành công')
+        }
+    }
 
     if (isLoading) {
         return (
@@ -128,9 +158,19 @@ const DetailOrderDelivering: React.FC = () => {
                             <Text style={StyleDetailManagerOder.textOrderCode}>Trạng thái đơn hàng:</Text>
                             <Text style={StyleDetailManagerOder.textOrderCode}>{item.status}</Text>
                         </View>
+                        <View style={StyleDetailManagerOder.viewOrderCodeInfor}>
+                            <Text style={StyleDetailManagerOder.textOrderCode}>Khách ghi chú </Text>
+                            <Text style={StyleDetailManagerOder.textOrderCode}>{item.note ? item.note : 'Không có'}</Text>
+                        </View>
                     </View>
                 </View>
             </ScrollView>
+            <TouchableOpacity style={StyleDetailManagerOder.viewConfirm} onPress={() => handleConfirmOrder(item._id, 'Đã giao', new Date(), undefined)}>
+                <Text style={StyleDetailManagerOder.textConfirm}>Xác nhận đơn hàng đã giao</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={StyleDetailManagerOder.viewConfirm} onPress={() => handleConfirmOrder(item._id, undefined, undefined, 'Đã thanh toán')}>
+                <Text style={StyleDetailManagerOder.textConfirm}>Khách thanh toán đơn này</Text>
+            </TouchableOpacity>
         </View>
     )
 }

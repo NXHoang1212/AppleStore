@@ -1,14 +1,21 @@
 import { View, Text, ActivityIndicator, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
-import { useGetDetailOrderQuery } from '../../../../service/Api/Index.Order'
+import { useConfirmOrderAdminMutation, useGetDetailOrderQuery } from '../../../../service/Api/Index.Order'
+
 import { useRoute, RouteProp } from '@react-navigation/native'
 import { CustomHeader } from '../../../../import/IndexComponent'
 import StyleDetailManagerOder from './StyleDetailManagerOrder'
+
 import { Icon } from '../../../../constant/Icon'
 import Clipboard from '@react-native-clipboard/clipboard'
 import { FormatPrice, FormatPriceVND2 } from '../../../../utils/FormatPrice'
+
 import { FormatDate3 } from '../../../../utils/FormatDate'
 import { ScrollView } from 'react-native-gesture-handler'
+import ToastMessage from '../../../../utils/ToastMessage'
+
+import { useNavigation } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 type RouteParams = {
     DetailManagerOrder: {
@@ -20,9 +27,38 @@ const DetailOrderCancel: React.FC = () => {
 
     const route = useRoute<RouteProp<RouteParams, 'DetailManagerOrder'>>()
 
+    const navigation = useNavigation<NativeStackNavigationProp<any>>()
+
     const { data, isLoading } = useGetDetailOrderQuery(route.params.id)
 
     const item = data?.data || {} as any
+
+    const [ConfirmOrderAdmin] = useConfirmOrderAdminMutation()
+
+    const handleConfirmOrder = async (id: string, status: string, canceledAt?: Date, updateAt?: Date, paymentStatus?: string) => {
+        try {
+            const data = {
+                data: {
+                    status: status,
+                    // Kiểm tra nếu trạng thái là 'Đã hủy', chỉ thêm canceledAt và paymentStatus
+                    ...(status === 'Đã hủy' && { canceledAt, paymentStatus }),
+                    // Nếu không phải 'Đã hủy', chỉ thêm updateAt và paymentStatus
+                    ...(status !== 'Đã hủy' && { updateAt, paymentStatus })
+                }
+            };
+            const response = await ConfirmOrderAdmin({ id, data }).unwrap();
+            if (response) {
+                const successMessage = status === 'Đã hủy'
+                    ? 'Xác nhận hủy đơn hàng thành công'
+                    : 'Xác nhận đơn hàng thành công';
+                ToastMessage('success', successMessage);
+                navigation.goBack();
+            }
+        } catch (error) {
+            ToastMessage('error', 'Xác nhận đơn hàng không thành công');
+        }
+    };
+
 
     if (isLoading) {
         return (
@@ -126,18 +162,18 @@ const DetailOrderCancel: React.FC = () => {
                         </View>
                     </View>
                 </View>
-                <View style={StyleDetailManagerOder.viewFooter}>
-                    <TouchableOpacity>
+                {/* <View style={StyleDetailManagerOder.viewFooter}>
+                    <TouchableOpacity onPress={() => handleConfirmOrder(item._id, 'Đã hủy', new Date(), undefined, 'Đã hủy')}>
                         <View style={StyleDetailManagerOder.viewOrderButton}>
                             <Text style={StyleDetailManagerOder.textActive}>Hủy đơn hàng</Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => handleConfirmOrder(item._id, 'Đã xác nhận', undefined, new Date(), 'Đã thanh toán')}>
                         <View style={StyleDetailManagerOder.viewOrderButton}>
                             <Text style={StyleDetailManagerOder.textActive}>Xác nhận đơn hàng</Text>
                         </View>
                     </TouchableOpacity>
-                </View>
+                </View> */}
             </ScrollView>
         </View>
     )

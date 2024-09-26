@@ -3,17 +3,19 @@ import { TabAdminManagerListParam, TabAdminManagerType } from '../../model/param
 import { TabAdminManagerEnum, TabHomeEnum } from '../../model/enum/IndexTab.enum';
 
 import { Icon } from '../../constant/Icon';
-
+import { useEffect } from 'react';
 import { Image, ImageSourcePropType, StyleSheet, Text, View } from 'react-native';
+
 import { COLOR } from '../../constant/Colors';
 import { Responsive } from '../../constant/Responsive';
-
 import { SvgProps } from 'react-native-svg';
 
 import ManageOrder from '../../screens/admin/infororder/list/ManageOrder';
 import ManagerAll from '../../screens/admin/manager/ManagerAll';
-import StatisticAdmin from '../../screens/admin/statistic/StatisticAdmin';
+import StatisticAdmin from '../../screens/admin/statistic/StatisticAdmin'
+    ;
 import OtherAdmin from '../../screens/admin/other/OtherAdmin';
+import { socket } from '../../utils/Socket.io-client';
 
 const BottomTabHomePage = createBottomTabNavigator<TabAdminManagerListParam>();
 
@@ -45,6 +47,16 @@ const TabAdminManager = () => {
             isSvg: false
         },
     ]
+
+    useEffect(() => {
+
+        socket.connect();
+
+        return () => {
+            socket.disconnect();
+        }
+        
+    }, [])
 
     return (
         <BottomTabHomePage.Navigator

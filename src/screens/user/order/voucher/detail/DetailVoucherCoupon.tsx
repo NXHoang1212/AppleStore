@@ -13,9 +13,13 @@ import { ScrollView } from 'react-native-gesture-handler'
 
 const DetailVoucherCoupon: React.FC = () => {
     const route = useRoute<TypeVoucherProps['route']>()
+
     const navigation = useNavigation<NativeStackNavigationProp<any>>()
+
     const { id } = route.params
+
     const { data } = useGetVoucherByIdQuery(id)
+    
     const imageUri = data?.data.images ? { uri: data.data.images as string } : Icon.BACKGROUNDVOUCHER;
 
     return (

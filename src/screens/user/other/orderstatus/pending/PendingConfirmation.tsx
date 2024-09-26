@@ -78,7 +78,29 @@ const PendingConfirmation: React.FC = () => {
                                 <Text style={IndexStyles.StylePendingConfirmation.textTotal}>Tổng thanh toán: {FormatPriceVND2(item.totalAmount)}</Text>
                             </View>
                             <View style={IndexStyles.StylePendingConfirmation.line} />
-                            {item.paymentStatus === "Đã thanh toán" || item.paymentMethod === "Nhận hàng tại nhà" || item.paymentMethod === "Trả góp" ? (
+                            {/* {item.paymentStatus === "Đã thanh toán" || item.paymentMethod === "Nhận hàng tại nhà" || item.paymentMethod === "Trả góp" ? (
+                                <View style={IndexStyles.StylePendingConfirmation.viewPayment}>
+                                    <Text style={IndexStyles.StylePendingConfirmation.textConfirm}>{confirmStatus}</Text>
+                                    <TouchableOpacity style={IndexStyles.StylePendingConfirmation.viewButton}>
+                                        <Text style={IndexStyles.StylePendingConfirmation.textButton}>Đang xác nhận</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            ) : (
+                                <View style={IndexStyles.StylePendingConfirmation.viewPayment}>
+                                    <Text style={IndexStyles.StylePendingConfirmation.textPayment}>{payment}</Text>
+                                    <TouchableOpacity style={IndexStyles.StylePendingConfirmation.viewButton}>
+                                        <Text style={IndexStyles.StylePendingConfirmation.textButton}>Thanh toán ngay</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            )} */}
+                            {item.status === "Đã xác nhận" ? (
+                                <View style={IndexStyles.StylePendingConfirmation.viewPayment}>
+                                    <Text style={IndexStyles.StylePendingConfirmation.textConfirm}>Đơn hàng đã xác nhận, shop sẽ giao hàng trong thời gian sớm nhất.</Text>
+                                    <TouchableOpacity style={IndexStyles.StylePendingConfirmation.viewButton}>
+                                        <Text style={IndexStyles.StylePendingConfirmation.textButton}>Đã xác nhận</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            ) : item.paymentStatus === "Đã thanh toán" || (item.paymentMethod === "Nhận hàng tại nhà" || item.paymentMethod === "Trả góp") ? (
                                 <View style={IndexStyles.StylePendingConfirmation.viewPayment}>
                                     <Text style={IndexStyles.StylePendingConfirmation.textConfirm}>{confirmStatus}</Text>
                                     <TouchableOpacity style={IndexStyles.StylePendingConfirmation.viewButton}>

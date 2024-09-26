@@ -31,7 +31,7 @@ export const EvaluateQuery = createApi({
         }),
         getEvaluateAllAdmin: build.query<{ data: EvaluateEntity[] }, void>({
             query: () => ({
-                url: `/api/evaluate/admin/get_all`,
+                url: `/api/evaluate/get/admin/allEvaluate`,
                 method: 'GET',
             }),
             providesTags: [{ type: 'Evaluate', id: 'LIST' }],
@@ -57,7 +57,7 @@ export const EvaluateQuery = createApi({
 export const {
     useCreateEvaluateMutation, useGetEvaluateOrderQuery,
     useUpdateEvaluateMutation, useDetailEvaluateQuery,
-    useGetEvaluateUserQuery
+    useGetEvaluateUserQuery, useGetEvaluateAllAdminQuery
 
 } = EvaluateQuery;
 export default EvaluateQuery;

@@ -10,15 +10,19 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useGetCartByUserQuery } from '../../../service/Api/IndexCart';
 import { useAppSelector, useAppDispatch } from '../../../import/IndexFeatures';
 import { decrementItemCount } from '../../../redux/slices/CountCartSlice';
+
 import { ItemListCart, CustomCheckBox, CustomHeader } from '../../../import/IndexComponent';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import { FormatPrice } from '../../../utils/FormatPrice';
+
 import LinearGradient from 'react-native-linear-gradient';
 import ToastMessage from '../../../utils/ToastMessage';
 import { Responsive } from '../../../constant/Responsive';
 
 const Cart: React.FC = () => {
+
   useStatusBarConfig('dark-content', 'transparent', true)
+
   const navigation = useNavigation<NativeStackNavigationProp<any>>()
 
   const dispatch = useAppDispatch()

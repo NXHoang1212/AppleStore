@@ -69,6 +69,9 @@ const ManageOrder: React.FC = () => {
         <View style={StyleMangerOrder.headerTitle}>
           <Icon.LogoAppleSVG width={70} height={130} fill='red' />
           <Text style={StyleMangerOrder.headerText}>Quản lý đơn hàng admin</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('StackAdminManagerOther', { screen: 'SearchOrderAdmin' } as any)}>
+            <Icon.SearchSVG width={23} height={25} fill='#fff' />
+          </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('StackAdminManagerProduct', { screen: 'ListNotifications' })}>
             <Icon.BellSVG width={28} height={25} fill='#fff' />
           </TouchableOpacity>

@@ -29,6 +29,7 @@ type PropsCart = {
 const imageAnimated = new Animated.Value(0)
 
 const ItemListCart = ({ item, navigation, currentlyOpenSwipeable, decrementItemCount, dispatch, isSelected, onItemSelect }: PropsCart) => {
+
     const [show, setShow] = useState<boolean>(false);
 
     const [trigger, { data }] = useLazyGetProductsByIdQuery();

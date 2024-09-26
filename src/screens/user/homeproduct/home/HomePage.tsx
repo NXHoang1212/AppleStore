@@ -17,11 +17,12 @@ import { ItemProductHomePage, Loading } from '../../../../import/IndexComponent'
 import { fetchFavourites } from '../../../../redux/slices/Favourties.Slice';
 import { fetchGetCountCart } from '../../../../redux/slices/CountCartSlice';
 
-import HandleNotification from '../../../../utils/HandleNotification';
 import NetInfor from '@react-native-community/netinfo';
 import RNRestart from 'react-native-restart';
+import { useGetNotificationQuery } from '../../../../service/Api/Index.Notification';
 
 const HomePage: React.FC = () => {
+
     useStatusBarConfig('dark-content', 'transparent', true)
 
     const navigation = useNavigation<NativeStackNavigationProp<StackHomeTypeParam, 'AuthUser'>>()
@@ -33,6 +34,10 @@ const HomePage: React.FC = () => {
     const dispatch = useAppDispatch()
 
     const user = useAppSelector(state => state.root.Auth)
+
+    const { data } = useGetNotificationQuery(user.user._id)
+
+    const lengthNotification = data?.data.filter((item) => item.isRead === false).length
 
     const product = useAppSelector(state => state.Product)
 
@@ -71,6 +76,11 @@ const HomePage: React.FC = () => {
                         <View style={IndexStyles.StylesHomePage.viewcrossbar2}>
                             <TouchableOpacity onPress={() => navigation.navigate(user.isLogged ? 'StackMisc' : 'AuthUser', { screen: 'Notification' } as any)}>
                                 <Icon.BellSVG width={25} height={25} fill='#fff' />
+                                {lengthNotification ?
+                                    <View style={IndexStyles.StylesHomePage.viewNotification}>
+                                        <Text style={IndexStyles.StylesHomePage.textNotification}>{lengthNotification}</Text>
+                                    </View> :
+                                    null}
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => navigation.navigate(user.isLogged ? 'StackIndividual' : 'AuthUser', { screen: 'EditProfile' } as any)}>
                                 {user.user.photoUrl ? <Image source={{ uri: user.user.photoUrl }} style={IndexStyles.StylesHomePage.avatar} /> : <Icon.AvatarSVG width={25} height={25} fill='#fff' />}

@@ -5,6 +5,11 @@ import { Responsive } from "../../../../constant/Responsive";
 
 
 const StyleNotification = StyleSheet.create({
+    containerLoading: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     container: {
         flex: 1,
         backgroundColor: COLOR.GRAYONE
@@ -36,9 +41,56 @@ const StyleNotification = StyleSheet.create({
     },
     containerBody: {
         flex: 1,
-        backgroundColor: COLOR.GRAYONE,
+        backgroundColor: COLOR.WHITE,
     },
-
+    containerItem: {
+        width: Responsive.wp(100),
+        backgroundColor: COLOR.WHITE,
+        marginVertical: Responsive.hp(1),
+        alignSelf: 'center',
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    viewText: {
+    },
+    textTitle: {
+        fontSize: Responsive.RFPercentage(2.2),
+        fontFamily: FontsOSANS.OSANS_REGULAR,
+        color: COLOR.BLACK,
+        fontWeight: 'bold',
+        letterSpacing: 0.25
+    },
+    textBody: {
+        fontSize: Responsive.RFPercentage(2),
+        fontFamily: FontsOSANS.OSANS_REGULAR,
+        color: COLOR.BLACK,
+        letterSpacing: 0.25,
+        width: Responsive.wp(85),
+    },
+    textTime: {
+        fontSize: Responsive.RFPercentage(1.8),
+        fontFamily: FontsOSANS.OSANS_REGULAR,
+        color: COLOR.GREY,
+        letterSpacing: 0.25
+    },
+    image: {
+        width: Responsive.wp(15),
+        height: Responsive.hp(8),
+    },
+    viewDelete: {
+        width: Responsive.wp(15),
+        height: Responsive.hp(10),
+        backgroundColor: COLOR.REDTWO,
+        alignSelf: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    textDelete: {
+        fontFamily: FontsROBOTO.ROBOTO_BOLD,
+        fontSize: Responsive.RFPercentage(2.5),
+        color: COLOR.WHITE,
+        textAlign: 'center',
+    },
 });
 
 export { StyleNotification }

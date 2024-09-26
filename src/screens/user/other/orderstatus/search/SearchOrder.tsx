@@ -26,10 +26,18 @@ const SearchOrder: React.FC = () => {
     const { data } = useGetOrderUserQuery(user)
 
     const searchOrder = data?.data.filter((item) => {
-        return item.orderCode.toLowerCase().includes(search.toLowerCase()) || item._id.toLowerCase().includes(search.toLowerCase())
-            || item.status.toLowerCase().includes(search.toLowerCase()) || item.paymentStatus.toLowerCase().includes(search.toLowerCase())
-            || item.products.find((item) => item.name.toLowerCase().includes(search.toLowerCase()))
+        if (item.status !== 'Đã giao') {
+            return false;
+        }
+
+        return item.orderCode.toLowerCase().includes(search.toLowerCase()) ||
+            item._id.toLowerCase().includes(search.toLowerCase()) ||
+            item.status.toLowerCase().includes(search.toLowerCase()) ||
+            item.paymentStatus.toLowerCase().includes(search.toLowerCase()) ||
+            item.products.find((product) => product.name.toLowerCase().includes(search.toLowerCase()));
     }) || [];
+
+    const payment = 'Giao hàng thành công, cảm ơn bạn đã mua hàng tại shop.';
 
     return (
         <View style={IndexStyles.StyleSearchOrder.container}>
@@ -55,7 +63,7 @@ const SearchOrder: React.FC = () => {
                     {search.length > 0 && searchOrder.length > 0 ? (
                         searchOrder.map((item, index) => (
                             <View key={index}>
-                                <TouchableOpacity style={IndexStyles.StyleSearchOrder.containerItem} onPress={() => navigation.navigate('StackMisc', { screen: 'DetailOrder', params: { id: item._id } })}>
+                                <TouchableOpacity style={IndexStyles.StyleSearchOrder.containerItem} onPress={() => navigation.navigate('StackMisc', { screen: 'DetailStatusDelivered', params: { id: item._id, payment: payment } })}>
                                     <View style={IndexStyles.StyleSearchOrder.viewText}>
                                         <View style={IndexStyles.StyleSearchOrder.viewIcon}>
                                             <Icon.StoreSVG width={25} height={25} />
@@ -81,7 +89,7 @@ const SearchOrder: React.FC = () => {
                                     </View>
                                     <View style={IndexStyles.StyleSearchOrder.line} />
                                     {item.products.length > 1 ? (
-                                        <TouchableOpacity onPress={() => navigation.navigate('StackMisc', { screen: 'DetailOrder', params: { id: item._id } })}>
+                                        <TouchableOpacity onPress={() => navigation.navigate('StackMisc', { screen: 'DetailStatusDelivered', params: { id: item._id, payment: payment } })}>
                                             <Text style={IndexStyles.StyleSearchOrder.textMoreProducts}>Xem thêm sản phẩm</Text>
                                             <View style={IndexStyles.StyleSearchOrder.line} />
                                         </TouchableOpacity>
@@ -115,7 +123,9 @@ const SearchOrder: React.FC = () => {
                         ))
                     ) : (
                         search.length > 0 && (
-                            <View>  </View>
+                            <View>
+                                <Text style={IndexStyles.StyleSearchOrder.textNotFound}>Không tìm thấy đơn hàng</Text>
+                            </View>
                         )
                     )}
                 </View>

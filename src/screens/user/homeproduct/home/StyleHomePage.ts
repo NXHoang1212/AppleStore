@@ -186,6 +186,23 @@ const StylesHomePage = StyleSheet.create({
         fontSize: Responsive.RFPercentage(2.2),
         color: COLOR.WHITE,
     },
+    viewNotification: {
+        position: 'absolute',
+        left: Responsive.wp(3.2),
+        bottom: Responsive.hp(1.8),
+    },
+    textNotification: {
+        fontFamily: FontsOSANS.OSANS_BOLD,
+        fontSize: Responsive.RFPercentage(2),
+        color: COLOR.WHITE,
+        width: Responsive.wp(5),
+        height: Responsive.hp(2.5),
+        borderRadius: 10,
+        backgroundColor: COLOR.LIGHT_RED,
+        textAlign: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 
 });
 

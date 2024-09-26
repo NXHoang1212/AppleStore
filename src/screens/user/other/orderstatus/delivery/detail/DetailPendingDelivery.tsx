@@ -21,6 +21,7 @@ type RootStackParamList = {
 }
 
 const DetailPendingDelivery: React.FC = () => {
+
     const route = useRoute<RouteProp<RootStackParamList, 'DetailOrder'>>()
 
     const { id, payment } = route.params

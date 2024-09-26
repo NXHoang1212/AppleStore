@@ -7,8 +7,8 @@ const NotificationQuery = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: HOST.API }),
     tagTypes: ['Notification'],
     endpoints: build => ({
-        getNotification: build.query<{ data: NotificationEntity[] }, { userId: string }>({
-            query: ({ userId }) => {
+        getNotification: build.query<{ data: NotificationEntity[] }, string>({
+            query: (userId) => {
                 return {
                     url: `/api/notifee/get/${userId}`,
                     method: 'GET'
@@ -26,6 +26,16 @@ const NotificationQuery = createApi({
             },
             invalidatesTags: [{ type: 'Notification', id: 'LIST' }],
         }),
+        updateIsReadNotification: build.mutation<NotificationEntity, { data: any }>({
+            query: ({ data }) => {
+                return {
+                    url: `/api/notifee/updateIsRead`,
+                    method: 'PUT',
+                    body: data
+                }
+            },
+            invalidatesTags: [{ type: 'Notification', id: 'LIST' }],
+        }),
         updateNotification: build.mutation<NotificationEntity, { data: UpdateNotificationEntity }>({
             query: ({ data }) => {
                 return {
@@ -36,10 +46,10 @@ const NotificationQuery = createApi({
             },
             invalidatesTags: [{ type: 'Notification', id: 'LIST' }],
         }),
-        deleteNotification: build.mutation<{ data: NotificationEntity }, { _id: string }>({
-            query: ({ _id }) => {
+        deleteNotification: build.mutation<{ data: NotificationEntity }, { id: string }>({
+            query: ({ id }) => {
                 return {
-                    url: `/api/notifee/delete/${_id}`,
+                    url: `/api/notifee/delete/${id}`,
                     method: 'DELETE'
                 }
             },
@@ -73,6 +83,7 @@ export const {
     useUpdateNotificationMutation,
     useDeleteNotificationMutation,
     useGetAdminNotificationQuery,
-    useCreateAdminNotificationMutation
+    useCreateAdminNotificationMutation,
+    useUpdateIsReadNotificationMutation
 } = NotificationQuery
 export default NotificationQuery

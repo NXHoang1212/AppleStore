@@ -8,6 +8,8 @@ const StyleSearchOrder = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: COLOR.WHITE,
+        justifyContent: 'center',
+        
     },
     viewheader: {
         flexDirection: 'row',
@@ -197,7 +199,13 @@ const StyleSearchOrder = StyleSheet.create({
         fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
         fontSize: Responsive.RFPercentage(2),
         color: COLOR.WHITE,
-    }
+    },
+    textNotFound: {
+        fontFamily: FontsROBOTO.ROBOTO_MEDIUM,
+        fontSize: Responsive.RFPercentage(2.5),
+        color: COLOR.RED,
+        textAlign: 'center',
+    },
 
 });
 
