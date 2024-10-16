@@ -1992,10 +1992,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@notifee/react-native@^7.8.2":
-  version "7.8.2"
-  resolved "https://registry.npmjs.org/@notifee/react-native/-/react-native-7.8.2.tgz"
-  integrity sha512-VG4IkWJIlOKqXwa3aExC3WFCVCGCC9BA55Ivg0SMRfEs+ruvYy/zlLANcrVGiPtgkUEryXDhA8SXx9+JcO8oLA==
+"@notifee/react-native@^9.1.1":
+  version "9.1.1"
+  resolved "https://registry.yarnpkg.com/@notifee/react-native/-/react-native-9.1.1.tgz#81f81570442c27fcd7f968692912f39d8d1bec54"
+  integrity sha512-d9UdnT7TIJKal+RSCcl81beveWXjBpNZZ+8rqzcfd8DcAlkl7WGvvIAhUfkb83aOfc/zHpZJrJwu4fxwI6GCCg==
 
 "@protobufjs/aspromise@^1.1.1", "@protobufjs/aspromise@^1.1.2":
   version "1.1.2"
@@ -2226,10 +2226,10 @@
     firebase "10.12.2"
     superstruct "^0.6.2"
 
-"@react-native-firebase/messaging@^20.3.0":
-  version "20.3.0"
-  resolved "https://registry.npmjs.org/@react-native-firebase/messaging/-/messaging-20.3.0.tgz"
-  integrity sha512-jkAQq4gMGjrOcodFLP4YJGpaXaqcqikxlGMa7AzldTPyzNPdMIUhhWxiH1xjcCcepb4aIXz3ysqtJ3LvBWdyyw==
+"@react-native-firebase/messaging@^21.0.0":
+  version "21.0.0"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/messaging/-/messaging-21.0.0.tgz#6229a0c3cc4ad4fadd5032a643d1bd4eb7355f0f"
+  integrity sha512-2k6ID8dRWlgtFhZA8UXLRkpsKgeKNFBiQXnBbMxmmxw76Ww6pef8pWW2m5epAQnKW/mi55YQn9egMtlstjGXjA==
 
 "@react-native-google-signin/google-signin@^12.2.1":
   version "12.2.1"
