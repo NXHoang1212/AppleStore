@@ -7,7 +7,6 @@ const initialState: UserState = {
     user: {
         _id: "",
         email: "",
-        password: "",
         phone: "",
         fullname: "",
         gender: "",
@@ -15,6 +14,8 @@ const initialState: UserState = {
         photoUrl: "",
         otp: "",
         provider: "",
+        role: "",
+        fcmToken: ""
     }
 }
 
@@ -33,23 +34,15 @@ const AuthSlice = createSlice({
             state.user.gender = action.payload.gender;
             state.user.photoUrl = action.payload.photoUrl;
         },
+        updateToken: (state, action: PayloadAction<string>) => {
+            state.user.fcmToken = action.payload;
+        },
         Logout: (state) => {
             state.isLogged = false;
-            state.user = {
-                _id: "",
-                email: "",
-                password: "",
-                phone: "",
-                fullname: "",
-                gender: "",
-                date_of_birth: new Date(),
-                photoUrl: "",
-                otp: "",
-                provider: "",
-            }
+            state.user = {} as UserState['user'];
         }
     }
 })
 
-export const { Login, Update, Logout } = AuthSlice.actions;
+export const { Login, Update, Logout, updateToken } = AuthSlice.actions;
 export default AuthSlice.reducer;

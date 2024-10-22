@@ -45,6 +45,19 @@ import PaymentCancell from '../assets/svg/PaymentCancell.svg';
 import PaymentPending from '../assets/svg/paymentpending.svg';
 import PaymentSuccess from '../assets/svg/paymentsuccess.svg';
 import IconStore from '../assets/svg/store.svg';
+import All from '../assets/svg/all.svg';
+import Create from '../assets/svg/create.svg';
+import Delete from '../assets/svg/delete.svg';
+import Edit from '../assets/svg/edit.svg';
+import IconVideo from '../assets/svg/video.svg'
+import IconCamera from '../assets/svg/camera.svg'
+import IconSelectAll from '../assets/svg/selectall.svg'
+import IconEmoji from '../assets/svg/emoji.svg'
+import IconLibraryImage from '../assets/svg/libraryimage.svg'
+import IconSend from '../assets/svg/send.svg'
+import IconMic from '../assets/svg/mic.svg'
+import IconPause from '../assets/svg/pause.svg'
+import IconPlay from   '../assets/svg/play.svg'
 
 export class Icon {
     static BackSVG = IconBack;
@@ -94,6 +107,19 @@ export class Icon {
     static PaymentPendingSVG = PaymentPending;
     static PaymentSuccessSVG = PaymentSuccess;
     static StoreSVG = IconStore;
+    static AllSVG = All;
+    static CreateSVG = Create;
+    static DeleteSVG = Delete;
+    static EditSVG = Edit;
+    static VideoSVG = IconVideo;
+    static CameraSVG = IconCamera;
+    static SelectAllSVG = IconSelectAll;
+    static EmojiSVG = IconEmoji;
+    static LibraryImageSVG = IconLibraryImage;
+    static SendSVG = IconSend;
+    static MicSVG = IconMic;
+    static PauseSVG = IconPause;
+    static PlaySVG = IconPlay;
     static HOME = require('../assets/images/house.png');
     static CART = require('../assets/images/cart.png');
     static CATEGORY = require('../assets/images/category.png');
@@ -125,6 +151,12 @@ export class Icon {
     static NoCarts = require('../assets/images/NoCarts.png');
     static BACKGROUNDVOUCHER = require('../assets/images/backgroundVoucher.png');
     static PAYMENTVNPAY = require('../assets/images/Vnpay.png');
+    static CATEGORYADMIN = require('../assets/images/categoryAdmin.png');
+    static PRODUCTADMIN = require('../assets/images/product.png');
+    static BANNERADMIN = require('../assets/images/advertising.png');
+    static CUSTOMERADMIN = require('../assets/images/customer.png');
+    static POINTS = require('../assets/images/points.png');
+    static NOSEARCHORDER = require('../assets/images/nosearchorder.png');
 }
 
 

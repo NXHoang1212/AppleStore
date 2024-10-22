@@ -8,6 +8,18 @@ const config = {
             screens: {
                 DetailArticle: {
                     path: 'getdetail/:_id'
+                },
+                OrderSuccess: {
+                    path: 'order/success',
+                },
+                OrderFailed: {
+                    path: 'order/failed',
+                },
+                VoucherCoupon: {
+                    path: 'order/voucher',
+                },
+                Notification: {
+                    path: 'Notification',
                 }
             },
         },
@@ -16,14 +28,29 @@ const config = {
             screens: {
                 HomePage: { path: 'Trang chủ' },
             },
-
+        },
+        StackAdminManagerOther: {
+            path: 'StackAdminManagerOther',
+            screens: {
+                ChatAdmin: {
+                    path: 'ChatAdmin/:username',
+                },
+            }
+        },
+        StackIndividual: {
+            path: 'StackIndividual',
+            screens: {
+                ChatWithAdmin: {
+                    path: 'ChatWithAdmin',
+                },
+            }
         },
     },
 };
 
-const Linking: any = {
+const ConfigLinking: any = {
     prefixes: [HOST.DOMAIN],
     config,
 };
 
-export default Linking;
+export default ConfigLinking;

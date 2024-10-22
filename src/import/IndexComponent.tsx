@@ -41,6 +41,12 @@ import ItemFavourites from "../components/item/product/list/ItemFavourites";
 import ItemListCart from "../components/item/cart/list/ItemListCart";
 import ItemDetailUpdateCart from "../components/item/cart/detail/ItemDetailUpdateCart";
 import ItemDetailUpdateArticle from "../components/item/cart/detail/ItemDetailUpdateCart";
+import ItemAdminListProducts from "../components/item/product/list/ItemAdminListProducts";
+import ItemAdminListCategories from "../components/item/product/list/ItemAdminListCategory";
+import ItemAdminListBanner from '../components/item/product/list/ItemAdminListBanner';
+import ItemAdminListVoucher from "../components/item/product/list/ItemAdminListVoucher";
+import ItemAdminListNotification from "../components/item/product/list/ItemAdminListNotification";
+import ItemMessageUser from "../components/item/chat/ItemMessageUser";
 
 /*MEDIA */
 import ImagePicker from "../components/media/CamraPicker";
@@ -50,6 +56,10 @@ import Loading from "../components/activity/ActivityIndicator";
 
 /*COLOR */
 import MultiColorLine from "../components/MultiColorLine";
+
+/*RATING */
+import CustomAirbnbRating from "../components/rating/CustomAirbnbRating";
+
 
 export {
     CustomHeader,
@@ -79,7 +89,14 @@ export {
     ItemDetailUpdateCart,
     ItemDetailArticle,
     ItemDetailUpdateArticle,
+    ItemAdminListProducts,
+    ItemAdminListCategories,
+    ItemAdminListBanner,
+    ItemAdminListVoucher,
+    ItemAdminListNotification,
+    ItemMessageUser,
     ImagePicker,
     Loading,
-    MultiColorLine
+    MultiColorLine,
+    CustomAirbnbRating
 }

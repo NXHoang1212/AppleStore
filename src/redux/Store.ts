@@ -12,6 +12,7 @@ import ProductPaginationReducer from './slices/ProductLimited.Slice';
 import AddressReducer from './slices/Address.Slice';
 import FavourtiesReducer from './slices/Favourties.Slice';
 import CountCartReducer from './slices/CountCartSlice'
+import CountNotificationReducert from './slices/CountNotifee.Slice'
 
 /*BaseQuery */
 import { DetailProducts } from '../service/Api/IndexProduct';
@@ -19,6 +20,10 @@ import { AddressQuery } from '../service/Api/IndexAddress';
 import { CartQuery } from '../service/Api/IndexCart';
 import VoucherQuery from '../service/Api/Index.Voucher';
 import OrderQuery from '../service/Api/Index.Order';
+import NotificationQuery from '../service/Api/Index.Notification';
+import { AdminBannerQuery } from '../service/Api/IndexBanner';
+import { AdminCategoriesQuery } from '../service/Api/IndexCategory';
+import EvaluateQuery from '../service/Api/Index.Evaluate';
 import { setupListeners } from '@reduxjs/toolkit/query';
 
 /*AsyncStorage, Redux Persist */
@@ -32,7 +37,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
     Auth: AuthReducer,
-    CountCart: CountCartReducer
+    CountCart: CountCartReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -51,24 +56,25 @@ const StoreRedux = configureStore({
         [CartQuery.reducerPath]: CartQuery.reducer,
         [VoucherQuery.reducerPath]: VoucherQuery.reducer,
         [OrderQuery.reducerPath]: OrderQuery.reducer,
+        [NotificationQuery.reducerPath]: NotificationQuery.reducer,
+        [AdminCategoriesQuery.reducerPath]: AdminCategoriesQuery.reducer,
+        [AdminBannerQuery.reducerPath]: AdminBannerQuery.reducer,
+        [EvaluateQuery.reducerPath]: EvaluateQuery.reducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
-            immutableCheck: {
-                ignoredPaths: ['root.Auth.user', 'root.Auth.isLogin', 'root.Auth.loading',
-                    'root.Auth.error', 'root.CountCart', 'root.Category', 'root.Banner',
-                    'root.Product', 'root.ProductPagination', 'root.Address', 'root.Favourites',
-                    'root.DetailProducts', 'root.AddressQuery', 'root.CartQuery', 'root.VoucherQuery',
-                    'root.OrderQuery']
-            },
+            immutableCheck: false, // Tắt immutableCheck
             serializableCheck: false,
         })
-            .concat(createImmutableStateInvariantMiddleware())
             .concat(DetailProducts.middleware)
             .concat(AddressQuery.middleware)
             .concat(VoucherQuery.middleware)
             .concat(CartQuery.middleware)
             .concat(OrderQuery.middleware)
+            .concat(NotificationQuery.middleware)
+            .concat(AdminCategoriesQuery.middleware)
+            .concat(AdminBannerQuery.middleware)
+            .concat(EvaluateQuery.middleware)
 
 });
 

@@ -8,15 +8,19 @@ export const FormatDate = (date: Date) => {
     return '';
 };
 
-export const FormatDate2 = (date: string) => {
-    if (date) {
-        const day = date.split('T')[0].split('-')[2];
-        const month = date.split('T')[0].split('-')[1];
-        const year = date.split('T')[0].split('-')[0];
+export const FormatDate2 = (date: string | Date | undefined) => {
+    if (date && typeof date === 'string') {
+        const [year, month, day] = date.split('T')[0].split('-');
+        return `${day}-${month}-${year}`;
+    } else if (date instanceof Date) {
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
         return `${day}-${month}-${year}`;
     }
     return '';
 }
+
 
 export const FormatDate3 = (date: string) => {
     if (date) {

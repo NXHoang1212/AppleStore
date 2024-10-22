@@ -6,6 +6,11 @@ export enum StackHomeEnum {
     TabStatusOrder = 'TabStatusOrder',
     StackMisc = 'StackMisc',
     NotFound = 'NotFound',
+    ConnectInternet = 'ConnectInternet',
+    TabAdminManager = 'TabAdminManager',
+    StackAdminManagerOrder = 'StackAdminManagerOrder',
+    StackAdminManagerProduct = 'StackAdminManagerProduct',
+    StackAdminManagerOther = 'StackAdminManagerOther',
 }
 
 export enum StackIndividualEnum {
@@ -48,4 +53,47 @@ export enum StackMiscEnum {
     DetailStatusCancelled = 'DetailStatusCancelled',
     DetailPendingDelivery = 'DetailPendingDelivery',
     DetailStatusDelivered = 'DetailStatusDelivered',
+    OrderSuccess = 'OrderSuccess',
+    OrderFailed = 'OrderFailed',
+    Notification = 'Notification',
+    EvaluateProducts = 'EvaluateProducts',
+}
+
+
+/*ADMIN*/
+export enum StackAdminManagerOrderEnum {
+    DetailManagerOrder = 'DetailManagerOrder',
+    DetailOrderCancel = 'DetailOrderCancel',
+    DetailOrderDelivered = 'DetailOrderDelivered',
+    DetailOrderDelivering = 'DetailOrderDelivering',
+    DetailOrderPending = 'DetailOrderPending',
+}
+
+export enum StackAdminManagerProductEnum {
+    ListProducts = 'ListProducts',
+    AddProducts = 'AddProducts',
+    EditProducts = 'EditProducts',
+    ListCategories = 'ListCategories',
+    AddCategories = 'AddCategories',
+    EditCategories = 'EditCategories',
+    ListBanner = 'ListBanner',
+    AddBanner = 'AddBanner',
+    EditBanner = 'EditBanner',
+    ListVouchers = 'ListVouchers',
+    AddVouchers = 'AddVouchers',
+    EditVouchers = 'EditVouchers',
+    ListCustomer = 'ListCustomer',
+    SendNotifications = 'SendNotifications',
+    ListNotifications = 'ListNotifications',
+}
+
+export enum StackAdminManagerOtherEnum {
+    EditProfileAdmin = 'EditProfileAdmin',
+    ManagerCustomerAdmin = 'ManagerCustomerAdmin',
+    EvaluateAdmin = 'EvaluateAdmin',
+    ChangePasswordAdmin = 'ChangePasswordAdmin',
+    ChatAdmin = 'ChatAdmin',
+    ContactFeedbackAdmin = 'ContactFeedbackAdmin',
+    SearchOrderAdmin = 'SearchOrderAdmin',
+    ListCustomerChat = 'ListCustomerChat',
 }

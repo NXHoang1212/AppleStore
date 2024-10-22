@@ -33,11 +33,11 @@ const renderOrderStatus = ({ icon, text, navigate, image, badget }: PropsOrderSt
     <TouchableOpacity style={StyleItemIndividual.viewconfirm3} key={text} onPress={navigate}>
         <View style={{ position: 'relative' }}>
             {icon}
-            {badget !== 0 && (
+            {badget ? (
                 <View style={StyleItemIndividual.badge}>
                     <Text style={StyleItemIndividual.badgeText}>{badget}</Text>
                 </View>
-            )}
+            ) : null}
         </View>
         <Text style={StyleItemIndividual.textconfirm}>{text}</Text>
     </TouchableOpacity>

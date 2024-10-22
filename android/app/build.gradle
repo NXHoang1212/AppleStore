@@ -111,7 +111,7 @@ dependencies {
     implementation("com.facebook.react:flipper-integration")
     implementation project(':react-native-pager-view')
     implementation project(':react-native-permissions')
-
+    implementation project(':react-native-restart') 
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")
     } else {

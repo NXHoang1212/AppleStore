@@ -1,4 +1,4 @@
-import { useLayoutEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import { StatusBar, Platform } from 'react-native';
 
 const useStatusBarConfig = (
@@ -6,7 +6,7 @@ const useStatusBarConfig = (
     backgroundColor: string,
     translucent: boolean = false
 ) => {
-    useLayoutEffect(() => {
+    useEffect(() => {
         StatusBar.setBarStyle(barStyle);
         if (Platform.OS === 'android') {
             StatusBar.setBackgroundColor(backgroundColor);

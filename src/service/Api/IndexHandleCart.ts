@@ -2,12 +2,12 @@ import ToastMessage from "../../utils/ToastMessage";
 
 
 class IndexHandleCart {
-    public static async handleDeleteCart(deleteCart: any, itemId: string, dispatch: any, decrementItemCount: any) {
+    public static async handleDeleteCart(deleteCart: any, itemId: string, dispatch: any, decrementItemCount: any, quantityToDecrement: any) {
         try {
             const res = await deleteCart(itemId);
             if (res.data) {
                 ToastMessage('success', 'Xóa sản phẩm thành công');
-                dispatch(decrementItemCount());
+                dispatch(decrementItemCount(quantityToDecrement));
             } else {
                 ToastMessage('error', 'Xóa sản phẩm thất bại');
             }
@@ -28,11 +28,26 @@ class IndexHandleCart {
         }
     }
 
-    public static async handleUpdateCartOrder(updateCartStatus: any, data: any, dispatch: any, decrementItemCount: any, quantityToDecrement: any) {
+    public static async handleUpdateStatusRemove(updateStatusRemove: any, id: string, dispatch: any, decrementItemCount: any) {
+        try {
+            const res = await updateStatusRemove({ id, status: 'Đã xóa' });
+            if (res.data) {
+                const quantityToDecrement = res.data.data.quantity;
+                dispatch(decrementItemCount(quantityToDecrement));
+                ToastMessage('success', 'Xóa sản phẩm thành công');
+            } else {
+                ToastMessage('error', 'Cập nhật giỏ hàng thất bại');
+            }
+        } catch (error) {
+            console.log('handleUpdateStatusRemove error:', error);
+        }
+    }
+
+    public static async handleUpdateCartOrder(updateCartStatus: any, data: any, dispatch: any, decrementItemCount: any) {
         try {
             const res = await updateCartStatus(data);
             if (res.data) {
-                //trừ theo số lượng sản phẩm đã mua  trong giỏ hàng
+                const quantityToDecrement = res.data.data.matchedCount
                 dispatch(decrementItemCount(quantityToDecrement));
             } else {
                 ToastMessage('error', 'Cập nhật giỏ hàng thất bại');

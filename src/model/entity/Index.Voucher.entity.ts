@@ -1,7 +1,7 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { ImageSourcePropType } from "react-native";
 
-export interface VoucherEntity {
+interface VoucherEntity {
     _id: string;
     userUsed: string[];
     usersApplicable: string[];
@@ -19,19 +19,42 @@ export interface VoucherEntity {
     expirationDate: string;
     createdAt: string;
 }
+interface CreateVoucherEntity {
+    name: string;
+    code: string;
+    discount: number;
+    description: string;
+    condition: string;
+    maxDiscountAmount: number;
+    minOrderAmount: number;
+    usageLimit: number;
+    paymentMethod: string;
+    usersApplicable: string[];
+    expirationDate: string;
+    images: string;
+}
 
-export interface UseVoucherEntity {
+interface UpdateVoucherEntity {
+    name: string;
+    code: string;
+    discount: number;
+    description: string;
+    condition: string;
+    maxDiscountAmount: number;
+    minOrderAmount: number;
+    usageLimit: number;
+    paymentMethod: string;
+    usersApplicable: string[];
+    expirationDate: string;
+    images: string;
+}
+
+interface UseVoucherEntity {
     id: string;
     userId: string;
     paymentMethod: string;
 }
 
-export const enum paymentMethod {
-    credit_card = 'credit_card',
-    paypal = 'paypal',
-    cash_on_delivery = 'cash_on_delivery',
-    all = 'all',
-}
 
 type VoucherState = {
     idVoucher: {
@@ -42,3 +65,4 @@ type VoucherState = {
 export type TypeVoucherProps = NativeStackScreenProps<VoucherState, 'idVoucher'>;
 
 
+export type { VoucherEntity, CreateVoucherEntity, UpdateVoucherEntity, UseVoucherEntity }

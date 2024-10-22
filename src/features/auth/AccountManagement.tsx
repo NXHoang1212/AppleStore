@@ -39,7 +39,8 @@ const AccountManagement = () => {
             if (response.status === 200) {
                 const data: Users = response.data
                 dispatch(Login({ isLogged: true, user: data }))
-                navigation.navigate('TabHome', { screen: 'HomePage' } as any)
+                // navigation.navigate('TabHome', { screen: 'HomePage' } as any)
+                navigation.navigate(data.role === 'user' ? 'TabHome' : 'TabAdminManager', { screen: 'HomePage' } as any)
                 ToastMessage('success', 'Đăng nhập thành công')
             } else {
                 ToastMessage('error', 'Đăng nhập thất bại')
@@ -77,6 +78,8 @@ const AccountManagement = () => {
                 const data: Users = response.data;
                 console.log("🚀 ~ handleRegister ~ data:", data);
                 ToastMessage('success', 'Đăng ký thành công');
+                // // navigation.navigate('TabHome', { screen: 'Trang chủ' } as any)
+                // navigation.navigate(data.role === 'user' ? 'TabHome' : 'TabAdminManager', { screen: 'HomePage' } as any)
                 navigation.goBack()
             } else if (response.status === 400) {
                 ToastMessage('error', 'Tài khoản đã tồn tại vui lòng kiểm tra lại thông tin');

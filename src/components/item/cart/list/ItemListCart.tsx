@@ -15,7 +15,7 @@ import { useLazyGetProductsByIdQuery } from '../../../../service/Api/IndexProduc
 import { ItemDetailUpdateArticle, CustomModalConfirm, CustomCheckBox } from '../../../../import/IndexComponent'
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 
-import { useDeleteCartMutation, useUpdateCartMutation } from '../../../../service/Api/IndexCart'
+import { useUpdateCartMutation, useUpdateStatusRemoveMutation } from '../../../../service/Api/IndexCart'
 
 type PropsCart = {
     item: CartEntity,
@@ -24,11 +24,12 @@ type PropsCart = {
     decrementItemCount?: any,
     dispatch?: any,
     isSelected: boolean,
-    onItemSelect: (itemId: string) => void
+    onItemSelect: (itemId: string) => void,
 }
 const imageAnimated = new Animated.Value(0)
 
 const ItemListCart = ({ item, navigation, currentlyOpenSwipeable, decrementItemCount, dispatch, isSelected, onItemSelect }: PropsCart) => {
+
     const [show, setShow] = useState<boolean>(false);
 
     const [trigger, { data }] = useLazyGetProductsByIdQuery();
@@ -37,7 +38,7 @@ const ItemListCart = ({ item, navigation, currentlyOpenSwipeable, decrementItemC
 
     const [modalVisible, setModalVisible] = useState<boolean>(false);
 
-    const [deleteCart] = useDeleteCartMutation();
+    const [updateStatusRemove] = useUpdateStatusRemoveMutation();
 
     const [updateCart] = useUpdateCartMutation();
 
@@ -66,7 +67,7 @@ const ItemListCart = ({ item, navigation, currentlyOpenSwipeable, decrementItemC
 
     const renderRightActions = () => {
         return (
-            <TouchableOpacity style={IndexStyles.StylesItemListCart.viewDelete} onPress={() => IndexHandleCart.handleDeleteCart(deleteCart, item._id, dispatch, decrementItemCount)}>
+            <TouchableOpacity style={IndexStyles.StylesItemListCart.viewDelete} onPress={() => IndexHandleCart.handleUpdateStatusRemove(updateStatusRemove, item._id, dispatch, decrementItemCount)}>
                 <Text style={IndexStyles.StylesItemListCart.textDelete}>Xóa</Text>
             </TouchableOpacity>
         );
@@ -135,7 +136,7 @@ const ItemListCart = ({ item, navigation, currentlyOpenSwipeable, decrementItemC
                 message={'Bạn có chắc chắn muốn xóa sản phẩm này không?'}
                 isVisible={modalVisible}
                 onPressCancel={() => setModalVisible(false)}
-                onPressConfirm={() => IndexHandleCart.handleDeleteCart(deleteCart, item._id, dispatch, decrementItemCount)}
+                onPressConfirm={() => IndexHandleCart.handleUpdateStatusRemove(updateStatusRemove, item._id, dispatch, decrementItemCount)}
             />
         </Swipeable>
     )

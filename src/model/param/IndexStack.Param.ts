@@ -1,6 +1,7 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 export type StackHomeTypeParam = {
+    /*User*/
     TabHome: undefined;
     StackIndividual: undefined;
     AuthUser: undefined;
@@ -8,6 +9,13 @@ export type StackHomeTypeParam = {
     TabStatusOrder: undefined;
     StackMisc: undefined;
     NotFound: undefined;
+    ConnectInternet: undefined;
+
+    /*Admin*/
+    TabAdminManager: undefined;
+    StackAdminManagerOrder: undefined;
+    StackAdminManagerProduct: undefined;
+    StackAdminManagerOther: undefined;
 };
 
 export type StackIndividualParams = {
@@ -42,6 +50,11 @@ export type StackMiscParams = {
     DetailStatusCancelled: undefined;
     DetailPendingDelivery: undefined;
     DetailStatusDelivered: undefined;
+    OrderSuccess: undefined;
+    OrderFailed: undefined;
+    Notification: undefined;
+    EvaluateProducts: undefined;
+
 }
 
 export type StackAuthUserParams = {
@@ -51,3 +64,42 @@ export type StackAuthUserParams = {
     OtpPassword: undefined;
     CreatePassword: undefined;
 };
+
+
+/*ADMIN*/
+export type StackAdminManagerOrderParams = {
+    DetailManagerOrder: undefined;
+    DetailOrderCancel: undefined;
+    DetailOrderDelivered: undefined;
+    DetailOrderDelivering: undefined;
+    DetailOrderPending: undefined;
+}
+
+export type StackAdminManagerProductParams = {
+    ListProducts: undefined;
+    AddProducts: undefined;
+    EditProducts: undefined;
+    ListCategories: undefined;
+    AddCategories: undefined;
+    EditCategories: undefined;
+    ListBanner: undefined;
+    AddBanner: undefined;
+    EditBanner: undefined;
+    ListVouchers: undefined;
+    AddVouchers: undefined;
+    EditVouchers: undefined;
+    SendNotifications: undefined;
+    ListNotifications: undefined;
+    ListCustomer: undefined;
+}
+
+export type StackAdminMangerOtherParams = {
+    EditProfileAdmin: undefined;
+    ManagerCustomerAdmin: undefined;
+    EvaluateAdmin: undefined;
+    ChangePasswordAdmin: undefined;
+    ChatAdmin: undefined;
+    ContactFeedbackAdmin: undefined;
+    SearchOrderAdmin: undefined;
+    ListCustomerChat: undefined;
+}

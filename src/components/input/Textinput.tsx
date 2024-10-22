@@ -16,12 +16,15 @@ type TextinputProps = {
     onEndEditing?: () => void;
     color?: string;
     disabled?: boolean;
+    defaultValue?: string;
+    editable?: boolean;
 }
 
 const InputCustom: React.FC<TextinputProps> = ({
     placeholder, placeholderTextColor, value,
     onChangeText, onPressIn, onEndEditing,
-    secureTextEntry, keyboardType, icon, style, autoFocus, color, disabled
+    secureTextEntry, keyboardType, icon, style,
+    autoFocus, color, disabled, defaultValue, editable
 }) => {
     return (
         <View style={[{ flexDirection: 'row', alignItems: 'center', }, style]}>
@@ -31,7 +34,6 @@ const InputCustom: React.FC<TextinputProps> = ({
                 </View>
             )}
             <TextInput
-                onKeyPress={onPressIn}
                 placeholder={placeholder}
                 value={value}
                 onChangeText={onChangeText}
@@ -41,7 +43,9 @@ const InputCustom: React.FC<TextinputProps> = ({
                 style={{ padding: 8, fontSize: 17, color: color }}
                 autoFocus={autoFocus}
                 onEndEditing={onEndEditing}
-                editable={!disabled}
+                editable={editable}
+                defaultValue={defaultValue}
+                onPressIn={onPressIn}
             />
         </View>
     )
@@ -62,3 +66,46 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     }
 })
+
+// const InputCustom = forwardRef<TextInput, TextinputProps>(({
+//     placeholder,
+//     placeholderTextColor,
+//     value,
+//     onChangeText,
+//     onPressIn,
+//     onEndEditing,
+//     secureTextEntry,
+//     keyboardType,
+//     icon,
+//     style,
+//     autoFocus,
+//     color,
+//     disabled,
+//     defaultValue,
+//     editable,
+// }, ref) => {
+//     return (
+//         <View style={[{ flexDirection: 'row', alignItems: 'center', }, style]}>
+//             {icon && (
+//                 <View style={styles.iconContainer}>
+//                     {icon}
+//                 </View>
+//             )}
+//             <TextInput
+//                 placeholder={placeholder}
+//                 value={value}
+//                 onChangeText={onChangeText}
+//                 secureTextEntry={secureTextEntry}
+//                 keyboardType={keyboardType}
+//                 placeholderTextColor={placeholderTextColor}
+//                 style={{ padding: 8, fontSize: 17, color: color }}
+//                 autoFocus={autoFocus}
+//                 onEndEditing={onEndEditing}
+//                 editable={editable}
+//                 defaultValue={defaultValue}
+//                 onPressIn={onPressIn}
+//                 ref={ref}
+//             />
+//         </View>
+//     )
+// })

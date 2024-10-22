@@ -1,7 +1,6 @@
 export interface Users {
     _id: string;
     email: string;
-    password: string;
     fullname: string;
     phone: string;
     photoUrl: string;
@@ -9,6 +8,8 @@ export interface Users {
     gender: string;
     provider?: string;
     otp?: string;
+    fcmToken: string;
+    role: string;
 }
 
 export interface UserState {
@@ -20,6 +21,6 @@ export interface UpdateUser {
     fullname: string;
     phone: string;
     photoUrl: string;
-    date_of_birth: Date ;
+    date_of_birth: Date;
     gender: string;
 }
