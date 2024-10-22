@@ -67,6 +67,18 @@ const StyleChatWithAdmin = StyleSheet.create({
         color: COLOR.BLACK,
         letterSpacing: 0.25
     },
+    textAudio: {
+        fontSize: Responsive.RFPercentage(2.1),
+        fontFamily: FontsROBOTO.ROBOTO_REGULAR,
+        color: COLOR.BLACK,
+        letterSpacing: 0.25,
+    }, 
+    textTime: {
+        fontSize: Responsive.RFPercentage(1.8),
+        fontFamily: FontsROBOTO.ROBOTO_REGULAR,
+        color: COLOR.BLACK,
+        letterSpacing: 0.25,
+    },
     viewInputSend: {
         flexDirection: 'row',
         alignItems: 'center',

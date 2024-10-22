@@ -4,19 +4,22 @@ import { Responsive } from '../../../constant/Responsive'
 import Video from 'react-native-video'
 import { IndexStyles } from '../../../import/IndexStyles'
 import { Icon } from '../../../constant/Icon'
+import { MessageEntity } from '../../../model/entity/Index.Message.entity'
 
 
-interface Props = {
-    message: string,
-    image: string,
-    video: string,
-    audio: string,
-    username: string,
-    time: string,
-    role: string,
+interface Props {
+    item: MessageEntity,
+    user: any,
+    currentPlayingVideoId: string | null,
+    setCurrentPlayingVideoId: (id: string | null) => void,
+    isPlaying: boolean,
+    playingMessageId: string | null,
+    startAudio: (audio: string) => void,
+    stopAudio: () => void,
+    playVideo: (video: string) => void
 }
 
-const ItemMessageUser = ({ item, user, playVideo, currentPlayingVideoId, setCurrentPlayingVideoId, isPlaying, playingMessageId, startAudio, stopAudio }: any) => {
+const ItemMessageUser: React.FC<Props> = ({ item, user, currentPlayingVideoId, setCurrentPlayingVideoId, isPlaying, playingMessageId, startAudio, stopAudio, playVideo }) => {
     return (
         <View style={[
             IndexStyles.StyleChatWithAdmin.viewItem,

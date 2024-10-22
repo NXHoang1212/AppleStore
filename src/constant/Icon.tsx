@@ -56,6 +56,8 @@ import IconEmoji from '../assets/svg/emoji.svg'
 import IconLibraryImage from '../assets/svg/libraryimage.svg'
 import IconSend from '../assets/svg/send.svg'
 import IconMic from '../assets/svg/mic.svg'
+import IconPause from '../assets/svg/pause.svg'
+import IconPlay from   '../assets/svg/play.svg'
 
 export class Icon {
     static BackSVG = IconBack;
@@ -116,6 +118,8 @@ export class Icon {
     static LibraryImageSVG = IconLibraryImage;
     static SendSVG = IconSend;
     static MicSVG = IconMic;
+    static PauseSVG = IconPause;
+    static PlaySVG = IconPlay;
     static HOME = require('../assets/images/house.png');
     static CART = require('../assets/images/cart.png');
     static CATEGORY = require('../assets/images/category.png');
