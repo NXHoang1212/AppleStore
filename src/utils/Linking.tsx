@@ -29,6 +29,22 @@ const config = {
                 HomePage: { path: 'Trang chủ' },
             },
         },
+        StackAdminManagerOther: {
+            path: 'StackAdminManagerOther',
+            screens: {
+                ChatAdmin: {
+                    path: 'ChatAdmin/:username',
+                },
+            }
+        },
+        StackIndividual: {
+            path: 'StackIndividual',
+            screens: {
+                ChatWithAdmin: {
+                    path: 'ChatWithAdmin',
+                },
+            }
+        },
     },
 };
 

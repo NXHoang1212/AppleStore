@@ -6,12 +6,12 @@ import StyleChatAdmin from './StyleChatAdmin';
 import { Responsive } from '../../../../../constant/Responsive';
 import { Icon } from '../../../../../constant/Icon';
 
-import { Message } from '../../../../user/other/chat/ChatWithAdmin';
 import { useAppSelector } from '../../../../../import/IndexFeatures';
 import { ScrollView } from 'react-native-gesture-handler';
-
 import { socket } from '../../../../../utils/Socket.io-client';
+
 import { useRoute, RouteProp } from '@react-navigation/native';
+import { MessageEntity } from '../../../../../model/entity/Index.Message.entity';
 
 type Props = {
     username: string;
@@ -33,7 +33,7 @@ const EvaluateAdmin: React.FC = () => {
 
     const iconTranslateY = useRef(new Animated.Value(0)).current;
 
-    const [messages, setMessages] = useState<Message[]>([]);
+    const [messages, setMessages] = useState<MessageEntity[]>([]);
 
     const [message, setMessage] = useState('');
 

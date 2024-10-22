@@ -46,6 +46,7 @@ import ItemAdminListCategories from "../components/item/product/list/ItemAdminLi
 import ItemAdminListBanner from '../components/item/product/list/ItemAdminListBanner';
 import ItemAdminListVoucher from "../components/item/product/list/ItemAdminListVoucher";
 import ItemAdminListNotification from "../components/item/product/list/ItemAdminListNotification";
+import ItemMessageUser from "../components/item/chat/ItemMessageUser";
 
 /*MEDIA */
 import ImagePicker from "../components/media/CamraPicker";
@@ -93,6 +94,7 @@ export {
     ItemAdminListBanner,
     ItemAdminListVoucher,
     ItemAdminListNotification,
+    ItemMessageUser,
     ImagePicker,
     Loading,
     MultiColorLine,
