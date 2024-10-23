@@ -102,6 +102,18 @@ const EvaluateAdmin: React.FC = () => {
             setMessages((prevMessages) => [...prevMessages, msg]);
         });
 
+        socket.on('userImage', (data) => {
+            setMessages((prevMessages) => [...prevMessages, data]);
+        });
+
+        socket.on('userAudio', (data) => {
+            setMessages((prevMessages) => [...prevMessages, data]);
+        });
+
+        socket.on('userVideo', (data) => {
+            setMessages((prevMessages) => [...prevMessages, data]);
+        });
+
         return () => {
             socket.off('adminMessage');
 
