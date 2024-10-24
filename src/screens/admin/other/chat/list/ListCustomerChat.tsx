@@ -54,7 +54,6 @@ const ListCustomerChat: React.FC = () => {
         }, [])
     );
 
-
     const groupMessagesByUser = (messages: any) => {
         const userMessagesMap = new Map();
 

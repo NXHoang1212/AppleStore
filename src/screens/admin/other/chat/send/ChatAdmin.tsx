@@ -119,14 +119,18 @@ const ChatAdmin: React.FC = () => {
             setMessages(loadedMessages);
         });
 
-        socket.emit('getWaitingMessages');
-
-
         return () => {
 
             socket.off('userMessage');
 
             socket.off('loadMessages');
+
+            socket.off('userImage');
+
+            socket.off('userAudio');
+
+            socket.off('userVideo');
+
         };
 
     }, []);
