@@ -58,6 +58,17 @@ const StyleListCustomerChat = StyleSheet.create({
         letterSpacing: 0.25,
         marginLeft: 'auto'
     },
+    textUnreadBadge: {
+        fontSize: Responsive.RFPercentage(2.1),
+        fontFamily: FontsROBOTO.ROBOTO_REGULAR,
+        color: COLOR.WHITE,
+        backgroundColor: COLOR.REDONE,
+        borderRadius: 50,
+        paddingHorizontal: Responsive.wp(2),
+        paddingVertical: Responsive.hp(0.5),
+        textAlign: 'center',
+        marginLeft: 'auto'
+    },
     viewItem: {
         flexDirection: 'row',
         alignItems: 'center',
